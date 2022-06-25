@@ -1,0 +1,40 @@
+circuit FR :
+  module FR :
+    input clock : Clock
+    input reset : UInt<1>
+    output io : { flip afu_in_1 : UInt<1>, flip afu_in_2 : UInt<1>, flip ae_out : UInt<1>, flip as_out : UInt<1>, flip aw_out : UInt<1>, flip vfu_out : UInt<1>, flip ve_in : UInt<1>, flip vs_in : UInt<1>, flip vw_in : UInt<1>, vn_out : UInt<1>}
+
+    wire configuration_mask : UInt<5> @[FR.scala 24:34]
+    wire configuration_mask_mux : UInt<2> @[FR.scala 25:38]
+    configuration_mask <= UInt<5>("h5") @[FR.scala 26:24]
+    configuration_mask_mux <= UInt<2>("h2") @[FR.scala 27:28]
+    node _result_mux_T = eq(configuration_mask_mux, UInt<2>("h0")) @[FR.scala 29:73]
+    node _result_mux_T_1 = eq(configuration_mask_mux, UInt<2>("h1")) @[FR.scala 30:73]
+    node _result_mux_T_2 = eq(configuration_mask_mux, UInt<2>("h2")) @[FR.scala 31:73]
+    node _result_mux_T_3 = eq(configuration_mask_mux, UInt<2>("h3")) @[FR.scala 32:73]
+    node _result_mux_T_4 = mux(_result_mux_T_3, io.vfu_out, UInt<1>("h0")) @[Mux.scala 101:16]
+    node _result_mux_T_5 = mux(_result_mux_T_2, io.ve_in, _result_mux_T_4) @[Mux.scala 101:16]
+    node _result_mux_T_6 = mux(_result_mux_T_1, io.vs_in, _result_mux_T_5) @[Mux.scala 101:16]
+    node result_mux = mux(_result_mux_T, io.vw_in, _result_mux_T_6) @[Mux.scala 101:16]
+    node _io_vn_out_T = bits(configuration_mask, 4, 4) @[FR.scala 34:39]
+    node _io_vn_out_T_1 = not(_io_vn_out_T) @[FR.scala 34:19]
+    node _io_vn_out_T_2 = or(_io_vn_out_T_1, io.afu_in_1) @[FR.scala 34:43]
+    node _io_vn_out_T_3 = bits(configuration_mask, 3, 3) @[FR.scala 35:40]
+    node _io_vn_out_T_4 = not(_io_vn_out_T_3) @[FR.scala 35:20]
+    node _io_vn_out_T_5 = or(_io_vn_out_T_4, io.afu_in_2) @[FR.scala 35:44]
+    node _io_vn_out_T_6 = and(_io_vn_out_T_2, _io_vn_out_T_5) @[FR.scala 34:58]
+    node _io_vn_out_T_7 = bits(configuration_mask, 2, 2) @[FR.scala 36:40]
+    node _io_vn_out_T_8 = not(_io_vn_out_T_7) @[FR.scala 36:20]
+    node _io_vn_out_T_9 = or(_io_vn_out_T_8, io.ae_out) @[FR.scala 36:44]
+    node _io_vn_out_T_10 = and(_io_vn_out_T_6, _io_vn_out_T_9) @[FR.scala 35:59]
+    node _io_vn_out_T_11 = bits(configuration_mask, 1, 1) @[FR.scala 37:40]
+    node _io_vn_out_T_12 = not(_io_vn_out_T_11) @[FR.scala 37:20]
+    node _io_vn_out_T_13 = or(_io_vn_out_T_12, io.as_out) @[FR.scala 37:44]
+    node _io_vn_out_T_14 = and(_io_vn_out_T_10, _io_vn_out_T_13) @[FR.scala 36:57]
+    node _io_vn_out_T_15 = bits(configuration_mask, 0, 0) @[FR.scala 38:40]
+    node _io_vn_out_T_16 = not(_io_vn_out_T_15) @[FR.scala 38:20]
+    node _io_vn_out_T_17 = or(_io_vn_out_T_16, io.aw_out) @[FR.scala 38:44]
+    node _io_vn_out_T_18 = and(_io_vn_out_T_14, _io_vn_out_T_17) @[FR.scala 37:57]
+    node _io_vn_out_T_19 = and(_io_vn_out_T_18, result_mux) @[FR.scala 38:57]
+    io.vn_out <= _io_vn_out_T_19 @[FR.scala 34:15]
+

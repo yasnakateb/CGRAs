@@ -1,0 +1,34 @@
+[
+  {
+    "class":"firrtl.transforms.DedupedResult",
+    "original":"~D_EB|RegEnable",
+    "duplicate":"~D_EB|D_EB/reg_1:RegEnable",
+    "index":0.0
+  },
+  {
+    "class":"firrtl.transforms.DedupedResult",
+    "original":"~D_EB|RegEnable_1",
+    "duplicate":"~D_EB|D_EB/reg_2:RegEnable",
+    "index":0.25
+  },
+  {
+    "class":"firrtl.transforms.DedupedResult",
+    "original":"~D_EB|RegEnable_2",
+    "duplicate":"~D_EB|D_EB/reg_3:RegEnable_2",
+    "index":0.5
+  },
+  {
+    "class":"firrtl.transforms.DedupedResult",
+    "original":"~D_EB|RegEnable_3",
+    "duplicate":"~D_EB|D_EB/reg_4:RegEnable_2",
+    "index":0.75
+  },
+  {
+    "class":"firrtl.EmitCircuitAnnotation",
+    "emitter":"firrtl.VerilogEmitter"
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxTargetDirAnno",
+    "targetDir":"generated"
+  }
+]
