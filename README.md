@@ -6,16 +6,16 @@
 | FU            |       ✅      |   ✅  |
 | Join          |       ✅      |   ✅  |
 | D_EB          |       ✅      |   ✅  |
-| D_SEB         |               |       |
+| D_SEB         |       ✅      |   ✅  |
 | D_BUF         |       ✅      |   ✅  |
-| D_FIFO        |               |       |
+| D_FIFO        |       ✅      |   ✅  |
 | D_REG         |       ✅      |   ✅  |
 | FS            |       ✅      |   ✅  |
 | FR            |       ✅      |   ✅  |
-| Routing       |               |       |
+| Routing       |       ✅      |   ✅  |
 | Const         |               |       |
-| FU Wrapper    |               |       |
+| FU Wrapper    |       ✅      |   ✅  |
 
 
 ### Todo
-- ⭕ Fix Conf Mask
+- ✅ Fix Conf Mask
