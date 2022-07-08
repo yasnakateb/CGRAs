@@ -37,6 +37,12 @@ d-reg:
 d-reg-test:
 	$(SBT) "testOnly D_REGTest -- -DwriteVcd=1"
 
+d-seb:
+	$(SBT) "runMain D_SEBMain"
+
+d-seb-test:
+	$(SBT) "testOnly D_SEBTest -- -DwriteVcd=1"
+
 fs:
 	$(SBT) "runMain FSMain"
 
@@ -51,3 +57,27 @@ fr-test:
 
 reg-enable:
 	$(SBT) "runMain RegEnableMain"
+
+conf-mux:
+	$(SBT) "runMain ConfMuxMain"
+
+conf-mux-test:
+	$(SBT) "testOnly ConfMuxTest -- -DwriteVcd=1"	
+
+d-fifo:
+	$(SBT) "runMain D_FIFOMain"
+
+d-fifo-test:
+	$(SBT) "testOnly D_FIFOTest -- -DwriteVcd=1"	
+
+cell-processing:
+	$(SBT) "runMain CellProcessingMain"
+
+cell-processing-test:
+	$(SBT) "testOnly CellProcessingTest -- -DwriteVcd=1"	
+
+processing-element:
+	$(SBT) "runMain ProcessingElementMain"
+
+processing-element-test:
+	$(SBT) "testOnly ProcessingElementTest -- -DwriteVcd=1"	

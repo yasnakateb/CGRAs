@@ -1,26 +1,26 @@
 [
   {
     "class":"firrtl.transforms.DedupedResult",
-    "original":"~D_EB|RegEnable",
-    "duplicate":"~D_EB|D_EB/main:RegEnable",
+    "original":"~D_SEB|RegEnable",
+    "duplicate":"~D_SEB|D_SEB/main:RegEnable",
     "index":0.0
   },
   {
     "class":"firrtl.transforms.DedupedResult",
-    "original":"~D_EB|RegEnable_1",
-    "duplicate":"~D_EB|D_EB/aux:RegEnable",
+    "original":"~D_SEB|RegEnable_1",
+    "duplicate":"~D_SEB|D_SEB/aux:RegEnable",
     "index":0.25
   },
   {
     "class":"firrtl.transforms.DedupedResult",
-    "original":"~D_EB|RegEnable_2",
-    "duplicate":"~D_EB|D_EB/reg_1:RegEnable_2",
+    "original":"~D_SEB|RegEnable_2",
+    "duplicate":"~D_SEB|D_SEB/reg_1:RegEnable_2",
     "index":0.5
   },
   {
     "class":"firrtl.transforms.DedupedResult",
-    "original":"~D_EB|RegEnable_3",
-    "duplicate":"~D_EB|D_EB/reg_2:RegEnable_2",
+    "original":"~D_SEB|RegEnable_3",
+    "duplicate":"~D_SEB|D_SEB/reg_2:RegEnable_2",
     "index":0.75
   },
   {
@@ -30,12 +30,5 @@
   {
     "class":"firrtl.transforms.BlackBoxTargetDirAnno",
     "targetDir":"generated"
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~D_EB|D_EB>io_a_p",
-    "sources":[
-      "~D_EB|D_EB>io_v_p"
-    ]
   }
 ]

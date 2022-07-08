@@ -9,13 +9,10 @@
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~FS|FS>io_an_in",
+    "sink":"~FS|FS>io_ready_in",
     "sources":[
-      "~FS|FS>io_aw_out",
-      "~FS|FS>io_as_out",
-      "~FS|FS>io_ae_out",
-      "~FS|FS>io_afu_in_1",
-      "~FS|FS>io_afu_in_2"
+      "~FS|FS>io_ready_out",
+      "~FS|FS>io_fork_mask"
     ]
   }
 ]

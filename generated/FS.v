@@ -1,12 +1,17 @@
 module FS(
-  input   clock,
-  input   reset,
-  input   io_afu_in_1,
-  input   io_afu_in_2,
-  input   io_ae_out,
-  input   io_as_out,
-  input   io_aw_out,
-  output  io_an_in
+  input        clock,
+  input        reset,
+  input  [4:0] io_ready_out,
+  input  [4:0] io_fork_mask,
+  output       io_ready_in
 );
-  assign io_an_in = io_ae_out & io_aw_out; // @[FS.scala 26:57]
+  wire  aux_0 = ~io_fork_mask[0] | io_ready_out[0]; // @[FS.scala 24:39]
+  wire  aux_1 = ~io_fork_mask[1] | io_ready_out[1]; // @[FS.scala 24:39]
+  wire  aux_2 = ~io_fork_mask[2] | io_ready_out[2]; // @[FS.scala 24:39]
+  wire  aux_3 = ~io_fork_mask[3] | io_ready_out[3]; // @[FS.scala 24:39]
+  wire  aux_4 = ~io_fork_mask[4] | io_ready_out[4]; // @[FS.scala 24:39]
+  wire  temp_1 = aux_0 & aux_1; // @[FS.scala 30:30]
+  wire  temp_2 = temp_1 & aux_2; // @[FS.scala 30:30]
+  wire  temp_3 = temp_2 & aux_3; // @[FS.scala 30:30]
+  assign io_ready_in = temp_3 & aux_4; // @[FS.scala 30:30]
 endmodule

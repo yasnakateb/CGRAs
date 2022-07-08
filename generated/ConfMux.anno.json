@@ -9,12 +9,10 @@
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~FR|FR>io_valid_out",
+    "sink":"~ConfMux|ConfMux>io_mux_output",
     "sources":[
-      "~FR|FR>io_valid_mux_sel",
-      "~FR|FR>io_valid_in",
-      "~FR|FR>io_ready_out",
-      "~FR|FR>io_fork_mask"
+      "~ConfMux|ConfMux>io_selector",
+      "~ConfMux|ConfMux>io_mux_input"
     ]
   }
 ]

@@ -1,18 +1,18 @@
 module RegEnable(
-  input        clock,
-  input        reset,
-  input  [7:0] io_in,
-  input        io_en,
-  output [7:0] io_out
+  input         clock,
+  input         reset,
+  input  [31:0] io_in,
+  input         io_en,
+  output [31:0] io_out
 );
 `ifdef RANDOMIZE_REG_INIT
   reg [31:0] _RAND_0;
 `endif // RANDOMIZE_REG_INIT
-  reg [7:0] reg_; // @[RegEnable.scala 11:22]
+  reg [31:0] reg_; // @[RegEnable.scala 11:22]
   assign io_out = reg_; // @[RegEnable.scala 15:12]
   always @(posedge clock) begin
     if (reset) begin // @[RegEnable.scala 11:22]
-      reg_ <= 8'h0; // @[RegEnable.scala 11:22]
+      reg_ <= 32'h0; // @[RegEnable.scala 11:22]
     end else if (io_en) begin // @[RegEnable.scala 12:17]
       reg_ <= io_in; // @[RegEnable.scala 13:13]
     end
@@ -54,7 +54,7 @@ initial begin
     `endif
 `ifdef RANDOMIZE_REG_INIT
   _RAND_0 = {1{`RANDOM}};
-  reg_ = _RAND_0[7:0];
+  reg_ = _RAND_0[31:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial
@@ -128,93 +128,93 @@ end // initial
 `endif
 `endif // SYNTHESIS
 endmodule
-module D_EB(
-  input        clock,
-  input        reset,
-  input  [7:0] io_d_p,
-  input        io_v_p,
-  input        io_a_n,
-  output [7:0] io_d_n,
-  output       io_v_n,
-  output       io_a_p
+module D_SEB(
+  input         clock,
+  input         reset,
+  input  [31:0] io_din,
+  input         io_din_v,
+  output        io_din_r,
+  output [31:0] io_dout,
+  output        io_dout_v,
+  input         io_dout_r
 );
 `ifdef RANDOMIZE_REG_INIT
   reg [31:0] _RAND_0;
 `endif // RANDOMIZE_REG_INIT
-  wire  main_clock; // @[D_EB.scala 19:24]
-  wire  main_reset; // @[D_EB.scala 19:24]
-  wire [7:0] main_io_in; // @[D_EB.scala 19:24]
-  wire  main_io_en; // @[D_EB.scala 19:24]
-  wire [7:0] main_io_out; // @[D_EB.scala 19:24]
-  wire  aux_clock; // @[D_EB.scala 20:23]
-  wire  aux_reset; // @[D_EB.scala 20:23]
-  wire [7:0] aux_io_in; // @[D_EB.scala 20:23]
-  wire  aux_io_en; // @[D_EB.scala 20:23]
-  wire [7:0] aux_io_out; // @[D_EB.scala 20:23]
-  wire  reg_1_clock; // @[D_EB.scala 21:25]
-  wire  reg_1_reset; // @[D_EB.scala 21:25]
-  wire  reg_1_io_in; // @[D_EB.scala 21:25]
-  wire  reg_1_io_en; // @[D_EB.scala 21:25]
-  wire  reg_1_io_out; // @[D_EB.scala 21:25]
-  wire  reg_2_clock; // @[D_EB.scala 22:25]
-  wire  reg_2_reset; // @[D_EB.scala 22:25]
-  wire  reg_2_io_in; // @[D_EB.scala 22:25]
-  wire  reg_2_io_en; // @[D_EB.scala 22:25]
-  wire  reg_2_io_out; // @[D_EB.scala 22:25]
-  reg  reg_; // @[D_EB.scala 24:22]
-  wire  mux2_out = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_EB.scala 28:23]
-  RegEnable main ( // @[D_EB.scala 19:24]
+  wire  main_clock; // @[D_SEB.scala 19:24]
+  wire  main_reset; // @[D_SEB.scala 19:24]
+  wire [31:0] main_io_in; // @[D_SEB.scala 19:24]
+  wire  main_io_en; // @[D_SEB.scala 19:24]
+  wire [31:0] main_io_out; // @[D_SEB.scala 19:24]
+  wire  aux_clock; // @[D_SEB.scala 20:23]
+  wire  aux_reset; // @[D_SEB.scala 20:23]
+  wire [31:0] aux_io_in; // @[D_SEB.scala 20:23]
+  wire  aux_io_en; // @[D_SEB.scala 20:23]
+  wire [31:0] aux_io_out; // @[D_SEB.scala 20:23]
+  wire  reg_1_clock; // @[D_SEB.scala 21:25]
+  wire  reg_1_reset; // @[D_SEB.scala 21:25]
+  wire  reg_1_io_in; // @[D_SEB.scala 21:25]
+  wire  reg_1_io_en; // @[D_SEB.scala 21:25]
+  wire  reg_1_io_out; // @[D_SEB.scala 21:25]
+  wire  reg_2_clock; // @[D_SEB.scala 22:25]
+  wire  reg_2_reset; // @[D_SEB.scala 22:25]
+  wire  reg_2_io_in; // @[D_SEB.scala 22:25]
+  wire  reg_2_io_en; // @[D_SEB.scala 22:25]
+  wire  reg_2_io_out; // @[D_SEB.scala 22:25]
+  reg  reg_; // @[D_SEB.scala 24:22]
+  wire  mux2_out = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_SEB.scala 28:23]
+  RegEnable main ( // @[D_SEB.scala 19:24]
     .clock(main_clock),
     .reset(main_reset),
     .io_in(main_io_in),
     .io_en(main_io_en),
     .io_out(main_io_out)
   );
-  RegEnable aux ( // @[D_EB.scala 20:23]
+  RegEnable aux ( // @[D_SEB.scala 20:23]
     .clock(aux_clock),
     .reset(aux_reset),
     .io_in(aux_io_in),
     .io_en(aux_io_en),
     .io_out(aux_io_out)
   );
-  RegEnable_2 reg_1 ( // @[D_EB.scala 21:25]
+  RegEnable_2 reg_1 ( // @[D_SEB.scala 21:25]
     .clock(reg_1_clock),
     .reset(reg_1_reset),
     .io_in(reg_1_io_in),
     .io_en(reg_1_io_en),
     .io_out(reg_1_io_out)
   );
-  RegEnable_2 reg_2 ( // @[D_EB.scala 22:25]
+  RegEnable_2 reg_2 ( // @[D_SEB.scala 22:25]
     .clock(reg_2_clock),
     .reset(reg_2_reset),
     .io_in(reg_2_io_in),
     .io_en(reg_2_io_en),
     .io_out(reg_2_io_out)
   );
-  assign io_d_n = reg_ ? main_io_out : aux_io_out; // @[D_EB.scala 48:18]
-  assign io_v_n = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_EB.scala 28:23]
-  assign io_a_p = reg_ | ~io_v_p; // @[D_EB.scala 34:20]
+  assign io_din_r = reg_; // @[D_SEB.scala 30:20]
+  assign io_dout = reg_ ? main_io_out : aux_io_out; // @[D_SEB.scala 46:19]
+  assign io_dout_v = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_SEB.scala 28:23]
   assign main_clock = clock;
   assign main_reset = reset;
-  assign main_io_in = io_d_p; // @[D_EB.scala 38:16]
-  assign main_io_en = io_a_p; // @[D_EB.scala 26:18 35:8]
+  assign main_io_in = io_din; // @[D_SEB.scala 36:16]
+  assign main_io_en = reg_; // @[D_SEB.scala 30:20]
   assign aux_clock = clock;
   assign aux_reset = reset;
-  assign aux_io_in = main_io_out; // @[D_EB.scala 39:15]
-  assign aux_io_en = reg_; // @[D_EB.scala 30:17]
+  assign aux_io_in = main_io_out; // @[D_SEB.scala 37:15]
+  assign aux_io_en = reg_; // @[D_SEB.scala 30:20]
   assign reg_1_clock = clock;
   assign reg_1_reset = reset;
-  assign reg_1_io_in = io_v_p; // @[D_EB.scala 40:17]
-  assign reg_1_io_en = io_a_p; // @[D_EB.scala 26:18 35:8]
+  assign reg_1_io_in = io_din_v; // @[D_SEB.scala 38:17]
+  assign reg_1_io_en = reg_; // @[D_SEB.scala 30:20]
   assign reg_2_clock = clock;
   assign reg_2_reset = reset;
-  assign reg_2_io_in = reg_1_io_out; // @[D_EB.scala 41:17]
-  assign reg_2_io_en = reg_; // @[D_EB.scala 30:17]
+  assign reg_2_io_in = reg_1_io_out; // @[D_SEB.scala 39:17]
+  assign reg_2_io_en = reg_; // @[D_SEB.scala 30:20]
   always @(posedge clock) begin
-    if (reset) begin // @[D_EB.scala 24:22]
-      reg_ <= 1'h0; // @[D_EB.scala 24:22]
+    if (reset) begin // @[D_SEB.scala 24:22]
+      reg_ <= 1'h0; // @[D_SEB.scala 24:22]
     end else begin
-      reg_ <= io_a_n | ~mux2_out; // @[D_EB.scala 29:9]
+      reg_ <= io_dout_r | ~mux2_out; // @[D_SEB.scala 29:9]
     end
   end
 // Register and memory initialization

@@ -9,11 +9,11 @@
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~ALU|ALU>io_d_out",
+    "sink":"~ALU|ALU>io_dout",
     "sources":[
       "~ALU|ALU>io_op_config",
-      "~ALU|ALU>io_d_in_1",
-      "~ALU|ALU>io_d_in_2"
+      "~ALU|ALU>io_din_1",
+      "~ALU|ALU>io_din_2"
     ]
   }
 ]

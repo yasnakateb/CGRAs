@@ -9,9 +9,9 @@
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~D_REG|D_REG>io_a_p",
+    "sink":"~D_REG|D_REG>io_din_r",
     "sources":[
-      "~D_REG|D_REG>io_a_n"
+      "~D_REG|D_REG>io_dout_r"
     ]
   }
 ]

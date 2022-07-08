@@ -1,20 +1,20 @@
 module Join(
   input        clock,
   input        reset,
-  input  [7:0] io_d_in_1,
-  input  [7:0] io_d_in_2,
-  output       io_a_in_1,
-  output       io_a_in_2,
-  output [7:0] io_d_out_1,
-  output [7:0] io_d_out_2,
-  input        io_v_in_1,
-  input        io_v_in_2,
-  output       io_v_out,
-  input        io_a_out
+  input  [7:0] io_din_1,
+  input  [7:0] io_din_2,
+  output       io_din_1_r,
+  output       io_din_2_r,
+  output [7:0] io_dout_1,
+  output [7:0] io_dout_2,
+  input        io_din_1_v,
+  input        io_din_2_v,
+  output       io_dout_v,
+  input        io_dout_r
 );
-  assign io_a_in_1 = io_v_in_2 & io_a_out; // @[Join.scala 25:28]
-  assign io_a_in_2 = io_v_in_1 & io_a_out; // @[Join.scala 26:28]
-  assign io_d_out_1 = io_d_in_1; // @[Join.scala 20:16]
-  assign io_d_out_2 = io_d_in_2; // @[Join.scala 21:16]
-  assign io_v_out = io_v_in_1 & io_v_in_2; // @[Join.scala 23:27]
+  assign io_din_1_r = io_din_2_v & io_dout_r; // @[Join.scala 25:30]
+  assign io_din_2_r = io_din_1_v & io_dout_r; // @[Join.scala 26:30]
+  assign io_dout_1 = io_din_1; // @[Join.scala 20:15]
+  assign io_dout_2 = io_din_2; // @[Join.scala 21:15]
+  assign io_dout_v = io_din_1_v & io_din_2_v; // @[Join.scala 23:29]
 endmodule

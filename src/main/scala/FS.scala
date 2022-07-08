@@ -7,24 +7,30 @@
 import chisel3._
 import chisel3.util._
 
-class FS (CONF_MASK: Int)extends Module {
+class FS (NUMBER_OF_READYS: Int)extends Module {
     val io = IO(new Bundle {
-        val afu_in_1 = Input(Bool())
-        val afu_in_2 = Input(Bool())
-        val ae_out = Input(Bool())
-        val as_out = Input(Bool())
-        val aw_out = Input(Bool())
-        val an_in = Output(Bool())
+        // Inputs
+        val ready_out = Input(UInt(NUMBER_OF_READYS.W))
+        val fork_mask = Input(UInt(NUMBER_OF_READYS.W))
+       
+        // Outputs
+        val ready_in = Output(Bool())  
     })
 
-    val configuration_mask = Wire(UInt(5.W))
-    configuration_mask := CONF_MASK.U(5.W)
+    var aux = Wire(Vec(NUMBER_OF_READYS, Bool()))
+    var temp = Wire(Vec(NUMBER_OF_READYS, Bool()))
 
-    io.an_in := (~ configuration_mask(4) | io.afu_in_1) & 
-                  (~ configuration_mask(3) | io.afu_in_2) & 
-                  (~ configuration_mask(2) | io.ae_out) & 
-                  (~ configuration_mask(1) | io.as_out) & 
-                  (~ configuration_mask(0) | io.aw_out) 
+    for (i <- 0 until NUMBER_OF_READYS) {
+        aux(i) := ((~io.fork_mask(i)) | io.ready_out(i)).asBool
+    }
+
+    temp(0) := aux(0) 
+
+    for (i <- 1 until NUMBER_OF_READYS) {
+        temp(i) := temp(i-1) & aux(i)
+    }
+
+    io.ready_in := temp(NUMBER_OF_READYS - 1)   
 }
 
 // Generate the Verilog code

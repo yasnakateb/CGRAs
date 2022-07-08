@@ -9,22 +9,22 @@
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~FU|FU>io_r_in",
+    "sink":"~FU|FU>io_din_r",
     "sources":[
-      "~FU|FU>io_r_out"
+      "~FU|FU>io_dout_r"
     ]
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~FU|FU>io_v_out",
+    "sink":"~FU|FU>io_dout_v",
     "sources":[
-      "~FU|FU>io_v_in",
+      "~FU|FU>io_din_v",
       "~FU|FU>io_loop_source"
     ]
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~FU|FU>io_d_out",
+    "sink":"~FU|FU>io_dout",
     "sources":[
       "~FU|FU>io_loop_source"
     ]

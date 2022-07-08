@@ -24,7 +24,7 @@ circuit D_REG :
   module D_REG :
     input clock : Clock
     input reset : UInt<1>
-    output io : { flip d_p : UInt<8>, flip v_p : UInt<1>, flip a_n : UInt<1>, d_n : UInt<8>, v_n : UInt<1>, a_p : UInt<1>}
+    output io : { flip din : UInt<8>, flip din_v : UInt<1>, flip dout_r : UInt<1>, dout : UInt<8>, dout_v : UInt<1>, din_r : UInt<1>}
 
     inst reg_1 of RegEnable @[D_REG.scala 19:25]
     reg_1.clock <= clock
@@ -32,11 +32,11 @@ circuit D_REG :
     inst reg_2 of RegEnable_1 @[D_REG.scala 20:25]
     reg_2.clock <= clock
     reg_2.reset <= reset
-    reg_1.io.in <= io.d_p @[D_REG.scala 22:17]
-    reg_2.io.in <= io.v_p @[D_REG.scala 23:17]
-    reg_1.io.en <= io.a_n @[D_REG.scala 24:17]
-    reg_2.io.en <= io.a_n @[D_REG.scala 25:17]
-    io.d_n <= reg_1.io.out @[D_REG.scala 26:12]
-    io.v_n <= reg_2.io.out @[D_REG.scala 27:12]
-    io.a_p <= io.a_n @[D_REG.scala 28:12]
+    reg_1.io.in <= io.din @[D_REG.scala 22:17]
+    reg_2.io.in <= io.din_v @[D_REG.scala 23:17]
+    reg_1.io.en <= io.dout_r @[D_REG.scala 24:17]
+    reg_2.io.en <= io.dout_r @[D_REG.scala 25:17]
+    io.dout <= reg_1.io.out @[D_REG.scala 26:13]
+    io.dout_v <= reg_2.io.out @[D_REG.scala 27:15]
+    io.din_r <= io.dout_r @[D_REG.scala 28:14]
 

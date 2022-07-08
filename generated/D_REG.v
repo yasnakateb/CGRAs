@@ -131,12 +131,12 @@ endmodule
 module D_REG(
   input        clock,
   input        reset,
-  input  [7:0] io_d_p,
-  input        io_v_p,
-  input        io_a_n,
-  output [7:0] io_d_n,
-  output       io_v_n,
-  output       io_a_p
+  input  [7:0] io_din,
+  input        io_din_v,
+  input        io_dout_r,
+  output [7:0] io_dout,
+  output       io_dout_v,
+  output       io_din_r
 );
   wire  reg_1_clock; // @[D_REG.scala 19:25]
   wire  reg_1_reset; // @[D_REG.scala 19:25]
@@ -162,15 +162,15 @@ module D_REG(
     .io_en(reg_2_io_en),
     .io_out(reg_2_io_out)
   );
-  assign io_d_n = reg_1_io_out; // @[D_REG.scala 26:12]
-  assign io_v_n = reg_2_io_out; // @[D_REG.scala 27:12]
-  assign io_a_p = io_a_n; // @[D_REG.scala 28:12]
+  assign io_dout = reg_1_io_out; // @[D_REG.scala 26:13]
+  assign io_dout_v = reg_2_io_out; // @[D_REG.scala 27:15]
+  assign io_din_r = io_dout_r; // @[D_REG.scala 28:14]
   assign reg_1_clock = clock;
   assign reg_1_reset = reset;
-  assign reg_1_io_in = io_d_p; // @[D_REG.scala 22:17]
-  assign reg_1_io_en = io_a_n; // @[D_REG.scala 24:17]
+  assign reg_1_io_in = io_din; // @[D_REG.scala 22:17]
+  assign reg_1_io_en = io_dout_r; // @[D_REG.scala 24:17]
   assign reg_2_clock = clock;
   assign reg_2_reset = reset;
-  assign reg_2_io_in = io_v_p; // @[D_REG.scala 23:17]
-  assign reg_2_io_en = io_a_n; // @[D_REG.scala 25:17]
+  assign reg_2_io_in = io_din_v; // @[D_REG.scala 23:17]
+  assign reg_2_io_en = io_dout_r; // @[D_REG.scala 25:17]
 endmodule

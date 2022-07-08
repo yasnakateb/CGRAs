@@ -1,44 +1,44 @@
 module ALU(
-  input  [7:0] io_d_in_1,
-  input  [7:0] io_d_in_2,
+  input  [7:0] io_din_1,
+  input  [7:0] io_din_2,
   input  [7:0] io_op_config,
-  output [7:0] io_d_out
+  output [7:0] io_dout
 );
-  wire [7:0] _io_d_out_T_1 = io_d_in_1 + io_d_in_2; // @[ALU.scala 30:29]
-  wire [15:0] _io_d_out_T_2 = io_d_in_1 * io_d_in_2; // @[ALU.scala 33:29]
-  wire [7:0] _io_d_out_T_4 = io_d_in_1 - io_d_in_2; // @[ALU.scala 36:29]
-  wire [262:0] _GEN_14 = {{255'd0}, io_d_in_1}; // @[ALU.scala 39:29]
-  wire [262:0] _io_d_out_T_5 = _GEN_14 << io_d_in_2; // @[ALU.scala 39:29]
-  wire [7:0] _io_d_out_T_6 = io_d_in_1 >> io_d_in_2; // @[ALU.scala 42:29]
-  wire [7:0] _io_d_out_T_7 = io_d_in_1 & io_d_in_2; // @[ALU.scala 45:29]
-  wire [7:0] _io_d_out_T_8 = io_d_in_1 | io_d_in_2; // @[ALU.scala 48:29]
-  wire [7:0] _io_d_out_T_9 = io_d_in_1 ^ io_d_in_2; // @[ALU.scala 51:29]
-  wire [7:0] _GEN_0 = io_d_in_1 > io_d_in_2 ? io_d_in_2 : 8'h0; // @[ALU.scala 28:14 57:40 58:18]
-  wire [7:0] _GEN_1 = io_d_in_1 <= io_d_in_2 ? io_d_in_1 : _GEN_0; // @[ALU.scala 54:37 55:18]
-  wire [7:0] _GEN_2 = io_d_in_1 < io_d_in_2 ? io_d_in_2 : 8'h0; // @[ALU.scala 28:14 65:40 66:18]
-  wire [7:0] _GEN_3 = io_d_in_1 >= io_d_in_2 ? io_d_in_1 : _GEN_2; // @[ALU.scala 62:37 63:18]
-  wire [7:0] _GEN_4 = io_op_config == 8'h9 ? _GEN_3 : 8'h0; // @[ALU.scala 61:38 70:16]
+  wire [7:0] _io_dout_T_1 = io_din_1 + io_din_2; // @[ALU.scala 30:27]
+  wire [15:0] _io_dout_T_2 = io_din_1 * io_din_2; // @[ALU.scala 33:27]
+  wire [7:0] _io_dout_T_4 = io_din_1 - io_din_2; // @[ALU.scala 36:27]
+  wire [262:0] _GEN_14 = {{255'd0}, io_din_1}; // @[ALU.scala 39:27]
+  wire [262:0] _io_dout_T_5 = _GEN_14 << io_din_2; // @[ALU.scala 39:27]
+  wire [7:0] _io_dout_T_6 = io_din_1 >> io_din_2; // @[ALU.scala 42:27]
+  wire [7:0] _io_dout_T_7 = io_din_1 & io_din_2; // @[ALU.scala 45:27]
+  wire [7:0] _io_dout_T_8 = io_din_1 | io_din_2; // @[ALU.scala 48:27]
+  wire [7:0] _io_dout_T_9 = io_din_1 ^ io_din_2; // @[ALU.scala 51:27]
+  wire [7:0] _GEN_0 = io_din_1 > io_din_2 ? io_din_2 : 8'h0; // @[ALU.scala 28:13 57:38 58:17]
+  wire [7:0] _GEN_1 = io_din_1 <= io_din_2 ? io_din_1 : _GEN_0; // @[ALU.scala 54:35 55:17]
+  wire [7:0] _GEN_2 = io_din_1 < io_din_2 ? io_din_2 : 8'h0; // @[ALU.scala 28:13 65:38 66:17]
+  wire [7:0] _GEN_3 = io_din_1 >= io_din_2 ? io_din_1 : _GEN_2; // @[ALU.scala 62:35 63:17]
+  wire [7:0] _GEN_4 = io_op_config == 8'h9 ? _GEN_3 : 8'h0; // @[ALU.scala 61:38 70:15]
   wire [7:0] _GEN_5 = io_op_config == 8'h8 ? _GEN_1 : _GEN_4; // @[ALU.scala 53:38]
-  wire [7:0] _GEN_6 = io_op_config == 8'h7 ? _io_d_out_T_9 : _GEN_5; // @[ALU.scala 50:38 51:16]
-  wire [7:0] _GEN_7 = io_op_config == 8'h6 ? _io_d_out_T_8 : _GEN_6; // @[ALU.scala 47:37 48:16]
-  wire [7:0] _GEN_8 = io_op_config == 8'h5 ? _io_d_out_T_7 : _GEN_7; // @[ALU.scala 44:38 45:16]
-  wire [7:0] _GEN_9 = io_op_config == 8'h4 ? _io_d_out_T_6 : _GEN_8; // @[ALU.scala 41:38 42:16]
-  wire [262:0] _GEN_10 = io_op_config == 8'h3 ? _io_d_out_T_5 : {{255'd0}, _GEN_9}; // @[ALU.scala 38:38 39:16]
-  wire [262:0] _GEN_11 = io_op_config == 8'h2 ? {{255'd0}, _io_d_out_T_4} : _GEN_10; // @[ALU.scala 35:38 36:16]
-  wire [262:0] _GEN_12 = io_op_config == 8'h1 ? {{247'd0}, _io_d_out_T_2} : _GEN_11; // @[ALU.scala 32:38 33:16]
-  wire [262:0] _GEN_13 = io_op_config == 8'h0 ? {{255'd0}, _io_d_out_T_1} : _GEN_12; // @[ALU.scala 29:33 30:16]
-  assign io_d_out = _GEN_13[7:0];
+  wire [7:0] _GEN_6 = io_op_config == 8'h7 ? _io_dout_T_9 : _GEN_5; // @[ALU.scala 50:38 51:15]
+  wire [7:0] _GEN_7 = io_op_config == 8'h6 ? _io_dout_T_8 : _GEN_6; // @[ALU.scala 47:37 48:15]
+  wire [7:0] _GEN_8 = io_op_config == 8'h5 ? _io_dout_T_7 : _GEN_7; // @[ALU.scala 44:38 45:15]
+  wire [7:0] _GEN_9 = io_op_config == 8'h4 ? _io_dout_T_6 : _GEN_8; // @[ALU.scala 41:38 42:15]
+  wire [262:0] _GEN_10 = io_op_config == 8'h3 ? _io_dout_T_5 : {{255'd0}, _GEN_9}; // @[ALU.scala 38:38 39:15]
+  wire [262:0] _GEN_11 = io_op_config == 8'h2 ? {{255'd0}, _io_dout_T_4} : _GEN_10; // @[ALU.scala 35:38 36:15]
+  wire [262:0] _GEN_12 = io_op_config == 8'h1 ? {{247'd0}, _io_dout_T_2} : _GEN_11; // @[ALU.scala 32:38 33:15]
+  wire [262:0] _GEN_13 = io_op_config == 8'h0 ? {{255'd0}, _io_dout_T_1} : _GEN_12; // @[ALU.scala 29:33 30:15]
+  assign io_dout = _GEN_13[7:0];
 endmodule
 module FU(
   input         clock,
   input         reset,
-  input  [7:0]  io_d_in_1,
-  input  [7:0]  io_d_in_2,
-  input         io_v_in,
-  output        io_r_in,
-  output [7:0]  io_d_out,
-  output        io_v_out,
-  input         io_r_out,
+  input  [7:0]  io_din_1,
+  input  [7:0]  io_din_2,
+  input         io_din_v,
+  output        io_din_r,
+  output [7:0]  io_dout,
+  output        io_dout_v,
+  input         io_dout_r,
   input  [1:0]  io_loop_source,
   input  [15:0] io_iterations_reset,
   input  [7:0]  io_op_config
@@ -52,14 +52,14 @@ module FU(
   reg [31:0] _RAND_5;
   reg [31:0] _RAND_6;
 `endif // RANDOMIZE_REG_INIT
-  wire [7:0] ALU_io_d_in_1; // @[FU.scala 44:22]
-  wire [7:0] ALU_io_d_in_2; // @[FU.scala 44:22]
+  wire [7:0] ALU_io_din_1; // @[FU.scala 44:22]
+  wire [7:0] ALU_io_din_2; // @[FU.scala 44:22]
   wire [7:0] ALU_io_op_config; // @[FU.scala 44:22]
-  wire [7:0] ALU_io_d_out; // @[FU.scala 44:22]
-  reg [7:0] alu_d_in_1; // @[FU.scala 33:29]
-  reg [7:0] alu_d_in_2; // @[FU.scala 34:29]
-  reg [7:0] alu_d_out; // @[FU.scala 35:28]
-  reg [7:0] d_out_Reg; // @[FU.scala 36:28]
+  wire [7:0] ALU_io_dout; // @[FU.scala 44:22]
+  reg [7:0] alu_din_1; // @[FU.scala 33:28]
+  reg [7:0] alu_din_2; // @[FU.scala 34:28]
+  reg [7:0] alu_dout; // @[FU.scala 35:27]
+  reg [7:0] dout_Reg; // @[FU.scala 36:27]
   reg [15:0] count; // @[FU.scala 40:24]
   reg  loaded; // @[FU.scala 41:25]
   reg  valid; // @[FU.scala 42:24]
@@ -67,68 +67,68 @@ module FU(
   wire  _T_1 = io_loop_source == 2'h1; // @[FU.scala 55:31]
   wire  _T_2 = ~loaded; // @[FU.scala 56:22]
   wire  _T_3 = io_loop_source == 2'h2; // @[FU.scala 65:31]
-  wire [7:0] _GEN_3 = _T_2 ? io_d_in_2 : d_out_Reg; // @[FU.scala 66:31 68:24 72:24]
-  wire  _GEN_10 = io_r_out ? 1'h0 : valid; // @[FU.scala 90:33 91:19 42:24]
+  wire [7:0] _GEN_3 = _T_2 ? io_din_2 : dout_Reg; // @[FU.scala 66:31 68:23 72:23]
+  wire  _GEN_10 = io_dout_r ? 1'h0 : valid; // @[FU.scala 90:34 91:19 42:24]
   wire  _T_13 = _T_1 | _T_3; // @[FU.scala 94:42]
-  wire  _T_14 = io_v_in & io_r_out & _T_13; // @[FU.scala 93:51]
+  wire  _T_14 = io_din_v & io_dout_r & _T_13; // @[FU.scala 93:53]
   wire [15:0] _count_T_1 = count + 16'h1; // @[FU.scala 97:29]
   wire  _T_19 = count == io_iterations_reset & _T_13; // @[FU.scala 99:45]
-  wire  _T_21 = _T_19 & io_r_out; // @[FU.scala 100:73]
-  wire  _T_26 = _T_13 & io_v_in; // @[FU.scala 108:79]
-  wire  _T_28 = _T_26 & io_r_out; // @[FU.scala 109:36]
+  wire  _T_21 = _T_19 & io_dout_r; // @[FU.scala 100:73]
+  wire  _T_26 = _T_13 & io_din_v; // @[FU.scala 108:79]
+  wire  _T_28 = _T_26 & io_dout_r; // @[FU.scala 109:37]
   wire  _GEN_16 = _T_21 | _GEN_10; // @[FU.scala 102:13 105:22]
   ALU ALU ( // @[FU.scala 44:22]
-    .io_d_in_1(ALU_io_d_in_1),
-    .io_d_in_2(ALU_io_d_in_2),
+    .io_din_1(ALU_io_din_1),
+    .io_din_2(ALU_io_din_2),
     .io_op_config(ALU_io_op_config),
-    .io_d_out(ALU_io_d_out)
+    .io_dout(ALU_io_dout)
   );
-  assign io_r_in = io_r_out; // @[FU.scala 123:13]
-  assign io_d_out = _T ? alu_d_out : d_out_Reg; // @[FU.scala 125:38 126:18 129:18]
-  assign io_v_out = _T ? io_v_in : valid; // @[FU.scala 116:38 117:18 120:18]
-  assign ALU_io_d_in_1 = alu_d_in_1; // @[FU.scala 45:19]
-  assign ALU_io_d_in_2 = alu_d_in_2; // @[FU.scala 46:19]
+  assign io_din_r = io_dout_r; // @[FU.scala 123:14]
+  assign io_dout = _T ? alu_dout : dout_Reg; // @[FU.scala 125:38 126:17 129:17]
+  assign io_dout_v = _T ? io_din_v : valid; // @[FU.scala 116:38 117:19 120:19]
+  assign ALU_io_din_1 = alu_din_1; // @[FU.scala 45:18]
+  assign ALU_io_din_2 = alu_din_2; // @[FU.scala 46:18]
   assign ALU_io_op_config = io_op_config; // @[FU.scala 48:22]
   always @(posedge clock) begin
-    if (reset) begin // @[FU.scala 33:29]
-      alu_d_in_1 <= 8'h0; // @[FU.scala 33:29]
+    if (reset) begin // @[FU.scala 33:28]
+      alu_din_1 <= 8'h0; // @[FU.scala 33:28]
     end else if (io_loop_source == 2'h0) begin // @[FU.scala 51:39]
-      alu_d_in_1 <= io_d_in_1; // @[FU.scala 52:20]
+      alu_din_1 <= io_din_1; // @[FU.scala 52:19]
     end else if (io_loop_source == 2'h1) begin // @[FU.scala 55:44]
       if (~loaded) begin // @[FU.scala 56:31]
-        alu_d_in_1 <= io_d_in_1; // @[FU.scala 57:24]
+        alu_din_1 <= io_din_1; // @[FU.scala 57:23]
       end else begin
-        alu_d_in_1 <= d_out_Reg; // @[FU.scala 61:24]
+        alu_din_1 <= dout_Reg; // @[FU.scala 61:23]
       end
     end else if (io_loop_source == 2'h2) begin // @[FU.scala 65:44]
-      alu_d_in_1 <= io_d_in_1;
+      alu_din_1 <= io_din_1;
     end else begin
-      alu_d_in_1 <= 8'h7; // @[FU.scala 76:20]
+      alu_din_1 <= 8'h7; // @[FU.scala 76:19]
     end
-    if (reset) begin // @[FU.scala 34:29]
-      alu_d_in_2 <= 8'h0; // @[FU.scala 34:29]
+    if (reset) begin // @[FU.scala 34:28]
+      alu_din_2 <= 8'h0; // @[FU.scala 34:28]
     end else if (io_loop_source == 2'h0) begin // @[FU.scala 51:39]
-      alu_d_in_2 <= io_d_in_2; // @[FU.scala 53:20]
+      alu_din_2 <= io_din_2; // @[FU.scala 53:19]
     end else if (io_loop_source == 2'h1) begin // @[FU.scala 55:44]
-      alu_d_in_2 <= io_d_in_2;
+      alu_din_2 <= io_din_2;
     end else if (io_loop_source == 2'h2) begin // @[FU.scala 65:44]
-      alu_d_in_2 <= _GEN_3;
+      alu_din_2 <= _GEN_3;
     end else begin
-      alu_d_in_2 <= 8'h7; // @[FU.scala 77:20]
+      alu_din_2 <= 8'h7; // @[FU.scala 77:19]
     end
-    if (reset) begin // @[FU.scala 35:28]
-      alu_d_out <= 8'h0; // @[FU.scala 35:28]
+    if (reset) begin // @[FU.scala 35:27]
+      alu_dout <= 8'h0; // @[FU.scala 35:27]
     end else begin
-      alu_d_out <= ALU_io_d_out; // @[FU.scala 47:15]
+      alu_dout <= ALU_io_dout; // @[FU.scala 47:14]
     end
-    if (reset) begin // @[FU.scala 36:28]
-      d_out_Reg <= 8'h0; // @[FU.scala 36:28]
+    if (reset) begin // @[FU.scala 36:27]
+      dout_Reg <= 8'h0; // @[FU.scala 36:27]
     end else if (_T_21) begin // @[FU.scala 102:13]
-      d_out_Reg <= alu_d_out; // @[FU.scala 106:23]
+      dout_Reg <= alu_dout; // @[FU.scala 106:22]
     end else if (_T_28) begin // @[FU.scala 111:13]
-      d_out_Reg <= alu_d_out; // @[FU.scala 112:23]
+      dout_Reg <= alu_dout; // @[FU.scala 112:22]
     end else begin
-      d_out_Reg <= 8'h0; // @[FU.scala 84:19]
+      dout_Reg <= 8'h0; // @[FU.scala 84:18]
     end
     if (reset) begin // @[FU.scala 40:24]
       count <= 16'hffff; // @[FU.scala 40:24]
@@ -189,13 +189,13 @@ initial begin
     `endif
 `ifdef RANDOMIZE_REG_INIT
   _RAND_0 = {1{`RANDOM}};
-  alu_d_in_1 = _RAND_0[7:0];
+  alu_din_1 = _RAND_0[7:0];
   _RAND_1 = {1{`RANDOM}};
-  alu_d_in_2 = _RAND_1[7:0];
+  alu_din_2 = _RAND_1[7:0];
   _RAND_2 = {1{`RANDOM}};
-  alu_d_out = _RAND_2[7:0];
+  alu_dout = _RAND_2[7:0];
   _RAND_3 = {1{`RANDOM}};
-  d_out_Reg = _RAND_3[7:0];
+  dout_Reg = _RAND_3[7:0];
   _RAND_4 = {1{`RANDOM}};
   count = _RAND_4[15:0];
   _RAND_5 = {1{`RANDOM}};

@@ -9,12 +9,16 @@
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~FR|FR>io_valid_out",
+    "sink":"~D_FIFO|D_FIFO>io_dout_v",
     "sources":[
-      "~FR|FR>io_valid_mux_sel",
-      "~FR|FR>io_valid_in",
-      "~FR|FR>io_ready_out",
-      "~FR|FR>io_fork_mask"
+      "~D_FIFO|D_FIFO>io_dout_r"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~D_FIFO|D_FIFO>io_dout",
+    "sources":[
+      "~D_FIFO|D_FIFO>io_dout_r"
     ]
   }
 ]

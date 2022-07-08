@@ -4,69 +4,20 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class FSTest extends AnyFlatSpec with ChiselScalatestTester {
     "FSTest test" should "pass" in {
-        test(new FS(5)) { dut =>
+        test(new FS(6)) { dut =>
             
-            var afu_in_1 = true 
-            var afu_in_2 = true 
-            var ae_out = true 
-            var as_out = true 
-            var aw_out = true 
-            
-            dut.io.afu_in_1.poke(afu_in_1.B)
-            dut.io.afu_in_2.poke(afu_in_2.B)
-            dut.io.ae_out.poke(ae_out.B)
-            dut.io.as_out.poke(as_out.B)
-            dut.io.aw_out.poke(aw_out.B)
+            var ready_out = "b1010".U 
+            var fork_mask = "b1010".U 
+        
+            dut.io.ready_out.poke(ready_out)
+            dut.io.fork_mask.poke(fork_mask)
             println("*************************************")
             println("*************************************")
-            println("AFU_In_1: " + dut.io.afu_in_1.peek().toString)
-            println("AFU_In_2: " + dut.io.afu_in_2.peek().toString)
-            println("AE_Out: " + dut.io.ae_out.peek().toString)
-            println("AS_Out: " + dut.io.as_out.peek().toString)
-            println("AW_Out: " + dut.io.aw_out.peek().toString)
-            println("*************************************")
-            println("*************************************")
+            println("Ready Out: " + dut.io.ready_out.peek().toString)
+            println("Fork Mask: " + dut.io.fork_mask.peek().toString)
             dut.clock.step(1)
             println("--------------------------------------")
-            println("AN_In: " + dut.io.an_in.peek().toString)
-            println("*************************************")
-            println("*************************************")
-            ae_out = false 
-            aw_out = false  
-            dut.io.ae_out.poke(ae_out.B)
-            dut.io.aw_out.poke(aw_out.B)
-            println("AFU_In_1: " + dut.io.afu_in_1.peek().toString)
-            println("AFU_In_2: " + dut.io.afu_in_2.peek().toString)
-            println("AE_Out: " + dut.io.ae_out.peek().toString)
-            println("AS_Out: " + dut.io.as_out.peek().toString)
-            println("AW_Out: " + dut.io.aw_out.peek().toString)
-            println("*************************************")
-            println("*************************************")
-            dut.clock.step(1)
-            println("--------------------------------------")
-            println("AN_In: " + dut.io.an_in.peek().toString)
-            println("*************************************")
-            println("*************************************")
-            afu_in_1 = false 
-            afu_in_2 = false  
-            ae_out = true 
-            as_out = false  
-            aw_out = true 
-            dut.io.afu_in_1.poke(afu_in_1.B)
-            dut.io.afu_in_2.poke(afu_in_2.B)
-            dut.io.ae_out.poke(ae_out.B)
-            dut.io.as_out.poke(as_out.B)
-            dut.io.aw_out.poke(aw_out.B)
-            println("AFU_In_1: " + dut.io.afu_in_1.peek().toString)
-            println("AFU_In_2: " + dut.io.afu_in_2.peek().toString)
-            println("AE_Out: " + dut.io.ae_out.peek().toString)
-            println("AS_Out: " + dut.io.as_out.peek().toString)
-            println("AW_Out: " + dut.io.aw_out.peek().toString)
-            println("*************************************")
-            println("*************************************")
-            dut.clock.step(1)
-            println("--------------------------------------")
-            println("AN_In: " + dut.io.an_in.peek().toString)
+            println("Ready In: " + dut.io.ready_in.peek().toString)
             println("*************************************")
             println("*************************************")
         }
