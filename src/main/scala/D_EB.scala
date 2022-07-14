@@ -1,7 +1,17 @@
+///////////////////////////////////////
+//                                   //
+//               D-EB                //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chisel3.util._
 
-class D_EB (DATA_WIDTH: Int)extends Module {
+class D_EB 
+    (
+        DATA_WIDTH: Int
+    )
+    extends Module {
     val io = IO(new Bundle {
         val d_p = Input(UInt(DATA_WIDTH.W))
         val v_p = Input(Bool())
@@ -25,10 +35,8 @@ class D_EB (DATA_WIDTH: Int)extends Module {
     S_EA := reg.asBool
     io.v_n := mux2_out.asBool
 
-
     io.a_p := S_EA | (~io.v_p)
     EM := io.a_p
-
 
     main.io.in := io.d_p
     aux.io.in := main.io.out 

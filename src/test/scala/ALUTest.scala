@@ -1,3 +1,9 @@
+///////////////////////////////////////
+//                                   //
+//    Arithmetic Logic Unit Test     //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
@@ -32,7 +38,8 @@ class ALUTest extends AnyFlatSpec with ChiselScalatestTester {
             op_config = 3
             dut.io.op_config.poke(op_config.U)
             dut.clock.step(1)
-            println("Shift Left Logical: " + dut.io.dout.peek().toString)
+            println("Warning: Fix SSL")
+            println("Left Logical: " + dut.io.dout.peek().toString)
             // Shift Right Logical
             op_config = 4
             dut.io.op_config.poke(op_config.U)

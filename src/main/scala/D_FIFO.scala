@@ -1,25 +1,35 @@
+///////////////////////////////////////
+//                                   //
+//              D-FIFO               //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chisel3.util._
- 
-class D_FIFO (DATA_WIDTH: Int, FIFO_DEPTH: Int) extends Module {
+
+class D_FIFO 
+    (
+        DATA_WIDTH: Int, 
+        FIFO_DEPTH: Int
+    ) 
+    extends Module {
     val io = IO(new Bundle {
         // Inputs 
-        val din   =  Input(UInt(DATA_WIDTH.W))  
-        val din_v =  Input(Bool())
-        val dout_r =  Input(Bool())
+        val din = Input(UInt(DATA_WIDTH.W))  
+        val din_v = Input(Bool())
+        val dout_r = Input(Bool())
 
         // Outputs
-        val din_r =  Output(Bool())
-        val dout   =  Output(UInt(DATA_WIDTH.W))  
-        val dout_v =  Output(Bool()) 
+        val din_r = Output(Bool())
+        val dout = Output(UInt(DATA_WIDTH.W))  
+        val dout_v = Output(Bool()) 
     })
 
     val memory = SyncReadMem(FIFO_DEPTH, UInt(DATA_WIDTH.W))
 
-	var write_pointer = RegInit(0.U(FIFO_DEPTH.W)) 
+    var write_pointer = RegInit(0.U(FIFO_DEPTH.W)) 
     var read_pointer = RegInit(0.U(FIFO_DEPTH.W)) 
     var num_data = RegInit(0.U(FIFO_DEPTH.W)) 
-
 
     var full = Wire(Bool()) 
     var empty = Wire(Bool()) 
@@ -27,15 +37,15 @@ class D_FIFO (DATA_WIDTH: Int, FIFO_DEPTH: Int) extends Module {
     var wr_en = Wire(Bool()) 
 
     empty := true.B
-	full := false.B 
-	write_pointer := 0.U 
+    full := false.B 
+    write_pointer := 0.U 
     read_pointer := 0.U 
-	num_data := 0.U 
+    num_data := 0.U 
     io.dout := 0.U 
-	io.dout_v :=  false.B  
+    io.dout_v := false.B  
 
     when (io.dout_r) {
-        io.dout_v :=  false.B  
+        io.dout_v := false.B  
     }
 
     when( full === false.B  &  wr_en === true.B ){ 
@@ -74,9 +84,8 @@ class D_FIFO (DATA_WIDTH: Int, FIFO_DEPTH: Int) extends Module {
     }  
 
     wr_en := io.din_v & (~full) 
-	rd_en := io.dout_r & (~empty) 
-	io.din_r := (~full)         
-                
+    rd_en := io.dout_r & (~empty) 
+    io.din_r := (~full)                        
 }
 
 // Generate the Verilog code

@@ -1,8 +1,17 @@
+///////////////////////////////////////
+//                                   //
+//           Cell Processing         //
+//                                   //
+///////////////////////////////////////
 
 import chisel3._
 import chisel3.util._
 
-class CellProcessing (DATA_WIDTH: Int) extends Module {
+class CellProcessing 
+    (
+        DATA_WIDTH: Int
+    ) 
+    extends Module {
     val io = IO(new Bundle {
         //  Data in
         val north_din = Input(UInt(DATA_WIDTH.W))
@@ -89,7 +98,7 @@ class CellProcessing (DATA_WIDTH: Int) extends Module {
     FR_1.io.fork_mask := fork_receiver_mask_1 
     EB_din_1_v := FR_1.io.valid_out 
 
-    val MUX_1  = Module (new ConfMux(6, DATA_WIDTH))
+    val MUX_1 = Module (new ConfMux(6, DATA_WIDTH))
     MUX_1.io.selector := selector_mux_1
     MUX_1.io.mux_input := FU_dout & I1_const & io.west_din & io.south_din & io.east_din & io.north_din 
     EB_din_1 := MUX_1.io.mux_output
@@ -97,7 +106,7 @@ class CellProcessing (DATA_WIDTH: Int) extends Module {
     val SEB_1 = Module (new D_SEB(DATA_WIDTH))
     SEB_1.io.din := EB_din_1
     SEB_1.io.din_v := EB_din_1_v
-    io.FU_din_1_r  := SEB_1.io.din_r 
+    io.FU_din_1_r := SEB_1.io.din_r 
     join_din_1 := SEB_1.io.dout   
     join_din_1_v := SEB_1.io.dout_v 
     SEB_1.io.dout_r := join_din_1_r
@@ -111,7 +120,7 @@ class CellProcessing (DATA_WIDTH: Int) extends Module {
     FR_2.io.fork_mask := fork_receiver_mask_2 
     EB_din_2_v := FR_2.io.valid_out 
 
-    val MUX_2  = Module (new ConfMux(6, DATA_WIDTH))
+    val MUX_2 = Module (new ConfMux(6, DATA_WIDTH))
     MUX_2.io.selector := selector_mux_2
     MUX_2.io.mux_input := FU_dout & I1_const & io.west_din & io.south_din & io.east_din & io.north_din 
     EB_din_2 := MUX_2.io.mux_output

@@ -202,80 +202,80 @@ module D_SEB(
 `ifdef RANDOMIZE_REG_INIT
   reg [31:0] _RAND_0;
 `endif // RANDOMIZE_REG_INIT
-  wire  main_clock; // @[D_SEB.scala 19:24]
-  wire  main_reset; // @[D_SEB.scala 19:24]
-  wire [31:0] main_io_in; // @[D_SEB.scala 19:24]
-  wire  main_io_en; // @[D_SEB.scala 19:24]
-  wire [31:0] main_io_out; // @[D_SEB.scala 19:24]
-  wire  aux_clock; // @[D_SEB.scala 20:23]
-  wire  aux_reset; // @[D_SEB.scala 20:23]
-  wire [31:0] aux_io_in; // @[D_SEB.scala 20:23]
-  wire  aux_io_en; // @[D_SEB.scala 20:23]
-  wire [31:0] aux_io_out; // @[D_SEB.scala 20:23]
-  wire  reg_1_clock; // @[D_SEB.scala 21:25]
-  wire  reg_1_reset; // @[D_SEB.scala 21:25]
-  wire  reg_1_io_in; // @[D_SEB.scala 21:25]
-  wire  reg_1_io_en; // @[D_SEB.scala 21:25]
-  wire  reg_1_io_out; // @[D_SEB.scala 21:25]
-  wire  reg_2_clock; // @[D_SEB.scala 22:25]
-  wire  reg_2_reset; // @[D_SEB.scala 22:25]
-  wire  reg_2_io_in; // @[D_SEB.scala 22:25]
-  wire  reg_2_io_en; // @[D_SEB.scala 22:25]
-  wire  reg_2_io_out; // @[D_SEB.scala 22:25]
-  reg  reg_; // @[D_SEB.scala 24:22]
-  wire  mux2_out = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_SEB.scala 28:23]
-  RegEnable main ( // @[D_SEB.scala 19:24]
+  wire  main_clock; // @[D_SEB.scala 14:24]
+  wire  main_reset; // @[D_SEB.scala 14:24]
+  wire [31:0] main_io_in; // @[D_SEB.scala 14:24]
+  wire  main_io_en; // @[D_SEB.scala 14:24]
+  wire [31:0] main_io_out; // @[D_SEB.scala 14:24]
+  wire  aux_clock; // @[D_SEB.scala 15:23]
+  wire  aux_reset; // @[D_SEB.scala 15:23]
+  wire [31:0] aux_io_in; // @[D_SEB.scala 15:23]
+  wire  aux_io_en; // @[D_SEB.scala 15:23]
+  wire [31:0] aux_io_out; // @[D_SEB.scala 15:23]
+  wire  reg_1_clock; // @[D_SEB.scala 16:25]
+  wire  reg_1_reset; // @[D_SEB.scala 16:25]
+  wire  reg_1_io_in; // @[D_SEB.scala 16:25]
+  wire  reg_1_io_en; // @[D_SEB.scala 16:25]
+  wire  reg_1_io_out; // @[D_SEB.scala 16:25]
+  wire  reg_2_clock; // @[D_SEB.scala 17:25]
+  wire  reg_2_reset; // @[D_SEB.scala 17:25]
+  wire  reg_2_io_in; // @[D_SEB.scala 17:25]
+  wire  reg_2_io_en; // @[D_SEB.scala 17:25]
+  wire  reg_2_io_out; // @[D_SEB.scala 17:25]
+  reg  reg_; // @[D_SEB.scala 19:22]
+  wire  mux2_out = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_SEB.scala 23:23]
+  RegEnable main ( // @[D_SEB.scala 14:24]
     .clock(main_clock),
     .reset(main_reset),
     .io_in(main_io_in),
     .io_en(main_io_en),
     .io_out(main_io_out)
   );
-  RegEnable aux ( // @[D_SEB.scala 20:23]
+  RegEnable aux ( // @[D_SEB.scala 15:23]
     .clock(aux_clock),
     .reset(aux_reset),
     .io_in(aux_io_in),
     .io_en(aux_io_en),
     .io_out(aux_io_out)
   );
-  RegEnable_2 reg_1 ( // @[D_SEB.scala 21:25]
+  RegEnable_2 reg_1 ( // @[D_SEB.scala 16:25]
     .clock(reg_1_clock),
     .reset(reg_1_reset),
     .io_in(reg_1_io_in),
     .io_en(reg_1_io_en),
     .io_out(reg_1_io_out)
   );
-  RegEnable_2 reg_2 ( // @[D_SEB.scala 22:25]
+  RegEnable_2 reg_2 ( // @[D_SEB.scala 17:25]
     .clock(reg_2_clock),
     .reset(reg_2_reset),
     .io_in(reg_2_io_in),
     .io_en(reg_2_io_en),
     .io_out(reg_2_io_out)
   );
-  assign io_din_r = reg_; // @[D_SEB.scala 30:20]
-  assign io_dout = reg_ ? main_io_out : aux_io_out; // @[D_SEB.scala 46:19]
-  assign io_dout_v = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_SEB.scala 28:23]
+  assign io_din_r = reg_; // @[D_SEB.scala 25:20]
+  assign io_dout = reg_ ? main_io_out : aux_io_out; // @[D_SEB.scala 41:19]
+  assign io_dout_v = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_SEB.scala 23:23]
   assign main_clock = clock;
   assign main_reset = reset;
-  assign main_io_in = io_din; // @[D_SEB.scala 36:16]
-  assign main_io_en = reg_; // @[D_SEB.scala 30:20]
+  assign main_io_in = io_din; // @[D_SEB.scala 31:16]
+  assign main_io_en = reg_; // @[D_SEB.scala 25:20]
   assign aux_clock = clock;
   assign aux_reset = reset;
-  assign aux_io_in = main_io_out; // @[D_SEB.scala 37:15]
-  assign aux_io_en = reg_; // @[D_SEB.scala 30:20]
+  assign aux_io_in = main_io_out; // @[D_SEB.scala 32:15]
+  assign aux_io_en = reg_; // @[D_SEB.scala 25:20]
   assign reg_1_clock = clock;
   assign reg_1_reset = reset;
-  assign reg_1_io_in = io_din_v; // @[D_SEB.scala 38:17]
-  assign reg_1_io_en = reg_; // @[D_SEB.scala 30:20]
+  assign reg_1_io_in = io_din_v; // @[D_SEB.scala 33:17]
+  assign reg_1_io_en = reg_; // @[D_SEB.scala 25:20]
   assign reg_2_clock = clock;
   assign reg_2_reset = reset;
-  assign reg_2_io_in = reg_1_io_out; // @[D_SEB.scala 39:17]
-  assign reg_2_io_en = reg_; // @[D_SEB.scala 30:20]
+  assign reg_2_io_in = reg_1_io_out; // @[D_SEB.scala 34:17]
+  assign reg_2_io_en = reg_; // @[D_SEB.scala 25:20]
   always @(posedge clock) begin
-    if (reset) begin // @[D_SEB.scala 24:22]
-      reg_ <= 1'h0; // @[D_SEB.scala 24:22]
+    if (reset) begin // @[D_SEB.scala 19:22]
+      reg_ <= 1'h0; // @[D_SEB.scala 19:22]
     end else begin
-      reg_ <= io_dout_r | ~mux2_out; // @[D_SEB.scala 29:9]
+      reg_ <= io_dout_r | ~mux2_out; // @[D_SEB.scala 24:9]
     end
   end
 // Register and memory initialization
@@ -336,11 +336,11 @@ module Join(
   output [31:0] io_dout_1,
   output [31:0] io_dout_2
 );
-  assign io_dout_v = io_din_1_v & io_din_2_v; // @[Join.scala 26:29]
-  assign io_din_1_r = io_din_2_v & io_dout_r; // @[Join.scala 28:30]
-  assign io_din_2_r = io_din_1_v & io_dout_r; // @[Join.scala 29:30]
-  assign io_dout_1 = io_din_1; // @[Join.scala 23:15]
-  assign io_dout_2 = io_din_2; // @[Join.scala 24:15]
+  assign io_dout_v = io_din_1_v & io_din_2_v; // @[Join.scala 24:29]
+  assign io_din_1_r = io_din_2_v & io_dout_r; // @[Join.scala 26:30]
+  assign io_din_2_r = io_din_1_v & io_dout_r; // @[Join.scala 27:30]
+  assign io_dout_1 = io_din_1; // @[Join.scala 21:15]
+  assign io_dout_2 = io_din_2; // @[Join.scala 22:15]
 endmodule
 module ALU(
   input  [31:0] io_din_1,
@@ -605,111 +605,111 @@ module CellProcessing(
   reg [31:0] _RAND_13;
   reg [31:0] _RAND_14;
 `endif // RANDOMIZE_REG_INIT
-  wire [5:0] FR_1_io_valid_in; // @[CellProcessing.scala 83:23]
-  wire [3:0] FR_1_io_ready_out; // @[CellProcessing.scala 83:23]
-  wire [2:0] FR_1_io_valid_mux_sel; // @[CellProcessing.scala 83:23]
-  wire [3:0] FR_1_io_fork_mask; // @[CellProcessing.scala 83:23]
-  wire  FR_1_io_valid_out; // @[CellProcessing.scala 83:23]
-  wire [2:0] MUX_1_io_selector; // @[CellProcessing.scala 92:25]
-  wire [191:0] MUX_1_io_mux_input; // @[CellProcessing.scala 92:25]
-  wire [31:0] MUX_1_io_mux_output; // @[CellProcessing.scala 92:25]
-  wire  SEB_1_clock; // @[CellProcessing.scala 97:24]
-  wire  SEB_1_reset; // @[CellProcessing.scala 97:24]
-  wire [31:0] SEB_1_io_din; // @[CellProcessing.scala 97:24]
-  wire  SEB_1_io_din_v; // @[CellProcessing.scala 97:24]
-  wire  SEB_1_io_din_r; // @[CellProcessing.scala 97:24]
-  wire [31:0] SEB_1_io_dout; // @[CellProcessing.scala 97:24]
-  wire  SEB_1_io_dout_v; // @[CellProcessing.scala 97:24]
-  wire  SEB_1_io_dout_r; // @[CellProcessing.scala 97:24]
-  wire [5:0] FR_2_io_valid_in; // @[CellProcessing.scala 105:23]
-  wire [3:0] FR_2_io_ready_out; // @[CellProcessing.scala 105:23]
-  wire [2:0] FR_2_io_valid_mux_sel; // @[CellProcessing.scala 105:23]
-  wire [3:0] FR_2_io_fork_mask; // @[CellProcessing.scala 105:23]
-  wire  FR_2_io_valid_out; // @[CellProcessing.scala 105:23]
-  wire [2:0] MUX_2_io_selector; // @[CellProcessing.scala 114:25]
-  wire [191:0] MUX_2_io_mux_input; // @[CellProcessing.scala 114:25]
-  wire [31:0] MUX_2_io_mux_output; // @[CellProcessing.scala 114:25]
-  wire  SEB_2_clock; // @[CellProcessing.scala 119:24]
-  wire  SEB_2_reset; // @[CellProcessing.scala 119:24]
-  wire [31:0] SEB_2_io_din; // @[CellProcessing.scala 119:24]
-  wire  SEB_2_io_din_v; // @[CellProcessing.scala 119:24]
-  wire  SEB_2_io_din_r; // @[CellProcessing.scala 119:24]
-  wire [31:0] SEB_2_io_dout; // @[CellProcessing.scala 119:24]
-  wire  SEB_2_io_dout_v; // @[CellProcessing.scala 119:24]
-  wire  SEB_2_io_dout_r; // @[CellProcessing.scala 119:24]
-  wire [31:0] JOIN_INST_io_din_1; // @[CellProcessing.scala 127:28]
-  wire [31:0] JOIN_INST_io_din_2; // @[CellProcessing.scala 127:28]
-  wire  JOIN_INST_io_dout_r; // @[CellProcessing.scala 127:28]
-  wire  JOIN_INST_io_din_1_v; // @[CellProcessing.scala 127:28]
-  wire  JOIN_INST_io_din_2_v; // @[CellProcessing.scala 127:28]
-  wire  JOIN_INST_io_dout_v; // @[CellProcessing.scala 127:28]
-  wire  JOIN_INST_io_din_1_r; // @[CellProcessing.scala 127:28]
-  wire  JOIN_INST_io_din_2_r; // @[CellProcessing.scala 127:28]
-  wire [31:0] JOIN_INST_io_dout_1; // @[CellProcessing.scala 127:28]
-  wire [31:0] JOIN_INST_io_dout_2; // @[CellProcessing.scala 127:28]
-  wire  FU_INST_clock; // @[CellProcessing.scala 140:26]
-  wire  FU_INST_reset; // @[CellProcessing.scala 140:26]
-  wire [31:0] FU_INST_io_din_1; // @[CellProcessing.scala 140:26]
-  wire [31:0] FU_INST_io_din_2; // @[CellProcessing.scala 140:26]
-  wire  FU_INST_io_din_v; // @[CellProcessing.scala 140:26]
-  wire  FU_INST_io_dout_r; // @[CellProcessing.scala 140:26]
-  wire [1:0] FU_INST_io_loop_source; // @[CellProcessing.scala 140:26]
-  wire [15:0] FU_INST_io_iterations_reset; // @[CellProcessing.scala 140:26]
-  wire [3:0] FU_INST_io_op_config; // @[CellProcessing.scala 140:26]
-  wire  FU_INST_io_din_r; // @[CellProcessing.scala 140:26]
-  wire [31:0] FU_INST_io_dout; // @[CellProcessing.scala 140:26]
-  wire  FU_INST_io_dout_v; // @[CellProcessing.scala 140:26]
-  wire  SEB_OUT_clock; // @[CellProcessing.scala 153:26]
-  wire  SEB_OUT_reset; // @[CellProcessing.scala 153:26]
-  wire [31:0] SEB_OUT_io_din; // @[CellProcessing.scala 153:26]
-  wire  SEB_OUT_io_din_v; // @[CellProcessing.scala 153:26]
-  wire  SEB_OUT_io_din_r; // @[CellProcessing.scala 153:26]
-  wire [31:0] SEB_OUT_io_dout; // @[CellProcessing.scala 153:26]
-  wire  SEB_OUT_io_dout_v; // @[CellProcessing.scala 153:26]
-  wire  SEB_OUT_io_dout_r; // @[CellProcessing.scala 153:26]
-  wire [4:0] FS_io_ready_out; // @[CellProcessing.scala 161:21]
-  wire [4:0] FS_io_fork_mask; // @[CellProcessing.scala 161:21]
-  wire  FS_io_ready_in; // @[CellProcessing.scala 161:21]
-  reg [2:0] selector_mux_1; // @[CellProcessing.scala 32:33]
-  reg [2:0] selector_mux_2; // @[CellProcessing.scala 33:33]
-  reg [3:0] fork_receiver_mask_1; // @[CellProcessing.scala 34:39]
-  reg [3:0] fork_receiver_mask_2; // @[CellProcessing.scala 35:39]
-  reg [4:0] op_config; // @[CellProcessing.scala 36:28]
-  reg [4:0] fork_sender_mask; // @[CellProcessing.scala 37:35]
-  reg [31:0] I1_const; // @[CellProcessing.scala 38:27]
-  reg [15:0] iterations_reset_load; // @[CellProcessing.scala 40:40]
-  reg [1:0] load_initial_value; // @[CellProcessing.scala 42:37]
-  reg [31:0] FU_dout; // @[CellProcessing.scala 45:26]
-  reg [31:0] EB_din_1; // @[CellProcessing.scala 46:27]
-  reg [31:0] EB_din_2; // @[CellProcessing.scala 47:27]
-  reg [31:0] join_din_1; // @[CellProcessing.scala 48:29]
-  reg [31:0] join_dout_1; // @[CellProcessing.scala 50:30]
-  reg [31:0] join_dout_2; // @[CellProcessing.scala 51:30]
+  wire [5:0] FR_1_io_valid_in; // @[CellProcessing.scala 88:23]
+  wire [3:0] FR_1_io_ready_out; // @[CellProcessing.scala 88:23]
+  wire [2:0] FR_1_io_valid_mux_sel; // @[CellProcessing.scala 88:23]
+  wire [3:0] FR_1_io_fork_mask; // @[CellProcessing.scala 88:23]
+  wire  FR_1_io_valid_out; // @[CellProcessing.scala 88:23]
+  wire [2:0] MUX_1_io_selector; // @[CellProcessing.scala 97:25]
+  wire [191:0] MUX_1_io_mux_input; // @[CellProcessing.scala 97:25]
+  wire [31:0] MUX_1_io_mux_output; // @[CellProcessing.scala 97:25]
+  wire  SEB_1_clock; // @[CellProcessing.scala 102:24]
+  wire  SEB_1_reset; // @[CellProcessing.scala 102:24]
+  wire [31:0] SEB_1_io_din; // @[CellProcessing.scala 102:24]
+  wire  SEB_1_io_din_v; // @[CellProcessing.scala 102:24]
+  wire  SEB_1_io_din_r; // @[CellProcessing.scala 102:24]
+  wire [31:0] SEB_1_io_dout; // @[CellProcessing.scala 102:24]
+  wire  SEB_1_io_dout_v; // @[CellProcessing.scala 102:24]
+  wire  SEB_1_io_dout_r; // @[CellProcessing.scala 102:24]
+  wire [5:0] FR_2_io_valid_in; // @[CellProcessing.scala 110:23]
+  wire [3:0] FR_2_io_ready_out; // @[CellProcessing.scala 110:23]
+  wire [2:0] FR_2_io_valid_mux_sel; // @[CellProcessing.scala 110:23]
+  wire [3:0] FR_2_io_fork_mask; // @[CellProcessing.scala 110:23]
+  wire  FR_2_io_valid_out; // @[CellProcessing.scala 110:23]
+  wire [2:0] MUX_2_io_selector; // @[CellProcessing.scala 119:25]
+  wire [191:0] MUX_2_io_mux_input; // @[CellProcessing.scala 119:25]
+  wire [31:0] MUX_2_io_mux_output; // @[CellProcessing.scala 119:25]
+  wire  SEB_2_clock; // @[CellProcessing.scala 124:24]
+  wire  SEB_2_reset; // @[CellProcessing.scala 124:24]
+  wire [31:0] SEB_2_io_din; // @[CellProcessing.scala 124:24]
+  wire  SEB_2_io_din_v; // @[CellProcessing.scala 124:24]
+  wire  SEB_2_io_din_r; // @[CellProcessing.scala 124:24]
+  wire [31:0] SEB_2_io_dout; // @[CellProcessing.scala 124:24]
+  wire  SEB_2_io_dout_v; // @[CellProcessing.scala 124:24]
+  wire  SEB_2_io_dout_r; // @[CellProcessing.scala 124:24]
+  wire [31:0] JOIN_INST_io_din_1; // @[CellProcessing.scala 132:28]
+  wire [31:0] JOIN_INST_io_din_2; // @[CellProcessing.scala 132:28]
+  wire  JOIN_INST_io_dout_r; // @[CellProcessing.scala 132:28]
+  wire  JOIN_INST_io_din_1_v; // @[CellProcessing.scala 132:28]
+  wire  JOIN_INST_io_din_2_v; // @[CellProcessing.scala 132:28]
+  wire  JOIN_INST_io_dout_v; // @[CellProcessing.scala 132:28]
+  wire  JOIN_INST_io_din_1_r; // @[CellProcessing.scala 132:28]
+  wire  JOIN_INST_io_din_2_r; // @[CellProcessing.scala 132:28]
+  wire [31:0] JOIN_INST_io_dout_1; // @[CellProcessing.scala 132:28]
+  wire [31:0] JOIN_INST_io_dout_2; // @[CellProcessing.scala 132:28]
+  wire  FU_INST_clock; // @[CellProcessing.scala 145:26]
+  wire  FU_INST_reset; // @[CellProcessing.scala 145:26]
+  wire [31:0] FU_INST_io_din_1; // @[CellProcessing.scala 145:26]
+  wire [31:0] FU_INST_io_din_2; // @[CellProcessing.scala 145:26]
+  wire  FU_INST_io_din_v; // @[CellProcessing.scala 145:26]
+  wire  FU_INST_io_dout_r; // @[CellProcessing.scala 145:26]
+  wire [1:0] FU_INST_io_loop_source; // @[CellProcessing.scala 145:26]
+  wire [15:0] FU_INST_io_iterations_reset; // @[CellProcessing.scala 145:26]
+  wire [3:0] FU_INST_io_op_config; // @[CellProcessing.scala 145:26]
+  wire  FU_INST_io_din_r; // @[CellProcessing.scala 145:26]
+  wire [31:0] FU_INST_io_dout; // @[CellProcessing.scala 145:26]
+  wire  FU_INST_io_dout_v; // @[CellProcessing.scala 145:26]
+  wire  SEB_OUT_clock; // @[CellProcessing.scala 158:26]
+  wire  SEB_OUT_reset; // @[CellProcessing.scala 158:26]
+  wire [31:0] SEB_OUT_io_din; // @[CellProcessing.scala 158:26]
+  wire  SEB_OUT_io_din_v; // @[CellProcessing.scala 158:26]
+  wire  SEB_OUT_io_din_r; // @[CellProcessing.scala 158:26]
+  wire [31:0] SEB_OUT_io_dout; // @[CellProcessing.scala 158:26]
+  wire  SEB_OUT_io_dout_v; // @[CellProcessing.scala 158:26]
+  wire  SEB_OUT_io_dout_r; // @[CellProcessing.scala 158:26]
+  wire [4:0] FS_io_ready_out; // @[CellProcessing.scala 166:21]
+  wire [4:0] FS_io_fork_mask; // @[CellProcessing.scala 166:21]
+  wire  FS_io_ready_in; // @[CellProcessing.scala 166:21]
+  reg [2:0] selector_mux_1; // @[CellProcessing.scala 37:33]
+  reg [2:0] selector_mux_2; // @[CellProcessing.scala 38:33]
+  reg [3:0] fork_receiver_mask_1; // @[CellProcessing.scala 39:39]
+  reg [3:0] fork_receiver_mask_2; // @[CellProcessing.scala 40:39]
+  reg [4:0] op_config; // @[CellProcessing.scala 41:28]
+  reg [4:0] fork_sender_mask; // @[CellProcessing.scala 42:35]
+  reg [31:0] I1_const; // @[CellProcessing.scala 43:27]
+  reg [15:0] iterations_reset_load; // @[CellProcessing.scala 45:40]
+  reg [1:0] load_initial_value; // @[CellProcessing.scala 47:37]
+  reg [31:0] FU_dout; // @[CellProcessing.scala 50:26]
+  reg [31:0] EB_din_1; // @[CellProcessing.scala 51:27]
+  reg [31:0] EB_din_2; // @[CellProcessing.scala 52:27]
+  reg [31:0] join_din_1; // @[CellProcessing.scala 53:29]
+  reg [31:0] join_dout_1; // @[CellProcessing.scala 55:30]
+  reg [31:0] join_dout_2; // @[CellProcessing.scala 56:30]
   wire [1:0] ready_FR1_lo = {io_south_dout_r,io_west_dout_r}; // @[Cat.scala 31:58]
   wire [1:0] ready_FR1_hi = {io_north_dout_r,io_east_dout_r}; // @[Cat.scala 31:58]
   wire [2:0] valid_in_FR1_lo = {io_south_din_v,io_east_din_v,io_north_din_v}; // @[Cat.scala 31:58]
-  wire  FU_dout_v = FU_INST_io_dout_v; // @[CellProcessing.scala 150:15 53:25]
+  wire  FU_dout_v = FU_INST_io_dout_v; // @[CellProcessing.scala 155:15 58:25]
   wire [2:0] valid_in_FR1_hi = {FU_dout_v,1'h1,io_west_din_v}; // @[Cat.scala 31:58]
-  wire [31:0] _MUX_1_io_mux_input_T = FU_dout & I1_const; // @[CellProcessing.scala 94:35]
-  wire [31:0] _MUX_1_io_mux_input_T_1 = _MUX_1_io_mux_input_T & io_west_din; // @[CellProcessing.scala 94:46]
-  wire [31:0] _MUX_1_io_mux_input_T_2 = _MUX_1_io_mux_input_T_1 & io_south_din; // @[CellProcessing.scala 94:60]
-  wire [31:0] _MUX_1_io_mux_input_T_3 = _MUX_1_io_mux_input_T_2 & io_east_din; // @[CellProcessing.scala 94:75]
-  wire [31:0] _MUX_1_io_mux_input_T_4 = _MUX_1_io_mux_input_T_3 & io_north_din; // @[CellProcessing.scala 94:89]
+  wire [31:0] _MUX_1_io_mux_input_T = FU_dout & I1_const; // @[CellProcessing.scala 99:35]
+  wire [31:0] _MUX_1_io_mux_input_T_1 = _MUX_1_io_mux_input_T & io_west_din; // @[CellProcessing.scala 99:46]
+  wire [31:0] _MUX_1_io_mux_input_T_2 = _MUX_1_io_mux_input_T_1 & io_south_din; // @[CellProcessing.scala 99:60]
+  wire [31:0] _MUX_1_io_mux_input_T_3 = _MUX_1_io_mux_input_T_2 & io_east_din; // @[CellProcessing.scala 99:75]
+  wire [31:0] _MUX_1_io_mux_input_T_4 = _MUX_1_io_mux_input_T_3 & io_north_din; // @[CellProcessing.scala 99:89]
   wire [2:0] ready_out_FS_hi = {1'h1,io_north_dout_r,io_east_dout_r}; // @[Cat.scala 31:58]
-  wire  join_din_1_v = SEB_1_io_dout_v; // @[CellProcessing.scala 102:18 57:28]
-  FR FR_1 ( // @[CellProcessing.scala 83:23]
+  wire  join_din_1_v = SEB_1_io_dout_v; // @[CellProcessing.scala 107:18 62:28]
+  FR FR_1 ( // @[CellProcessing.scala 88:23]
     .io_valid_in(FR_1_io_valid_in),
     .io_ready_out(FR_1_io_ready_out),
     .io_valid_mux_sel(FR_1_io_valid_mux_sel),
     .io_fork_mask(FR_1_io_fork_mask),
     .io_valid_out(FR_1_io_valid_out)
   );
-  ConfMux_1 MUX_1 ( // @[CellProcessing.scala 92:25]
+  ConfMux_1 MUX_1 ( // @[CellProcessing.scala 97:25]
     .io_selector(MUX_1_io_selector),
     .io_mux_input(MUX_1_io_mux_input),
     .io_mux_output(MUX_1_io_mux_output)
   );
-  D_SEB SEB_1 ( // @[CellProcessing.scala 97:24]
+  D_SEB SEB_1 ( // @[CellProcessing.scala 102:24]
     .clock(SEB_1_clock),
     .reset(SEB_1_reset),
     .io_din(SEB_1_io_din),
@@ -719,19 +719,19 @@ module CellProcessing(
     .io_dout_v(SEB_1_io_dout_v),
     .io_dout_r(SEB_1_io_dout_r)
   );
-  FR FR_2 ( // @[CellProcessing.scala 105:23]
+  FR FR_2 ( // @[CellProcessing.scala 110:23]
     .io_valid_in(FR_2_io_valid_in),
     .io_ready_out(FR_2_io_ready_out),
     .io_valid_mux_sel(FR_2_io_valid_mux_sel),
     .io_fork_mask(FR_2_io_fork_mask),
     .io_valid_out(FR_2_io_valid_out)
   );
-  ConfMux_1 MUX_2 ( // @[CellProcessing.scala 114:25]
+  ConfMux_1 MUX_2 ( // @[CellProcessing.scala 119:25]
     .io_selector(MUX_2_io_selector),
     .io_mux_input(MUX_2_io_mux_input),
     .io_mux_output(MUX_2_io_mux_output)
   );
-  D_SEB SEB_2 ( // @[CellProcessing.scala 119:24]
+  D_SEB SEB_2 ( // @[CellProcessing.scala 124:24]
     .clock(SEB_2_clock),
     .reset(SEB_2_reset),
     .io_din(SEB_2_io_din),
@@ -741,7 +741,7 @@ module CellProcessing(
     .io_dout_v(SEB_2_io_dout_v),
     .io_dout_r(SEB_2_io_dout_r)
   );
-  Join JOIN_INST ( // @[CellProcessing.scala 127:28]
+  Join JOIN_INST ( // @[CellProcessing.scala 132:28]
     .io_din_1(JOIN_INST_io_din_1),
     .io_din_2(JOIN_INST_io_din_2),
     .io_dout_r(JOIN_INST_io_dout_r),
@@ -753,7 +753,7 @@ module CellProcessing(
     .io_dout_1(JOIN_INST_io_dout_1),
     .io_dout_2(JOIN_INST_io_dout_2)
   );
-  FU FU_INST ( // @[CellProcessing.scala 140:26]
+  FU FU_INST ( // @[CellProcessing.scala 145:26]
     .clock(FU_INST_clock),
     .reset(FU_INST_reset),
     .io_din_1(FU_INST_io_din_1),
@@ -767,7 +767,7 @@ module CellProcessing(
     .io_dout(FU_INST_io_dout),
     .io_dout_v(FU_INST_io_dout_v)
   );
-  D_SEB SEB_OUT ( // @[CellProcessing.scala 153:26]
+  D_SEB SEB_OUT ( // @[CellProcessing.scala 158:26]
     .clock(SEB_OUT_clock),
     .reset(SEB_OUT_reset),
     .io_din(SEB_OUT_io_din),
@@ -777,133 +777,133 @@ module CellProcessing(
     .io_dout_v(SEB_OUT_io_dout_v),
     .io_dout_r(SEB_OUT_io_dout_r)
   );
-  FS FS ( // @[CellProcessing.scala 161:21]
+  FS FS ( // @[CellProcessing.scala 166:21]
     .io_ready_out(FS_io_ready_out),
     .io_fork_mask(FS_io_fork_mask),
     .io_ready_in(FS_io_ready_in)
   );
-  assign io_FU_din_1_r = SEB_1_io_din_r; // @[CellProcessing.scala 100:20]
-  assign io_FU_din_2_r = SEB_2_io_din_r; // @[CellProcessing.scala 122:19]
-  assign io_dout = SEB_OUT_io_dout; // @[CellProcessing.scala 157:13]
-  assign io_dout_v = SEB_OUT_io_dout_v; // @[CellProcessing.scala 158:15]
+  assign io_FU_din_1_r = SEB_1_io_din_r; // @[CellProcessing.scala 105:20]
+  assign io_FU_din_2_r = SEB_2_io_din_r; // @[CellProcessing.scala 127:19]
+  assign io_dout = SEB_OUT_io_dout; // @[CellProcessing.scala 162:13]
+  assign io_dout_v = SEB_OUT_io_dout_v; // @[CellProcessing.scala 163:15]
   assign FR_1_io_valid_in = {valid_in_FR1_hi,valid_in_FR1_lo}; // @[Cat.scala 31:58]
   assign FR_1_io_ready_out = {ready_FR1_hi,ready_FR1_lo}; // @[Cat.scala 31:58]
-  assign FR_1_io_valid_mux_sel = selector_mux_1; // @[CellProcessing.scala 88:27]
-  assign FR_1_io_fork_mask = fork_receiver_mask_1; // @[CellProcessing.scala 89:23]
-  assign MUX_1_io_selector = selector_mux_1; // @[CellProcessing.scala 93:23]
-  assign MUX_1_io_mux_input = {{160'd0}, _MUX_1_io_mux_input_T_4}; // @[CellProcessing.scala 94:24]
+  assign FR_1_io_valid_mux_sel = selector_mux_1; // @[CellProcessing.scala 93:27]
+  assign FR_1_io_fork_mask = fork_receiver_mask_1; // @[CellProcessing.scala 94:23]
+  assign MUX_1_io_selector = selector_mux_1; // @[CellProcessing.scala 98:23]
+  assign MUX_1_io_mux_input = {{160'd0}, _MUX_1_io_mux_input_T_4}; // @[CellProcessing.scala 99:24]
   assign SEB_1_clock = clock;
   assign SEB_1_reset = reset;
-  assign SEB_1_io_din = EB_din_1; // @[CellProcessing.scala 98:18]
-  assign SEB_1_io_din_v = FR_1_io_valid_out; // @[CellProcessing.scala 55:26 90:16]
-  assign SEB_1_io_dout_r = JOIN_INST_io_din_1_r; // @[CellProcessing.scala 135:18 58:28]
+  assign SEB_1_io_din = EB_din_1; // @[CellProcessing.scala 103:18]
+  assign SEB_1_io_din_v = FR_1_io_valid_out; // @[CellProcessing.scala 60:26 95:16]
+  assign SEB_1_io_dout_r = JOIN_INST_io_din_1_r; // @[CellProcessing.scala 140:18 63:28]
   assign FR_2_io_valid_in = {valid_in_FR1_hi,valid_in_FR1_lo}; // @[Cat.scala 31:58]
   assign FR_2_io_ready_out = {ready_FR1_hi,ready_FR1_lo}; // @[Cat.scala 31:58]
-  assign FR_2_io_valid_mux_sel = selector_mux_2; // @[CellProcessing.scala 110:27]
-  assign FR_2_io_fork_mask = fork_receiver_mask_2; // @[CellProcessing.scala 111:23]
-  assign MUX_2_io_selector = selector_mux_2; // @[CellProcessing.scala 115:23]
-  assign MUX_2_io_mux_input = {{160'd0}, _MUX_1_io_mux_input_T_4}; // @[CellProcessing.scala 116:24]
+  assign FR_2_io_valid_mux_sel = selector_mux_2; // @[CellProcessing.scala 115:27]
+  assign FR_2_io_fork_mask = fork_receiver_mask_2; // @[CellProcessing.scala 116:23]
+  assign MUX_2_io_selector = selector_mux_2; // @[CellProcessing.scala 120:23]
+  assign MUX_2_io_mux_input = {{160'd0}, _MUX_1_io_mux_input_T_4}; // @[CellProcessing.scala 121:24]
   assign SEB_2_clock = clock;
   assign SEB_2_reset = reset;
-  assign SEB_2_io_din = EB_din_2; // @[CellProcessing.scala 120:18]
-  assign SEB_2_io_din_v = FR_2_io_valid_out; // @[CellProcessing.scala 112:16 56:26]
-  assign SEB_2_io_dout_r = JOIN_INST_io_din_2_r; // @[CellProcessing.scala 136:18 60:28]
-  assign JOIN_INST_io_din_1 = join_din_1; // @[CellProcessing.scala 128:24]
-  assign JOIN_INST_io_din_2 = {{31'd0}, join_din_1_v}; // @[CellProcessing.scala 129:24]
-  assign JOIN_INST_io_dout_r = FU_INST_io_din_r; // @[CellProcessing.scala 144:17 62:27]
-  assign JOIN_INST_io_din_1_v = SEB_1_io_dout_v; // @[CellProcessing.scala 102:18 57:28]
-  assign JOIN_INST_io_din_2_v = SEB_1_io_dout_v; // @[CellProcessing.scala 124:18 59:28]
+  assign SEB_2_io_din = EB_din_2; // @[CellProcessing.scala 125:18]
+  assign SEB_2_io_din_v = FR_2_io_valid_out; // @[CellProcessing.scala 117:16 61:26]
+  assign SEB_2_io_dout_r = JOIN_INST_io_din_2_r; // @[CellProcessing.scala 141:18 65:28]
+  assign JOIN_INST_io_din_1 = join_din_1; // @[CellProcessing.scala 133:24]
+  assign JOIN_INST_io_din_2 = {{31'd0}, join_din_1_v}; // @[CellProcessing.scala 134:24]
+  assign JOIN_INST_io_dout_r = FU_INST_io_din_r; // @[CellProcessing.scala 149:17 67:27]
+  assign JOIN_INST_io_din_1_v = SEB_1_io_dout_v; // @[CellProcessing.scala 107:18 62:28]
+  assign JOIN_INST_io_din_2_v = SEB_1_io_dout_v; // @[CellProcessing.scala 129:18 64:28]
   assign FU_INST_clock = clock;
   assign FU_INST_reset = reset;
-  assign FU_INST_io_din_1 = join_dout_1; // @[CellProcessing.scala 141:22]
-  assign FU_INST_io_din_2 = join_dout_2; // @[CellProcessing.scala 142:22]
-  assign FU_INST_io_din_v = JOIN_INST_io_dout_v; // @[CellProcessing.scala 134:17 61:27]
-  assign FU_INST_io_dout_r = SEB_OUT_io_din_r; // @[CellProcessing.scala 156:15 54:25]
-  assign FU_INST_io_loop_source = load_initial_value; // @[CellProcessing.scala 145:28]
-  assign FU_INST_io_iterations_reset = iterations_reset_load; // @[CellProcessing.scala 146:33]
-  assign FU_INST_io_op_config = op_config[3:0]; // @[CellProcessing.scala 147:26]
+  assign FU_INST_io_din_1 = join_dout_1; // @[CellProcessing.scala 146:22]
+  assign FU_INST_io_din_2 = join_dout_2; // @[CellProcessing.scala 147:22]
+  assign FU_INST_io_din_v = JOIN_INST_io_dout_v; // @[CellProcessing.scala 139:17 66:27]
+  assign FU_INST_io_dout_r = SEB_OUT_io_din_r; // @[CellProcessing.scala 161:15 59:25]
+  assign FU_INST_io_loop_source = load_initial_value; // @[CellProcessing.scala 150:28]
+  assign FU_INST_io_iterations_reset = iterations_reset_load; // @[CellProcessing.scala 151:33]
+  assign FU_INST_io_op_config = op_config[3:0]; // @[CellProcessing.scala 152:26]
   assign SEB_OUT_clock = clock;
   assign SEB_OUT_reset = reset;
-  assign SEB_OUT_io_din = FU_dout; // @[CellProcessing.scala 154:20]
-  assign SEB_OUT_io_din_v = FU_INST_io_dout_v; // @[CellProcessing.scala 150:15 53:25]
-  assign SEB_OUT_io_dout_r = FS_io_ready_in; // @[CellProcessing.scala 164:19 63:29]
+  assign SEB_OUT_io_din = FU_dout; // @[CellProcessing.scala 159:20]
+  assign SEB_OUT_io_din_v = FU_INST_io_dout_v; // @[CellProcessing.scala 155:15 58:25]
+  assign SEB_OUT_io_dout_r = FS_io_ready_in; // @[CellProcessing.scala 169:19 68:29]
   assign FS_io_ready_out = {ready_out_FS_hi,ready_FR1_lo}; // @[Cat.scala 31:58]
-  assign FS_io_fork_mask = fork_sender_mask; // @[CellProcessing.scala 165:21]
+  assign FS_io_fork_mask = fork_sender_mask; // @[CellProcessing.scala 170:21]
   always @(posedge clock) begin
-    if (reset) begin // @[CellProcessing.scala 32:33]
-      selector_mux_1 <= 3'h0; // @[CellProcessing.scala 32:33]
+    if (reset) begin // @[CellProcessing.scala 37:33]
+      selector_mux_1 <= 3'h0; // @[CellProcessing.scala 37:33]
     end else begin
-      selector_mux_1 <= io_config_bits[2:0]; // @[CellProcessing.scala 66:20]
+      selector_mux_1 <= io_config_bits[2:0]; // @[CellProcessing.scala 71:20]
     end
-    if (reset) begin // @[CellProcessing.scala 33:33]
-      selector_mux_2 <= 3'h0; // @[CellProcessing.scala 33:33]
+    if (reset) begin // @[CellProcessing.scala 38:33]
+      selector_mux_2 <= 3'h0; // @[CellProcessing.scala 38:33]
     end else begin
-      selector_mux_2 <= io_config_bits[5:3]; // @[CellProcessing.scala 67:20]
+      selector_mux_2 <= io_config_bits[5:3]; // @[CellProcessing.scala 72:20]
     end
-    if (reset) begin // @[CellProcessing.scala 34:39]
-      fork_receiver_mask_1 <= 4'h0; // @[CellProcessing.scala 34:39]
+    if (reset) begin // @[CellProcessing.scala 39:39]
+      fork_receiver_mask_1 <= 4'h0; // @[CellProcessing.scala 39:39]
     end else begin
-      fork_receiver_mask_1 <= io_config_bits[17:14]; // @[CellProcessing.scala 68:26]
+      fork_receiver_mask_1 <= io_config_bits[17:14]; // @[CellProcessing.scala 73:26]
     end
-    if (reset) begin // @[CellProcessing.scala 35:39]
-      fork_receiver_mask_2 <= 4'h0; // @[CellProcessing.scala 35:39]
+    if (reset) begin // @[CellProcessing.scala 40:39]
+      fork_receiver_mask_2 <= 4'h0; // @[CellProcessing.scala 40:39]
     end else begin
-      fork_receiver_mask_2 <= io_config_bits[23:20]; // @[CellProcessing.scala 70:26]
+      fork_receiver_mask_2 <= io_config_bits[23:20]; // @[CellProcessing.scala 75:26]
     end
-    if (reset) begin // @[CellProcessing.scala 36:28]
-      op_config <= 5'h0; // @[CellProcessing.scala 36:28]
+    if (reset) begin // @[CellProcessing.scala 41:28]
+      op_config <= 5'h0; // @[CellProcessing.scala 41:28]
     end else begin
-      op_config <= io_config_bits[48:44]; // @[CellProcessing.scala 72:15]
+      op_config <= io_config_bits[48:44]; // @[CellProcessing.scala 77:15]
     end
-    if (reset) begin // @[CellProcessing.scala 37:35]
-      fork_sender_mask <= 5'h0; // @[CellProcessing.scala 37:35]
+    if (reset) begin // @[CellProcessing.scala 42:35]
+      fork_sender_mask <= 5'h0; // @[CellProcessing.scala 42:35]
     end else begin
-      fork_sender_mask <= io_config_bits[56:52]; // @[CellProcessing.scala 74:22]
+      fork_sender_mask <= io_config_bits[56:52]; // @[CellProcessing.scala 79:22]
     end
-    if (reset) begin // @[CellProcessing.scala 38:27]
-      I1_const <= 32'h0; // @[CellProcessing.scala 38:27]
+    if (reset) begin // @[CellProcessing.scala 43:27]
+      I1_const <= 32'h0; // @[CellProcessing.scala 43:27]
     end else begin
-      I1_const <= io_config_bits[115:84]; // @[CellProcessing.scala 76:15]
+      I1_const <= io_config_bits[115:84]; // @[CellProcessing.scala 81:15]
     end
-    if (reset) begin // @[CellProcessing.scala 40:40]
-      iterations_reset_load <= 16'h0; // @[CellProcessing.scala 40:40]
+    if (reset) begin // @[CellProcessing.scala 45:40]
+      iterations_reset_load <= 16'h0; // @[CellProcessing.scala 45:40]
     end else begin
-      iterations_reset_load <= io_config_bits[179:164]; // @[CellProcessing.scala 80:27]
+      iterations_reset_load <= io_config_bits[179:164]; // @[CellProcessing.scala 85:27]
     end
-    if (reset) begin // @[CellProcessing.scala 42:37]
-      load_initial_value <= 2'h0; // @[CellProcessing.scala 42:37]
+    if (reset) begin // @[CellProcessing.scala 47:37]
+      load_initial_value <= 2'h0; // @[CellProcessing.scala 47:37]
     end else begin
-      load_initial_value <= io_config_bits[181:180]; // @[CellProcessing.scala 81:24]
+      load_initial_value <= io_config_bits[181:180]; // @[CellProcessing.scala 86:24]
     end
-    if (reset) begin // @[CellProcessing.scala 45:26]
-      FU_dout <= 32'h0; // @[CellProcessing.scala 45:26]
+    if (reset) begin // @[CellProcessing.scala 50:26]
+      FU_dout <= 32'h0; // @[CellProcessing.scala 50:26]
     end else begin
-      FU_dout <= FU_INST_io_dout; // @[CellProcessing.scala 149:13]
+      FU_dout <= FU_INST_io_dout; // @[CellProcessing.scala 154:13]
     end
-    if (reset) begin // @[CellProcessing.scala 46:27]
-      EB_din_1 <= 32'h0; // @[CellProcessing.scala 46:27]
+    if (reset) begin // @[CellProcessing.scala 51:27]
+      EB_din_1 <= 32'h0; // @[CellProcessing.scala 51:27]
     end else begin
-      EB_din_1 <= MUX_1_io_mux_output; // @[CellProcessing.scala 95:14]
+      EB_din_1 <= MUX_1_io_mux_output; // @[CellProcessing.scala 100:14]
     end
-    if (reset) begin // @[CellProcessing.scala 47:27]
-      EB_din_2 <= 32'h0; // @[CellProcessing.scala 47:27]
+    if (reset) begin // @[CellProcessing.scala 52:27]
+      EB_din_2 <= 32'h0; // @[CellProcessing.scala 52:27]
     end else begin
-      EB_din_2 <= MUX_2_io_mux_output; // @[CellProcessing.scala 117:14]
+      EB_din_2 <= MUX_2_io_mux_output; // @[CellProcessing.scala 122:14]
     end
-    if (reset) begin // @[CellProcessing.scala 48:29]
-      join_din_1 <= 32'h0; // @[CellProcessing.scala 48:29]
+    if (reset) begin // @[CellProcessing.scala 53:29]
+      join_din_1 <= 32'h0; // @[CellProcessing.scala 53:29]
     end else begin
-      join_din_1 <= SEB_1_io_dout; // @[CellProcessing.scala 101:16]
+      join_din_1 <= SEB_1_io_dout; // @[CellProcessing.scala 106:16]
     end
-    if (reset) begin // @[CellProcessing.scala 50:30]
-      join_dout_1 <= 32'h0; // @[CellProcessing.scala 50:30]
+    if (reset) begin // @[CellProcessing.scala 55:30]
+      join_dout_1 <= 32'h0; // @[CellProcessing.scala 55:30]
     end else begin
-      join_dout_1 <= JOIN_INST_io_dout_1; // @[CellProcessing.scala 137:17]
+      join_dout_1 <= JOIN_INST_io_dout_1; // @[CellProcessing.scala 142:17]
     end
-    if (reset) begin // @[CellProcessing.scala 51:30]
-      join_dout_2 <= 32'h0; // @[CellProcessing.scala 51:30]
+    if (reset) begin // @[CellProcessing.scala 56:30]
+      join_dout_2 <= 32'h0; // @[CellProcessing.scala 56:30]
     end else begin
-      join_dout_2 <= JOIN_INST_io_dout_2; // @[CellProcessing.scala 138:17]
+      join_dout_2 <= JOIN_INST_io_dout_2; // @[CellProcessing.scala 143:17]
     end
   end
 // Register and memory initialization

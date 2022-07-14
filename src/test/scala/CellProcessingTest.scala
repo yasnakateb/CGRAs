@@ -1,3 +1,9 @@
+///////////////////////////////////////
+//                                   //
+//       Cell Processing Test        //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
@@ -47,6 +53,8 @@ class CellProcessingTest extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
+            // Outputs
+            println("Outputs")
             println("FU_din_1_r: " + dut.io.FU_din_1_r.peek().toString)
             println("FU_din_2_r: " + dut.io.FU_din_2_r.peek().toString)
             println("dout: " + dut.io.dout.peek().toString)

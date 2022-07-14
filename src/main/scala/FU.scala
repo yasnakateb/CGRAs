@@ -1,3 +1,9 @@
+///////////////////////////////////////
+//                                   //
+//                FU                 //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chisel3.util._
 
@@ -11,7 +17,12 @@ object FU
 
 import FU._
 
-class FU (DATA_WIDTH: Int, OP_WIDTH: Int)extends Module {
+class FU 
+    (
+        DATA_WIDTH: Int, 
+        OP_WIDTH: Int
+    )
+    extends Module {
     val io = IO(new Bundle {
         //  Inputs
         val din_1 = Input(UInt(DATA_WIDTH.W))

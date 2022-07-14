@@ -1,3 +1,9 @@
+///////////////////////////////////////
+//                                   //
+//    Processing Element Test        //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
@@ -57,6 +63,8 @@ class ProcessingElementTest extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
+            // Outputs
+            println("Outputs")
             println("north_din_r: " + dut.io.north_din_r.peek().toString)
             println("east_din_r: " + dut.io.east_din_r.peek().toString)
             println("south_din_r: " + dut.io.south_din_r.peek().toString)

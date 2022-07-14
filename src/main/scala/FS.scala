@@ -7,7 +7,11 @@
 import chisel3._
 import chisel3.util._
 
-class FS (NUMBER_OF_READYS: Int)extends Module {
+class FS 
+    (
+        NUMBER_OF_READYS: Int
+    )
+    extends Module {
     val io = IO(new Bundle {
         // Inputs
         val ready_out = Input(UInt(NUMBER_OF_READYS.W))

@@ -248,19 +248,19 @@ circuit ProcessingElement :
     input reset : Reset
     output io : { flip din : UInt<32>, flip din_v : UInt<1>, flip dout_r : UInt<1>, dout : UInt<32>, dout_v : UInt<1>, din_r : UInt<1>}
 
-    inst reg_1 of RegEnable @[D_REG.scala 19:25]
+    inst reg_1 of RegEnable @[D_REG.scala 14:25]
     reg_1.clock <= clock
     reg_1.reset <= reset
-    inst reg_2 of RegEnable_1 @[D_REG.scala 20:25]
+    inst reg_2 of RegEnable_1 @[D_REG.scala 15:25]
     reg_2.clock <= clock
     reg_2.reset <= reset
-    reg_1.io.in <= io.din @[D_REG.scala 22:17]
-    reg_2.io.in <= io.din_v @[D_REG.scala 23:17]
-    reg_1.io.en <= io.dout_r @[D_REG.scala 24:17]
-    reg_2.io.en <= io.dout_r @[D_REG.scala 25:17]
-    io.dout <= reg_1.io.out @[D_REG.scala 26:13]
-    io.dout_v <= reg_2.io.out @[D_REG.scala 27:15]
-    io.din_r <= io.dout_r @[D_REG.scala 28:14]
+    reg_1.io.in <= io.din @[D_REG.scala 17:17]
+    reg_2.io.in <= io.din_v @[D_REG.scala 18:17]
+    reg_1.io.en <= io.dout_r @[D_REG.scala 19:17]
+    reg_2.io.en <= io.dout_r @[D_REG.scala 20:17]
+    io.dout <= reg_1.io.out @[D_REG.scala 21:13]
+    io.dout_v <= reg_2.io.out @[D_REG.scala 22:15]
+    io.din_r <= io.dout_r @[D_REG.scala 23:14]
 
   module D_FIFO_1 :
     input clock : Clock
@@ -511,19 +511,19 @@ circuit ProcessingElement :
     input reset : Reset
     output io : { flip din : UInt<32>, flip din_v : UInt<1>, flip dout_r : UInt<1>, dout : UInt<32>, dout_v : UInt<1>, din_r : UInt<1>}
 
-    inst reg_1 of RegEnable_2 @[D_REG.scala 19:25]
+    inst reg_1 of RegEnable_2 @[D_REG.scala 14:25]
     reg_1.clock <= clock
     reg_1.reset <= reset
-    inst reg_2 of RegEnable_3 @[D_REG.scala 20:25]
+    inst reg_2 of RegEnable_3 @[D_REG.scala 15:25]
     reg_2.clock <= clock
     reg_2.reset <= reset
-    reg_1.io.in <= io.din @[D_REG.scala 22:17]
-    reg_2.io.in <= io.din_v @[D_REG.scala 23:17]
-    reg_1.io.en <= io.dout_r @[D_REG.scala 24:17]
-    reg_2.io.en <= io.dout_r @[D_REG.scala 25:17]
-    io.dout <= reg_1.io.out @[D_REG.scala 26:13]
-    io.dout_v <= reg_2.io.out @[D_REG.scala 27:15]
-    io.din_r <= io.dout_r @[D_REG.scala 28:14]
+    reg_1.io.in <= io.din @[D_REG.scala 17:17]
+    reg_2.io.in <= io.din_v @[D_REG.scala 18:17]
+    reg_1.io.en <= io.dout_r @[D_REG.scala 19:17]
+    reg_2.io.en <= io.dout_r @[D_REG.scala 20:17]
+    io.dout <= reg_1.io.out @[D_REG.scala 21:13]
+    io.dout_v <= reg_2.io.out @[D_REG.scala 22:15]
+    io.din_r <= io.dout_r @[D_REG.scala 23:14]
 
   module D_FIFO_2 :
     input clock : Clock
@@ -774,19 +774,19 @@ circuit ProcessingElement :
     input reset : Reset
     output io : { flip din : UInt<32>, flip din_v : UInt<1>, flip dout_r : UInt<1>, dout : UInt<32>, dout_v : UInt<1>, din_r : UInt<1>}
 
-    inst reg_1 of RegEnable_4 @[D_REG.scala 19:25]
+    inst reg_1 of RegEnable_4 @[D_REG.scala 14:25]
     reg_1.clock <= clock
     reg_1.reset <= reset
-    inst reg_2 of RegEnable_5 @[D_REG.scala 20:25]
+    inst reg_2 of RegEnable_5 @[D_REG.scala 15:25]
     reg_2.clock <= clock
     reg_2.reset <= reset
-    reg_1.io.in <= io.din @[D_REG.scala 22:17]
-    reg_2.io.in <= io.din_v @[D_REG.scala 23:17]
-    reg_1.io.en <= io.dout_r @[D_REG.scala 24:17]
-    reg_2.io.en <= io.dout_r @[D_REG.scala 25:17]
-    io.dout <= reg_1.io.out @[D_REG.scala 26:13]
-    io.dout_v <= reg_2.io.out @[D_REG.scala 27:15]
-    io.din_r <= io.dout_r @[D_REG.scala 28:14]
+    reg_1.io.in <= io.din @[D_REG.scala 17:17]
+    reg_2.io.in <= io.din_v @[D_REG.scala 18:17]
+    reg_1.io.en <= io.dout_r @[D_REG.scala 19:17]
+    reg_2.io.en <= io.dout_r @[D_REG.scala 20:17]
+    io.dout <= reg_1.io.out @[D_REG.scala 21:13]
+    io.dout_v <= reg_2.io.out @[D_REG.scala 22:15]
+    io.din_r <= io.dout_r @[D_REG.scala 23:14]
 
   module D_FIFO_3 :
     input clock : Clock
@@ -1037,19 +1037,19 @@ circuit ProcessingElement :
     input reset : Reset
     output io : { flip din : UInt<32>, flip din_v : UInt<1>, flip dout_r : UInt<1>, dout : UInt<32>, dout_v : UInt<1>, din_r : UInt<1>}
 
-    inst reg_1 of RegEnable_6 @[D_REG.scala 19:25]
+    inst reg_1 of RegEnable_6 @[D_REG.scala 14:25]
     reg_1.clock <= clock
     reg_1.reset <= reset
-    inst reg_2 of RegEnable_7 @[D_REG.scala 20:25]
+    inst reg_2 of RegEnable_7 @[D_REG.scala 15:25]
     reg_2.clock <= clock
     reg_2.reset <= reset
-    reg_1.io.in <= io.din @[D_REG.scala 22:17]
-    reg_2.io.in <= io.din_v @[D_REG.scala 23:17]
-    reg_1.io.en <= io.dout_r @[D_REG.scala 24:17]
-    reg_2.io.en <= io.dout_r @[D_REG.scala 25:17]
-    io.dout <= reg_1.io.out @[D_REG.scala 26:13]
-    io.dout_v <= reg_2.io.out @[D_REG.scala 27:15]
-    io.din_r <= io.dout_r @[D_REG.scala 28:14]
+    reg_1.io.in <= io.din @[D_REG.scala 17:17]
+    reg_2.io.in <= io.din_v @[D_REG.scala 18:17]
+    reg_1.io.en <= io.dout_r @[D_REG.scala 19:17]
+    reg_2.io.en <= io.dout_r @[D_REG.scala 20:17]
+    io.dout <= reg_1.io.out @[D_REG.scala 21:13]
+    io.dout_v <= reg_2.io.out @[D_REG.scala 22:15]
+    io.din_r <= io.dout_r @[D_REG.scala 23:14]
 
   module ConfMux_8 :
     input clock : Clock
@@ -1191,41 +1191,41 @@ circuit ProcessingElement :
     input reset : Reset
     output io : { flip din : UInt<32>, flip din_v : UInt<1>, din_r : UInt<1>, dout : UInt<32>, dout_v : UInt<1>, flip dout_r : UInt<1>}
 
-    inst main of RegEnable_8 @[D_SEB.scala 19:24]
+    inst main of RegEnable_8 @[D_SEB.scala 14:24]
     main.clock <= clock
     main.reset <= reset
-    inst aux of RegEnable_9 @[D_SEB.scala 20:23]
+    inst aux of RegEnable_9 @[D_SEB.scala 15:23]
     aux.clock <= clock
     aux.reset <= reset
-    inst reg_1 of RegEnable_10 @[D_SEB.scala 21:25]
+    inst reg_1 of RegEnable_10 @[D_SEB.scala 16:25]
     reg_1.clock <= clock
     reg_1.reset <= reset
-    inst reg_2 of RegEnable_11 @[D_SEB.scala 22:25]
+    inst reg_2 of RegEnable_11 @[D_SEB.scala 17:25]
     reg_2.clock <= clock
     reg_2.reset <= reset
     reg reg : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[D_SEB.scala 24:22]
-    wire S_EA_EM : UInt<1> @[D_SEB.scala 25:23]
-    node _mux2_out_T = bits(reg, 0, 0) @[D_SEB.scala 28:28]
-    node mux2_out = mux(_mux2_out_T, reg_1.io.out, reg_2.io.out) @[D_SEB.scala 28:23]
-    node _reg_T = not(mux2_out) @[D_SEB.scala 29:32]
-    node _reg_T_1 = or(io.dout_r, _reg_T) @[D_SEB.scala 29:29]
-    reg <= _reg_T_1 @[D_SEB.scala 29:9]
-    node _S_EA_EM_T = bits(reg, 0, 0) @[D_SEB.scala 30:20]
-    S_EA_EM <= _S_EA_EM_T @[D_SEB.scala 30:13]
-    node _io_dout_v_T = bits(mux2_out, 0, 0) @[D_SEB.scala 31:27]
-    io.dout_v <= _io_dout_v_T @[D_SEB.scala 31:15]
-    io.din_r <= S_EA_EM @[D_SEB.scala 34:14]
-    main.io.in <= io.din @[D_SEB.scala 36:16]
-    aux.io.in <= main.io.out @[D_SEB.scala 37:15]
-    reg_1.io.in <= io.din_v @[D_SEB.scala 38:17]
-    reg_2.io.in <= reg_1.io.out @[D_SEB.scala 39:17]
-    main.io.en <= S_EA_EM @[D_SEB.scala 41:16]
-    aux.io.en <= S_EA_EM @[D_SEB.scala 42:15]
-    reg_1.io.en <= S_EA_EM @[D_SEB.scala 43:17]
-    reg_2.io.en <= S_EA_EM @[D_SEB.scala 44:17]
-    node _io_dout_T = mux(S_EA_EM, main.io.out, aux.io.out) @[D_SEB.scala 46:19]
-    io.dout <= _io_dout_T @[D_SEB.scala 46:13]
+      reset => (reset, UInt<1>("h0")) @[D_SEB.scala 19:22]
+    wire S_EA_EM : UInt<1> @[D_SEB.scala 20:23]
+    node _mux2_out_T = bits(reg, 0, 0) @[D_SEB.scala 23:28]
+    node mux2_out = mux(_mux2_out_T, reg_1.io.out, reg_2.io.out) @[D_SEB.scala 23:23]
+    node _reg_T = not(mux2_out) @[D_SEB.scala 24:32]
+    node _reg_T_1 = or(io.dout_r, _reg_T) @[D_SEB.scala 24:29]
+    reg <= _reg_T_1 @[D_SEB.scala 24:9]
+    node _S_EA_EM_T = bits(reg, 0, 0) @[D_SEB.scala 25:20]
+    S_EA_EM <= _S_EA_EM_T @[D_SEB.scala 25:13]
+    node _io_dout_v_T = bits(mux2_out, 0, 0) @[D_SEB.scala 26:27]
+    io.dout_v <= _io_dout_v_T @[D_SEB.scala 26:15]
+    io.din_r <= S_EA_EM @[D_SEB.scala 29:14]
+    main.io.in <= io.din @[D_SEB.scala 31:16]
+    aux.io.in <= main.io.out @[D_SEB.scala 32:15]
+    reg_1.io.in <= io.din_v @[D_SEB.scala 33:17]
+    reg_2.io.in <= reg_1.io.out @[D_SEB.scala 34:17]
+    main.io.en <= S_EA_EM @[D_SEB.scala 36:16]
+    aux.io.en <= S_EA_EM @[D_SEB.scala 37:15]
+    reg_1.io.en <= S_EA_EM @[D_SEB.scala 38:17]
+    reg_2.io.en <= S_EA_EM @[D_SEB.scala 39:17]
+    node _io_dout_T = mux(S_EA_EM, main.io.out, aux.io.out) @[D_SEB.scala 41:19]
+    io.dout <= _io_dout_T @[D_SEB.scala 41:13]
 
   module ConfMux_10 :
     input clock : Clock
@@ -1367,55 +1367,55 @@ circuit ProcessingElement :
     input reset : Reset
     output io : { flip din : UInt<32>, flip din_v : UInt<1>, din_r : UInt<1>, dout : UInt<32>, dout_v : UInt<1>, flip dout_r : UInt<1>}
 
-    inst main of RegEnable_12 @[D_SEB.scala 19:24]
+    inst main of RegEnable_12 @[D_SEB.scala 14:24]
     main.clock <= clock
     main.reset <= reset
-    inst aux of RegEnable_13 @[D_SEB.scala 20:23]
+    inst aux of RegEnable_13 @[D_SEB.scala 15:23]
     aux.clock <= clock
     aux.reset <= reset
-    inst reg_1 of RegEnable_14 @[D_SEB.scala 21:25]
+    inst reg_1 of RegEnable_14 @[D_SEB.scala 16:25]
     reg_1.clock <= clock
     reg_1.reset <= reset
-    inst reg_2 of RegEnable_15 @[D_SEB.scala 22:25]
+    inst reg_2 of RegEnable_15 @[D_SEB.scala 17:25]
     reg_2.clock <= clock
     reg_2.reset <= reset
     reg reg : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[D_SEB.scala 24:22]
-    wire S_EA_EM : UInt<1> @[D_SEB.scala 25:23]
-    node _mux2_out_T = bits(reg, 0, 0) @[D_SEB.scala 28:28]
-    node mux2_out = mux(_mux2_out_T, reg_1.io.out, reg_2.io.out) @[D_SEB.scala 28:23]
-    node _reg_T = not(mux2_out) @[D_SEB.scala 29:32]
-    node _reg_T_1 = or(io.dout_r, _reg_T) @[D_SEB.scala 29:29]
-    reg <= _reg_T_1 @[D_SEB.scala 29:9]
-    node _S_EA_EM_T = bits(reg, 0, 0) @[D_SEB.scala 30:20]
-    S_EA_EM <= _S_EA_EM_T @[D_SEB.scala 30:13]
-    node _io_dout_v_T = bits(mux2_out, 0, 0) @[D_SEB.scala 31:27]
-    io.dout_v <= _io_dout_v_T @[D_SEB.scala 31:15]
-    io.din_r <= S_EA_EM @[D_SEB.scala 34:14]
-    main.io.in <= io.din @[D_SEB.scala 36:16]
-    aux.io.in <= main.io.out @[D_SEB.scala 37:15]
-    reg_1.io.in <= io.din_v @[D_SEB.scala 38:17]
-    reg_2.io.in <= reg_1.io.out @[D_SEB.scala 39:17]
-    main.io.en <= S_EA_EM @[D_SEB.scala 41:16]
-    aux.io.en <= S_EA_EM @[D_SEB.scala 42:15]
-    reg_1.io.en <= S_EA_EM @[D_SEB.scala 43:17]
-    reg_2.io.en <= S_EA_EM @[D_SEB.scala 44:17]
-    node _io_dout_T = mux(S_EA_EM, main.io.out, aux.io.out) @[D_SEB.scala 46:19]
-    io.dout <= _io_dout_T @[D_SEB.scala 46:13]
+      reset => (reset, UInt<1>("h0")) @[D_SEB.scala 19:22]
+    wire S_EA_EM : UInt<1> @[D_SEB.scala 20:23]
+    node _mux2_out_T = bits(reg, 0, 0) @[D_SEB.scala 23:28]
+    node mux2_out = mux(_mux2_out_T, reg_1.io.out, reg_2.io.out) @[D_SEB.scala 23:23]
+    node _reg_T = not(mux2_out) @[D_SEB.scala 24:32]
+    node _reg_T_1 = or(io.dout_r, _reg_T) @[D_SEB.scala 24:29]
+    reg <= _reg_T_1 @[D_SEB.scala 24:9]
+    node _S_EA_EM_T = bits(reg, 0, 0) @[D_SEB.scala 25:20]
+    S_EA_EM <= _S_EA_EM_T @[D_SEB.scala 25:13]
+    node _io_dout_v_T = bits(mux2_out, 0, 0) @[D_SEB.scala 26:27]
+    io.dout_v <= _io_dout_v_T @[D_SEB.scala 26:15]
+    io.din_r <= S_EA_EM @[D_SEB.scala 29:14]
+    main.io.in <= io.din @[D_SEB.scala 31:16]
+    aux.io.in <= main.io.out @[D_SEB.scala 32:15]
+    reg_1.io.in <= io.din_v @[D_SEB.scala 33:17]
+    reg_2.io.in <= reg_1.io.out @[D_SEB.scala 34:17]
+    main.io.en <= S_EA_EM @[D_SEB.scala 36:16]
+    aux.io.en <= S_EA_EM @[D_SEB.scala 37:15]
+    reg_1.io.en <= S_EA_EM @[D_SEB.scala 38:17]
+    reg_2.io.en <= S_EA_EM @[D_SEB.scala 39:17]
+    node _io_dout_T = mux(S_EA_EM, main.io.out, aux.io.out) @[D_SEB.scala 41:19]
+    io.dout <= _io_dout_T @[D_SEB.scala 41:13]
 
   module Join :
     input clock : Clock
     input reset : Reset
     output io : { flip din_1 : UInt<32>, flip din_2 : UInt<32>, flip dout_r : UInt<1>, flip din_1_v : UInt<1>, flip din_2_v : UInt<1>, dout_v : UInt<1>, din_1_r : UInt<1>, din_2_r : UInt<1>, dout_1 : UInt<32>, dout_2 : UInt<32>}
 
-    io.dout_1 <= io.din_1 @[Join.scala 23:15]
-    io.dout_2 <= io.din_2 @[Join.scala 24:15]
-    node _io_dout_v_T = and(io.din_1_v, io.din_2_v) @[Join.scala 26:29]
-    io.dout_v <= _io_dout_v_T @[Join.scala 26:15]
-    node _io_din_1_r_T = and(io.din_2_v, io.dout_r) @[Join.scala 28:30]
-    io.din_1_r <= _io_din_1_r_T @[Join.scala 28:16]
-    node _io_din_2_r_T = and(io.din_1_v, io.dout_r) @[Join.scala 29:30]
-    io.din_2_r <= _io_din_2_r_T @[Join.scala 29:16]
+    io.dout_1 <= io.din_1 @[Join.scala 21:15]
+    io.dout_2 <= io.din_2 @[Join.scala 22:15]
+    node _io_dout_v_T = and(io.din_1_v, io.din_2_v) @[Join.scala 24:29]
+    io.dout_v <= _io_dout_v_T @[Join.scala 24:15]
+    node _io_din_1_r_T = and(io.din_2_v, io.dout_r) @[Join.scala 26:30]
+    io.din_1_r <= _io_din_1_r_T @[Join.scala 26:16]
+    node _io_din_2_r_T = and(io.din_1_v, io.dout_r) @[Join.scala 27:30]
+    io.din_2_r <= _io_din_2_r_T @[Join.scala 27:16]
 
   module ALU :
     input clock : Clock
@@ -1642,41 +1642,41 @@ circuit ProcessingElement :
     input reset : Reset
     output io : { flip din : UInt<32>, flip din_v : UInt<1>, din_r : UInt<1>, dout : UInt<32>, dout_v : UInt<1>, flip dout_r : UInt<1>}
 
-    inst main of RegEnable_16 @[D_SEB.scala 19:24]
+    inst main of RegEnable_16 @[D_SEB.scala 14:24]
     main.clock <= clock
     main.reset <= reset
-    inst aux of RegEnable_17 @[D_SEB.scala 20:23]
+    inst aux of RegEnable_17 @[D_SEB.scala 15:23]
     aux.clock <= clock
     aux.reset <= reset
-    inst reg_1 of RegEnable_18 @[D_SEB.scala 21:25]
+    inst reg_1 of RegEnable_18 @[D_SEB.scala 16:25]
     reg_1.clock <= clock
     reg_1.reset <= reset
-    inst reg_2 of RegEnable_19 @[D_SEB.scala 22:25]
+    inst reg_2 of RegEnable_19 @[D_SEB.scala 17:25]
     reg_2.clock <= clock
     reg_2.reset <= reset
     reg reg : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[D_SEB.scala 24:22]
-    wire S_EA_EM : UInt<1> @[D_SEB.scala 25:23]
-    node _mux2_out_T = bits(reg, 0, 0) @[D_SEB.scala 28:28]
-    node mux2_out = mux(_mux2_out_T, reg_1.io.out, reg_2.io.out) @[D_SEB.scala 28:23]
-    node _reg_T = not(mux2_out) @[D_SEB.scala 29:32]
-    node _reg_T_1 = or(io.dout_r, _reg_T) @[D_SEB.scala 29:29]
-    reg <= _reg_T_1 @[D_SEB.scala 29:9]
-    node _S_EA_EM_T = bits(reg, 0, 0) @[D_SEB.scala 30:20]
-    S_EA_EM <= _S_EA_EM_T @[D_SEB.scala 30:13]
-    node _io_dout_v_T = bits(mux2_out, 0, 0) @[D_SEB.scala 31:27]
-    io.dout_v <= _io_dout_v_T @[D_SEB.scala 31:15]
-    io.din_r <= S_EA_EM @[D_SEB.scala 34:14]
-    main.io.in <= io.din @[D_SEB.scala 36:16]
-    aux.io.in <= main.io.out @[D_SEB.scala 37:15]
-    reg_1.io.in <= io.din_v @[D_SEB.scala 38:17]
-    reg_2.io.in <= reg_1.io.out @[D_SEB.scala 39:17]
-    main.io.en <= S_EA_EM @[D_SEB.scala 41:16]
-    aux.io.en <= S_EA_EM @[D_SEB.scala 42:15]
-    reg_1.io.en <= S_EA_EM @[D_SEB.scala 43:17]
-    reg_2.io.en <= S_EA_EM @[D_SEB.scala 44:17]
-    node _io_dout_T = mux(S_EA_EM, main.io.out, aux.io.out) @[D_SEB.scala 46:19]
-    io.dout <= _io_dout_T @[D_SEB.scala 46:13]
+      reset => (reset, UInt<1>("h0")) @[D_SEB.scala 19:22]
+    wire S_EA_EM : UInt<1> @[D_SEB.scala 20:23]
+    node _mux2_out_T = bits(reg, 0, 0) @[D_SEB.scala 23:28]
+    node mux2_out = mux(_mux2_out_T, reg_1.io.out, reg_2.io.out) @[D_SEB.scala 23:23]
+    node _reg_T = not(mux2_out) @[D_SEB.scala 24:32]
+    node _reg_T_1 = or(io.dout_r, _reg_T) @[D_SEB.scala 24:29]
+    reg <= _reg_T_1 @[D_SEB.scala 24:9]
+    node _S_EA_EM_T = bits(reg, 0, 0) @[D_SEB.scala 25:20]
+    S_EA_EM <= _S_EA_EM_T @[D_SEB.scala 25:13]
+    node _io_dout_v_T = bits(mux2_out, 0, 0) @[D_SEB.scala 26:27]
+    io.dout_v <= _io_dout_v_T @[D_SEB.scala 26:15]
+    io.din_r <= S_EA_EM @[D_SEB.scala 29:14]
+    main.io.in <= io.din @[D_SEB.scala 31:16]
+    aux.io.in <= main.io.out @[D_SEB.scala 32:15]
+    reg_1.io.in <= io.din_v @[D_SEB.scala 33:17]
+    reg_2.io.in <= reg_1.io.out @[D_SEB.scala 34:17]
+    main.io.en <= S_EA_EM @[D_SEB.scala 36:16]
+    aux.io.en <= S_EA_EM @[D_SEB.scala 37:15]
+    reg_1.io.en <= S_EA_EM @[D_SEB.scala 38:17]
+    reg_2.io.en <= S_EA_EM @[D_SEB.scala 39:17]
+    node _io_dout_T = mux(S_EA_EM, main.io.out, aux.io.out) @[D_SEB.scala 41:19]
+    io.dout <= _io_dout_T @[D_SEB.scala 41:13]
 
   module FS_4 :
     input clock : Clock
@@ -1924,144 +1924,144 @@ circuit ProcessingElement :
     output io : { flip north_din : UInt<32>, flip north_din_v : UInt<1>, north_din_r : UInt<1>, flip east_din : UInt<32>, flip east_din_v : UInt<1>, east_din_r : UInt<1>, flip south_din : UInt<32>, flip south_din_v : UInt<1>, south_din_r : UInt<1>, flip west_din : UInt<32>, flip west_din_v : UInt<1>, west_din_r : UInt<1>, north_dout : UInt<32>, north_dout_v : UInt<1>, flip north_dout_r : UInt<1>, east_dout : UInt<32>, east_dout_v : UInt<1>, flip east_dout_r : UInt<1>, south_dout : UInt<32>, south_dout_v : UInt<1>, flip south_dout_r : UInt<1>, west_dout : UInt<32>, west_dout_v : UInt<1>, flip west_dout_r : UInt<1>, flip config_bits : UInt<182>, flip catch_config : UInt<1>}
 
     reg mux_N_sel : UInt<2>, clock with :
-      reset => (reset, UInt<2>("h0")) @[ProcessingElement.scala 47:28]
+      reset => (reset, UInt<2>("h0")) @[ProcessingElement.scala 57:28]
     reg mux_E_sel : UInt<2>, clock with :
-      reset => (reset, UInt<2>("h0")) @[ProcessingElement.scala 48:28]
+      reset => (reset, UInt<2>("h0")) @[ProcessingElement.scala 58:28]
     reg mux_S_sel : UInt<2>, clock with :
-      reset => (reset, UInt<2>("h0")) @[ProcessingElement.scala 49:28]
+      reset => (reset, UInt<2>("h0")) @[ProcessingElement.scala 59:28]
     reg mux_W_sel : UInt<2>, clock with :
-      reset => (reset, UInt<2>("h0")) @[ProcessingElement.scala 50:28]
+      reset => (reset, UInt<2>("h0")) @[ProcessingElement.scala 60:28]
     reg accept_mask_frN : UInt<5>, clock with :
-      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 51:34]
+      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 61:34]
     reg accept_mask_frE : UInt<5>, clock with :
-      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 52:34]
+      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 62:34]
     reg accept_mask_frS : UInt<5>, clock with :
-      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 53:34]
+      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 63:34]
     reg accept_mask_frW : UInt<5>, clock with :
-      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 54:34]
+      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 64:34]
     reg accept_mask_fsiN : UInt<5>, clock with :
-      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 55:35]
+      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 65:35]
     reg accept_mask_fsiE : UInt<5>, clock with :
-      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 56:35]
+      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 66:35]
     reg accept_mask_fsiS : UInt<5>, clock with :
-      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 57:35]
+      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 67:35]
     reg accept_mask_fsiW : UInt<5>, clock with :
-      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 58:35]
+      reset => (reset, UInt<5>("h0")) @[ProcessingElement.scala 68:35]
     reg config_bits_reg : UInt<182>, clock with :
-      reset => (reset, UInt<182>("h0")) @[ProcessingElement.scala 59:34]
+      reset => (reset, UInt<182>("h0")) @[ProcessingElement.scala 69:34]
     reg north_buffer : UInt<32>, clock with :
-      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 63:31]
+      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 73:31]
     reg east_buffer : UInt<32>, clock with :
-      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 64:30]
+      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 74:30]
     reg south_buffer : UInt<32>, clock with :
-      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 65:31]
+      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 75:31]
     reg west_buffer : UInt<32>, clock with :
-      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 66:30]
+      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 76:30]
     reg north_buffer_v : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 68:33]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 78:33]
     reg east_buffer_v : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 69:32]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 79:32]
     reg south_buffer_v : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 70:33]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 80:33]
     reg west_buffer_v : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 71:32]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 81:32]
     reg north_buffer_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 73:33]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 83:33]
     reg east_buffer_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 74:32]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 84:32]
     reg south_buffer_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 75:33]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 85:33]
     reg west_buffer_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 76:32]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 86:32]
     reg north_REG_din : UInt<32>, clock with :
-      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 78:32]
+      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 88:32]
     reg east_REG_din : UInt<32>, clock with :
-      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 79:31]
+      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 89:31]
     reg south_REG_din : UInt<32>, clock with :
-      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 80:32]
+      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 90:32]
     reg west_REG_din : UInt<32>, clock with :
-      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 81:31]
+      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 91:31]
     reg north_REG_din_v : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 83:34]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 92:34]
     reg east_REG_din_v : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 84:33]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 93:33]
     reg south_REG_din_v : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 85:34]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 94:34]
     reg west_REG_din_v : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 86:33]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 95:33]
     reg north_REG_din_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 87:34]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 96:34]
     reg east_REG_din_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 88:33]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 97:33]
     reg south_REG_din_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 89:34]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 98:34]
     reg west_REG_din_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 90:33]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 99:33]
     reg FU_din_1_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 92:29]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 101:29]
     reg FU_din_2_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 93:29]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 102:29]
     reg FU_dout : UInt<32>, clock with :
-      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 94:26]
+      reset => (reset, UInt<32>("h0")) @[ProcessingElement.scala 103:26]
     reg FU_dout_v : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 95:28]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 104:28]
     reg FU_dout_r : UInt<1>, clock with :
-      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 96:28]
-    when io.catch_config : @[ProcessingElement.scala 98:28]
-      config_bits_reg <= io.config_bits @[ProcessingElement.scala 99:25]
-    node _mux_N_sel_T = bits(config_bits_reg, 7, 6) @[ProcessingElement.scala 103:33]
-    mux_N_sel <= _mux_N_sel_T @[ProcessingElement.scala 103:15]
-    node _mux_E_sel_T = bits(config_bits_reg, 9, 8) @[ProcessingElement.scala 104:33]
-    mux_E_sel <= _mux_E_sel_T @[ProcessingElement.scala 104:15]
-    node _mux_S_sel_T = bits(config_bits_reg, 11, 10) @[ProcessingElement.scala 105:33]
-    mux_S_sel <= _mux_S_sel_T @[ProcessingElement.scala 105:15]
-    node _mux_W_sel_T = bits(config_bits_reg, 13, 12) @[ProcessingElement.scala 106:33]
-    mux_W_sel <= _mux_W_sel_T @[ProcessingElement.scala 106:15]
-    node _accept_mask_fsiN_T = bits(config_bits_reg, 28, 24) @[ProcessingElement.scala 108:40]
-    accept_mask_fsiN <= _accept_mask_fsiN_T @[ProcessingElement.scala 108:22]
-    node _accept_mask_fsiE_T = bits(config_bits_reg, 33, 29) @[ProcessingElement.scala 109:40]
-    accept_mask_fsiE <= _accept_mask_fsiE_T @[ProcessingElement.scala 109:22]
-    node _accept_mask_fsiS_T = bits(config_bits_reg, 38, 34) @[ProcessingElement.scala 110:40]
-    accept_mask_fsiS <= _accept_mask_fsiS_T @[ProcessingElement.scala 110:22]
-    node _accept_mask_fsiW_T = bits(config_bits_reg, 43, 39) @[ProcessingElement.scala 111:40]
-    accept_mask_fsiW <= _accept_mask_fsiW_T @[ProcessingElement.scala 111:22]
-    node _accept_mask_frN_T = bits(config_bits_reg, 61, 57) @[ProcessingElement.scala 113:39]
-    accept_mask_frN <= _accept_mask_frN_T @[ProcessingElement.scala 113:21]
-    node _accept_mask_frE_T = bits(config_bits_reg, 66, 62) @[ProcessingElement.scala 114:39]
-    accept_mask_frE <= _accept_mask_frE_T @[ProcessingElement.scala 114:21]
-    node _accept_mask_frS_T = bits(config_bits_reg, 71, 67) @[ProcessingElement.scala 115:39]
-    accept_mask_frS <= _accept_mask_frS_T @[ProcessingElement.scala 115:21]
-    node _accept_mask_frW_T = bits(config_bits_reg, 76, 72) @[ProcessingElement.scala 116:39]
-    accept_mask_frW <= _accept_mask_frW_T @[ProcessingElement.scala 116:21]
-    inst FIFO_Nin of D_FIFO @[ProcessingElement.scala 120:27]
+      reset => (reset, UInt<1>("h0")) @[ProcessingElement.scala 105:28]
+    when io.catch_config : @[ProcessingElement.scala 107:28]
+      config_bits_reg <= io.config_bits @[ProcessingElement.scala 108:25]
+    node _mux_N_sel_T = bits(config_bits_reg, 7, 6) @[ProcessingElement.scala 112:33]
+    mux_N_sel <= _mux_N_sel_T @[ProcessingElement.scala 112:15]
+    node _mux_E_sel_T = bits(config_bits_reg, 9, 8) @[ProcessingElement.scala 113:33]
+    mux_E_sel <= _mux_E_sel_T @[ProcessingElement.scala 113:15]
+    node _mux_S_sel_T = bits(config_bits_reg, 11, 10) @[ProcessingElement.scala 114:33]
+    mux_S_sel <= _mux_S_sel_T @[ProcessingElement.scala 114:15]
+    node _mux_W_sel_T = bits(config_bits_reg, 13, 12) @[ProcessingElement.scala 115:33]
+    mux_W_sel <= _mux_W_sel_T @[ProcessingElement.scala 115:15]
+    node _accept_mask_fsiN_T = bits(config_bits_reg, 28, 24) @[ProcessingElement.scala 117:40]
+    accept_mask_fsiN <= _accept_mask_fsiN_T @[ProcessingElement.scala 117:22]
+    node _accept_mask_fsiE_T = bits(config_bits_reg, 33, 29) @[ProcessingElement.scala 118:40]
+    accept_mask_fsiE <= _accept_mask_fsiE_T @[ProcessingElement.scala 118:22]
+    node _accept_mask_fsiS_T = bits(config_bits_reg, 38, 34) @[ProcessingElement.scala 119:40]
+    accept_mask_fsiS <= _accept_mask_fsiS_T @[ProcessingElement.scala 119:22]
+    node _accept_mask_fsiW_T = bits(config_bits_reg, 43, 39) @[ProcessingElement.scala 120:40]
+    accept_mask_fsiW <= _accept_mask_fsiW_T @[ProcessingElement.scala 120:22]
+    node _accept_mask_frN_T = bits(config_bits_reg, 61, 57) @[ProcessingElement.scala 122:39]
+    accept_mask_frN <= _accept_mask_frN_T @[ProcessingElement.scala 122:21]
+    node _accept_mask_frE_T = bits(config_bits_reg, 66, 62) @[ProcessingElement.scala 123:39]
+    accept_mask_frE <= _accept_mask_frE_T @[ProcessingElement.scala 123:21]
+    node _accept_mask_frS_T = bits(config_bits_reg, 71, 67) @[ProcessingElement.scala 124:39]
+    accept_mask_frS <= _accept_mask_frS_T @[ProcessingElement.scala 124:21]
+    node _accept_mask_frW_T = bits(config_bits_reg, 76, 72) @[ProcessingElement.scala 125:39]
+    accept_mask_frW <= _accept_mask_frW_T @[ProcessingElement.scala 125:21]
+    inst FIFO_Nin of D_FIFO @[ProcessingElement.scala 129:27]
     FIFO_Nin.clock <= clock
     FIFO_Nin.reset <= reset
-    FIFO_Nin.io.din <= io.north_din @[ProcessingElement.scala 121:21]
-    FIFO_Nin.io.din_v <= io.north_din_v @[ProcessingElement.scala 122:23]
-    FIFO_Nin.io.dout_r <= north_buffer_r @[ProcessingElement.scala 123:24]
-    io.north_din_r <= FIFO_Nin.io.din_r @[ProcessingElement.scala 124:20]
-    north_buffer <= FIFO_Nin.io.dout @[ProcessingElement.scala 125:18]
-    north_buffer_v <= FIFO_Nin.io.dout_v @[ProcessingElement.scala 126:20]
-    inst FS_Nin of FS @[ProcessingElement.scala 128:25]
+    FIFO_Nin.io.din <= io.north_din @[ProcessingElement.scala 130:21]
+    FIFO_Nin.io.din_v <= io.north_din_v @[ProcessingElement.scala 131:23]
+    FIFO_Nin.io.dout_r <= north_buffer_r @[ProcessingElement.scala 132:24]
+    io.north_din_r <= FIFO_Nin.io.din_r @[ProcessingElement.scala 133:20]
+    north_buffer <= FIFO_Nin.io.dout @[ProcessingElement.scala 134:18]
+    north_buffer_v <= FIFO_Nin.io.dout_v @[ProcessingElement.scala 135:20]
+    inst FS_Nin of FS @[ProcessingElement.scala 137:25]
     FS_Nin.clock <= clock
     FS_Nin.reset <= reset
     node ready_out_FS_Nin_lo = cat(south_REG_din_r, west_REG_din_r) @[Cat.scala 31:58]
     node ready_out_FS_Nin_hi_hi = cat(FU_din_1_r, FU_din_2_r) @[Cat.scala 31:58]
     node ready_out_FS_Nin_hi = cat(ready_out_FS_Nin_hi_hi, east_REG_din_r) @[Cat.scala 31:58]
     node ready_out_FS_Nin = cat(ready_out_FS_Nin_hi, ready_out_FS_Nin_lo) @[Cat.scala 31:58]
-    FS_Nin.io.ready_out <= ready_out_FS_Nin @[ProcessingElement.scala 130:25]
-    north_buffer_r <= FS_Nin.io.ready_in @[ProcessingElement.scala 131:20]
-    FS_Nin.io.fork_mask <= accept_mask_fsiN @[ProcessingElement.scala 132:25]
-    inst MUX_Nout of ConfMux @[ProcessingElement.scala 134:28]
+    FS_Nin.io.ready_out <= ready_out_FS_Nin @[ProcessingElement.scala 139:25]
+    north_buffer_r <= FS_Nin.io.ready_in @[ProcessingElement.scala 140:20]
+    FS_Nin.io.fork_mask <= accept_mask_fsiN @[ProcessingElement.scala 141:25]
+    inst MUX_Nout of ConfMux @[ProcessingElement.scala 143:28]
     MUX_Nout.clock <= clock
     MUX_Nout.reset <= reset
-    MUX_Nout.io.selector <= mux_N_sel @[ProcessingElement.scala 135:26]
-    node _MUX_Nout_io_mux_input_T = and(west_buffer, south_buffer) @[ProcessingElement.scala 136:42]
-    node _MUX_Nout_io_mux_input_T_1 = and(_MUX_Nout_io_mux_input_T, east_buffer) @[ProcessingElement.scala 136:57]
-    node _MUX_Nout_io_mux_input_T_2 = and(_MUX_Nout_io_mux_input_T_1, FU_dout) @[ProcessingElement.scala 136:71]
-    MUX_Nout.io.mux_input <= _MUX_Nout_io_mux_input_T_2 @[ProcessingElement.scala 136:27]
-    north_REG_din <= MUX_Nout.io.mux_output @[ProcessingElement.scala 137:19]
-    inst FR_Nout of FR @[ProcessingElement.scala 139:26]
+    MUX_Nout.io.selector <= mux_N_sel @[ProcessingElement.scala 144:26]
+    node _MUX_Nout_io_mux_input_T = and(west_buffer, south_buffer) @[ProcessingElement.scala 145:42]
+    node _MUX_Nout_io_mux_input_T_1 = and(_MUX_Nout_io_mux_input_T, east_buffer) @[ProcessingElement.scala 145:57]
+    node _MUX_Nout_io_mux_input_T_2 = and(_MUX_Nout_io_mux_input_T_1, FU_dout) @[ProcessingElement.scala 145:71]
+    MUX_Nout.io.mux_input <= _MUX_Nout_io_mux_input_T_2 @[ProcessingElement.scala 145:27]
+    north_REG_din <= MUX_Nout.io.mux_output @[ProcessingElement.scala 146:19]
+    inst FR_Nout of FR @[ProcessingElement.scala 148:26]
     FR_Nout.clock <= clock
     FR_Nout.reset <= reset
     node ready_FR_Nout_lo = cat(south_REG_din_r, west_REG_din_r) @[Cat.scala 31:58]
@@ -2071,49 +2071,49 @@ circuit ProcessingElement :
     node valid_in_FR_Nout_lo = cat(east_buffer_v, FU_dout_v) @[Cat.scala 31:58]
     node valid_in_FR_Nout_hi = cat(west_buffer_v, south_buffer_v) @[Cat.scala 31:58]
     node valid_in_FR_Nout = cat(valid_in_FR_Nout_hi, valid_in_FR_Nout_lo) @[Cat.scala 31:58]
-    FR_Nout.io.ready_out <= ready_FR_Nout @[ProcessingElement.scala 142:26]
-    FR_Nout.io.valid_in <= valid_in_FR_Nout @[ProcessingElement.scala 143:25]
-    FR_Nout.io.valid_mux_sel <= mux_N_sel @[ProcessingElement.scala 144:30]
-    FR_Nout.io.fork_mask <= accept_mask_frN @[ProcessingElement.scala 145:26]
-    north_REG_din_v <= FR_Nout.io.valid_out @[ProcessingElement.scala 146:21]
-    inst REG_Nout of D_REG @[ProcessingElement.scala 148:27]
+    FR_Nout.io.ready_out <= ready_FR_Nout @[ProcessingElement.scala 151:26]
+    FR_Nout.io.valid_in <= valid_in_FR_Nout @[ProcessingElement.scala 152:25]
+    FR_Nout.io.valid_mux_sel <= mux_N_sel @[ProcessingElement.scala 153:30]
+    FR_Nout.io.fork_mask <= accept_mask_frN @[ProcessingElement.scala 154:26]
+    north_REG_din_v <= FR_Nout.io.valid_out @[ProcessingElement.scala 155:21]
+    inst REG_Nout of D_REG @[ProcessingElement.scala 157:27]
     REG_Nout.clock <= clock
     REG_Nout.reset <= reset
-    REG_Nout.io.din <= north_REG_din @[ProcessingElement.scala 150:21]
-    REG_Nout.io.din_v <= north_REG_din_v @[ProcessingElement.scala 151:23]
-    REG_Nout.io.dout_r <= io.north_dout_r @[ProcessingElement.scala 152:24]
-    north_REG_din_r <= REG_Nout.io.din_r @[ProcessingElement.scala 154:21]
-    io.north_dout <= REG_Nout.io.dout @[ProcessingElement.scala 155:19]
-    io.north_dout_v <= REG_Nout.io.dout_v @[ProcessingElement.scala 156:21]
-    inst FIFO_Ein of D_FIFO_1 @[ProcessingElement.scala 162:27]
+    REG_Nout.io.din <= north_REG_din @[ProcessingElement.scala 159:21]
+    REG_Nout.io.din_v <= north_REG_din_v @[ProcessingElement.scala 160:23]
+    REG_Nout.io.dout_r <= io.north_dout_r @[ProcessingElement.scala 161:24]
+    north_REG_din_r <= REG_Nout.io.din_r @[ProcessingElement.scala 163:21]
+    io.north_dout <= REG_Nout.io.dout @[ProcessingElement.scala 164:19]
+    io.north_dout_v <= REG_Nout.io.dout_v @[ProcessingElement.scala 165:21]
+    inst FIFO_Ein of D_FIFO_1 @[ProcessingElement.scala 171:27]
     FIFO_Ein.clock <= clock
     FIFO_Ein.reset <= reset
-    FIFO_Ein.io.din <= io.east_din @[ProcessingElement.scala 163:21]
-    FIFO_Ein.io.din_v <= io.east_din_v @[ProcessingElement.scala 164:23]
-    FIFO_Ein.io.dout_r <= east_buffer_r @[ProcessingElement.scala 165:24]
-    io.east_din_r <= FIFO_Ein.io.din_r @[ProcessingElement.scala 166:19]
-    east_buffer <= FIFO_Ein.io.dout @[ProcessingElement.scala 167:17]
-    east_buffer_v <= FIFO_Ein.io.dout_v @[ProcessingElement.scala 168:19]
-    inst FS_Ein of FS_1 @[ProcessingElement.scala 170:25]
+    FIFO_Ein.io.din <= io.east_din @[ProcessingElement.scala 172:21]
+    FIFO_Ein.io.din_v <= io.east_din_v @[ProcessingElement.scala 173:23]
+    FIFO_Ein.io.dout_r <= east_buffer_r @[ProcessingElement.scala 174:24]
+    io.east_din_r <= FIFO_Ein.io.din_r @[ProcessingElement.scala 175:19]
+    east_buffer <= FIFO_Ein.io.dout @[ProcessingElement.scala 176:17]
+    east_buffer_v <= FIFO_Ein.io.dout_v @[ProcessingElement.scala 177:19]
+    inst FS_Ein of FS_1 @[ProcessingElement.scala 179:25]
     FS_Ein.clock <= clock
     FS_Ein.reset <= reset
     node ready_out_FS_Ein_lo = cat(south_REG_din_r, west_REG_din_r) @[Cat.scala 31:58]
     node ready_out_FS_Ein_hi_hi = cat(FU_din_1_r, FU_din_2_r) @[Cat.scala 31:58]
     node ready_out_FS_Ein_hi = cat(ready_out_FS_Ein_hi_hi, north_REG_din_r) @[Cat.scala 31:58]
     node ready_out_FS_Ein = cat(ready_out_FS_Ein_hi, ready_out_FS_Ein_lo) @[Cat.scala 31:58]
-    FS_Ein.io.ready_out <= ready_out_FS_Ein @[ProcessingElement.scala 172:25]
-    east_buffer_r <= FS_Ein.io.ready_in @[ProcessingElement.scala 173:19]
-    FS_Ein.io.fork_mask <= accept_mask_fsiE @[ProcessingElement.scala 174:25]
-    inst MUX_Eout of ConfMux_2 @[ProcessingElement.scala 176:28]
+    FS_Ein.io.ready_out <= ready_out_FS_Ein @[ProcessingElement.scala 181:25]
+    east_buffer_r <= FS_Ein.io.ready_in @[ProcessingElement.scala 182:19]
+    FS_Ein.io.fork_mask <= accept_mask_fsiE @[ProcessingElement.scala 183:25]
+    inst MUX_Eout of ConfMux_2 @[ProcessingElement.scala 185:28]
     MUX_Eout.clock <= clock
     MUX_Eout.reset <= reset
-    MUX_Eout.io.selector <= mux_E_sel @[ProcessingElement.scala 177:26]
-    node _MUX_Eout_io_mux_input_T = and(west_buffer, south_buffer) @[ProcessingElement.scala 178:42]
-    node _MUX_Eout_io_mux_input_T_1 = and(_MUX_Eout_io_mux_input_T, north_buffer) @[ProcessingElement.scala 178:57]
-    node _MUX_Eout_io_mux_input_T_2 = and(_MUX_Eout_io_mux_input_T_1, FU_dout) @[ProcessingElement.scala 178:72]
-    MUX_Eout.io.mux_input <= _MUX_Eout_io_mux_input_T_2 @[ProcessingElement.scala 178:27]
-    east_REG_din <= MUX_Eout.io.mux_output @[ProcessingElement.scala 179:18]
-    inst FR_Eout of FR_1 @[ProcessingElement.scala 181:26]
+    MUX_Eout.io.selector <= mux_E_sel @[ProcessingElement.scala 186:26]
+    node _MUX_Eout_io_mux_input_T = and(west_buffer, south_buffer) @[ProcessingElement.scala 187:42]
+    node _MUX_Eout_io_mux_input_T_1 = and(_MUX_Eout_io_mux_input_T, north_buffer) @[ProcessingElement.scala 187:57]
+    node _MUX_Eout_io_mux_input_T_2 = and(_MUX_Eout_io_mux_input_T_1, FU_dout) @[ProcessingElement.scala 187:72]
+    MUX_Eout.io.mux_input <= _MUX_Eout_io_mux_input_T_2 @[ProcessingElement.scala 187:27]
+    east_REG_din <= MUX_Eout.io.mux_output @[ProcessingElement.scala 188:18]
+    inst FR_Eout of FR_1 @[ProcessingElement.scala 190:26]
     FR_Eout.clock <= clock
     FR_Eout.reset <= reset
     node ready_FR_Eout_lo = cat(south_REG_din_r, west_REG_din_r) @[Cat.scala 31:58]
@@ -2123,49 +2123,49 @@ circuit ProcessingElement :
     node valid_in_FR_Eout_lo = cat(north_buffer_v, FU_dout_v) @[Cat.scala 31:58]
     node valid_in_FR_Eout_hi = cat(west_buffer_v, south_buffer_v) @[Cat.scala 31:58]
     node valid_in_FR_Eout = cat(valid_in_FR_Eout_hi, valid_in_FR_Eout_lo) @[Cat.scala 31:58]
-    FR_Eout.io.ready_out <= ready_FR_Eout @[ProcessingElement.scala 184:26]
-    FR_Eout.io.valid_in <= valid_in_FR_Eout @[ProcessingElement.scala 185:25]
-    FR_Eout.io.valid_mux_sel <= mux_E_sel @[ProcessingElement.scala 186:30]
-    FR_Eout.io.fork_mask <= accept_mask_frE @[ProcessingElement.scala 187:26]
-    east_REG_din_v <= FR_Eout.io.valid_out @[ProcessingElement.scala 188:20]
-    inst REG_Eout of D_REG_1 @[ProcessingElement.scala 190:27]
+    FR_Eout.io.ready_out <= ready_FR_Eout @[ProcessingElement.scala 193:26]
+    FR_Eout.io.valid_in <= valid_in_FR_Eout @[ProcessingElement.scala 194:25]
+    FR_Eout.io.valid_mux_sel <= mux_E_sel @[ProcessingElement.scala 195:30]
+    FR_Eout.io.fork_mask <= accept_mask_frE @[ProcessingElement.scala 196:26]
+    east_REG_din_v <= FR_Eout.io.valid_out @[ProcessingElement.scala 197:20]
+    inst REG_Eout of D_REG_1 @[ProcessingElement.scala 199:27]
     REG_Eout.clock <= clock
     REG_Eout.reset <= reset
-    REG_Eout.io.din <= east_REG_din @[ProcessingElement.scala 192:21]
-    REG_Eout.io.din_v <= east_REG_din_v @[ProcessingElement.scala 193:23]
-    REG_Eout.io.dout_r <= io.east_dout_r @[ProcessingElement.scala 194:24]
-    east_REG_din_r <= REG_Eout.io.din_r @[ProcessingElement.scala 196:20]
-    io.east_dout <= REG_Eout.io.dout @[ProcessingElement.scala 197:18]
-    io.east_dout_v <= REG_Eout.io.dout_v @[ProcessingElement.scala 198:20]
-    inst FIFO_Sin of D_FIFO_2 @[ProcessingElement.scala 203:27]
+    REG_Eout.io.din <= east_REG_din @[ProcessingElement.scala 201:21]
+    REG_Eout.io.din_v <= east_REG_din_v @[ProcessingElement.scala 202:23]
+    REG_Eout.io.dout_r <= io.east_dout_r @[ProcessingElement.scala 203:24]
+    east_REG_din_r <= REG_Eout.io.din_r @[ProcessingElement.scala 205:20]
+    io.east_dout <= REG_Eout.io.dout @[ProcessingElement.scala 206:18]
+    io.east_dout_v <= REG_Eout.io.dout_v @[ProcessingElement.scala 207:20]
+    inst FIFO_Sin of D_FIFO_2 @[ProcessingElement.scala 212:27]
     FIFO_Sin.clock <= clock
     FIFO_Sin.reset <= reset
-    FIFO_Sin.io.din <= io.south_din @[ProcessingElement.scala 204:21]
-    FIFO_Sin.io.din_v <= io.south_din_v @[ProcessingElement.scala 205:23]
-    FIFO_Sin.io.dout_r <= south_buffer_r @[ProcessingElement.scala 206:24]
-    io.south_din_r <= FIFO_Sin.io.din_r @[ProcessingElement.scala 207:20]
-    south_buffer <= FIFO_Sin.io.dout @[ProcessingElement.scala 208:18]
-    south_buffer_v <= FIFO_Sin.io.dout_v @[ProcessingElement.scala 209:20]
-    inst FS_Sin of FS_2 @[ProcessingElement.scala 211:25]
+    FIFO_Sin.io.din <= io.south_din @[ProcessingElement.scala 213:21]
+    FIFO_Sin.io.din_v <= io.south_din_v @[ProcessingElement.scala 214:23]
+    FIFO_Sin.io.dout_r <= south_buffer_r @[ProcessingElement.scala 215:24]
+    io.south_din_r <= FIFO_Sin.io.din_r @[ProcessingElement.scala 216:20]
+    south_buffer <= FIFO_Sin.io.dout @[ProcessingElement.scala 217:18]
+    south_buffer_v <= FIFO_Sin.io.dout_v @[ProcessingElement.scala 218:20]
+    inst FS_Sin of FS_2 @[ProcessingElement.scala 220:25]
     FS_Sin.clock <= clock
     FS_Sin.reset <= reset
     node ready_out_FS_Sin_lo = cat(east_REG_din_r, west_REG_din_r) @[Cat.scala 31:58]
     node ready_out_FS_Sin_hi_hi = cat(FU_din_1_r, FU_din_2_r) @[Cat.scala 31:58]
     node ready_out_FS_Sin_hi = cat(ready_out_FS_Sin_hi_hi, north_REG_din_r) @[Cat.scala 31:58]
     node ready_out_FS_Sin = cat(ready_out_FS_Sin_hi, ready_out_FS_Sin_lo) @[Cat.scala 31:58]
-    FS_Sin.io.ready_out <= ready_out_FS_Sin @[ProcessingElement.scala 213:25]
-    south_buffer_r <= FS_Sin.io.ready_in @[ProcessingElement.scala 214:20]
-    FS_Sin.io.fork_mask <= accept_mask_fsiS @[ProcessingElement.scala 215:25]
-    inst MUX_Sout of ConfMux_4 @[ProcessingElement.scala 217:28]
+    FS_Sin.io.ready_out <= ready_out_FS_Sin @[ProcessingElement.scala 222:25]
+    south_buffer_r <= FS_Sin.io.ready_in @[ProcessingElement.scala 223:20]
+    FS_Sin.io.fork_mask <= accept_mask_fsiS @[ProcessingElement.scala 224:25]
+    inst MUX_Sout of ConfMux_4 @[ProcessingElement.scala 226:28]
     MUX_Sout.clock <= clock
     MUX_Sout.reset <= reset
-    MUX_Sout.io.selector <= mux_S_sel @[ProcessingElement.scala 218:26]
-    node _MUX_Sout_io_mux_input_T = and(west_buffer, east_buffer) @[ProcessingElement.scala 219:42]
-    node _MUX_Sout_io_mux_input_T_1 = and(_MUX_Sout_io_mux_input_T, north_buffer) @[ProcessingElement.scala 219:56]
-    node _MUX_Sout_io_mux_input_T_2 = and(_MUX_Sout_io_mux_input_T_1, FU_dout) @[ProcessingElement.scala 219:71]
-    MUX_Sout.io.mux_input <= _MUX_Sout_io_mux_input_T_2 @[ProcessingElement.scala 219:27]
-    south_REG_din <= MUX_Sout.io.mux_output @[ProcessingElement.scala 220:19]
-    inst FR_Sout of FR_2 @[ProcessingElement.scala 222:26]
+    MUX_Sout.io.selector <= mux_S_sel @[ProcessingElement.scala 227:26]
+    node _MUX_Sout_io_mux_input_T = and(west_buffer, east_buffer) @[ProcessingElement.scala 228:42]
+    node _MUX_Sout_io_mux_input_T_1 = and(_MUX_Sout_io_mux_input_T, north_buffer) @[ProcessingElement.scala 228:56]
+    node _MUX_Sout_io_mux_input_T_2 = and(_MUX_Sout_io_mux_input_T_1, FU_dout) @[ProcessingElement.scala 228:71]
+    MUX_Sout.io.mux_input <= _MUX_Sout_io_mux_input_T_2 @[ProcessingElement.scala 228:27]
+    south_REG_din <= MUX_Sout.io.mux_output @[ProcessingElement.scala 229:19]
+    inst FR_Sout of FR_2 @[ProcessingElement.scala 231:26]
     FR_Sout.clock <= clock
     FR_Sout.reset <= reset
     node ready_FR_Sout_lo = cat(east_REG_din_r, west_REG_din_r) @[Cat.scala 31:58]
@@ -2175,49 +2175,49 @@ circuit ProcessingElement :
     node valid_in_FR_Sout_lo = cat(north_buffer_v, FU_dout_v) @[Cat.scala 31:58]
     node valid_in_FR_Sout_hi = cat(west_buffer_v, east_buffer_v) @[Cat.scala 31:58]
     node valid_in_FR_Sout = cat(valid_in_FR_Sout_hi, valid_in_FR_Sout_lo) @[Cat.scala 31:58]
-    FR_Sout.io.ready_out <= ready_FR_Sout @[ProcessingElement.scala 225:26]
-    FR_Sout.io.valid_in <= valid_in_FR_Sout @[ProcessingElement.scala 226:25]
-    FR_Sout.io.valid_mux_sel <= mux_S_sel @[ProcessingElement.scala 227:30]
-    FR_Sout.io.fork_mask <= accept_mask_frS @[ProcessingElement.scala 228:26]
-    south_REG_din_v <= FR_Sout.io.valid_out @[ProcessingElement.scala 229:21]
-    inst REG_Sout of D_REG_2 @[ProcessingElement.scala 231:27]
+    FR_Sout.io.ready_out <= ready_FR_Sout @[ProcessingElement.scala 234:26]
+    FR_Sout.io.valid_in <= valid_in_FR_Sout @[ProcessingElement.scala 235:25]
+    FR_Sout.io.valid_mux_sel <= mux_S_sel @[ProcessingElement.scala 236:30]
+    FR_Sout.io.fork_mask <= accept_mask_frS @[ProcessingElement.scala 237:26]
+    south_REG_din_v <= FR_Sout.io.valid_out @[ProcessingElement.scala 238:21]
+    inst REG_Sout of D_REG_2 @[ProcessingElement.scala 240:27]
     REG_Sout.clock <= clock
     REG_Sout.reset <= reset
-    REG_Sout.io.din <= south_REG_din @[ProcessingElement.scala 233:21]
-    REG_Sout.io.din_v <= south_REG_din_v @[ProcessingElement.scala 234:23]
-    REG_Sout.io.dout_r <= io.south_dout_r @[ProcessingElement.scala 235:24]
-    south_REG_din_r <= REG_Sout.io.din_r @[ProcessingElement.scala 237:21]
-    io.south_dout <= REG_Sout.io.dout @[ProcessingElement.scala 238:19]
-    io.south_dout_v <= REG_Sout.io.dout_v @[ProcessingElement.scala 239:21]
-    inst FIFO_Win of D_FIFO_3 @[ProcessingElement.scala 244:27]
+    REG_Sout.io.din <= south_REG_din @[ProcessingElement.scala 242:21]
+    REG_Sout.io.din_v <= south_REG_din_v @[ProcessingElement.scala 243:23]
+    REG_Sout.io.dout_r <= io.south_dout_r @[ProcessingElement.scala 244:24]
+    south_REG_din_r <= REG_Sout.io.din_r @[ProcessingElement.scala 246:21]
+    io.south_dout <= REG_Sout.io.dout @[ProcessingElement.scala 247:19]
+    io.south_dout_v <= REG_Sout.io.dout_v @[ProcessingElement.scala 248:21]
+    inst FIFO_Win of D_FIFO_3 @[ProcessingElement.scala 253:27]
     FIFO_Win.clock <= clock
     FIFO_Win.reset <= reset
-    FIFO_Win.io.din <= io.west_din @[ProcessingElement.scala 245:21]
-    FIFO_Win.io.din_v <= io.west_din_v @[ProcessingElement.scala 246:23]
-    FIFO_Win.io.dout_r <= west_buffer_r @[ProcessingElement.scala 247:24]
-    io.west_din_r <= FIFO_Win.io.din_r @[ProcessingElement.scala 248:19]
-    west_buffer <= FIFO_Win.io.dout @[ProcessingElement.scala 249:17]
-    west_buffer_v <= FIFO_Win.io.dout_v @[ProcessingElement.scala 250:19]
-    inst FS_Win of FS_3 @[ProcessingElement.scala 252:25]
+    FIFO_Win.io.din <= io.west_din @[ProcessingElement.scala 254:21]
+    FIFO_Win.io.din_v <= io.west_din_v @[ProcessingElement.scala 255:23]
+    FIFO_Win.io.dout_r <= west_buffer_r @[ProcessingElement.scala 256:24]
+    io.west_din_r <= FIFO_Win.io.din_r @[ProcessingElement.scala 257:19]
+    west_buffer <= FIFO_Win.io.dout @[ProcessingElement.scala 258:17]
+    west_buffer_v <= FIFO_Win.io.dout_v @[ProcessingElement.scala 259:19]
+    inst FS_Win of FS_3 @[ProcessingElement.scala 261:25]
     FS_Win.clock <= clock
     FS_Win.reset <= reset
     node ready_out_FS_Win_lo = cat(east_REG_din_r, south_REG_din_r) @[Cat.scala 31:58]
     node ready_out_FS_Win_hi_hi = cat(FU_din_1_r, FU_din_2_r) @[Cat.scala 31:58]
     node ready_out_FS_Win_hi = cat(ready_out_FS_Win_hi_hi, north_REG_din_r) @[Cat.scala 31:58]
     node ready_out_FS_Win = cat(ready_out_FS_Win_hi, ready_out_FS_Win_lo) @[Cat.scala 31:58]
-    FS_Win.io.ready_out <= ready_out_FS_Win @[ProcessingElement.scala 254:25]
-    west_buffer_r <= FS_Win.io.ready_in @[ProcessingElement.scala 255:19]
-    FS_Win.io.fork_mask <= accept_mask_fsiW @[ProcessingElement.scala 256:25]
-    inst MUX_Wout of ConfMux_6 @[ProcessingElement.scala 258:28]
+    FS_Win.io.ready_out <= ready_out_FS_Win @[ProcessingElement.scala 263:25]
+    west_buffer_r <= FS_Win.io.ready_in @[ProcessingElement.scala 264:19]
+    FS_Win.io.fork_mask <= accept_mask_fsiW @[ProcessingElement.scala 265:25]
+    inst MUX_Wout of ConfMux_6 @[ProcessingElement.scala 267:28]
     MUX_Wout.clock <= clock
     MUX_Wout.reset <= reset
-    MUX_Wout.io.selector <= mux_W_sel @[ProcessingElement.scala 259:26]
-    node _MUX_Wout_io_mux_input_T = and(south_buffer, east_buffer) @[ProcessingElement.scala 260:43]
-    node _MUX_Wout_io_mux_input_T_1 = and(_MUX_Wout_io_mux_input_T, north_buffer) @[ProcessingElement.scala 260:57]
-    node _MUX_Wout_io_mux_input_T_2 = and(_MUX_Wout_io_mux_input_T_1, FU_dout) @[ProcessingElement.scala 260:72]
-    MUX_Wout.io.mux_input <= _MUX_Wout_io_mux_input_T_2 @[ProcessingElement.scala 260:27]
-    west_REG_din <= MUX_Wout.io.mux_output @[ProcessingElement.scala 261:18]
-    inst FR_Wout of FR_3 @[ProcessingElement.scala 263:26]
+    MUX_Wout.io.selector <= mux_W_sel @[ProcessingElement.scala 268:26]
+    node _MUX_Wout_io_mux_input_T = and(south_buffer, east_buffer) @[ProcessingElement.scala 269:43]
+    node _MUX_Wout_io_mux_input_T_1 = and(_MUX_Wout_io_mux_input_T, north_buffer) @[ProcessingElement.scala 269:57]
+    node _MUX_Wout_io_mux_input_T_2 = and(_MUX_Wout_io_mux_input_T_1, FU_dout) @[ProcessingElement.scala 269:72]
+    MUX_Wout.io.mux_input <= _MUX_Wout_io_mux_input_T_2 @[ProcessingElement.scala 269:27]
+    west_REG_din <= MUX_Wout.io.mux_output @[ProcessingElement.scala 270:18]
+    inst FR_Wout of FR_3 @[ProcessingElement.scala 272:26]
     FR_Wout.clock <= clock
     FR_Wout.reset <= reset
     node ready_FR_Wout_lo = cat(east_REG_din_r, south_REG_din_r) @[Cat.scala 31:58]
@@ -2227,38 +2227,38 @@ circuit ProcessingElement :
     node valid_in_FR_Wout_lo = cat(north_buffer_v, FU_dout_v) @[Cat.scala 31:58]
     node valid_in_FR_Wout_hi = cat(south_buffer_v, east_buffer_v) @[Cat.scala 31:58]
     node valid_in_FR_Wout = cat(valid_in_FR_Wout_hi, valid_in_FR_Wout_lo) @[Cat.scala 31:58]
-    FR_Wout.io.ready_out <= ready_FR_Wout @[ProcessingElement.scala 266:26]
-    FR_Wout.io.valid_in <= valid_in_FR_Wout @[ProcessingElement.scala 267:25]
-    FR_Wout.io.valid_mux_sel <= mux_W_sel @[ProcessingElement.scala 268:30]
-    FR_Wout.io.fork_mask <= accept_mask_frW @[ProcessingElement.scala 269:26]
-    west_REG_din_v <= FR_Wout.io.valid_out @[ProcessingElement.scala 270:20]
-    inst REG_Wout of D_REG_3 @[ProcessingElement.scala 272:27]
+    FR_Wout.io.ready_out <= ready_FR_Wout @[ProcessingElement.scala 275:26]
+    FR_Wout.io.valid_in <= valid_in_FR_Wout @[ProcessingElement.scala 276:25]
+    FR_Wout.io.valid_mux_sel <= mux_W_sel @[ProcessingElement.scala 277:30]
+    FR_Wout.io.fork_mask <= accept_mask_frW @[ProcessingElement.scala 278:26]
+    west_REG_din_v <= FR_Wout.io.valid_out @[ProcessingElement.scala 279:20]
+    inst REG_Wout of D_REG_3 @[ProcessingElement.scala 281:27]
     REG_Wout.clock <= clock
     REG_Wout.reset <= reset
-    REG_Wout.io.din <= west_REG_din @[ProcessingElement.scala 274:21]
-    REG_Wout.io.din_v <= west_REG_din_v @[ProcessingElement.scala 275:23]
-    REG_Wout.io.dout_r <= io.west_dout_r @[ProcessingElement.scala 276:24]
-    west_REG_din_r <= REG_Wout.io.din_r @[ProcessingElement.scala 278:20]
-    io.west_dout <= REG_Wout.io.dout @[ProcessingElement.scala 279:18]
-    io.west_dout_v <= REG_Wout.io.dout_v @[ProcessingElement.scala 280:20]
-    inst CELL of CellProcessing @[ProcessingElement.scala 284:23]
+    REG_Wout.io.din <= west_REG_din @[ProcessingElement.scala 283:21]
+    REG_Wout.io.din_v <= west_REG_din_v @[ProcessingElement.scala 284:23]
+    REG_Wout.io.dout_r <= io.west_dout_r @[ProcessingElement.scala 285:24]
+    west_REG_din_r <= REG_Wout.io.din_r @[ProcessingElement.scala 287:20]
+    io.west_dout <= REG_Wout.io.dout @[ProcessingElement.scala 288:18]
+    io.west_dout_v <= REG_Wout.io.dout_v @[ProcessingElement.scala 289:20]
+    inst CELL of CellProcessing @[ProcessingElement.scala 293:23]
     CELL.clock <= clock
     CELL.reset <= reset
-    CELL.io.north_din <= north_buffer @[ProcessingElement.scala 285:23]
-    CELL.io.north_din_v <= north_buffer_v @[ProcessingElement.scala 286:25]
-    CELL.io.east_din <= east_buffer @[ProcessingElement.scala 287:22]
-    CELL.io.east_din_v <= east_buffer_v @[ProcessingElement.scala 288:24]
-    CELL.io.south_din <= south_buffer @[ProcessingElement.scala 289:23]
-    CELL.io.south_din_v <= south_buffer_v @[ProcessingElement.scala 290:25]
-    CELL.io.west_din <= west_buffer @[ProcessingElement.scala 291:22]
-    CELL.io.west_din_v <= west_buffer_v @[ProcessingElement.scala 292:24]
-    CELL.io.north_dout_r <= north_REG_din_r @[ProcessingElement.scala 293:26]
-    CELL.io.east_dout_r <= east_REG_din_r @[ProcessingElement.scala 294:25]
-    CELL.io.south_dout_r <= south_REG_din_r @[ProcessingElement.scala 295:26]
-    CELL.io.west_dout_r <= west_REG_din_r @[ProcessingElement.scala 296:25]
-    CELL.io.config_bits <= config_bits_reg @[ProcessingElement.scala 297:25]
-    FU_din_1_r <= CELL.io.FU_din_1_r @[ProcessingElement.scala 299:16]
-    FU_din_2_r <= CELL.io.FU_din_2_r @[ProcessingElement.scala 300:16]
-    FU_dout <= CELL.io.dout @[ProcessingElement.scala 301:13]
-    FU_dout_v <= CELL.io.dout_v @[ProcessingElement.scala 302:15]
+    CELL.io.north_din <= north_buffer @[ProcessingElement.scala 294:23]
+    CELL.io.north_din_v <= north_buffer_v @[ProcessingElement.scala 295:25]
+    CELL.io.east_din <= east_buffer @[ProcessingElement.scala 296:22]
+    CELL.io.east_din_v <= east_buffer_v @[ProcessingElement.scala 297:24]
+    CELL.io.south_din <= south_buffer @[ProcessingElement.scala 298:23]
+    CELL.io.south_din_v <= south_buffer_v @[ProcessingElement.scala 299:25]
+    CELL.io.west_din <= west_buffer @[ProcessingElement.scala 300:22]
+    CELL.io.west_din_v <= west_buffer_v @[ProcessingElement.scala 301:24]
+    CELL.io.north_dout_r <= north_REG_din_r @[ProcessingElement.scala 302:26]
+    CELL.io.east_dout_r <= east_REG_din_r @[ProcessingElement.scala 303:25]
+    CELL.io.south_dout_r <= south_REG_din_r @[ProcessingElement.scala 304:26]
+    CELL.io.west_dout_r <= west_REG_din_r @[ProcessingElement.scala 305:25]
+    CELL.io.config_bits <= config_bits_reg @[ProcessingElement.scala 306:25]
+    FU_din_1_r <= CELL.io.FU_din_1_r @[ProcessingElement.scala 308:16]
+    FU_din_2_r <= CELL.io.FU_din_2_r @[ProcessingElement.scala 309:16]
+    FU_dout <= CELL.io.dout @[ProcessingElement.scala 310:13]
+    FU_dout_v <= CELL.io.dout_v @[ProcessingElement.scala 311:15]
 

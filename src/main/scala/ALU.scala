@@ -1,3 +1,9 @@
+///////////////////////////////////////
+//                                   //
+//      Arithmetic Logic Unit        //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chisel3.util._
 
@@ -17,7 +23,12 @@ object ALU
 
 import ALU._
  
-class ALU (DATA_WIDTH: Int, OP_WIDTH: Int)extends Module {
+class ALU 
+    (
+      DATA_WIDTH: Int, 
+      OP_WIDTH: Int
+    )
+    extends Module {
     val io = IO(new Bundle {
         val din_1 = Input(UInt(DATA_WIDTH.W))
         val din_2 = Input(UInt(DATA_WIDTH.W))
@@ -36,7 +47,8 @@ class ALU (DATA_WIDTH: Int, OP_WIDTH: Int)extends Module {
       io.dout := io.din_1 - io.din_2                            // SUB
     }
     .elsewhen (io.op_config === SLL) {
-      // io.dout := io.din_1 << io.din_2                           // SLL
+      // Fix 
+      // io.dout := io.din_1 << io.din_2                        // SLL
       io.dout := 1.U
     } 
     .elsewhen (io.op_config === SRL) {
@@ -51,24 +63,24 @@ class ALU (DATA_WIDTH: Int, OP_WIDTH: Int)extends Module {
     .elsewhen (io.op_config === XOR) {
       io.dout := io.din_1 ^ io.din_2                            // XOR
     } 
-    .elsewhen (io.op_config === MIN) {                             // MIN
+    .elsewhen (io.op_config === MIN) {                          // MIN
       when (io.din_1 <= io.din_2) {
-        io.dout := io.din_1                                      // MIN = din_1 
+        io.dout := io.din_1                                     // MIN = din_1 
       }  
       .elsewhen(io.din_1 > io.din_2) {
-        io.dout := io.din_2                                      // MIN = din_2
+        io.dout := io.din_2                                     // MIN = din_2
       }                             
     }
-    .elsewhen (io.op_config === MAX) {                             // MAX
+    .elsewhen (io.op_config === MAX) {                          // MAX
       when (io.din_1 >= io.din_2) {
-        io.dout := io.din_1                                      // MAX = din_1 
+        io.dout := io.din_1                                     // MAX = din_1 
       }  
       .elsewhen(io.din_1 < io.din_2) {
-        io.dout := io.din_2                                      // MAX = din_2
+        io.dout := io.din_2                                     // MAX = din_2
       }     
     } 
     .otherwise { 
-      io.dout := 0.U                                              // Default 
+      io.dout := 0.U                                            // Default 
     }
 }
 

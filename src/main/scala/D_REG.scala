@@ -1,7 +1,17 @@
+///////////////////////////////////////
+//                                   //
+//               D-REG               //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chisel3.util._
 
-class D_REG (DATA_WIDTH: Int)extends Module {
+class D_REG 
+    (
+        DATA_WIDTH: Int
+    )
+    extends Module {
     val io = IO(new Bundle {
         val din = Input(UInt(DATA_WIDTH.W))
         val din_v = Input(Bool())

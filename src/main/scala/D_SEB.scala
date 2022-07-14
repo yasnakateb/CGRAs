@@ -1,7 +1,17 @@
+///////////////////////////////////////
+//                                   //
+//               D-SEB               //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chisel3.util._
 
-class D_SEB (DATA_WIDTH: Int)extends Module {
+class D_SEB 
+    (
+        DATA_WIDTH: Int
+    )
+    extends Module {
     val io = IO(new Bundle {
         val din = Input(UInt(DATA_WIDTH.W))
         val din_v = Input(Bool())
@@ -24,7 +34,6 @@ class D_SEB (DATA_WIDTH: Int)extends Module {
     reg := io.dout_r.asUInt | (~mux2_out)
     S_EA_EM := reg.asBool
     io.dout_v := mux2_out.asBool
-
 
     io.din_r := S_EA_EM 
    

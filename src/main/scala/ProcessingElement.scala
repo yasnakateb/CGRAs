@@ -1,8 +1,18 @@
+///////////////////////////////////////
+//                                   //
+//        Processing Element         //
+//                                   //
+///////////////////////////////////////
 
 import chisel3._
 import chisel3.util._
 
-class ProcessingElement (DATA_WIDTH: Int, FIFO_DEPTH: Int) extends Module {
+class ProcessingElement 
+    (
+        DATA_WIDTH: Int, 
+        FIFO_DEPTH: Int
+    ) 
+    extends Module {
     val io = IO(new Bundle {
         //  Data in
         val north_din = Input(UInt(DATA_WIDTH.W))
@@ -79,7 +89,6 @@ class ProcessingElement (DATA_WIDTH: Int, FIFO_DEPTH: Int) extends Module {
     val east_REG_din = RegInit(0.U(DATA_WIDTH.W))
     val south_REG_din = RegInit(0.U(DATA_WIDTH.W))
     val west_REG_din = RegInit(0.U(DATA_WIDTH.W))
-
     val north_REG_din_v = RegInit(0.U(1.W))
     val east_REG_din_v = RegInit(0.U(1.W))
     val south_REG_din_v = RegInit(0.U(1.W))
@@ -280,7 +289,7 @@ class ProcessingElement (DATA_WIDTH: Int, FIFO_DEPTH: Int) extends Module {
     io.west_dout_v := REG_Wout.io.dout_v 
     // ------------------------------- WEST  NODE -------------------------------
 
-    //  -- Cell processing
+    // Cell processing
     val CELL = Module (new CellProcessing(DATA_WIDTH))
     CELL.io.north_din := north_buffer
     CELL.io.north_din_v := north_buffer_v

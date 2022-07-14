@@ -1,7 +1,17 @@
+///////////////////////////////////////
+//                                   //
+//               Join                //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chisel3.util._
 
-class Join (DATA_WIDTH: Int)extends Module {
+class Join 
+    (
+        DATA_WIDTH: Int
+    )
+    extends Module {
     val io = IO(new Bundle {
         //  Inputs
         val din_1 = Input(UInt(DATA_WIDTH.W))

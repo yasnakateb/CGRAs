@@ -362,41 +362,41 @@ module D_REG(
   output        io_dout_v,
   output        io_din_r
 );
-  wire  reg_1_clock; // @[D_REG.scala 19:25]
-  wire  reg_1_reset; // @[D_REG.scala 19:25]
-  wire [31:0] reg_1_io_in; // @[D_REG.scala 19:25]
-  wire  reg_1_io_en; // @[D_REG.scala 19:25]
-  wire [31:0] reg_1_io_out; // @[D_REG.scala 19:25]
-  wire  reg_2_clock; // @[D_REG.scala 20:25]
-  wire  reg_2_reset; // @[D_REG.scala 20:25]
-  wire  reg_2_io_in; // @[D_REG.scala 20:25]
-  wire  reg_2_io_en; // @[D_REG.scala 20:25]
-  wire  reg_2_io_out; // @[D_REG.scala 20:25]
-  RegEnable reg_1 ( // @[D_REG.scala 19:25]
+  wire  reg_1_clock; // @[D_REG.scala 14:25]
+  wire  reg_1_reset; // @[D_REG.scala 14:25]
+  wire [31:0] reg_1_io_in; // @[D_REG.scala 14:25]
+  wire  reg_1_io_en; // @[D_REG.scala 14:25]
+  wire [31:0] reg_1_io_out; // @[D_REG.scala 14:25]
+  wire  reg_2_clock; // @[D_REG.scala 15:25]
+  wire  reg_2_reset; // @[D_REG.scala 15:25]
+  wire  reg_2_io_in; // @[D_REG.scala 15:25]
+  wire  reg_2_io_en; // @[D_REG.scala 15:25]
+  wire  reg_2_io_out; // @[D_REG.scala 15:25]
+  RegEnable reg_1 ( // @[D_REG.scala 14:25]
     .clock(reg_1_clock),
     .reset(reg_1_reset),
     .io_in(reg_1_io_in),
     .io_en(reg_1_io_en),
     .io_out(reg_1_io_out)
   );
-  RegEnable_1 reg_2 ( // @[D_REG.scala 20:25]
+  RegEnable_1 reg_2 ( // @[D_REG.scala 15:25]
     .clock(reg_2_clock),
     .reset(reg_2_reset),
     .io_in(reg_2_io_in),
     .io_en(reg_2_io_en),
     .io_out(reg_2_io_out)
   );
-  assign io_dout = reg_1_io_out; // @[D_REG.scala 26:13]
-  assign io_dout_v = reg_2_io_out; // @[D_REG.scala 27:15]
-  assign io_din_r = io_dout_r; // @[D_REG.scala 28:14]
+  assign io_dout = reg_1_io_out; // @[D_REG.scala 21:13]
+  assign io_dout_v = reg_2_io_out; // @[D_REG.scala 22:15]
+  assign io_din_r = io_dout_r; // @[D_REG.scala 23:14]
   assign reg_1_clock = clock;
   assign reg_1_reset = reset;
-  assign reg_1_io_in = io_din; // @[D_REG.scala 22:17]
-  assign reg_1_io_en = io_dout_r; // @[D_REG.scala 24:17]
+  assign reg_1_io_in = io_din; // @[D_REG.scala 17:17]
+  assign reg_1_io_en = io_dout_r; // @[D_REG.scala 19:17]
   assign reg_2_clock = clock;
   assign reg_2_reset = reset;
-  assign reg_2_io_in = io_din_v; // @[D_REG.scala 23:17]
-  assign reg_2_io_en = io_dout_r; // @[D_REG.scala 25:17]
+  assign reg_2_io_in = io_din_v; // @[D_REG.scala 18:17]
+  assign reg_2_io_en = io_dout_r; // @[D_REG.scala 20:17]
 endmodule
 module ConfMux_8(
   input  [2:0] io_selector,
@@ -472,80 +472,80 @@ module D_SEB(
 `ifdef RANDOMIZE_REG_INIT
   reg [31:0] _RAND_0;
 `endif // RANDOMIZE_REG_INIT
-  wire  main_clock; // @[D_SEB.scala 19:24]
-  wire  main_reset; // @[D_SEB.scala 19:24]
-  wire [31:0] main_io_in; // @[D_SEB.scala 19:24]
-  wire  main_io_en; // @[D_SEB.scala 19:24]
-  wire [31:0] main_io_out; // @[D_SEB.scala 19:24]
-  wire  aux_clock; // @[D_SEB.scala 20:23]
-  wire  aux_reset; // @[D_SEB.scala 20:23]
-  wire [31:0] aux_io_in; // @[D_SEB.scala 20:23]
-  wire  aux_io_en; // @[D_SEB.scala 20:23]
-  wire [31:0] aux_io_out; // @[D_SEB.scala 20:23]
-  wire  reg_1_clock; // @[D_SEB.scala 21:25]
-  wire  reg_1_reset; // @[D_SEB.scala 21:25]
-  wire  reg_1_io_in; // @[D_SEB.scala 21:25]
-  wire  reg_1_io_en; // @[D_SEB.scala 21:25]
-  wire  reg_1_io_out; // @[D_SEB.scala 21:25]
-  wire  reg_2_clock; // @[D_SEB.scala 22:25]
-  wire  reg_2_reset; // @[D_SEB.scala 22:25]
-  wire  reg_2_io_in; // @[D_SEB.scala 22:25]
-  wire  reg_2_io_en; // @[D_SEB.scala 22:25]
-  wire  reg_2_io_out; // @[D_SEB.scala 22:25]
-  reg  reg_; // @[D_SEB.scala 24:22]
-  wire  mux2_out = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_SEB.scala 28:23]
-  RegEnable main ( // @[D_SEB.scala 19:24]
+  wire  main_clock; // @[D_SEB.scala 14:24]
+  wire  main_reset; // @[D_SEB.scala 14:24]
+  wire [31:0] main_io_in; // @[D_SEB.scala 14:24]
+  wire  main_io_en; // @[D_SEB.scala 14:24]
+  wire [31:0] main_io_out; // @[D_SEB.scala 14:24]
+  wire  aux_clock; // @[D_SEB.scala 15:23]
+  wire  aux_reset; // @[D_SEB.scala 15:23]
+  wire [31:0] aux_io_in; // @[D_SEB.scala 15:23]
+  wire  aux_io_en; // @[D_SEB.scala 15:23]
+  wire [31:0] aux_io_out; // @[D_SEB.scala 15:23]
+  wire  reg_1_clock; // @[D_SEB.scala 16:25]
+  wire  reg_1_reset; // @[D_SEB.scala 16:25]
+  wire  reg_1_io_in; // @[D_SEB.scala 16:25]
+  wire  reg_1_io_en; // @[D_SEB.scala 16:25]
+  wire  reg_1_io_out; // @[D_SEB.scala 16:25]
+  wire  reg_2_clock; // @[D_SEB.scala 17:25]
+  wire  reg_2_reset; // @[D_SEB.scala 17:25]
+  wire  reg_2_io_in; // @[D_SEB.scala 17:25]
+  wire  reg_2_io_en; // @[D_SEB.scala 17:25]
+  wire  reg_2_io_out; // @[D_SEB.scala 17:25]
+  reg  reg_; // @[D_SEB.scala 19:22]
+  wire  mux2_out = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_SEB.scala 23:23]
+  RegEnable main ( // @[D_SEB.scala 14:24]
     .clock(main_clock),
     .reset(main_reset),
     .io_in(main_io_in),
     .io_en(main_io_en),
     .io_out(main_io_out)
   );
-  RegEnable aux ( // @[D_SEB.scala 20:23]
+  RegEnable aux ( // @[D_SEB.scala 15:23]
     .clock(aux_clock),
     .reset(aux_reset),
     .io_in(aux_io_in),
     .io_en(aux_io_en),
     .io_out(aux_io_out)
   );
-  RegEnable_1 reg_1 ( // @[D_SEB.scala 21:25]
+  RegEnable_1 reg_1 ( // @[D_SEB.scala 16:25]
     .clock(reg_1_clock),
     .reset(reg_1_reset),
     .io_in(reg_1_io_in),
     .io_en(reg_1_io_en),
     .io_out(reg_1_io_out)
   );
-  RegEnable_1 reg_2 ( // @[D_SEB.scala 22:25]
+  RegEnable_1 reg_2 ( // @[D_SEB.scala 17:25]
     .clock(reg_2_clock),
     .reset(reg_2_reset),
     .io_in(reg_2_io_in),
     .io_en(reg_2_io_en),
     .io_out(reg_2_io_out)
   );
-  assign io_din_r = reg_; // @[D_SEB.scala 30:20]
-  assign io_dout = reg_ ? main_io_out : aux_io_out; // @[D_SEB.scala 46:19]
-  assign io_dout_v = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_SEB.scala 28:23]
+  assign io_din_r = reg_; // @[D_SEB.scala 25:20]
+  assign io_dout = reg_ ? main_io_out : aux_io_out; // @[D_SEB.scala 41:19]
+  assign io_dout_v = reg_ ? reg_1_io_out : reg_2_io_out; // @[D_SEB.scala 23:23]
   assign main_clock = clock;
   assign main_reset = reset;
-  assign main_io_in = io_din; // @[D_SEB.scala 36:16]
-  assign main_io_en = reg_; // @[D_SEB.scala 30:20]
+  assign main_io_in = io_din; // @[D_SEB.scala 31:16]
+  assign main_io_en = reg_; // @[D_SEB.scala 25:20]
   assign aux_clock = clock;
   assign aux_reset = reset;
-  assign aux_io_in = main_io_out; // @[D_SEB.scala 37:15]
-  assign aux_io_en = reg_; // @[D_SEB.scala 30:20]
+  assign aux_io_in = main_io_out; // @[D_SEB.scala 32:15]
+  assign aux_io_en = reg_; // @[D_SEB.scala 25:20]
   assign reg_1_clock = clock;
   assign reg_1_reset = reset;
-  assign reg_1_io_in = io_din_v; // @[D_SEB.scala 38:17]
-  assign reg_1_io_en = reg_; // @[D_SEB.scala 30:20]
+  assign reg_1_io_in = io_din_v; // @[D_SEB.scala 33:17]
+  assign reg_1_io_en = reg_; // @[D_SEB.scala 25:20]
   assign reg_2_clock = clock;
   assign reg_2_reset = reset;
-  assign reg_2_io_in = reg_1_io_out; // @[D_SEB.scala 39:17]
-  assign reg_2_io_en = reg_; // @[D_SEB.scala 30:20]
+  assign reg_2_io_in = reg_1_io_out; // @[D_SEB.scala 34:17]
+  assign reg_2_io_en = reg_; // @[D_SEB.scala 25:20]
   always @(posedge clock) begin
-    if (reset) begin // @[D_SEB.scala 24:22]
-      reg_ <= 1'h0; // @[D_SEB.scala 24:22]
+    if (reset) begin // @[D_SEB.scala 19:22]
+      reg_ <= 1'h0; // @[D_SEB.scala 19:22]
     end else begin
-      reg_ <= io_dout_r | ~mux2_out; // @[D_SEB.scala 29:9]
+      reg_ <= io_dout_r | ~mux2_out; // @[D_SEB.scala 24:9]
     end
   end
 // Register and memory initialization
@@ -606,11 +606,11 @@ module Join(
   output [31:0] io_dout_1,
   output [31:0] io_dout_2
 );
-  assign io_dout_v = io_din_1_v & io_din_2_v; // @[Join.scala 26:29]
-  assign io_din_1_r = io_din_2_v & io_dout_r; // @[Join.scala 28:30]
-  assign io_din_2_r = io_din_1_v & io_dout_r; // @[Join.scala 29:30]
-  assign io_dout_1 = io_din_1; // @[Join.scala 23:15]
-  assign io_dout_2 = io_din_2; // @[Join.scala 24:15]
+  assign io_dout_v = io_din_1_v & io_din_2_v; // @[Join.scala 24:29]
+  assign io_din_1_r = io_din_2_v & io_dout_r; // @[Join.scala 26:30]
+  assign io_din_2_r = io_din_1_v & io_dout_r; // @[Join.scala 27:30]
+  assign io_dout_1 = io_din_1; // @[Join.scala 21:15]
+  assign io_dout_2 = io_din_2; // @[Join.scala 22:15]
 endmodule
 module ALU(
   input  [31:0] io_din_1,
@@ -1308,196 +1308,196 @@ module ProcessingElement(
   reg [31:0] _RAND_39;
   reg [31:0] _RAND_40;
 `endif // RANDOMIZE_REG_INIT
-  wire  FIFO_Nin_clock; // @[ProcessingElement.scala 120:27]
-  wire  FIFO_Nin_reset; // @[ProcessingElement.scala 120:27]
-  wire [31:0] FIFO_Nin_io_din; // @[ProcessingElement.scala 120:27]
-  wire  FIFO_Nin_io_din_v; // @[ProcessingElement.scala 120:27]
-  wire  FIFO_Nin_io_dout_r; // @[ProcessingElement.scala 120:27]
-  wire  FIFO_Nin_io_din_r; // @[ProcessingElement.scala 120:27]
-  wire [31:0] FIFO_Nin_io_dout; // @[ProcessingElement.scala 120:27]
-  wire  FIFO_Nin_io_dout_v; // @[ProcessingElement.scala 120:27]
-  wire [4:0] FS_Nin_io_ready_out; // @[ProcessingElement.scala 128:25]
-  wire [4:0] FS_Nin_io_fork_mask; // @[ProcessingElement.scala 128:25]
-  wire  FS_Nin_io_ready_in; // @[ProcessingElement.scala 128:25]
-  wire [1:0] MUX_Nout_io_selector; // @[ProcessingElement.scala 134:28]
-  wire [127:0] MUX_Nout_io_mux_input; // @[ProcessingElement.scala 134:28]
-  wire [31:0] MUX_Nout_io_mux_output; // @[ProcessingElement.scala 134:28]
-  wire [3:0] FR_Nout_io_valid_in; // @[ProcessingElement.scala 139:26]
-  wire [4:0] FR_Nout_io_ready_out; // @[ProcessingElement.scala 139:26]
-  wire [1:0] FR_Nout_io_valid_mux_sel; // @[ProcessingElement.scala 139:26]
-  wire [4:0] FR_Nout_io_fork_mask; // @[ProcessingElement.scala 139:26]
-  wire  FR_Nout_io_valid_out; // @[ProcessingElement.scala 139:26]
-  wire  REG_Nout_clock; // @[ProcessingElement.scala 148:27]
-  wire  REG_Nout_reset; // @[ProcessingElement.scala 148:27]
-  wire [31:0] REG_Nout_io_din; // @[ProcessingElement.scala 148:27]
-  wire  REG_Nout_io_din_v; // @[ProcessingElement.scala 148:27]
-  wire  REG_Nout_io_dout_r; // @[ProcessingElement.scala 148:27]
-  wire [31:0] REG_Nout_io_dout; // @[ProcessingElement.scala 148:27]
-  wire  REG_Nout_io_dout_v; // @[ProcessingElement.scala 148:27]
-  wire  REG_Nout_io_din_r; // @[ProcessingElement.scala 148:27]
-  wire  FIFO_Ein_clock; // @[ProcessingElement.scala 162:27]
-  wire  FIFO_Ein_reset; // @[ProcessingElement.scala 162:27]
-  wire [31:0] FIFO_Ein_io_din; // @[ProcessingElement.scala 162:27]
-  wire  FIFO_Ein_io_din_v; // @[ProcessingElement.scala 162:27]
-  wire  FIFO_Ein_io_dout_r; // @[ProcessingElement.scala 162:27]
-  wire  FIFO_Ein_io_din_r; // @[ProcessingElement.scala 162:27]
-  wire [31:0] FIFO_Ein_io_dout; // @[ProcessingElement.scala 162:27]
-  wire  FIFO_Ein_io_dout_v; // @[ProcessingElement.scala 162:27]
-  wire [4:0] FS_Ein_io_ready_out; // @[ProcessingElement.scala 170:25]
-  wire [4:0] FS_Ein_io_fork_mask; // @[ProcessingElement.scala 170:25]
-  wire  FS_Ein_io_ready_in; // @[ProcessingElement.scala 170:25]
-  wire [1:0] MUX_Eout_io_selector; // @[ProcessingElement.scala 176:28]
-  wire [127:0] MUX_Eout_io_mux_input; // @[ProcessingElement.scala 176:28]
-  wire [31:0] MUX_Eout_io_mux_output; // @[ProcessingElement.scala 176:28]
-  wire [3:0] FR_Eout_io_valid_in; // @[ProcessingElement.scala 181:26]
-  wire [4:0] FR_Eout_io_ready_out; // @[ProcessingElement.scala 181:26]
-  wire [1:0] FR_Eout_io_valid_mux_sel; // @[ProcessingElement.scala 181:26]
-  wire [4:0] FR_Eout_io_fork_mask; // @[ProcessingElement.scala 181:26]
-  wire  FR_Eout_io_valid_out; // @[ProcessingElement.scala 181:26]
-  wire  REG_Eout_clock; // @[ProcessingElement.scala 190:27]
-  wire  REG_Eout_reset; // @[ProcessingElement.scala 190:27]
-  wire [31:0] REG_Eout_io_din; // @[ProcessingElement.scala 190:27]
-  wire  REG_Eout_io_din_v; // @[ProcessingElement.scala 190:27]
-  wire  REG_Eout_io_dout_r; // @[ProcessingElement.scala 190:27]
-  wire [31:0] REG_Eout_io_dout; // @[ProcessingElement.scala 190:27]
-  wire  REG_Eout_io_dout_v; // @[ProcessingElement.scala 190:27]
-  wire  REG_Eout_io_din_r; // @[ProcessingElement.scala 190:27]
-  wire  FIFO_Sin_clock; // @[ProcessingElement.scala 203:27]
-  wire  FIFO_Sin_reset; // @[ProcessingElement.scala 203:27]
-  wire [31:0] FIFO_Sin_io_din; // @[ProcessingElement.scala 203:27]
-  wire  FIFO_Sin_io_din_v; // @[ProcessingElement.scala 203:27]
-  wire  FIFO_Sin_io_dout_r; // @[ProcessingElement.scala 203:27]
-  wire  FIFO_Sin_io_din_r; // @[ProcessingElement.scala 203:27]
-  wire [31:0] FIFO_Sin_io_dout; // @[ProcessingElement.scala 203:27]
-  wire  FIFO_Sin_io_dout_v; // @[ProcessingElement.scala 203:27]
-  wire [4:0] FS_Sin_io_ready_out; // @[ProcessingElement.scala 211:25]
-  wire [4:0] FS_Sin_io_fork_mask; // @[ProcessingElement.scala 211:25]
-  wire  FS_Sin_io_ready_in; // @[ProcessingElement.scala 211:25]
-  wire [1:0] MUX_Sout_io_selector; // @[ProcessingElement.scala 217:28]
-  wire [127:0] MUX_Sout_io_mux_input; // @[ProcessingElement.scala 217:28]
-  wire [31:0] MUX_Sout_io_mux_output; // @[ProcessingElement.scala 217:28]
-  wire [3:0] FR_Sout_io_valid_in; // @[ProcessingElement.scala 222:26]
-  wire [4:0] FR_Sout_io_ready_out; // @[ProcessingElement.scala 222:26]
-  wire [1:0] FR_Sout_io_valid_mux_sel; // @[ProcessingElement.scala 222:26]
-  wire [4:0] FR_Sout_io_fork_mask; // @[ProcessingElement.scala 222:26]
-  wire  FR_Sout_io_valid_out; // @[ProcessingElement.scala 222:26]
-  wire  REG_Sout_clock; // @[ProcessingElement.scala 231:27]
-  wire  REG_Sout_reset; // @[ProcessingElement.scala 231:27]
-  wire [31:0] REG_Sout_io_din; // @[ProcessingElement.scala 231:27]
-  wire  REG_Sout_io_din_v; // @[ProcessingElement.scala 231:27]
-  wire  REG_Sout_io_dout_r; // @[ProcessingElement.scala 231:27]
-  wire [31:0] REG_Sout_io_dout; // @[ProcessingElement.scala 231:27]
-  wire  REG_Sout_io_dout_v; // @[ProcessingElement.scala 231:27]
-  wire  REG_Sout_io_din_r; // @[ProcessingElement.scala 231:27]
-  wire  FIFO_Win_clock; // @[ProcessingElement.scala 244:27]
-  wire  FIFO_Win_reset; // @[ProcessingElement.scala 244:27]
-  wire [31:0] FIFO_Win_io_din; // @[ProcessingElement.scala 244:27]
-  wire  FIFO_Win_io_din_v; // @[ProcessingElement.scala 244:27]
-  wire  FIFO_Win_io_dout_r; // @[ProcessingElement.scala 244:27]
-  wire  FIFO_Win_io_din_r; // @[ProcessingElement.scala 244:27]
-  wire [31:0] FIFO_Win_io_dout; // @[ProcessingElement.scala 244:27]
-  wire  FIFO_Win_io_dout_v; // @[ProcessingElement.scala 244:27]
-  wire [4:0] FS_Win_io_ready_out; // @[ProcessingElement.scala 252:25]
-  wire [4:0] FS_Win_io_fork_mask; // @[ProcessingElement.scala 252:25]
-  wire  FS_Win_io_ready_in; // @[ProcessingElement.scala 252:25]
-  wire [1:0] MUX_Wout_io_selector; // @[ProcessingElement.scala 258:28]
-  wire [127:0] MUX_Wout_io_mux_input; // @[ProcessingElement.scala 258:28]
-  wire [31:0] MUX_Wout_io_mux_output; // @[ProcessingElement.scala 258:28]
-  wire [3:0] FR_Wout_io_valid_in; // @[ProcessingElement.scala 263:26]
-  wire [4:0] FR_Wout_io_ready_out; // @[ProcessingElement.scala 263:26]
-  wire [1:0] FR_Wout_io_valid_mux_sel; // @[ProcessingElement.scala 263:26]
-  wire [4:0] FR_Wout_io_fork_mask; // @[ProcessingElement.scala 263:26]
-  wire  FR_Wout_io_valid_out; // @[ProcessingElement.scala 263:26]
-  wire  REG_Wout_clock; // @[ProcessingElement.scala 272:27]
-  wire  REG_Wout_reset; // @[ProcessingElement.scala 272:27]
-  wire [31:0] REG_Wout_io_din; // @[ProcessingElement.scala 272:27]
-  wire  REG_Wout_io_din_v; // @[ProcessingElement.scala 272:27]
-  wire  REG_Wout_io_dout_r; // @[ProcessingElement.scala 272:27]
-  wire [31:0] REG_Wout_io_dout; // @[ProcessingElement.scala 272:27]
-  wire  REG_Wout_io_dout_v; // @[ProcessingElement.scala 272:27]
-  wire  REG_Wout_io_din_r; // @[ProcessingElement.scala 272:27]
-  wire  CELL_clock; // @[ProcessingElement.scala 284:23]
-  wire  CELL_reset; // @[ProcessingElement.scala 284:23]
-  wire [31:0] CELL_io_north_din; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_north_din_v; // @[ProcessingElement.scala 284:23]
-  wire [31:0] CELL_io_east_din; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_east_din_v; // @[ProcessingElement.scala 284:23]
-  wire [31:0] CELL_io_south_din; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_south_din_v; // @[ProcessingElement.scala 284:23]
-  wire [31:0] CELL_io_west_din; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_west_din_v; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_FU_din_1_r; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_FU_din_2_r; // @[ProcessingElement.scala 284:23]
-  wire [31:0] CELL_io_dout; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_dout_v; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_north_dout_r; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_east_dout_r; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_south_dout_r; // @[ProcessingElement.scala 284:23]
-  wire  CELL_io_west_dout_r; // @[ProcessingElement.scala 284:23]
-  wire [181:0] CELL_io_config_bits; // @[ProcessingElement.scala 284:23]
-  reg [1:0] mux_N_sel; // @[ProcessingElement.scala 47:28]
-  reg [1:0] mux_E_sel; // @[ProcessingElement.scala 48:28]
-  reg [1:0] mux_S_sel; // @[ProcessingElement.scala 49:28]
-  reg [1:0] mux_W_sel; // @[ProcessingElement.scala 50:28]
-  reg [4:0] accept_mask_frN; // @[ProcessingElement.scala 51:34]
-  reg [4:0] accept_mask_frE; // @[ProcessingElement.scala 52:34]
-  reg [4:0] accept_mask_frS; // @[ProcessingElement.scala 53:34]
-  reg [4:0] accept_mask_frW; // @[ProcessingElement.scala 54:34]
-  reg [4:0] accept_mask_fsiN; // @[ProcessingElement.scala 55:35]
-  reg [4:0] accept_mask_fsiE; // @[ProcessingElement.scala 56:35]
-  reg [4:0] accept_mask_fsiS; // @[ProcessingElement.scala 57:35]
-  reg [4:0] accept_mask_fsiW; // @[ProcessingElement.scala 58:35]
-  reg [181:0] config_bits_reg; // @[ProcessingElement.scala 59:34]
-  reg [31:0] north_buffer; // @[ProcessingElement.scala 63:31]
-  reg [31:0] east_buffer; // @[ProcessingElement.scala 64:30]
-  reg [31:0] south_buffer; // @[ProcessingElement.scala 65:31]
-  reg [31:0] west_buffer; // @[ProcessingElement.scala 66:30]
-  reg  north_buffer_v; // @[ProcessingElement.scala 68:33]
-  reg  east_buffer_v; // @[ProcessingElement.scala 69:32]
-  reg  south_buffer_v; // @[ProcessingElement.scala 70:33]
-  reg  west_buffer_v; // @[ProcessingElement.scala 71:32]
-  reg  north_buffer_r; // @[ProcessingElement.scala 73:33]
-  reg  east_buffer_r; // @[ProcessingElement.scala 74:32]
-  reg  south_buffer_r; // @[ProcessingElement.scala 75:33]
-  reg  west_buffer_r; // @[ProcessingElement.scala 76:32]
-  reg [31:0] north_REG_din; // @[ProcessingElement.scala 78:32]
-  reg [31:0] east_REG_din; // @[ProcessingElement.scala 79:31]
-  reg [31:0] south_REG_din; // @[ProcessingElement.scala 80:32]
-  reg [31:0] west_REG_din; // @[ProcessingElement.scala 81:31]
-  reg  north_REG_din_v; // @[ProcessingElement.scala 83:34]
-  reg  east_REG_din_v; // @[ProcessingElement.scala 84:33]
-  reg  south_REG_din_v; // @[ProcessingElement.scala 85:34]
-  reg  west_REG_din_v; // @[ProcessingElement.scala 86:33]
-  reg  north_REG_din_r; // @[ProcessingElement.scala 87:34]
-  reg  east_REG_din_r; // @[ProcessingElement.scala 88:33]
-  reg  south_REG_din_r; // @[ProcessingElement.scala 89:34]
-  reg  west_REG_din_r; // @[ProcessingElement.scala 90:33]
-  reg  FU_din_1_r; // @[ProcessingElement.scala 92:29]
-  reg  FU_din_2_r; // @[ProcessingElement.scala 93:29]
-  reg [31:0] FU_dout; // @[ProcessingElement.scala 94:26]
-  reg  FU_dout_v; // @[ProcessingElement.scala 95:28]
+  wire  FIFO_Nin_clock; // @[ProcessingElement.scala 129:27]
+  wire  FIFO_Nin_reset; // @[ProcessingElement.scala 129:27]
+  wire [31:0] FIFO_Nin_io_din; // @[ProcessingElement.scala 129:27]
+  wire  FIFO_Nin_io_din_v; // @[ProcessingElement.scala 129:27]
+  wire  FIFO_Nin_io_dout_r; // @[ProcessingElement.scala 129:27]
+  wire  FIFO_Nin_io_din_r; // @[ProcessingElement.scala 129:27]
+  wire [31:0] FIFO_Nin_io_dout; // @[ProcessingElement.scala 129:27]
+  wire  FIFO_Nin_io_dout_v; // @[ProcessingElement.scala 129:27]
+  wire [4:0] FS_Nin_io_ready_out; // @[ProcessingElement.scala 137:25]
+  wire [4:0] FS_Nin_io_fork_mask; // @[ProcessingElement.scala 137:25]
+  wire  FS_Nin_io_ready_in; // @[ProcessingElement.scala 137:25]
+  wire [1:0] MUX_Nout_io_selector; // @[ProcessingElement.scala 143:28]
+  wire [127:0] MUX_Nout_io_mux_input; // @[ProcessingElement.scala 143:28]
+  wire [31:0] MUX_Nout_io_mux_output; // @[ProcessingElement.scala 143:28]
+  wire [3:0] FR_Nout_io_valid_in; // @[ProcessingElement.scala 148:26]
+  wire [4:0] FR_Nout_io_ready_out; // @[ProcessingElement.scala 148:26]
+  wire [1:0] FR_Nout_io_valid_mux_sel; // @[ProcessingElement.scala 148:26]
+  wire [4:0] FR_Nout_io_fork_mask; // @[ProcessingElement.scala 148:26]
+  wire  FR_Nout_io_valid_out; // @[ProcessingElement.scala 148:26]
+  wire  REG_Nout_clock; // @[ProcessingElement.scala 157:27]
+  wire  REG_Nout_reset; // @[ProcessingElement.scala 157:27]
+  wire [31:0] REG_Nout_io_din; // @[ProcessingElement.scala 157:27]
+  wire  REG_Nout_io_din_v; // @[ProcessingElement.scala 157:27]
+  wire  REG_Nout_io_dout_r; // @[ProcessingElement.scala 157:27]
+  wire [31:0] REG_Nout_io_dout; // @[ProcessingElement.scala 157:27]
+  wire  REG_Nout_io_dout_v; // @[ProcessingElement.scala 157:27]
+  wire  REG_Nout_io_din_r; // @[ProcessingElement.scala 157:27]
+  wire  FIFO_Ein_clock; // @[ProcessingElement.scala 171:27]
+  wire  FIFO_Ein_reset; // @[ProcessingElement.scala 171:27]
+  wire [31:0] FIFO_Ein_io_din; // @[ProcessingElement.scala 171:27]
+  wire  FIFO_Ein_io_din_v; // @[ProcessingElement.scala 171:27]
+  wire  FIFO_Ein_io_dout_r; // @[ProcessingElement.scala 171:27]
+  wire  FIFO_Ein_io_din_r; // @[ProcessingElement.scala 171:27]
+  wire [31:0] FIFO_Ein_io_dout; // @[ProcessingElement.scala 171:27]
+  wire  FIFO_Ein_io_dout_v; // @[ProcessingElement.scala 171:27]
+  wire [4:0] FS_Ein_io_ready_out; // @[ProcessingElement.scala 179:25]
+  wire [4:0] FS_Ein_io_fork_mask; // @[ProcessingElement.scala 179:25]
+  wire  FS_Ein_io_ready_in; // @[ProcessingElement.scala 179:25]
+  wire [1:0] MUX_Eout_io_selector; // @[ProcessingElement.scala 185:28]
+  wire [127:0] MUX_Eout_io_mux_input; // @[ProcessingElement.scala 185:28]
+  wire [31:0] MUX_Eout_io_mux_output; // @[ProcessingElement.scala 185:28]
+  wire [3:0] FR_Eout_io_valid_in; // @[ProcessingElement.scala 190:26]
+  wire [4:0] FR_Eout_io_ready_out; // @[ProcessingElement.scala 190:26]
+  wire [1:0] FR_Eout_io_valid_mux_sel; // @[ProcessingElement.scala 190:26]
+  wire [4:0] FR_Eout_io_fork_mask; // @[ProcessingElement.scala 190:26]
+  wire  FR_Eout_io_valid_out; // @[ProcessingElement.scala 190:26]
+  wire  REG_Eout_clock; // @[ProcessingElement.scala 199:27]
+  wire  REG_Eout_reset; // @[ProcessingElement.scala 199:27]
+  wire [31:0] REG_Eout_io_din; // @[ProcessingElement.scala 199:27]
+  wire  REG_Eout_io_din_v; // @[ProcessingElement.scala 199:27]
+  wire  REG_Eout_io_dout_r; // @[ProcessingElement.scala 199:27]
+  wire [31:0] REG_Eout_io_dout; // @[ProcessingElement.scala 199:27]
+  wire  REG_Eout_io_dout_v; // @[ProcessingElement.scala 199:27]
+  wire  REG_Eout_io_din_r; // @[ProcessingElement.scala 199:27]
+  wire  FIFO_Sin_clock; // @[ProcessingElement.scala 212:27]
+  wire  FIFO_Sin_reset; // @[ProcessingElement.scala 212:27]
+  wire [31:0] FIFO_Sin_io_din; // @[ProcessingElement.scala 212:27]
+  wire  FIFO_Sin_io_din_v; // @[ProcessingElement.scala 212:27]
+  wire  FIFO_Sin_io_dout_r; // @[ProcessingElement.scala 212:27]
+  wire  FIFO_Sin_io_din_r; // @[ProcessingElement.scala 212:27]
+  wire [31:0] FIFO_Sin_io_dout; // @[ProcessingElement.scala 212:27]
+  wire  FIFO_Sin_io_dout_v; // @[ProcessingElement.scala 212:27]
+  wire [4:0] FS_Sin_io_ready_out; // @[ProcessingElement.scala 220:25]
+  wire [4:0] FS_Sin_io_fork_mask; // @[ProcessingElement.scala 220:25]
+  wire  FS_Sin_io_ready_in; // @[ProcessingElement.scala 220:25]
+  wire [1:0] MUX_Sout_io_selector; // @[ProcessingElement.scala 226:28]
+  wire [127:0] MUX_Sout_io_mux_input; // @[ProcessingElement.scala 226:28]
+  wire [31:0] MUX_Sout_io_mux_output; // @[ProcessingElement.scala 226:28]
+  wire [3:0] FR_Sout_io_valid_in; // @[ProcessingElement.scala 231:26]
+  wire [4:0] FR_Sout_io_ready_out; // @[ProcessingElement.scala 231:26]
+  wire [1:0] FR_Sout_io_valid_mux_sel; // @[ProcessingElement.scala 231:26]
+  wire [4:0] FR_Sout_io_fork_mask; // @[ProcessingElement.scala 231:26]
+  wire  FR_Sout_io_valid_out; // @[ProcessingElement.scala 231:26]
+  wire  REG_Sout_clock; // @[ProcessingElement.scala 240:27]
+  wire  REG_Sout_reset; // @[ProcessingElement.scala 240:27]
+  wire [31:0] REG_Sout_io_din; // @[ProcessingElement.scala 240:27]
+  wire  REG_Sout_io_din_v; // @[ProcessingElement.scala 240:27]
+  wire  REG_Sout_io_dout_r; // @[ProcessingElement.scala 240:27]
+  wire [31:0] REG_Sout_io_dout; // @[ProcessingElement.scala 240:27]
+  wire  REG_Sout_io_dout_v; // @[ProcessingElement.scala 240:27]
+  wire  REG_Sout_io_din_r; // @[ProcessingElement.scala 240:27]
+  wire  FIFO_Win_clock; // @[ProcessingElement.scala 253:27]
+  wire  FIFO_Win_reset; // @[ProcessingElement.scala 253:27]
+  wire [31:0] FIFO_Win_io_din; // @[ProcessingElement.scala 253:27]
+  wire  FIFO_Win_io_din_v; // @[ProcessingElement.scala 253:27]
+  wire  FIFO_Win_io_dout_r; // @[ProcessingElement.scala 253:27]
+  wire  FIFO_Win_io_din_r; // @[ProcessingElement.scala 253:27]
+  wire [31:0] FIFO_Win_io_dout; // @[ProcessingElement.scala 253:27]
+  wire  FIFO_Win_io_dout_v; // @[ProcessingElement.scala 253:27]
+  wire [4:0] FS_Win_io_ready_out; // @[ProcessingElement.scala 261:25]
+  wire [4:0] FS_Win_io_fork_mask; // @[ProcessingElement.scala 261:25]
+  wire  FS_Win_io_ready_in; // @[ProcessingElement.scala 261:25]
+  wire [1:0] MUX_Wout_io_selector; // @[ProcessingElement.scala 267:28]
+  wire [127:0] MUX_Wout_io_mux_input; // @[ProcessingElement.scala 267:28]
+  wire [31:0] MUX_Wout_io_mux_output; // @[ProcessingElement.scala 267:28]
+  wire [3:0] FR_Wout_io_valid_in; // @[ProcessingElement.scala 272:26]
+  wire [4:0] FR_Wout_io_ready_out; // @[ProcessingElement.scala 272:26]
+  wire [1:0] FR_Wout_io_valid_mux_sel; // @[ProcessingElement.scala 272:26]
+  wire [4:0] FR_Wout_io_fork_mask; // @[ProcessingElement.scala 272:26]
+  wire  FR_Wout_io_valid_out; // @[ProcessingElement.scala 272:26]
+  wire  REG_Wout_clock; // @[ProcessingElement.scala 281:27]
+  wire  REG_Wout_reset; // @[ProcessingElement.scala 281:27]
+  wire [31:0] REG_Wout_io_din; // @[ProcessingElement.scala 281:27]
+  wire  REG_Wout_io_din_v; // @[ProcessingElement.scala 281:27]
+  wire  REG_Wout_io_dout_r; // @[ProcessingElement.scala 281:27]
+  wire [31:0] REG_Wout_io_dout; // @[ProcessingElement.scala 281:27]
+  wire  REG_Wout_io_dout_v; // @[ProcessingElement.scala 281:27]
+  wire  REG_Wout_io_din_r; // @[ProcessingElement.scala 281:27]
+  wire  CELL_clock; // @[ProcessingElement.scala 293:23]
+  wire  CELL_reset; // @[ProcessingElement.scala 293:23]
+  wire [31:0] CELL_io_north_din; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_north_din_v; // @[ProcessingElement.scala 293:23]
+  wire [31:0] CELL_io_east_din; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_east_din_v; // @[ProcessingElement.scala 293:23]
+  wire [31:0] CELL_io_south_din; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_south_din_v; // @[ProcessingElement.scala 293:23]
+  wire [31:0] CELL_io_west_din; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_west_din_v; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_FU_din_1_r; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_FU_din_2_r; // @[ProcessingElement.scala 293:23]
+  wire [31:0] CELL_io_dout; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_dout_v; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_north_dout_r; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_east_dout_r; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_south_dout_r; // @[ProcessingElement.scala 293:23]
+  wire  CELL_io_west_dout_r; // @[ProcessingElement.scala 293:23]
+  wire [181:0] CELL_io_config_bits; // @[ProcessingElement.scala 293:23]
+  reg [1:0] mux_N_sel; // @[ProcessingElement.scala 57:28]
+  reg [1:0] mux_E_sel; // @[ProcessingElement.scala 58:28]
+  reg [1:0] mux_S_sel; // @[ProcessingElement.scala 59:28]
+  reg [1:0] mux_W_sel; // @[ProcessingElement.scala 60:28]
+  reg [4:0] accept_mask_frN; // @[ProcessingElement.scala 61:34]
+  reg [4:0] accept_mask_frE; // @[ProcessingElement.scala 62:34]
+  reg [4:0] accept_mask_frS; // @[ProcessingElement.scala 63:34]
+  reg [4:0] accept_mask_frW; // @[ProcessingElement.scala 64:34]
+  reg [4:0] accept_mask_fsiN; // @[ProcessingElement.scala 65:35]
+  reg [4:0] accept_mask_fsiE; // @[ProcessingElement.scala 66:35]
+  reg [4:0] accept_mask_fsiS; // @[ProcessingElement.scala 67:35]
+  reg [4:0] accept_mask_fsiW; // @[ProcessingElement.scala 68:35]
+  reg [181:0] config_bits_reg; // @[ProcessingElement.scala 69:34]
+  reg [31:0] north_buffer; // @[ProcessingElement.scala 73:31]
+  reg [31:0] east_buffer; // @[ProcessingElement.scala 74:30]
+  reg [31:0] south_buffer; // @[ProcessingElement.scala 75:31]
+  reg [31:0] west_buffer; // @[ProcessingElement.scala 76:30]
+  reg  north_buffer_v; // @[ProcessingElement.scala 78:33]
+  reg  east_buffer_v; // @[ProcessingElement.scala 79:32]
+  reg  south_buffer_v; // @[ProcessingElement.scala 80:33]
+  reg  west_buffer_v; // @[ProcessingElement.scala 81:32]
+  reg  north_buffer_r; // @[ProcessingElement.scala 83:33]
+  reg  east_buffer_r; // @[ProcessingElement.scala 84:32]
+  reg  south_buffer_r; // @[ProcessingElement.scala 85:33]
+  reg  west_buffer_r; // @[ProcessingElement.scala 86:32]
+  reg [31:0] north_REG_din; // @[ProcessingElement.scala 88:32]
+  reg [31:0] east_REG_din; // @[ProcessingElement.scala 89:31]
+  reg [31:0] south_REG_din; // @[ProcessingElement.scala 90:32]
+  reg [31:0] west_REG_din; // @[ProcessingElement.scala 91:31]
+  reg  north_REG_din_v; // @[ProcessingElement.scala 92:34]
+  reg  east_REG_din_v; // @[ProcessingElement.scala 93:33]
+  reg  south_REG_din_v; // @[ProcessingElement.scala 94:34]
+  reg  west_REG_din_v; // @[ProcessingElement.scala 95:33]
+  reg  north_REG_din_r; // @[ProcessingElement.scala 96:34]
+  reg  east_REG_din_r; // @[ProcessingElement.scala 97:33]
+  reg  south_REG_din_r; // @[ProcessingElement.scala 98:34]
+  reg  west_REG_din_r; // @[ProcessingElement.scala 99:33]
+  reg  FU_din_1_r; // @[ProcessingElement.scala 101:29]
+  reg  FU_din_2_r; // @[ProcessingElement.scala 102:29]
+  reg [31:0] FU_dout; // @[ProcessingElement.scala 103:26]
+  reg  FU_dout_v; // @[ProcessingElement.scala 104:28]
   wire [1:0] ready_out_FS_Nin_lo = {south_REG_din_r,west_REG_din_r}; // @[Cat.scala 31:58]
   wire [2:0] ready_out_FS_Nin_hi = {FU_din_1_r,FU_din_2_r,east_REG_din_r}; // @[Cat.scala 31:58]
-  wire [31:0] _MUX_Nout_io_mux_input_T = west_buffer & south_buffer; // @[ProcessingElement.scala 136:42]
-  wire [31:0] _MUX_Nout_io_mux_input_T_1 = _MUX_Nout_io_mux_input_T & east_buffer; // @[ProcessingElement.scala 136:57]
-  wire [31:0] _MUX_Nout_io_mux_input_T_2 = _MUX_Nout_io_mux_input_T_1 & FU_dout; // @[ProcessingElement.scala 136:71]
+  wire [31:0] _MUX_Nout_io_mux_input_T = west_buffer & south_buffer; // @[ProcessingElement.scala 145:42]
+  wire [31:0] _MUX_Nout_io_mux_input_T_1 = _MUX_Nout_io_mux_input_T & east_buffer; // @[ProcessingElement.scala 145:57]
+  wire [31:0] _MUX_Nout_io_mux_input_T_2 = _MUX_Nout_io_mux_input_T_1 & FU_dout; // @[ProcessingElement.scala 145:71]
   wire [1:0] valid_in_FR_Nout_lo = {east_buffer_v,FU_dout_v}; // @[Cat.scala 31:58]
   wire [1:0] valid_in_FR_Nout_hi = {west_buffer_v,south_buffer_v}; // @[Cat.scala 31:58]
   wire [2:0] ready_out_FS_Ein_hi = {FU_din_1_r,FU_din_2_r,north_REG_din_r}; // @[Cat.scala 31:58]
-  wire [31:0] _MUX_Eout_io_mux_input_T_1 = _MUX_Nout_io_mux_input_T & north_buffer; // @[ProcessingElement.scala 178:57]
-  wire [31:0] _MUX_Eout_io_mux_input_T_2 = _MUX_Eout_io_mux_input_T_1 & FU_dout; // @[ProcessingElement.scala 178:72]
+  wire [31:0] _MUX_Eout_io_mux_input_T_1 = _MUX_Nout_io_mux_input_T & north_buffer; // @[ProcessingElement.scala 187:57]
+  wire [31:0] _MUX_Eout_io_mux_input_T_2 = _MUX_Eout_io_mux_input_T_1 & FU_dout; // @[ProcessingElement.scala 187:72]
   wire [1:0] valid_in_FR_Eout_lo = {north_buffer_v,FU_dout_v}; // @[Cat.scala 31:58]
   wire [1:0] ready_out_FS_Sin_lo = {east_REG_din_r,west_REG_din_r}; // @[Cat.scala 31:58]
-  wire [31:0] _MUX_Sout_io_mux_input_T = west_buffer & east_buffer; // @[ProcessingElement.scala 219:42]
-  wire [31:0] _MUX_Sout_io_mux_input_T_1 = _MUX_Sout_io_mux_input_T & north_buffer; // @[ProcessingElement.scala 219:56]
-  wire [31:0] _MUX_Sout_io_mux_input_T_2 = _MUX_Sout_io_mux_input_T_1 & FU_dout; // @[ProcessingElement.scala 219:71]
+  wire [31:0] _MUX_Sout_io_mux_input_T = west_buffer & east_buffer; // @[ProcessingElement.scala 228:42]
+  wire [31:0] _MUX_Sout_io_mux_input_T_1 = _MUX_Sout_io_mux_input_T & north_buffer; // @[ProcessingElement.scala 228:56]
+  wire [31:0] _MUX_Sout_io_mux_input_T_2 = _MUX_Sout_io_mux_input_T_1 & FU_dout; // @[ProcessingElement.scala 228:71]
   wire [1:0] valid_in_FR_Sout_hi = {west_buffer_v,east_buffer_v}; // @[Cat.scala 31:58]
   wire [1:0] ready_out_FS_Win_lo = {east_REG_din_r,south_REG_din_r}; // @[Cat.scala 31:58]
-  wire [31:0] _MUX_Wout_io_mux_input_T = south_buffer & east_buffer; // @[ProcessingElement.scala 260:43]
-  wire [31:0] _MUX_Wout_io_mux_input_T_1 = _MUX_Wout_io_mux_input_T & north_buffer; // @[ProcessingElement.scala 260:57]
-  wire [31:0] _MUX_Wout_io_mux_input_T_2 = _MUX_Wout_io_mux_input_T_1 & FU_dout; // @[ProcessingElement.scala 260:72]
+  wire [31:0] _MUX_Wout_io_mux_input_T = south_buffer & east_buffer; // @[ProcessingElement.scala 269:43]
+  wire [31:0] _MUX_Wout_io_mux_input_T_1 = _MUX_Wout_io_mux_input_T & north_buffer; // @[ProcessingElement.scala 269:57]
+  wire [31:0] _MUX_Wout_io_mux_input_T_2 = _MUX_Wout_io_mux_input_T_1 & FU_dout; // @[ProcessingElement.scala 269:72]
   wire [1:0] valid_in_FR_Wout_hi = {south_buffer_v,east_buffer_v}; // @[Cat.scala 31:58]
-  D_FIFO FIFO_Nin ( // @[ProcessingElement.scala 120:27]
+  D_FIFO FIFO_Nin ( // @[ProcessingElement.scala 129:27]
     .clock(FIFO_Nin_clock),
     .reset(FIFO_Nin_reset),
     .io_din(FIFO_Nin_io_din),
@@ -1507,24 +1507,24 @@ module ProcessingElement(
     .io_dout(FIFO_Nin_io_dout),
     .io_dout_v(FIFO_Nin_io_dout_v)
   );
-  FS FS_Nin ( // @[ProcessingElement.scala 128:25]
+  FS FS_Nin ( // @[ProcessingElement.scala 137:25]
     .io_ready_out(FS_Nin_io_ready_out),
     .io_fork_mask(FS_Nin_io_fork_mask),
     .io_ready_in(FS_Nin_io_ready_in)
   );
-  ConfMux MUX_Nout ( // @[ProcessingElement.scala 134:28]
+  ConfMux MUX_Nout ( // @[ProcessingElement.scala 143:28]
     .io_selector(MUX_Nout_io_selector),
     .io_mux_input(MUX_Nout_io_mux_input),
     .io_mux_output(MUX_Nout_io_mux_output)
   );
-  FR FR_Nout ( // @[ProcessingElement.scala 139:26]
+  FR FR_Nout ( // @[ProcessingElement.scala 148:26]
     .io_valid_in(FR_Nout_io_valid_in),
     .io_ready_out(FR_Nout_io_ready_out),
     .io_valid_mux_sel(FR_Nout_io_valid_mux_sel),
     .io_fork_mask(FR_Nout_io_fork_mask),
     .io_valid_out(FR_Nout_io_valid_out)
   );
-  D_REG REG_Nout ( // @[ProcessingElement.scala 148:27]
+  D_REG REG_Nout ( // @[ProcessingElement.scala 157:27]
     .clock(REG_Nout_clock),
     .reset(REG_Nout_reset),
     .io_din(REG_Nout_io_din),
@@ -1534,7 +1534,7 @@ module ProcessingElement(
     .io_dout_v(REG_Nout_io_dout_v),
     .io_din_r(REG_Nout_io_din_r)
   );
-  D_FIFO FIFO_Ein ( // @[ProcessingElement.scala 162:27]
+  D_FIFO FIFO_Ein ( // @[ProcessingElement.scala 171:27]
     .clock(FIFO_Ein_clock),
     .reset(FIFO_Ein_reset),
     .io_din(FIFO_Ein_io_din),
@@ -1544,24 +1544,24 @@ module ProcessingElement(
     .io_dout(FIFO_Ein_io_dout),
     .io_dout_v(FIFO_Ein_io_dout_v)
   );
-  FS FS_Ein ( // @[ProcessingElement.scala 170:25]
+  FS FS_Ein ( // @[ProcessingElement.scala 179:25]
     .io_ready_out(FS_Ein_io_ready_out),
     .io_fork_mask(FS_Ein_io_fork_mask),
     .io_ready_in(FS_Ein_io_ready_in)
   );
-  ConfMux MUX_Eout ( // @[ProcessingElement.scala 176:28]
+  ConfMux MUX_Eout ( // @[ProcessingElement.scala 185:28]
     .io_selector(MUX_Eout_io_selector),
     .io_mux_input(MUX_Eout_io_mux_input),
     .io_mux_output(MUX_Eout_io_mux_output)
   );
-  FR FR_Eout ( // @[ProcessingElement.scala 181:26]
+  FR FR_Eout ( // @[ProcessingElement.scala 190:26]
     .io_valid_in(FR_Eout_io_valid_in),
     .io_ready_out(FR_Eout_io_ready_out),
     .io_valid_mux_sel(FR_Eout_io_valid_mux_sel),
     .io_fork_mask(FR_Eout_io_fork_mask),
     .io_valid_out(FR_Eout_io_valid_out)
   );
-  D_REG REG_Eout ( // @[ProcessingElement.scala 190:27]
+  D_REG REG_Eout ( // @[ProcessingElement.scala 199:27]
     .clock(REG_Eout_clock),
     .reset(REG_Eout_reset),
     .io_din(REG_Eout_io_din),
@@ -1571,7 +1571,7 @@ module ProcessingElement(
     .io_dout_v(REG_Eout_io_dout_v),
     .io_din_r(REG_Eout_io_din_r)
   );
-  D_FIFO FIFO_Sin ( // @[ProcessingElement.scala 203:27]
+  D_FIFO FIFO_Sin ( // @[ProcessingElement.scala 212:27]
     .clock(FIFO_Sin_clock),
     .reset(FIFO_Sin_reset),
     .io_din(FIFO_Sin_io_din),
@@ -1581,24 +1581,24 @@ module ProcessingElement(
     .io_dout(FIFO_Sin_io_dout),
     .io_dout_v(FIFO_Sin_io_dout_v)
   );
-  FS FS_Sin ( // @[ProcessingElement.scala 211:25]
+  FS FS_Sin ( // @[ProcessingElement.scala 220:25]
     .io_ready_out(FS_Sin_io_ready_out),
     .io_fork_mask(FS_Sin_io_fork_mask),
     .io_ready_in(FS_Sin_io_ready_in)
   );
-  ConfMux MUX_Sout ( // @[ProcessingElement.scala 217:28]
+  ConfMux MUX_Sout ( // @[ProcessingElement.scala 226:28]
     .io_selector(MUX_Sout_io_selector),
     .io_mux_input(MUX_Sout_io_mux_input),
     .io_mux_output(MUX_Sout_io_mux_output)
   );
-  FR FR_Sout ( // @[ProcessingElement.scala 222:26]
+  FR FR_Sout ( // @[ProcessingElement.scala 231:26]
     .io_valid_in(FR_Sout_io_valid_in),
     .io_ready_out(FR_Sout_io_ready_out),
     .io_valid_mux_sel(FR_Sout_io_valid_mux_sel),
     .io_fork_mask(FR_Sout_io_fork_mask),
     .io_valid_out(FR_Sout_io_valid_out)
   );
-  D_REG REG_Sout ( // @[ProcessingElement.scala 231:27]
+  D_REG REG_Sout ( // @[ProcessingElement.scala 240:27]
     .clock(REG_Sout_clock),
     .reset(REG_Sout_reset),
     .io_din(REG_Sout_io_din),
@@ -1608,7 +1608,7 @@ module ProcessingElement(
     .io_dout_v(REG_Sout_io_dout_v),
     .io_din_r(REG_Sout_io_din_r)
   );
-  D_FIFO FIFO_Win ( // @[ProcessingElement.scala 244:27]
+  D_FIFO FIFO_Win ( // @[ProcessingElement.scala 253:27]
     .clock(FIFO_Win_clock),
     .reset(FIFO_Win_reset),
     .io_din(FIFO_Win_io_din),
@@ -1618,24 +1618,24 @@ module ProcessingElement(
     .io_dout(FIFO_Win_io_dout),
     .io_dout_v(FIFO_Win_io_dout_v)
   );
-  FS FS_Win ( // @[ProcessingElement.scala 252:25]
+  FS FS_Win ( // @[ProcessingElement.scala 261:25]
     .io_ready_out(FS_Win_io_ready_out),
     .io_fork_mask(FS_Win_io_fork_mask),
     .io_ready_in(FS_Win_io_ready_in)
   );
-  ConfMux MUX_Wout ( // @[ProcessingElement.scala 258:28]
+  ConfMux MUX_Wout ( // @[ProcessingElement.scala 267:28]
     .io_selector(MUX_Wout_io_selector),
     .io_mux_input(MUX_Wout_io_mux_input),
     .io_mux_output(MUX_Wout_io_mux_output)
   );
-  FR FR_Wout ( // @[ProcessingElement.scala 263:26]
+  FR FR_Wout ( // @[ProcessingElement.scala 272:26]
     .io_valid_in(FR_Wout_io_valid_in),
     .io_ready_out(FR_Wout_io_ready_out),
     .io_valid_mux_sel(FR_Wout_io_valid_mux_sel),
     .io_fork_mask(FR_Wout_io_fork_mask),
     .io_valid_out(FR_Wout_io_valid_out)
   );
-  D_REG REG_Wout ( // @[ProcessingElement.scala 272:27]
+  D_REG REG_Wout ( // @[ProcessingElement.scala 281:27]
     .clock(REG_Wout_clock),
     .reset(REG_Wout_reset),
     .io_din(REG_Wout_io_din),
@@ -1645,7 +1645,7 @@ module ProcessingElement(
     .io_dout_v(REG_Wout_io_dout_v),
     .io_din_r(REG_Wout_io_din_r)
   );
-  CellProcessing CELL ( // @[ProcessingElement.scala 284:23]
+  CellProcessing CELL ( // @[ProcessingElement.scala 293:23]
     .clock(CELL_clock),
     .reset(CELL_reset),
     .io_north_din(CELL_io_north_din),
@@ -1666,310 +1666,310 @@ module ProcessingElement(
     .io_west_dout_r(CELL_io_west_dout_r),
     .io_config_bits(CELL_io_config_bits)
   );
-  assign io_north_din_r = FIFO_Nin_io_din_r; // @[ProcessingElement.scala 124:20]
-  assign io_east_din_r = FIFO_Ein_io_din_r; // @[ProcessingElement.scala 166:19]
-  assign io_south_din_r = FIFO_Sin_io_din_r; // @[ProcessingElement.scala 207:20]
-  assign io_west_din_r = FIFO_Win_io_din_r; // @[ProcessingElement.scala 248:19]
-  assign io_north_dout = REG_Nout_io_dout; // @[ProcessingElement.scala 155:19]
-  assign io_north_dout_v = REG_Nout_io_dout_v; // @[ProcessingElement.scala 156:21]
-  assign io_east_dout = REG_Eout_io_dout; // @[ProcessingElement.scala 197:18]
-  assign io_east_dout_v = REG_Eout_io_dout_v; // @[ProcessingElement.scala 198:20]
-  assign io_south_dout = REG_Sout_io_dout; // @[ProcessingElement.scala 238:19]
-  assign io_south_dout_v = REG_Sout_io_dout_v; // @[ProcessingElement.scala 239:21]
-  assign io_west_dout = REG_Wout_io_dout; // @[ProcessingElement.scala 279:18]
-  assign io_west_dout_v = REG_Wout_io_dout_v; // @[ProcessingElement.scala 280:20]
+  assign io_north_din_r = FIFO_Nin_io_din_r; // @[ProcessingElement.scala 133:20]
+  assign io_east_din_r = FIFO_Ein_io_din_r; // @[ProcessingElement.scala 175:19]
+  assign io_south_din_r = FIFO_Sin_io_din_r; // @[ProcessingElement.scala 216:20]
+  assign io_west_din_r = FIFO_Win_io_din_r; // @[ProcessingElement.scala 257:19]
+  assign io_north_dout = REG_Nout_io_dout; // @[ProcessingElement.scala 164:19]
+  assign io_north_dout_v = REG_Nout_io_dout_v; // @[ProcessingElement.scala 165:21]
+  assign io_east_dout = REG_Eout_io_dout; // @[ProcessingElement.scala 206:18]
+  assign io_east_dout_v = REG_Eout_io_dout_v; // @[ProcessingElement.scala 207:20]
+  assign io_south_dout = REG_Sout_io_dout; // @[ProcessingElement.scala 247:19]
+  assign io_south_dout_v = REG_Sout_io_dout_v; // @[ProcessingElement.scala 248:21]
+  assign io_west_dout = REG_Wout_io_dout; // @[ProcessingElement.scala 288:18]
+  assign io_west_dout_v = REG_Wout_io_dout_v; // @[ProcessingElement.scala 289:20]
   assign FIFO_Nin_clock = clock;
   assign FIFO_Nin_reset = reset;
-  assign FIFO_Nin_io_din = io_north_din; // @[ProcessingElement.scala 121:21]
-  assign FIFO_Nin_io_din_v = io_north_din_v; // @[ProcessingElement.scala 122:23]
-  assign FIFO_Nin_io_dout_r = north_buffer_r; // @[ProcessingElement.scala 123:24]
+  assign FIFO_Nin_io_din = io_north_din; // @[ProcessingElement.scala 130:21]
+  assign FIFO_Nin_io_din_v = io_north_din_v; // @[ProcessingElement.scala 131:23]
+  assign FIFO_Nin_io_dout_r = north_buffer_r; // @[ProcessingElement.scala 132:24]
   assign FS_Nin_io_ready_out = {ready_out_FS_Nin_hi,ready_out_FS_Nin_lo}; // @[Cat.scala 31:58]
-  assign FS_Nin_io_fork_mask = accept_mask_fsiN; // @[ProcessingElement.scala 132:25]
-  assign MUX_Nout_io_selector = mux_N_sel; // @[ProcessingElement.scala 135:26]
-  assign MUX_Nout_io_mux_input = {{96'd0}, _MUX_Nout_io_mux_input_T_2}; // @[ProcessingElement.scala 136:27]
+  assign FS_Nin_io_fork_mask = accept_mask_fsiN; // @[ProcessingElement.scala 141:25]
+  assign MUX_Nout_io_selector = mux_N_sel; // @[ProcessingElement.scala 144:26]
+  assign MUX_Nout_io_mux_input = {{96'd0}, _MUX_Nout_io_mux_input_T_2}; // @[ProcessingElement.scala 145:27]
   assign FR_Nout_io_valid_in = {valid_in_FR_Nout_hi,valid_in_FR_Nout_lo}; // @[Cat.scala 31:58]
   assign FR_Nout_io_ready_out = {ready_out_FS_Nin_hi,ready_out_FS_Nin_lo}; // @[Cat.scala 31:58]
-  assign FR_Nout_io_valid_mux_sel = mux_N_sel; // @[ProcessingElement.scala 144:30]
-  assign FR_Nout_io_fork_mask = accept_mask_frN; // @[ProcessingElement.scala 145:26]
+  assign FR_Nout_io_valid_mux_sel = mux_N_sel; // @[ProcessingElement.scala 153:30]
+  assign FR_Nout_io_fork_mask = accept_mask_frN; // @[ProcessingElement.scala 154:26]
   assign REG_Nout_clock = clock;
   assign REG_Nout_reset = reset;
-  assign REG_Nout_io_din = north_REG_din; // @[ProcessingElement.scala 150:21]
-  assign REG_Nout_io_din_v = north_REG_din_v; // @[ProcessingElement.scala 151:23]
-  assign REG_Nout_io_dout_r = io_north_dout_r; // @[ProcessingElement.scala 152:24]
+  assign REG_Nout_io_din = north_REG_din; // @[ProcessingElement.scala 159:21]
+  assign REG_Nout_io_din_v = north_REG_din_v; // @[ProcessingElement.scala 160:23]
+  assign REG_Nout_io_dout_r = io_north_dout_r; // @[ProcessingElement.scala 161:24]
   assign FIFO_Ein_clock = clock;
   assign FIFO_Ein_reset = reset;
-  assign FIFO_Ein_io_din = io_east_din; // @[ProcessingElement.scala 163:21]
-  assign FIFO_Ein_io_din_v = io_east_din_v; // @[ProcessingElement.scala 164:23]
-  assign FIFO_Ein_io_dout_r = east_buffer_r; // @[ProcessingElement.scala 165:24]
+  assign FIFO_Ein_io_din = io_east_din; // @[ProcessingElement.scala 172:21]
+  assign FIFO_Ein_io_din_v = io_east_din_v; // @[ProcessingElement.scala 173:23]
+  assign FIFO_Ein_io_dout_r = east_buffer_r; // @[ProcessingElement.scala 174:24]
   assign FS_Ein_io_ready_out = {ready_out_FS_Ein_hi,ready_out_FS_Nin_lo}; // @[Cat.scala 31:58]
-  assign FS_Ein_io_fork_mask = accept_mask_fsiE; // @[ProcessingElement.scala 174:25]
-  assign MUX_Eout_io_selector = mux_E_sel; // @[ProcessingElement.scala 177:26]
-  assign MUX_Eout_io_mux_input = {{96'd0}, _MUX_Eout_io_mux_input_T_2}; // @[ProcessingElement.scala 178:27]
+  assign FS_Ein_io_fork_mask = accept_mask_fsiE; // @[ProcessingElement.scala 183:25]
+  assign MUX_Eout_io_selector = mux_E_sel; // @[ProcessingElement.scala 186:26]
+  assign MUX_Eout_io_mux_input = {{96'd0}, _MUX_Eout_io_mux_input_T_2}; // @[ProcessingElement.scala 187:27]
   assign FR_Eout_io_valid_in = {valid_in_FR_Nout_hi,valid_in_FR_Eout_lo}; // @[Cat.scala 31:58]
   assign FR_Eout_io_ready_out = {ready_out_FS_Ein_hi,ready_out_FS_Nin_lo}; // @[Cat.scala 31:58]
-  assign FR_Eout_io_valid_mux_sel = mux_E_sel; // @[ProcessingElement.scala 186:30]
-  assign FR_Eout_io_fork_mask = accept_mask_frE; // @[ProcessingElement.scala 187:26]
+  assign FR_Eout_io_valid_mux_sel = mux_E_sel; // @[ProcessingElement.scala 195:30]
+  assign FR_Eout_io_fork_mask = accept_mask_frE; // @[ProcessingElement.scala 196:26]
   assign REG_Eout_clock = clock;
   assign REG_Eout_reset = reset;
-  assign REG_Eout_io_din = east_REG_din; // @[ProcessingElement.scala 192:21]
-  assign REG_Eout_io_din_v = east_REG_din_v; // @[ProcessingElement.scala 193:23]
-  assign REG_Eout_io_dout_r = io_east_dout_r; // @[ProcessingElement.scala 194:24]
+  assign REG_Eout_io_din = east_REG_din; // @[ProcessingElement.scala 201:21]
+  assign REG_Eout_io_din_v = east_REG_din_v; // @[ProcessingElement.scala 202:23]
+  assign REG_Eout_io_dout_r = io_east_dout_r; // @[ProcessingElement.scala 203:24]
   assign FIFO_Sin_clock = clock;
   assign FIFO_Sin_reset = reset;
-  assign FIFO_Sin_io_din = io_south_din; // @[ProcessingElement.scala 204:21]
-  assign FIFO_Sin_io_din_v = io_south_din_v; // @[ProcessingElement.scala 205:23]
-  assign FIFO_Sin_io_dout_r = south_buffer_r; // @[ProcessingElement.scala 206:24]
+  assign FIFO_Sin_io_din = io_south_din; // @[ProcessingElement.scala 213:21]
+  assign FIFO_Sin_io_din_v = io_south_din_v; // @[ProcessingElement.scala 214:23]
+  assign FIFO_Sin_io_dout_r = south_buffer_r; // @[ProcessingElement.scala 215:24]
   assign FS_Sin_io_ready_out = {ready_out_FS_Ein_hi,ready_out_FS_Sin_lo}; // @[Cat.scala 31:58]
-  assign FS_Sin_io_fork_mask = accept_mask_fsiS; // @[ProcessingElement.scala 215:25]
-  assign MUX_Sout_io_selector = mux_S_sel; // @[ProcessingElement.scala 218:26]
-  assign MUX_Sout_io_mux_input = {{96'd0}, _MUX_Sout_io_mux_input_T_2}; // @[ProcessingElement.scala 219:27]
+  assign FS_Sin_io_fork_mask = accept_mask_fsiS; // @[ProcessingElement.scala 224:25]
+  assign MUX_Sout_io_selector = mux_S_sel; // @[ProcessingElement.scala 227:26]
+  assign MUX_Sout_io_mux_input = {{96'd0}, _MUX_Sout_io_mux_input_T_2}; // @[ProcessingElement.scala 228:27]
   assign FR_Sout_io_valid_in = {valid_in_FR_Sout_hi,valid_in_FR_Eout_lo}; // @[Cat.scala 31:58]
   assign FR_Sout_io_ready_out = {ready_out_FS_Ein_hi,ready_out_FS_Sin_lo}; // @[Cat.scala 31:58]
-  assign FR_Sout_io_valid_mux_sel = mux_S_sel; // @[ProcessingElement.scala 227:30]
-  assign FR_Sout_io_fork_mask = accept_mask_frS; // @[ProcessingElement.scala 228:26]
+  assign FR_Sout_io_valid_mux_sel = mux_S_sel; // @[ProcessingElement.scala 236:30]
+  assign FR_Sout_io_fork_mask = accept_mask_frS; // @[ProcessingElement.scala 237:26]
   assign REG_Sout_clock = clock;
   assign REG_Sout_reset = reset;
-  assign REG_Sout_io_din = south_REG_din; // @[ProcessingElement.scala 233:21]
-  assign REG_Sout_io_din_v = south_REG_din_v; // @[ProcessingElement.scala 234:23]
-  assign REG_Sout_io_dout_r = io_south_dout_r; // @[ProcessingElement.scala 235:24]
+  assign REG_Sout_io_din = south_REG_din; // @[ProcessingElement.scala 242:21]
+  assign REG_Sout_io_din_v = south_REG_din_v; // @[ProcessingElement.scala 243:23]
+  assign REG_Sout_io_dout_r = io_south_dout_r; // @[ProcessingElement.scala 244:24]
   assign FIFO_Win_clock = clock;
   assign FIFO_Win_reset = reset;
-  assign FIFO_Win_io_din = io_west_din; // @[ProcessingElement.scala 245:21]
-  assign FIFO_Win_io_din_v = io_west_din_v; // @[ProcessingElement.scala 246:23]
-  assign FIFO_Win_io_dout_r = west_buffer_r; // @[ProcessingElement.scala 247:24]
+  assign FIFO_Win_io_din = io_west_din; // @[ProcessingElement.scala 254:21]
+  assign FIFO_Win_io_din_v = io_west_din_v; // @[ProcessingElement.scala 255:23]
+  assign FIFO_Win_io_dout_r = west_buffer_r; // @[ProcessingElement.scala 256:24]
   assign FS_Win_io_ready_out = {ready_out_FS_Ein_hi,ready_out_FS_Win_lo}; // @[Cat.scala 31:58]
-  assign FS_Win_io_fork_mask = accept_mask_fsiW; // @[ProcessingElement.scala 256:25]
-  assign MUX_Wout_io_selector = mux_W_sel; // @[ProcessingElement.scala 259:26]
-  assign MUX_Wout_io_mux_input = {{96'd0}, _MUX_Wout_io_mux_input_T_2}; // @[ProcessingElement.scala 260:27]
+  assign FS_Win_io_fork_mask = accept_mask_fsiW; // @[ProcessingElement.scala 265:25]
+  assign MUX_Wout_io_selector = mux_W_sel; // @[ProcessingElement.scala 268:26]
+  assign MUX_Wout_io_mux_input = {{96'd0}, _MUX_Wout_io_mux_input_T_2}; // @[ProcessingElement.scala 269:27]
   assign FR_Wout_io_valid_in = {valid_in_FR_Wout_hi,valid_in_FR_Eout_lo}; // @[Cat.scala 31:58]
   assign FR_Wout_io_ready_out = {ready_out_FS_Ein_hi,ready_out_FS_Win_lo}; // @[Cat.scala 31:58]
-  assign FR_Wout_io_valid_mux_sel = mux_W_sel; // @[ProcessingElement.scala 268:30]
-  assign FR_Wout_io_fork_mask = accept_mask_frW; // @[ProcessingElement.scala 269:26]
+  assign FR_Wout_io_valid_mux_sel = mux_W_sel; // @[ProcessingElement.scala 277:30]
+  assign FR_Wout_io_fork_mask = accept_mask_frW; // @[ProcessingElement.scala 278:26]
   assign REG_Wout_clock = clock;
   assign REG_Wout_reset = reset;
-  assign REG_Wout_io_din = west_REG_din; // @[ProcessingElement.scala 274:21]
-  assign REG_Wout_io_din_v = west_REG_din_v; // @[ProcessingElement.scala 275:23]
-  assign REG_Wout_io_dout_r = io_west_dout_r; // @[ProcessingElement.scala 276:24]
+  assign REG_Wout_io_din = west_REG_din; // @[ProcessingElement.scala 283:21]
+  assign REG_Wout_io_din_v = west_REG_din_v; // @[ProcessingElement.scala 284:23]
+  assign REG_Wout_io_dout_r = io_west_dout_r; // @[ProcessingElement.scala 285:24]
   assign CELL_clock = clock;
   assign CELL_reset = reset;
-  assign CELL_io_north_din = north_buffer; // @[ProcessingElement.scala 285:23]
-  assign CELL_io_north_din_v = north_buffer_v; // @[ProcessingElement.scala 286:25]
-  assign CELL_io_east_din = east_buffer; // @[ProcessingElement.scala 287:22]
-  assign CELL_io_east_din_v = east_buffer_v; // @[ProcessingElement.scala 288:24]
-  assign CELL_io_south_din = south_buffer; // @[ProcessingElement.scala 289:23]
-  assign CELL_io_south_din_v = south_buffer_v; // @[ProcessingElement.scala 290:25]
-  assign CELL_io_west_din = west_buffer; // @[ProcessingElement.scala 291:22]
-  assign CELL_io_west_din_v = west_buffer_v; // @[ProcessingElement.scala 292:24]
-  assign CELL_io_north_dout_r = north_REG_din_r; // @[ProcessingElement.scala 293:26]
-  assign CELL_io_east_dout_r = east_REG_din_r; // @[ProcessingElement.scala 294:25]
-  assign CELL_io_south_dout_r = south_REG_din_r; // @[ProcessingElement.scala 295:26]
-  assign CELL_io_west_dout_r = west_REG_din_r; // @[ProcessingElement.scala 296:25]
-  assign CELL_io_config_bits = config_bits_reg; // @[ProcessingElement.scala 297:25]
+  assign CELL_io_north_din = north_buffer; // @[ProcessingElement.scala 294:23]
+  assign CELL_io_north_din_v = north_buffer_v; // @[ProcessingElement.scala 295:25]
+  assign CELL_io_east_din = east_buffer; // @[ProcessingElement.scala 296:22]
+  assign CELL_io_east_din_v = east_buffer_v; // @[ProcessingElement.scala 297:24]
+  assign CELL_io_south_din = south_buffer; // @[ProcessingElement.scala 298:23]
+  assign CELL_io_south_din_v = south_buffer_v; // @[ProcessingElement.scala 299:25]
+  assign CELL_io_west_din = west_buffer; // @[ProcessingElement.scala 300:22]
+  assign CELL_io_west_din_v = west_buffer_v; // @[ProcessingElement.scala 301:24]
+  assign CELL_io_north_dout_r = north_REG_din_r; // @[ProcessingElement.scala 302:26]
+  assign CELL_io_east_dout_r = east_REG_din_r; // @[ProcessingElement.scala 303:25]
+  assign CELL_io_south_dout_r = south_REG_din_r; // @[ProcessingElement.scala 304:26]
+  assign CELL_io_west_dout_r = west_REG_din_r; // @[ProcessingElement.scala 305:25]
+  assign CELL_io_config_bits = config_bits_reg; // @[ProcessingElement.scala 306:25]
   always @(posedge clock) begin
-    if (reset) begin // @[ProcessingElement.scala 47:28]
-      mux_N_sel <= 2'h0; // @[ProcessingElement.scala 47:28]
+    if (reset) begin // @[ProcessingElement.scala 57:28]
+      mux_N_sel <= 2'h0; // @[ProcessingElement.scala 57:28]
     end else begin
-      mux_N_sel <= config_bits_reg[7:6]; // @[ProcessingElement.scala 103:15]
+      mux_N_sel <= config_bits_reg[7:6]; // @[ProcessingElement.scala 112:15]
     end
-    if (reset) begin // @[ProcessingElement.scala 48:28]
-      mux_E_sel <= 2'h0; // @[ProcessingElement.scala 48:28]
+    if (reset) begin // @[ProcessingElement.scala 58:28]
+      mux_E_sel <= 2'h0; // @[ProcessingElement.scala 58:28]
     end else begin
-      mux_E_sel <= config_bits_reg[9:8]; // @[ProcessingElement.scala 104:15]
+      mux_E_sel <= config_bits_reg[9:8]; // @[ProcessingElement.scala 113:15]
     end
-    if (reset) begin // @[ProcessingElement.scala 49:28]
-      mux_S_sel <= 2'h0; // @[ProcessingElement.scala 49:28]
+    if (reset) begin // @[ProcessingElement.scala 59:28]
+      mux_S_sel <= 2'h0; // @[ProcessingElement.scala 59:28]
     end else begin
-      mux_S_sel <= config_bits_reg[11:10]; // @[ProcessingElement.scala 105:15]
+      mux_S_sel <= config_bits_reg[11:10]; // @[ProcessingElement.scala 114:15]
     end
-    if (reset) begin // @[ProcessingElement.scala 50:28]
-      mux_W_sel <= 2'h0; // @[ProcessingElement.scala 50:28]
+    if (reset) begin // @[ProcessingElement.scala 60:28]
+      mux_W_sel <= 2'h0; // @[ProcessingElement.scala 60:28]
     end else begin
-      mux_W_sel <= config_bits_reg[13:12]; // @[ProcessingElement.scala 106:15]
+      mux_W_sel <= config_bits_reg[13:12]; // @[ProcessingElement.scala 115:15]
     end
-    if (reset) begin // @[ProcessingElement.scala 51:34]
-      accept_mask_frN <= 5'h0; // @[ProcessingElement.scala 51:34]
+    if (reset) begin // @[ProcessingElement.scala 61:34]
+      accept_mask_frN <= 5'h0; // @[ProcessingElement.scala 61:34]
     end else begin
-      accept_mask_frN <= config_bits_reg[61:57]; // @[ProcessingElement.scala 113:21]
+      accept_mask_frN <= config_bits_reg[61:57]; // @[ProcessingElement.scala 122:21]
     end
-    if (reset) begin // @[ProcessingElement.scala 52:34]
-      accept_mask_frE <= 5'h0; // @[ProcessingElement.scala 52:34]
+    if (reset) begin // @[ProcessingElement.scala 62:34]
+      accept_mask_frE <= 5'h0; // @[ProcessingElement.scala 62:34]
     end else begin
-      accept_mask_frE <= config_bits_reg[66:62]; // @[ProcessingElement.scala 114:21]
+      accept_mask_frE <= config_bits_reg[66:62]; // @[ProcessingElement.scala 123:21]
     end
-    if (reset) begin // @[ProcessingElement.scala 53:34]
-      accept_mask_frS <= 5'h0; // @[ProcessingElement.scala 53:34]
+    if (reset) begin // @[ProcessingElement.scala 63:34]
+      accept_mask_frS <= 5'h0; // @[ProcessingElement.scala 63:34]
     end else begin
-      accept_mask_frS <= config_bits_reg[71:67]; // @[ProcessingElement.scala 115:21]
+      accept_mask_frS <= config_bits_reg[71:67]; // @[ProcessingElement.scala 124:21]
     end
-    if (reset) begin // @[ProcessingElement.scala 54:34]
-      accept_mask_frW <= 5'h0; // @[ProcessingElement.scala 54:34]
+    if (reset) begin // @[ProcessingElement.scala 64:34]
+      accept_mask_frW <= 5'h0; // @[ProcessingElement.scala 64:34]
     end else begin
-      accept_mask_frW <= config_bits_reg[76:72]; // @[ProcessingElement.scala 116:21]
+      accept_mask_frW <= config_bits_reg[76:72]; // @[ProcessingElement.scala 125:21]
     end
-    if (reset) begin // @[ProcessingElement.scala 55:35]
-      accept_mask_fsiN <= 5'h0; // @[ProcessingElement.scala 55:35]
+    if (reset) begin // @[ProcessingElement.scala 65:35]
+      accept_mask_fsiN <= 5'h0; // @[ProcessingElement.scala 65:35]
     end else begin
-      accept_mask_fsiN <= config_bits_reg[28:24]; // @[ProcessingElement.scala 108:22]
+      accept_mask_fsiN <= config_bits_reg[28:24]; // @[ProcessingElement.scala 117:22]
     end
-    if (reset) begin // @[ProcessingElement.scala 56:35]
-      accept_mask_fsiE <= 5'h0; // @[ProcessingElement.scala 56:35]
+    if (reset) begin // @[ProcessingElement.scala 66:35]
+      accept_mask_fsiE <= 5'h0; // @[ProcessingElement.scala 66:35]
     end else begin
-      accept_mask_fsiE <= config_bits_reg[33:29]; // @[ProcessingElement.scala 109:22]
+      accept_mask_fsiE <= config_bits_reg[33:29]; // @[ProcessingElement.scala 118:22]
     end
-    if (reset) begin // @[ProcessingElement.scala 57:35]
-      accept_mask_fsiS <= 5'h0; // @[ProcessingElement.scala 57:35]
+    if (reset) begin // @[ProcessingElement.scala 67:35]
+      accept_mask_fsiS <= 5'h0; // @[ProcessingElement.scala 67:35]
     end else begin
-      accept_mask_fsiS <= config_bits_reg[38:34]; // @[ProcessingElement.scala 110:22]
+      accept_mask_fsiS <= config_bits_reg[38:34]; // @[ProcessingElement.scala 119:22]
     end
-    if (reset) begin // @[ProcessingElement.scala 58:35]
-      accept_mask_fsiW <= 5'h0; // @[ProcessingElement.scala 58:35]
+    if (reset) begin // @[ProcessingElement.scala 68:35]
+      accept_mask_fsiW <= 5'h0; // @[ProcessingElement.scala 68:35]
     end else begin
-      accept_mask_fsiW <= config_bits_reg[43:39]; // @[ProcessingElement.scala 111:22]
+      accept_mask_fsiW <= config_bits_reg[43:39]; // @[ProcessingElement.scala 120:22]
     end
-    if (reset) begin // @[ProcessingElement.scala 59:34]
-      config_bits_reg <= 182'h0; // @[ProcessingElement.scala 59:34]
-    end else if (io_catch_config) begin // @[ProcessingElement.scala 98:28]
-      config_bits_reg <= io_config_bits; // @[ProcessingElement.scala 99:25]
+    if (reset) begin // @[ProcessingElement.scala 69:34]
+      config_bits_reg <= 182'h0; // @[ProcessingElement.scala 69:34]
+    end else if (io_catch_config) begin // @[ProcessingElement.scala 107:28]
+      config_bits_reg <= io_config_bits; // @[ProcessingElement.scala 108:25]
     end
-    if (reset) begin // @[ProcessingElement.scala 63:31]
-      north_buffer <= 32'h0; // @[ProcessingElement.scala 63:31]
+    if (reset) begin // @[ProcessingElement.scala 73:31]
+      north_buffer <= 32'h0; // @[ProcessingElement.scala 73:31]
     end else begin
-      north_buffer <= FIFO_Nin_io_dout; // @[ProcessingElement.scala 125:18]
+      north_buffer <= FIFO_Nin_io_dout; // @[ProcessingElement.scala 134:18]
     end
-    if (reset) begin // @[ProcessingElement.scala 64:30]
-      east_buffer <= 32'h0; // @[ProcessingElement.scala 64:30]
+    if (reset) begin // @[ProcessingElement.scala 74:30]
+      east_buffer <= 32'h0; // @[ProcessingElement.scala 74:30]
     end else begin
-      east_buffer <= FIFO_Ein_io_dout; // @[ProcessingElement.scala 167:17]
+      east_buffer <= FIFO_Ein_io_dout; // @[ProcessingElement.scala 176:17]
     end
-    if (reset) begin // @[ProcessingElement.scala 65:31]
-      south_buffer <= 32'h0; // @[ProcessingElement.scala 65:31]
+    if (reset) begin // @[ProcessingElement.scala 75:31]
+      south_buffer <= 32'h0; // @[ProcessingElement.scala 75:31]
     end else begin
-      south_buffer <= FIFO_Sin_io_dout; // @[ProcessingElement.scala 208:18]
+      south_buffer <= FIFO_Sin_io_dout; // @[ProcessingElement.scala 217:18]
     end
-    if (reset) begin // @[ProcessingElement.scala 66:30]
-      west_buffer <= 32'h0; // @[ProcessingElement.scala 66:30]
+    if (reset) begin // @[ProcessingElement.scala 76:30]
+      west_buffer <= 32'h0; // @[ProcessingElement.scala 76:30]
     end else begin
-      west_buffer <= FIFO_Win_io_dout; // @[ProcessingElement.scala 249:17]
+      west_buffer <= FIFO_Win_io_dout; // @[ProcessingElement.scala 258:17]
     end
-    if (reset) begin // @[ProcessingElement.scala 68:33]
-      north_buffer_v <= 1'h0; // @[ProcessingElement.scala 68:33]
+    if (reset) begin // @[ProcessingElement.scala 78:33]
+      north_buffer_v <= 1'h0; // @[ProcessingElement.scala 78:33]
     end else begin
-      north_buffer_v <= FIFO_Nin_io_dout_v; // @[ProcessingElement.scala 126:20]
+      north_buffer_v <= FIFO_Nin_io_dout_v; // @[ProcessingElement.scala 135:20]
     end
-    if (reset) begin // @[ProcessingElement.scala 69:32]
-      east_buffer_v <= 1'h0; // @[ProcessingElement.scala 69:32]
+    if (reset) begin // @[ProcessingElement.scala 79:32]
+      east_buffer_v <= 1'h0; // @[ProcessingElement.scala 79:32]
     end else begin
-      east_buffer_v <= FIFO_Ein_io_dout_v; // @[ProcessingElement.scala 168:19]
+      east_buffer_v <= FIFO_Ein_io_dout_v; // @[ProcessingElement.scala 177:19]
     end
-    if (reset) begin // @[ProcessingElement.scala 70:33]
-      south_buffer_v <= 1'h0; // @[ProcessingElement.scala 70:33]
+    if (reset) begin // @[ProcessingElement.scala 80:33]
+      south_buffer_v <= 1'h0; // @[ProcessingElement.scala 80:33]
     end else begin
-      south_buffer_v <= FIFO_Sin_io_dout_v; // @[ProcessingElement.scala 209:20]
+      south_buffer_v <= FIFO_Sin_io_dout_v; // @[ProcessingElement.scala 218:20]
     end
-    if (reset) begin // @[ProcessingElement.scala 71:32]
-      west_buffer_v <= 1'h0; // @[ProcessingElement.scala 71:32]
+    if (reset) begin // @[ProcessingElement.scala 81:32]
+      west_buffer_v <= 1'h0; // @[ProcessingElement.scala 81:32]
     end else begin
-      west_buffer_v <= FIFO_Win_io_dout_v; // @[ProcessingElement.scala 250:19]
+      west_buffer_v <= FIFO_Win_io_dout_v; // @[ProcessingElement.scala 259:19]
     end
-    if (reset) begin // @[ProcessingElement.scala 73:33]
-      north_buffer_r <= 1'h0; // @[ProcessingElement.scala 73:33]
+    if (reset) begin // @[ProcessingElement.scala 83:33]
+      north_buffer_r <= 1'h0; // @[ProcessingElement.scala 83:33]
     end else begin
-      north_buffer_r <= FS_Nin_io_ready_in; // @[ProcessingElement.scala 131:20]
+      north_buffer_r <= FS_Nin_io_ready_in; // @[ProcessingElement.scala 140:20]
     end
-    if (reset) begin // @[ProcessingElement.scala 74:32]
-      east_buffer_r <= 1'h0; // @[ProcessingElement.scala 74:32]
+    if (reset) begin // @[ProcessingElement.scala 84:32]
+      east_buffer_r <= 1'h0; // @[ProcessingElement.scala 84:32]
     end else begin
-      east_buffer_r <= FS_Ein_io_ready_in; // @[ProcessingElement.scala 173:19]
+      east_buffer_r <= FS_Ein_io_ready_in; // @[ProcessingElement.scala 182:19]
     end
-    if (reset) begin // @[ProcessingElement.scala 75:33]
-      south_buffer_r <= 1'h0; // @[ProcessingElement.scala 75:33]
+    if (reset) begin // @[ProcessingElement.scala 85:33]
+      south_buffer_r <= 1'h0; // @[ProcessingElement.scala 85:33]
     end else begin
-      south_buffer_r <= FS_Sin_io_ready_in; // @[ProcessingElement.scala 214:20]
+      south_buffer_r <= FS_Sin_io_ready_in; // @[ProcessingElement.scala 223:20]
     end
-    if (reset) begin // @[ProcessingElement.scala 76:32]
-      west_buffer_r <= 1'h0; // @[ProcessingElement.scala 76:32]
+    if (reset) begin // @[ProcessingElement.scala 86:32]
+      west_buffer_r <= 1'h0; // @[ProcessingElement.scala 86:32]
     end else begin
-      west_buffer_r <= FS_Win_io_ready_in; // @[ProcessingElement.scala 255:19]
+      west_buffer_r <= FS_Win_io_ready_in; // @[ProcessingElement.scala 264:19]
     end
-    if (reset) begin // @[ProcessingElement.scala 78:32]
-      north_REG_din <= 32'h0; // @[ProcessingElement.scala 78:32]
+    if (reset) begin // @[ProcessingElement.scala 88:32]
+      north_REG_din <= 32'h0; // @[ProcessingElement.scala 88:32]
     end else begin
-      north_REG_din <= MUX_Nout_io_mux_output; // @[ProcessingElement.scala 137:19]
+      north_REG_din <= MUX_Nout_io_mux_output; // @[ProcessingElement.scala 146:19]
     end
-    if (reset) begin // @[ProcessingElement.scala 79:31]
-      east_REG_din <= 32'h0; // @[ProcessingElement.scala 79:31]
+    if (reset) begin // @[ProcessingElement.scala 89:31]
+      east_REG_din <= 32'h0; // @[ProcessingElement.scala 89:31]
     end else begin
-      east_REG_din <= MUX_Eout_io_mux_output; // @[ProcessingElement.scala 179:18]
+      east_REG_din <= MUX_Eout_io_mux_output; // @[ProcessingElement.scala 188:18]
     end
-    if (reset) begin // @[ProcessingElement.scala 80:32]
-      south_REG_din <= 32'h0; // @[ProcessingElement.scala 80:32]
+    if (reset) begin // @[ProcessingElement.scala 90:32]
+      south_REG_din <= 32'h0; // @[ProcessingElement.scala 90:32]
     end else begin
-      south_REG_din <= MUX_Sout_io_mux_output; // @[ProcessingElement.scala 220:19]
+      south_REG_din <= MUX_Sout_io_mux_output; // @[ProcessingElement.scala 229:19]
     end
-    if (reset) begin // @[ProcessingElement.scala 81:31]
-      west_REG_din <= 32'h0; // @[ProcessingElement.scala 81:31]
+    if (reset) begin // @[ProcessingElement.scala 91:31]
+      west_REG_din <= 32'h0; // @[ProcessingElement.scala 91:31]
     end else begin
-      west_REG_din <= MUX_Wout_io_mux_output; // @[ProcessingElement.scala 261:18]
+      west_REG_din <= MUX_Wout_io_mux_output; // @[ProcessingElement.scala 270:18]
     end
-    if (reset) begin // @[ProcessingElement.scala 83:34]
-      north_REG_din_v <= 1'h0; // @[ProcessingElement.scala 83:34]
+    if (reset) begin // @[ProcessingElement.scala 92:34]
+      north_REG_din_v <= 1'h0; // @[ProcessingElement.scala 92:34]
     end else begin
-      north_REG_din_v <= FR_Nout_io_valid_out; // @[ProcessingElement.scala 146:21]
+      north_REG_din_v <= FR_Nout_io_valid_out; // @[ProcessingElement.scala 155:21]
     end
-    if (reset) begin // @[ProcessingElement.scala 84:33]
-      east_REG_din_v <= 1'h0; // @[ProcessingElement.scala 84:33]
+    if (reset) begin // @[ProcessingElement.scala 93:33]
+      east_REG_din_v <= 1'h0; // @[ProcessingElement.scala 93:33]
     end else begin
-      east_REG_din_v <= FR_Eout_io_valid_out; // @[ProcessingElement.scala 188:20]
+      east_REG_din_v <= FR_Eout_io_valid_out; // @[ProcessingElement.scala 197:20]
     end
-    if (reset) begin // @[ProcessingElement.scala 85:34]
-      south_REG_din_v <= 1'h0; // @[ProcessingElement.scala 85:34]
+    if (reset) begin // @[ProcessingElement.scala 94:34]
+      south_REG_din_v <= 1'h0; // @[ProcessingElement.scala 94:34]
     end else begin
-      south_REG_din_v <= FR_Sout_io_valid_out; // @[ProcessingElement.scala 229:21]
+      south_REG_din_v <= FR_Sout_io_valid_out; // @[ProcessingElement.scala 238:21]
     end
-    if (reset) begin // @[ProcessingElement.scala 86:33]
-      west_REG_din_v <= 1'h0; // @[ProcessingElement.scala 86:33]
+    if (reset) begin // @[ProcessingElement.scala 95:33]
+      west_REG_din_v <= 1'h0; // @[ProcessingElement.scala 95:33]
     end else begin
-      west_REG_din_v <= FR_Wout_io_valid_out; // @[ProcessingElement.scala 270:20]
+      west_REG_din_v <= FR_Wout_io_valid_out; // @[ProcessingElement.scala 279:20]
     end
-    if (reset) begin // @[ProcessingElement.scala 87:34]
-      north_REG_din_r <= 1'h0; // @[ProcessingElement.scala 87:34]
+    if (reset) begin // @[ProcessingElement.scala 96:34]
+      north_REG_din_r <= 1'h0; // @[ProcessingElement.scala 96:34]
     end else begin
-      north_REG_din_r <= REG_Nout_io_din_r; // @[ProcessingElement.scala 154:21]
+      north_REG_din_r <= REG_Nout_io_din_r; // @[ProcessingElement.scala 163:21]
     end
-    if (reset) begin // @[ProcessingElement.scala 88:33]
-      east_REG_din_r <= 1'h0; // @[ProcessingElement.scala 88:33]
+    if (reset) begin // @[ProcessingElement.scala 97:33]
+      east_REG_din_r <= 1'h0; // @[ProcessingElement.scala 97:33]
     end else begin
-      east_REG_din_r <= REG_Eout_io_din_r; // @[ProcessingElement.scala 196:20]
+      east_REG_din_r <= REG_Eout_io_din_r; // @[ProcessingElement.scala 205:20]
     end
-    if (reset) begin // @[ProcessingElement.scala 89:34]
-      south_REG_din_r <= 1'h0; // @[ProcessingElement.scala 89:34]
+    if (reset) begin // @[ProcessingElement.scala 98:34]
+      south_REG_din_r <= 1'h0; // @[ProcessingElement.scala 98:34]
     end else begin
-      south_REG_din_r <= REG_Sout_io_din_r; // @[ProcessingElement.scala 237:21]
+      south_REG_din_r <= REG_Sout_io_din_r; // @[ProcessingElement.scala 246:21]
     end
-    if (reset) begin // @[ProcessingElement.scala 90:33]
-      west_REG_din_r <= 1'h0; // @[ProcessingElement.scala 90:33]
+    if (reset) begin // @[ProcessingElement.scala 99:33]
+      west_REG_din_r <= 1'h0; // @[ProcessingElement.scala 99:33]
     end else begin
-      west_REG_din_r <= REG_Wout_io_din_r; // @[ProcessingElement.scala 278:20]
+      west_REG_din_r <= REG_Wout_io_din_r; // @[ProcessingElement.scala 287:20]
     end
-    if (reset) begin // @[ProcessingElement.scala 92:29]
-      FU_din_1_r <= 1'h0; // @[ProcessingElement.scala 92:29]
+    if (reset) begin // @[ProcessingElement.scala 101:29]
+      FU_din_1_r <= 1'h0; // @[ProcessingElement.scala 101:29]
     end else begin
-      FU_din_1_r <= CELL_io_FU_din_1_r; // @[ProcessingElement.scala 299:16]
+      FU_din_1_r <= CELL_io_FU_din_1_r; // @[ProcessingElement.scala 308:16]
     end
-    if (reset) begin // @[ProcessingElement.scala 93:29]
-      FU_din_2_r <= 1'h0; // @[ProcessingElement.scala 93:29]
+    if (reset) begin // @[ProcessingElement.scala 102:29]
+      FU_din_2_r <= 1'h0; // @[ProcessingElement.scala 102:29]
     end else begin
-      FU_din_2_r <= CELL_io_FU_din_2_r; // @[ProcessingElement.scala 300:16]
+      FU_din_2_r <= CELL_io_FU_din_2_r; // @[ProcessingElement.scala 309:16]
     end
-    if (reset) begin // @[ProcessingElement.scala 94:26]
-      FU_dout <= 32'h0; // @[ProcessingElement.scala 94:26]
+    if (reset) begin // @[ProcessingElement.scala 103:26]
+      FU_dout <= 32'h0; // @[ProcessingElement.scala 103:26]
     end else begin
-      FU_dout <= CELL_io_dout; // @[ProcessingElement.scala 301:13]
+      FU_dout <= CELL_io_dout; // @[ProcessingElement.scala 310:13]
     end
-    if (reset) begin // @[ProcessingElement.scala 95:28]
-      FU_dout_v <= 1'h0; // @[ProcessingElement.scala 95:28]
+    if (reset) begin // @[ProcessingElement.scala 104:28]
+      FU_dout_v <= 1'h0; // @[ProcessingElement.scala 104:28]
     end else begin
-      FU_dout_v <= CELL_io_dout_v; // @[ProcessingElement.scala 302:15]
+      FU_dout_v <= CELL_io_dout_v; // @[ProcessingElement.scala 311:15]
     end
   end
 // Register and memory initialization

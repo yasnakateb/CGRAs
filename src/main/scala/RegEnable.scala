@@ -1,11 +1,21 @@
+///////////////////////////////////////
+//                                   //
+//             Reg Enable            //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chisel3.util._
 // Register with Enable 
-class RegEnable (C_DATA_WIDTH: Int) extends Module {
+class RegEnable 
+    (
+        DATA_WIDTH: Int
+    ) 
+    extends Module {
     val io = IO(new Bundle {
-        val in = Input(UInt(C_DATA_WIDTH.W))
+        val in = Input(UInt(DATA_WIDTH.W))
         val en = Input(Bool())
-        val out = Output(UInt(C_DATA_WIDTH.W))
+        val out = Output(UInt(DATA_WIDTH.W))
     })
 
     val reg = RegInit(0.U)  

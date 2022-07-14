@@ -7,7 +7,12 @@
 import chisel3._
 import chisel3.util._
 
-class FR (NUMBER_OF_VALIDS: Int, NUMBER_OF_READYS: Int) extends Module {
+class FR 
+    (
+        NUMBER_OF_VALIDS: Int, 
+        NUMBER_OF_READYS: Int
+    ) 
+    extends Module {
     val io = IO(new Bundle {
         // Inputs
         val valid_in = Input(UInt(NUMBER_OF_VALIDS.W))

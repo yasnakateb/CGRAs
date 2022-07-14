@@ -1,7 +1,17 @@
+///////////////////////////////////////
+//                                   //
+//              D-BUF                //
+//                                   //
+///////////////////////////////////////
+
 import chisel3._
 import chisel3.util._
 
-class D_BUF (DATA_WIDTH: Int)extends Module {
+class D_BUF 
+    (
+        DATA_WIDTH: Int
+    )
+    extends Module {
     val io = IO(new Bundle {
         val d_p = Input(UInt(DATA_WIDTH.W))
         val v_p = Input(Bool())
