@@ -81,3 +81,10 @@ processing-element:
 
 processing-element-test:
 	$(SBT) "testOnly ProcessingElementTest -- -DwriteVcd=1"	
+
+overlay-rocc:
+	$(SBT) "runMain OverlayRoccMain"
+
+overlay-rocc-test:
+	$(SBT) "testOnly OverlayRoccTest -- -DwriteVcd=1"	
+	
