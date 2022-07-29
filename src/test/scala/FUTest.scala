@@ -15,7 +15,7 @@ class FUTest extends AnyFlatSpec with ChiselScalatestTester {
             val din_2 = 5
             var din_v = true
             var dout_r = true
-            var loop_source = 2
+            var loop_source = 0
             var iterations_reset = 4
             var op_config = 0 
 
@@ -36,6 +36,14 @@ class FUTest extends AnyFlatSpec with ChiselScalatestTester {
             println("Op Config: " + dut.io.op_config.peek().toString)
             // Summation  
             dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
             dut.clock.step(1)
             println("*************************************")
             println("*************************************")

@@ -11,15 +11,15 @@ import org.scalatest.flatspec.AnyFlatSpec
 class CellProcessingTest extends AnyFlatSpec with ChiselScalatestTester {
     "CellProcessingTest test" should "pass" in {
         test(new CellProcessing(32)) { dut =>
-            var north_din = 32.U 
-            var north_din_v = false.B 
-            var east_din = 32.U  
+            var north_din = 1.U 
+            var north_din_v = true.B 
+            var east_din = 2.U  
             var east_din_v = false.B 
 
-            var south_din = 32.U  
-            var south_din_v = false.B 
-            var west_din = 32.U  
-            var west_din_v = false.B 
+            var south_din = 3.U  
+            var south_din_v = true.B 
+            var west_din = 4.U  
+            var west_din_v = true.B 
 
             var north_dout_r = false.B 
             var east_dout_r = false.B 

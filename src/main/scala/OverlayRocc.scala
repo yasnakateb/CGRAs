@@ -10,8 +10,8 @@ import chisel3.util._
 class OverlayRocc 
     (
         DATA_WIDTH: Int = 32, 
-        INPUT_NODES: Int = 8, 
-        OUTPUT_NODES: Int = 8, 
+        INPUT_NODES: Int = 6, 
+        OUTPUT_NODES: Int = 6, 
         FIFO_DEPTH: Int = 32
     ) 
     extends Module { val io = IO(new Bundle {
@@ -98,6 +98,11 @@ class OverlayRocc
     CONFIG_PROC : process(cell_config)
     begin
         config_bits <= ( others => (others => '0'));
+
+        /// 
+        /// One bit or Multiple bits ?????????????????
+        /// config_bits(0) <= 1 or config_bits(3, 0) <= cell_config(3, 0);
+        
         config_bits(to_integer(unsigned(cell_config(190 downto 185)))) <= cell_config(181 downto 0);
         
         catch_config <= (others => '0');
@@ -148,18 +153,6 @@ class OverlayRocc
     
     //  ***************************************************************** Fix 
     var reg_data_out = Reg(Vec(INPUT_NODES, UInt(DATA_WIDTH.W)))
-
-    for( i <- 0 to OUTPUT_NODES - 1){
-        reg_data_out(i) := east_dout(i) 
-        // // ==> Error: Cannot reassign to read-only
-        // io.data_out_valid(i) := east_dout_v(i) 
-        // east_dout_r(i) := io.data_out_ready(i)
-    }
-
-    // Fix 
-    io.data_out_valid := east_dout_v.asUInt 
-    io.data_out := reg_data_out.asUInt
-    east_dout_r := io.data_out_ready   
 
     var I = 0
     var J = 0
@@ -620,11 +613,26 @@ class OverlayRocc
                 }            
             }
         }    
-    }     
+    }
+
+
+    // Fix 
+
+    for( i <- 0 to OUTPUT_NODES - 1){
+        reg_data_out(i) := east_dout(i) 
+        // // ==> Error: Cannot reassign to read-only
+        // io.data_out_valid(i) := east_dout_v(i) 
+        // east_dout_r(i) := io.data_out_ready(i)
+    }
+    
+    io.data_out_valid := east_dout_v.asUInt 
+    io.data_out := reg_data_out.asUInt
+    east_dout_r := io.data_out_ready   
+     
 }
 
 // Generate the Verilog code
 object OverlayRoccMain extends App {
     println("Generating the hardware")
-    (new chisel3.stage.ChiselStage).emitVerilog(new OverlayRocc(32, 8, 8, 32), Array("--target-dir", "generated"))
+    (new chisel3.stage.ChiselStage).emitVerilog(new OverlayRocc(32, 6, 6, 32), Array("--target-dir", "generated"))
 }
