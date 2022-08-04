@@ -12,24 +12,25 @@ class ProcessingElementTest extends AnyFlatSpec with ChiselScalatestTester {
     "ProcessingElementTest test" should "pass" in {
         test(new ProcessingElement(32, 4)) { dut =>
             
-            var north_din = 32.U 
+            var north_din = 0.U 
             var north_din_v = false.B 
 
-            var east_din = 32.U  
+            var east_din = 0.U  
             var east_din_v = false.B 
 
-            var south_din = 32.U  
+            var south_din = 0.U  
             var south_din_v = false.B 
 
-            var west_din = 32.U  
+            var west_din = 0.U  
             var west_din_v = false.B 
 
-            var config_bits = 32.U 
-            val north_dout_r = false.B 
-            val east_dout_r = false.B 
-            val south_dout_r = false.B 
-            val west_dout_r = false.B 
-            val catch_config = true.B 
+            var config_bits = "b01000000000111101100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
+
+            val north_dout_r = true.B 
+            val east_dout_r = true.B 
+            val south_dout_r = true.B 
+            val west_dout_r = true.B 
+            val catch_config = false.B 
 
             
             dut.io.north_din.poke(north_din)
@@ -53,12 +54,43 @@ class ProcessingElementTest extends AnyFlatSpec with ChiselScalatestTester {
 
             dut.io.south_dout_r.poke(south_dout_r)
             dut.io.west_dout_r.poke(west_dout_r)
-
-            dut.io.config_bits.poke(config_bits)
             dut.io.catch_config.poke(catch_config)
             
+            dut.io.catch_config.poke(true.B)
+            dut.io.config_bits.poke(config_bits)
+            dut.clock.step(1)
+            dut.io.catch_config.poke(false.B)
+
+            dut.io.north_din.poke(12.U)
+            dut.io.north_din_v.poke(true.B)
+            dut.io.north_dout_r.poke(true.B)
+            dut.io.west_din.poke(13.U)
+            dut.io.west_din_v.poke(true.B)
+            dut.io.west_dout_r.poke(true.B)
+            dut.clock.step(1)
+            dut.io.north_din.poke(14.U)
+            dut.io.north_din_v.poke(true.B)
+            dut.io.north_dout_r.poke(true.B)
+            dut.io.west_din.poke(15.U)
+            dut.io.west_din_v.poke(true.B)
+            dut.io.west_dout_r.poke(true.B)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.io.north_din_v.poke(false.B)
+            dut.io.west_din_v.poke(false.B)
             println("*************************************")
             println("*************************************")
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)

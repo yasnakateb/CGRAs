@@ -100,16 +100,8 @@ class CellProcessing
 
     val MUX_1 = Module (new ConfMux(6, DATA_WIDTH))
     MUX_1.io.selector := selector_mux_1
-    MUX_1.io.mux_input := FU_dout & I1_const & io.west_din & io.south_din & io.east_din & io.north_din 
+    MUX_1.io.mux_input := Cat(FU_dout, I1_const, io.west_din, io.south_din, io.east_din, io.north_din)
     EB_din_1 := MUX_1.io.mux_output
-
-    val SEB_1 = Module (new D_SEB(DATA_WIDTH))
-    SEB_1.io.din := EB_din_1
-    SEB_1.io.din_v := EB_din_1_v
-    io.FU_din_1_r := SEB_1.io.din_r 
-    join_din_1 := SEB_1.io.dout   
-    join_din_1_v := SEB_1.io.dout_v 
-    SEB_1.io.dout_r := join_din_1_r
 
     val FR_2 = Module (new FR(6, 4))
     val ready_FR2 = Cat(io.north_dout_r, io.east_dout_r, io.south_dout_r, io.west_dout_r)  
@@ -122,20 +114,28 @@ class CellProcessing
 
     val MUX_2 = Module (new ConfMux(6, DATA_WIDTH))
     MUX_2.io.selector := selector_mux_2
-    MUX_2.io.mux_input := FU_dout & I1_const & io.west_din & io.south_din & io.east_din & io.north_din 
+    MUX_2.io.mux_input := Cat(FU_dout, I1_const, io.west_din, io.south_din, io.east_din, io.north_din) 
     EB_din_2 := MUX_2.io.mux_output
+
+    val SEB_1 = Module (new D_SEB(DATA_WIDTH))
+    SEB_1.io.din := EB_din_1
+    SEB_1.io.din_v := EB_din_1_v
+    io.FU_din_1_r := SEB_1.io.din_r 
+    join_din_1 := SEB_1.io.dout   
+    join_din_1_v := SEB_1.io.dout_v 
+    SEB_1.io.dout_r := join_din_1_r
 
     val SEB_2 = Module (new D_SEB(DATA_WIDTH))
     SEB_2.io.din := EB_din_2
     SEB_2.io.din_v := EB_din_2_v
     io.FU_din_2_r := SEB_2.io.din_r 
-    join_din_2 := SEB_1.io.dout   
-    join_din_2_v := SEB_1.io.dout_v 
+    join_din_2 := SEB_2.io.dout   
+    join_din_2_v := SEB_2.io.dout_v 
     SEB_2.io.dout_r := join_din_2_r 
 
     val JOIN_INST = Module (new Join(DATA_WIDTH))
     JOIN_INST.io.din_1 := join_din_1
-    JOIN_INST.io.din_2 := join_din_1_v
+    JOIN_INST.io.din_2 := join_din_2
     JOIN_INST.io.dout_r := join_dout_r
     JOIN_INST.io.din_1_v := join_din_1_v
     JOIN_INST.io.din_2_v := join_din_2_v

@@ -57,12 +57,6 @@ class FU
     val loaded = RegInit(0.U(1.W))
     val valid = RegInit(0.U(1.W))
 
-    val ALU = Module (new ALU(DATA_WIDTH, OP_WIDTH))
-    ALU.io.din_1 := alu_din_1
-    ALU.io.din_2 := alu_din_2
-    alu_dout := ALU.io.dout 
-    ALU.io.op_config := io.op_config
-
     
     when (io.loop_source === STATE_0) {
         alu_din_1 := io.din_1;
@@ -112,7 +106,9 @@ class FU
             loaded := 1.U;
             count  := count + 1.U;                            
         }  
-        when (count === io.iterations_reset && 
+        ///// io.iterations_reset ?????? 
+        // when (count === io.iterations_reset && 
+        when (
              (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
               io.dout_r === 1.U)
             {
@@ -144,6 +140,12 @@ class FU
     .otherwise{
         io.dout := dout_Reg
     } 
+
+    val ALU = Module (new ALU(DATA_WIDTH, OP_WIDTH))
+    ALU.io.din_1 := alu_din_1
+    ALU.io.din_2 := alu_din_2
+    alu_dout := ALU.io.dout 
+    ALU.io.op_config := io.op_config
 }
 
 // Generate the Verilog code

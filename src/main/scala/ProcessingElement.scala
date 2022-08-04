@@ -142,7 +142,7 @@ class ProcessingElement
     
     val MUX_Nout  = Module (new ConfMux(4, DATA_WIDTH))
     MUX_Nout.io.selector := mux_N_sel
-    MUX_Nout.io.mux_input := west_buffer & south_buffer & east_buffer & FU_dout  
+    MUX_Nout.io.mux_input := Cat(west_buffer, south_buffer, east_buffer, FU_dout)  
     north_REG_din := MUX_Nout.io.mux_output
     
     val FR_Nout = Module (new FR(4, 5))
@@ -184,7 +184,7 @@ class ProcessingElement
 
     val MUX_Eout  = Module (new ConfMux(4, DATA_WIDTH))
     MUX_Eout.io.selector := mux_E_sel
-    MUX_Eout.io.mux_input := west_buffer & south_buffer & north_buffer & FU_dout 
+    MUX_Eout.io.mux_input := Cat(west_buffer, south_buffer, north_buffer, FU_dout) 
     east_REG_din := MUX_Eout.io.mux_output
     
     val FR_Eout = Module (new FR(4, 5))
@@ -225,7 +225,7 @@ class ProcessingElement
     
     val MUX_Sout  = Module (new ConfMux(4, DATA_WIDTH))
     MUX_Sout.io.selector := mux_S_sel
-    MUX_Sout.io.mux_input := west_buffer & east_buffer & north_buffer & FU_dout 
+    MUX_Sout.io.mux_input := Cat(west_buffer, east_buffer, north_buffer, FU_dout)
     south_REG_din := MUX_Sout.io.mux_output
 
     val FR_Sout = Module (new FR(4, 5))
@@ -266,7 +266,7 @@ class ProcessingElement
 
     val MUX_Wout  = Module (new ConfMux(4, DATA_WIDTH))
     MUX_Wout.io.selector := mux_W_sel
-    MUX_Wout.io.mux_input := south_buffer & east_buffer & north_buffer & FU_dout 
+    MUX_Wout.io.mux_input := Cat(south_buffer, east_buffer, north_buffer, FU_dout) 
     west_REG_din := MUX_Wout.io.mux_output
 
     val FR_Wout = Module (new FR(4, 5))

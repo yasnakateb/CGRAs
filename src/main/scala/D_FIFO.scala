@@ -36,6 +36,7 @@ class D_FIFO
     var rd_en = Wire(Bool()) 
     var wr_en = Wire(Bool()) 
 
+
     empty := true.B
     full := false.B 
     write_pointer := 0.U 
@@ -44,11 +45,16 @@ class D_FIFO
     io.dout := 0.U 
     io.dout_v := false.B  
 
+    wr_en := io.din_v & (~full) 
+    rd_en := io.dout_r & (~empty) 
+
     when (io.dout_r) {
         io.dout_v := false.B  
     }
 
-    when( full === false.B  &  wr_en === true.B ){ 
+    // FIX 
+    when( full === false.B  &  wr_en === true.B){ 
+        
         memory(write_pointer) := io.din;
         num_data := num_data + 1.U
 
@@ -59,7 +65,7 @@ class D_FIFO
         }
     }            
 
-    when( empty === false.B  &  rd_en === true.B ){ 
+    when( empty === false.B  &  rd_en === true.B){ 
         io.dout := memory(read_pointer)
         io.dout_v := true.B 
         num_data := num_data - 1.U 
@@ -83,8 +89,7 @@ class D_FIFO
         empty := false.B
     }  
 
-    wr_en := io.din_v & (~full) 
-    rd_en := io.dout_r & (~empty) 
+    
     io.din_r := (~full)                        
 }
 
