@@ -18,3 +18,4 @@
 
 ### Todo
 - ✅ Fix Conf Mask
+- ⭕ Fix D_FIFO
