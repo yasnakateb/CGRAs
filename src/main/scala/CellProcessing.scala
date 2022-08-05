@@ -106,8 +106,8 @@ class CellProcessing
     val FR_2 = Module (new FR(6, 4))
     val ready_FR2 = Cat(io.north_dout_r, io.east_dout_r, io.south_dout_r, io.west_dout_r)  
     val valid_in_FR2 = Cat(FU_dout_v.asUInt, "b1".U, io.west_din_v, io.south_din_v, io.east_din_v, io.north_din_v)  
-    FR_2.io.ready_out := ready_FR1
-    FR_2.io.valid_in := valid_in_FR1
+    FR_2.io.ready_out := ready_FR2
+    FR_2.io.valid_in := valid_in_FR2
     FR_2.io.valid_mux_sel := selector_mux_2
     FR_2.io.fork_mask := fork_receiver_mask_2 
     EB_din_2_v := FR_2.io.valid_out 

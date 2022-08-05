@@ -24,25 +24,25 @@ class FR
         val valid_out = Output(Bool())  
     })
 
-    var aux = Wire(Vec(NUMBER_OF_READYS + 1, Bool()))
-    var temp = Wire(Vec(NUMBER_OF_READYS + 1, Bool()))
+    var aux = Wire(Vec(NUMBER_OF_READYS, Bool()))
+    var temp = Wire(Vec(NUMBER_OF_READYS, Bool()))
     var Vaux = Wire(UInt(1.W))
 
-    for (i <- 0 until NUMBER_OF_READYS) {
+    for (i <- 0 until NUMBER_OF_READYS - 1) {
         aux(i) := ((~io.fork_mask(i)) | io.ready_out(i)).asBool
     }
     val conf_mux  = Module (new ConfMux(NUMBER_OF_VALIDS, 1))
-    conf_mux.io.selector <> io.valid_mux_sel
-    conf_mux.io.mux_input <> io.valid_in
-    conf_mux.io.mux_output <> Vaux
+    conf_mux.io.selector := io.valid_mux_sel
+    conf_mux.io.mux_input := io.valid_in
+    Vaux := conf_mux.io.mux_output
 
-    aux(NUMBER_OF_READYS) := Vaux(0) 
+    aux(NUMBER_OF_READYS-1) := Vaux(0) 
     temp(0) := aux(0)
 
-    for (i <- 1 until NUMBER_OF_READYS + 1) {
+    for (i <- 1 until NUMBER_OF_READYS) {
         temp(i) := temp(i-1) & aux(i)
     }
-    io.valid_out := temp(NUMBER_OF_READYS)   
+    io.valid_out := temp(NUMBER_OF_READYS-1)   
 }
 
 // Generate the Verilog code
