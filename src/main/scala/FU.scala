@@ -95,6 +95,10 @@ class FU
         valid <= 0.U;  
     }           
     //}
+    // ********************************************
+    // We have the following line in the vhdl code. 
+    // ********************************************
+
     //.elsewhen (io.clk === 1.U) {
     
         when (io.dout_r === 1.U) {
@@ -104,16 +108,15 @@ class FU
              (io.loop_source === STATE_1 || io.loop_source === STATE_2)) 
             {
             loaded := 1.U;
-            count  := count + 1.U;                            
+            count := count + 1.U;                            
         }  
-        ///// io.iterations_reset ?????? 
         when (count === io.iterations_reset && 
              (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
               io.dout_r === 1.U)
             {
-            count    := 0.U;
-            loaded   := 0.U;
-            valid    := 1.U;
+            count := 0.U;
+            loaded := 0.U;
+            valid := 1.U;
             dout_Reg := alu_dout;
         }    
         .elsewhen ((io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
@@ -122,8 +125,7 @@ class FU
             {
             dout_Reg := alu_dout;
         }                             
-    //} 
-    
+    // }
     when (io.loop_source === STATE_0){
         io.dout_v := io.din_v
     }
