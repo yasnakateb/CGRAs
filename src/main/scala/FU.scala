@@ -107,8 +107,7 @@ class FU
             count  := count + 1.U;                            
         }  
         ///// io.iterations_reset ?????? 
-        // when (count === io.iterations_reset && 
-        when (
+        when (count === io.iterations_reset && 
              (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
               io.dout_r === 1.U)
             {
