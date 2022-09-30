@@ -27,14 +27,14 @@ class D_FIFO
 
     val memory = SyncReadMem(FIFO_DEPTH, UInt(DATA_WIDTH.W))
 
-    var write_pointer = RegInit(0.U(FIFO_DEPTH.W)) 
-    var read_pointer = RegInit(0.U(FIFO_DEPTH.W)) 
-    var num_data = RegInit(0.U(FIFO_DEPTH.W)) 
+    val write_pointer = RegInit(0.U(FIFO_DEPTH.W)) 
+    val read_pointer = RegInit(0.U(FIFO_DEPTH.W)) 
+    val num_data = RegInit(0.U(FIFO_DEPTH.W)) 
 
-    var full = Wire(Bool()) 
-    var empty = Wire(Bool()) 
-    var rd_en = Wire(Bool()) 
-    var wr_en = Wire(Bool()) 
+    val full = Wire(Bool()) 
+    val empty = Wire(Bool()) 
+    val rd_en = Wire(Bool()) 
+    val wr_en = Wire(Bool()) 
 
 
     empty := true.B
@@ -52,20 +52,8 @@ class D_FIFO
         io.dout_v := false.B  
     }
 
-    // FIX 
-    when( full === false.B  &  wr_en === true.B){ 
-        
-        memory(write_pointer) := io.din;
-        num_data := num_data + 1.U
-
-        when (write_pointer === FIFO_DEPTH.U - 1.U)  {
-            write_pointer := 0.U 
-        }.otherwise {
-            write_pointer := write_pointer + 1.U 
-        }
-    }            
-
-    when( empty === false.B  &  rd_en === true.B){ 
+    // FIX (Read and write at the same time)
+    when(empty === false.B  &  rd_en === true.B){ 
         io.dout := memory(read_pointer)
         io.dout_v := true.B 
         num_data := num_data - 1.U 
@@ -76,6 +64,18 @@ class D_FIFO
             read_pointer := read_pointer + 1.U  
         }
     } 
+
+    when(full === false.B  &  wr_en === true.B){ 
+        
+        memory(write_pointer) := io.din;
+        num_data := num_data + 1.U
+
+        when (write_pointer === FIFO_DEPTH.U - 1.U)  {
+            write_pointer := 0.U 
+        }.otherwise {
+            write_pointer := write_pointer + 1.U 
+        }
+    }            
 
     when (num_data === FIFO_DEPTH.U)  {
         full := true.B 
@@ -89,7 +89,6 @@ class D_FIFO
         empty := false.B
     }  
 
-    
     io.din_r := (~full)                        
 }
 

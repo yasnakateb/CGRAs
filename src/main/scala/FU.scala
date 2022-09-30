@@ -59,40 +59,40 @@ class FU
 
     
     when (io.loop_source === STATE_0) {
-        alu_din_1 := io.din_1 
-        alu_din_2 := io.din_2                  
+        alu_din_1 := io.din_1;
+        alu_din_2 := io.din_2;                  
     }
     .elsewhen (io.loop_source === STATE_1) {
         when (loaded === 0.U) {
-            alu_din_1 := io.din_1 
-            alu_din_2 := io.din_2                                 
+            alu_din_1 := io.din_1;
+            alu_din_2 := io.din_2;                                
         }  
         .otherwise {
-            alu_din_1 := dout_Reg
-            alu_din_2 := io.din_2                       
+            alu_din_1 := dout_Reg;
+            alu_din_2 := io.din_2;                      
         }                               
     } 
     .elsewhen (io.loop_source === STATE_2) {
         when (loaded === 0.U) {
-            alu_din_1 := io.din_1 
-            alu_din_2 := io.din_2                                
+            alu_din_1 := io.din_1;
+            alu_din_2 := io.din_2;                                
         }  
         .otherwise {
             alu_din_1 := io.din_1
-            alu_din_2 := dout_Reg                       
+            alu_din_2 := dout_Reg;                      
         }                               
     } 
     .otherwise { 
-        alu_din_1 := (DATA_WIDTH - 1).U 
-        alu_din_2 := (DATA_WIDTH - 1).U 
+        alu_din_1 := (DATA_WIDTH - 1).U;
+        alu_din_2 := (DATA_WIDTH - 1).U;
     }
 
     //when (io.reset === RST_POL) {
     withReset (reset.asBool) {
-        loaded := 0.U 
-        count := 0.U 
-        dout_Reg := 0.U 
-        valid <= 0.U   
+        loaded := 0.U;
+        count := 0.U;
+        dout_Reg := 0.U;
+        valid := 0.U;  
     }           
     //}
     // ********************************************
@@ -102,23 +102,23 @@ class FU
     //.elsewhen (io.clk === 1.U) {
     
         when (io.dout_r === 1.U) {
-            valid := 0.U                             
+            valid := 0.U;                             
         }  
         when (io.din_v === 1.U && io.dout_r === 1.U && 
              (io.loop_source === STATE_1 || io.loop_source === STATE_2)) 
             {
-            loaded := 1.U 
-            count := count + 1.U    
-            valid := 1                          
+            loaded := 1.U;
+            count := count + 1.U;                            
         }  
-        when (count === io.iterations_reset && 
+        // when (count === io.iterations_reset && 
+            when(
              (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
               io.dout_r === 1.U)
             {
-            count := 0.U 
-            loaded := 0.U 
-            valid := 1.U 
-            dout_Reg := alu_dout 
+            count := 0.U;
+            loaded := 0.U;
+            valid := 1.U;
+            dout_Reg := alu_dout;
         }    
         .elsewhen ((io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
                    io.din_v === 1.U && 
