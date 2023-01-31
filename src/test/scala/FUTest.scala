@@ -10,13 +10,13 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class FUTest extends AnyFlatSpec with ChiselScalatestTester {
     "FUTest test" should "pass" in {
-        test(new FU(8, 8)) { dut =>
+        test(new FU(32, 4)) { dut =>
             val din_1 = 10
             val din_2 = 5
             var din_v = true
             var dout_r = true
             var loop_source = 0
-            var iterations_reset = 4
+            var iterations_reset = 0
             var op_config = 0 
 
             dut.io.din_1.poke(din_1.U)
@@ -47,13 +47,55 @@ class FUTest extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("*************************************")
             println("*************************************")
-            println("Summation: " + dut.io.dout.peek().toString)
             println("ROut: " + dut.io.dout_r.peek().toString)
             println("Loop Source: " + dut.io.loop_source.peek().toString)
             println("Rin: " + dut.io.din_r.peek().toString)
             println("Dout: " + dut.io.dout.peek().toString)
             println("Vout: " + dut.io.dout_v.peek().toString)
+            println("************ Test operators")
+            println("Summation: " + dut.io.dout.peek().toString)
             // Multiplication
+            op_config = 1
+            dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            println("Multiplication: " + dut.io.dout.peek().toString)
+            op_config = 2
+            dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            println("Subtraction: " + dut.io.dout.peek().toString)
+            op_config = 3
+            dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            println("Shift Left Logical: " + dut.io.dout.peek().toString)
+            op_config = 4
+            dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            println("Shift Right Arithmetic: " + dut.io.dout.peek().toString)
+            op_config = 5
+            dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            println("Shift Right Logical: " + dut.io.dout.peek().toString)
+            op_config = 6
+            dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            println("And: " + dut.io.dout.peek().toString)
+            op_config = 7
+            dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            println("Or: " + dut.io.dout.peek().toString)
+            op_config = 8
+            dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            println("Xor: " + dut.io.dout.peek().toString)
+            op_config = 9
+            dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            println("Minimum: " + dut.io.dout.peek().toString)
+            op_config = 10
+            dut.io.op_config.poke(op_config.U)
+            dut.clock.step(1)
+            println("Maximum: " + dut.io.dout.peek().toString)
+            /////////////////////////////////////////////////////////////////////
             op_config = 1
             loop_source = 0
             dout_r = false 
@@ -102,34 +144,34 @@ class FUTest extends AnyFlatSpec with ChiselScalatestTester {
             println("Dout: " + dut.io.dout.peek().toString)
             println("Vout: " + dut.io.dout_v.peek().toString)
             // Shift Right Logical
-            op_config = 4
+            op_config = 5
             dut.io.op_config.poke(op_config.U)
             dut.clock.step(1)
             println("*************************************")
             println("*************************************")
             println("Shift Right Logical: " + dut.io.dout.peek().toString)
             // And
-            op_config = 5
+            op_config = 6
             dut.io.op_config.poke(op_config.U)
             dut.clock.step(1)
             println("And: " + dut.io.dout.peek().toString)
             // Or
-            op_config = 6
+            op_config = 7
             dut.io.op_config.poke(op_config.U)
             dut.clock.step(1)
             println("Or: " + dut.io.dout.peek().toString)
             // Xor
-            op_config = 7
+            op_config = 8
             dut.io.op_config.poke(op_config.U)
             dut.clock.step(1)
             println("Xor: " + dut.io.dout.peek().toString)
             // Minimum
-            op_config = 8
+            op_config = 9
             dut.io.op_config.poke(op_config.U)
             dut.clock.step(1)
             println("Minimum: " + dut.io.dout.peek().toString)
             // Maximum
-            op_config = 9
+            op_config = 10
             dut.io.op_config.poke(op_config.U)
             dut.clock.step(1)
             println("Maximum: " + dut.io.dout.peek().toString)

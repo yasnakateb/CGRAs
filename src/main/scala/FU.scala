@@ -110,8 +110,8 @@ class FU
             loaded := 1.U;
             count := count + 1.U;                            
         }  
-        // when (count === io.iterations_reset && 
-            when(
+        when (count === io.iterations_reset && 
+            //when(
              (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
               io.dout_r === 1.U)
             {

@@ -86,5 +86,13 @@ overlay-rocc:
 	$(SBT) "runMain OverlayRoccMain"
 
 overlay-rocc-test:
-	$(SBT) "testOnly OverlayRoccTest -- -DwriteVcd=1"	
+	$(SBT) "testOnly OverlayRoccTest -- -DwriteVcd=1"
+	
+barrel-shifter:
+	$(SBT) "runMain BarrelShifterMain"
+
+barrel-shifter-test:
+	$(SBT) "testOnly BarrelShifterTest -- -DwriteVcd=1"
+
+	
 	
