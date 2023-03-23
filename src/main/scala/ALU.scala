@@ -18,8 +18,9 @@ object ALU
     def AND = 6.U    // And 
     def OR  = 7.U    // Or
     def XOR = 8.U    // Xor 
-    def MIN = 9.U    // Minimum
-    def MAX = 10.U   // Maximum
+    def DIV = 9.U    // Div (NOT IMPLEMENTED)
+    def MIN = 10.U   // Minimum
+    def MAX = 11.U   // Maximum
 }
 
 import ALU._
@@ -37,26 +38,18 @@ class ALU
         val dout = Output(UInt(DATA_WIDTH.W))
     })
 
-    val sign_din_1 = RegInit(0.S(DATA_WIDTH.W))
+    // Converting din_1 to signed integer for shift right arithmetic
+    val din_1_signed = RegInit(0.S(DATA_WIDTH.W))
 
+    // Store din_1 in reg_out for barrel shifter 
     val reg_out = RegInit(0.U(32.W))
-    val reg_out_temp = RegInit(0.U(32.W))
     reg_out := io.din_1 
     val reg_inbit = RegInit(0.U(1.W))
-    
     reg_inbit := io.din_1(31)
-    /*
-    val Barrel_Shifter = Module (new BarrelShifter())
-    //?
-    //Barrel_Shifter.io.load := 1.U
-    Barrel_Shifter.io.rshift := 0.U 
-    Barrel_Shifter.io.lshift := 1.U
-    Barrel_Shifter.io.shiftnum := io.din_2
-    Barrel_Shifter.reg_inbit := 0.U
-    Barrel_Shifter.io.in := io.din_1
-    */
-  
+    
+    // Default output 
     io.dout := 0.U 
+
     when (io.op_config === SUM) {
       io.dout := io.din_1 + io.din_2                            // SUM
     }
@@ -66,12 +59,14 @@ class ALU
     .elsewhen (io.op_config === SUB) {
       io.dout := io.din_1 - io.din_2                            // SUB
     }
+
+    //////////////////////////////////////////////////////////////////////
+    // A shift left logical of one position moves each bit to the left 
+    // by one. The low-order bit (the right-most bit) is replaced by 
+    // a zero bit and the high-order bit (the left-most bit) is discarded.
+    ///////////////////////////////////////////////////////////////////////
+
     .elsewhen (io.op_config === SLL) {                          // SLL
-      //?
-      //Barrel_Shifter.io.load := 0.U
-      
-      //io.dout := Barrel_Shifter.io.out 
-      
       switch(io.din_2) {
         is(0.U) {
           io.dout := reg_out
@@ -169,17 +164,25 @@ class ALU
         is(31.U) {
           io.dout := Cat(reg_out(0), Fill(31, reg_inbit))
         }
-      }
-      //reg_out_temp := reg_out
-      //io.dout := reg_out_temp     
-      
+      }      
     } 
+
+    ///////////////////////////////////////////////////////////////////////
+    // An arithmetic right shift fills bits vacated by the right shift with 
+    // the value of the most significant bit, which indicates the sign of 
+    // the number in twos complement notation.
+    ///////////////////////////////////////////////////////////////////////
+    
     .elsewhen (io.op_config === SRA) {
-      
-      sign_din_1 := io.din_1.asSInt
-      io.dout := (sign_din_1 >> io.din_2).asUInt                // SRA
-      
+      din_1_signed := io.din_1.asSInt
+      io.dout := (din_1_signed >> io.din_2).asUInt              // SRA
     } 
+
+    ///////////////////////////////////////////////////////////////////////
+    // When shifting right with a logical right shift, the 
+    // least-significant bit is lost and a 0 is inserted on the other end.
+    ///////////////////////////////////////////////////////////////////////
+
     .elsewhen (io.op_config === SRL) {
       io.dout := io.din_1 >> io.din_2                           // SRL
     }
@@ -194,18 +197,18 @@ class ALU
     } 
     .elsewhen (io.op_config === MIN) {                          // MIN
       when (io.din_1 <= io.din_2) {
-        io.dout := io.din_1                                     // MIN = din_1 
+        io.dout := io.din_1                                     // If din_1 <= din_2 then MIN = din_1 
       }  
       .elsewhen(io.din_1 > io.din_2) {
-        io.dout := io.din_2                                     // MIN = din_2
+        io.dout := io.din_2                                     // If din_1 > din_2 then MIN = din_2
       }                             
     }
     .elsewhen (io.op_config === MAX) {                          // MAX
       when (io.din_1 >= io.din_2) {
-        io.dout := io.din_1                                     // MAX = din_1 
+        io.dout := io.din_1                                     // If din_1 >= din_2 then MAX = din_1 
       }  
       .elsewhen(io.din_1 < io.din_2) {
-        io.dout := io.din_2                                     // MAX = din_2
+        io.dout := io.din_2                                     // If din_1 < din_2 then MAX = din_2
       }     
     } 
     .otherwise { 
@@ -216,5 +219,5 @@ class ALU
 // Generate the Verilog code
 object ALUMain extends App {
     println("Generating the hardware")
-    (new chisel3.stage.ChiselStage).emitVerilog(new ALU(32, 4), Array("--target-dir", "generated"))
+    (new chisel3.stage.ChiselStage).emitVerilog(new ALU(32, 5), Array("--target-dir", "generated"))
 }

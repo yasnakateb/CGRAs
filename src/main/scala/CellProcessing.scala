@@ -51,21 +51,32 @@ class CellProcessing
     val load_initial_value = RegInit(0.U(2.W))
     
     //  Interconnect signals
+    
     val FU_dout = RegInit(0.U(DATA_WIDTH.W))
+    
     val EB_din_1 = RegInit(0.U(DATA_WIDTH.W))
     val EB_din_2 = RegInit(0.U(DATA_WIDTH.W))
     val join_din_1 = RegInit(0.U(DATA_WIDTH.W))
     val join_din_2 = RegInit(0.U(DATA_WIDTH.W))
+    /********************************
     val join_dout_1 = RegInit(0.U(DATA_WIDTH.W))
     val join_dout_2 = RegInit(0.U(DATA_WIDTH.W))
+    *********************************/
+
     
     val FU_dout_v = Wire(Bool())
+   
     val FU_dout_r = Wire(Bool())
     val EB_din_1_v = Wire(Bool())
     val EB_din_2_v = Wire(Bool())
+    /********************************
     val join_din_1_v = Wire(Bool())
+    *********************************/
+
     val join_din_1_r = Wire(Bool())
+    /********************************
     val join_din_2_v = Wire(Bool())
+    *********************************/
     val join_din_2_r = Wire(Bool())
     val join_dout_v = Wire(Bool())
     val join_dout_r = Wire(Bool())
@@ -101,7 +112,9 @@ class CellProcessing
     val MUX_1 = Module (new ConfMux(6, DATA_WIDTH))
     MUX_1.io.selector := selector_mux_1
     MUX_1.io.mux_input := Cat(FU_dout, I1_const, io.west_din, io.south_din, io.east_din, io.north_din)
+    /********************************
     EB_din_1 := MUX_1.io.mux_output
+    ********************************/
 
     val FR_2 = Module (new FR(6, 4))
     val ready_FR2 = Cat(io.north_dout_r, io.east_dout_r, io.south_dout_r, io.west_dout_r)  
@@ -115,57 +128,90 @@ class CellProcessing
     val MUX_2 = Module (new ConfMux(6, DATA_WIDTH))
     MUX_2.io.selector := selector_mux_2
     MUX_2.io.mux_input := Cat(FU_dout, I1_const, io.west_din, io.south_din, io.east_din, io.north_din) 
+    /*********************************
     EB_din_2 := MUX_2.io.mux_output
+    *********************************/
 
-    val SEB_1 = Module (new D_SEB(DATA_WIDTH))
-    SEB_1.io.din := EB_din_1
-    SEB_1.io.din_v := EB_din_1_v
-    io.FU_din_1_r := SEB_1.io.din_r 
-    join_din_1 := SEB_1.io.dout   
-    join_din_1_v := SEB_1.io.dout_v 
-    SEB_1.io.dout_r := join_din_1_r
+    val EB_1 = Module (new D_EB(DATA_WIDTH))
+    /**********************************
+    EB_1.io.din := EB_din_1
+    **********************************/
+    EB_1.io.din := MUX_1.io.mux_output
+    EB_1.io.din_v := EB_din_1_v
+    io.FU_din_1_r := EB_1.io.din_r 
+    /**********************************
+    join_din_1 := EB_1.io.dout   
+    join_din_1_v := EB_1.io.dout_v 
+    **********************************/
+    EB_1.io.dout_r := join_din_1_r
 
-    val SEB_2 = Module (new D_SEB(DATA_WIDTH))
-    SEB_2.io.din := EB_din_2
-    SEB_2.io.din_v := EB_din_2_v
-    io.FU_din_2_r := SEB_2.io.din_r 
-    join_din_2 := SEB_2.io.dout   
-    join_din_2_v := SEB_2.io.dout_v 
-    SEB_2.io.dout_r := join_din_2_r 
+    val EB_2 = Module (new D_EB(DATA_WIDTH))
+    /*********************************
+    EB_2.io.din := EB_din_2
+    *********************************/
+    EB_2.io.din := MUX_2.io.mux_output
+    EB_2.io.din_v := EB_din_2_v
+    io.FU_din_2_r := EB_2.io.din_r 
+    /*********************************
+    join_din_2 := EB_2.io.dout   
+    join_din_2_v := EB_2.io.dout_v
+    *********************************/
+    EB_2.io.dout_r := join_din_2_r 
 
     val JOIN_INST = Module (new Join(DATA_WIDTH))
+    /**********************************
     JOIN_INST.io.din_1 := join_din_1
     JOIN_INST.io.din_2 := join_din_2
+    *********************************/
+    JOIN_INST.io.din_1 := EB_1.io.dout   
+    JOIN_INST.io.din_2 := EB_2.io.dout   
+
     JOIN_INST.io.dout_r := join_dout_r
+    /**********************************
     JOIN_INST.io.din_1_v := join_din_1_v
     JOIN_INST.io.din_2_v := join_din_2_v
+    *********************************/
+    JOIN_INST.io.din_1_v := EB_1.io.dout_v
+    JOIN_INST.io.din_2_v := EB_2.io.dout_v
 
     join_dout_v := JOIN_INST.io.dout_v 
     join_din_1_r := JOIN_INST.io.din_1_r 
     join_din_2_r := JOIN_INST.io.din_2_r 
+    /**********************************
     join_dout_1 := JOIN_INST.io.dout_1 
     join_dout_2 := JOIN_INST.io.dout_2 
+    *********************************/
 
-    val FU_INST = Module (new FU(DATA_WIDTH, 4))
+    val FU_INST = Module (new FU(DATA_WIDTH, 5))
+    FU_INST.io.din_1 := JOIN_INST.io.dout_1 
+    FU_INST.io.din_2 := JOIN_INST.io.dout_2 
+    /**********************************
     FU_INST.io.din_1 := join_dout_1
     FU_INST.io.din_2 := join_dout_2
+    *********************************/
     FU_INST.io.din_v := join_dout_v
     join_dout_r := FU_INST.io.din_r 
     FU_INST.io.loop_source := load_initial_value
     FU_INST.io.iterations_reset := iterations_reset_load 
     FU_INST.io.op_config := op_config 
-
+    ////// Question ==> val valid_in_FR1 = Cat(FU_dout_v.asUInt, "b1".U, io.west_din_v, io.south_din_v, io.east_din_v, io.north_din_v)
     FU_dout := FU_INST.io.dout    
-    FU_dout_v := FU_INST.io.dout_v 
+    FU_dout_v := FU_INST.io.dout_v
+    
     FU_INST.io.dout_r := FU_dout_r
 
-    val SEB_OUT = Module (new D_SEB(DATA_WIDTH))
-    SEB_OUT.io.din := FU_dout
-    SEB_OUT.io.din_v := FU_dout_v
-    FU_dout_r := SEB_OUT.io.din_r
-    io.dout := SEB_OUT.io.dout   
-    io.dout_v := SEB_OUT.io.dout_v 
-    SEB_OUT.io.dout_r := forked_dout_r
+    val EB_OUT = Module (new D_EB(DATA_WIDTH))
+    /**********************************
+    EB_OUT.io.din := FU_dout
+    EB_OUT.io.din_v := FU_dout_v
+    *********************************/
+    EB_OUT.io.din := FU_INST.io.dout    
+    EB_OUT.io.din_v := FU_INST.io.dout_v
+
+    FU_dout_r := EB_OUT.io.din_r
+    io.dout := EB_OUT.io.dout   
+    io.dout_v := EB_OUT.io.dout_v 
+    EB_OUT.io.dout_r := forked_dout_r
 
     val FS = Module (new FS(5))
     val ready_out_FS = Cat("b1".U, io.north_dout_r, io.east_dout_r, io.south_dout_r, io.west_dout_r)     

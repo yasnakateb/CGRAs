@@ -261,8 +261,9 @@ class ProcessingElement
     val FS_Win = Module (new FS(5))
     val ready_out_FS_Win = Cat(FU_din_1_r, FU_din_2_r, north_REG_din_r, east_REG_din_r, south_REG_din_r)     
     FS_Win.io.ready_out := ready_out_FS_Win
-    west_buffer_r := FS_Win.io.ready_in
     FS_Win.io.fork_mask :=  accept_mask_fsiW
+    west_buffer_r := FS_Win.io.ready_in
+    
 
     val MUX_Wout  = Module (new ConfMux(4, DATA_WIDTH))
     MUX_Wout.io.selector := mux_W_sel

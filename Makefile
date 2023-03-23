@@ -5,25 +5,25 @@ alu:
 	$(SBT) "runMain ALUMain"
 
 alu-test:
-	$(SBT) "testOnly ALUTest -- -DwriteVcd=1"
+	$(SBT) "testOnly ALU_Test -- -DwriteVcd=1"
 
 fu:
 	$(SBT) "runMain FUMain"
 
 fu-test:
-	$(SBT) "testOnly FUTest -- -DwriteVcd=1"
+	$(SBT) "testOnly FU_Test -- -DwriteVcd=1"
 
 join:
 	$(SBT) "runMain JoinMain"
 
 join-test:
-	$(SBT) "testOnly JoinTest -- -DwriteVcd=1"
+	$(SBT) "testOnly Join_Test -- -DwriteVcd=1"
 
 d-eb:
 	$(SBT) "runMain D_EBMain"
 
 d-eb-test:
-	$(SBT) "testOnly D_EBTest -- -DwriteVcd=1"
+	$(SBT) "testOnly D_EB_Test -- -DwriteVcd=1"
 
 d-buf:
 	$(SBT) "runMain D_BUFMain"
@@ -36,12 +36,6 @@ d-reg:
 
 d-reg-test:
 	$(SBT) "testOnly D_REGTest -- -DwriteVcd=1"
-
-d-seb:
-	$(SBT) "runMain D_SEBMain"
-
-d-seb-test:
-	$(SBT) "testOnly D_SEBTest -- -DwriteVcd=1"
 
 fs:
 	$(SBT) "runMain FSMain"

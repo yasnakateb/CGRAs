@@ -13,42 +13,43 @@ class D_EB
     )
     extends Module {
     val io = IO(new Bundle {
-        val d_p = Input(UInt(DATA_WIDTH.W))
-        val v_p = Input(Bool())
-        val a_n = Input(Bool())
-        val d_n = Output(UInt(DATA_WIDTH.W))
-        val v_n = Output(Bool())
-        val a_p = Output(Bool())  
+        // Data in
+        val din = Input(UInt(DATA_WIDTH.W))
+        val din_v = Input(Bool())
+        val din_r = Output(Bool())
+        // Data out
+        val dout = Output(UInt(DATA_WIDTH.W))
+        val dout_v = Output(Bool())
+        val dout_r = Input(Bool())  
     })
 
-    val main  = Module (new RegEnable(DATA_WIDTH))
-    val aux  = Module (new RegEnable(DATA_WIDTH))
-    val reg_1  = Module (new RegEnable(1))
-    val reg_2  = Module (new RegEnable(1))
+    // Registers
+    val regDin1 = RegInit(0.U(DATA_WIDTH.W))
+    val regDin2 = RegInit(0.U(DATA_WIDTH.W))
+    val regDinV1 = RegInit(0.B)
+    val regDinV2 = RegInit(0.B)
+    val regAreg = RegInit(0.B)
 
-    val reg = RegInit(0.U(1.W))
-    val S_EA = Wire(Bool())
-    val EM = Wire(Bool())
-     
-    val mux2_out = Mux(reg.asBool, reg_1.io.out, reg_2.io.out)
-    reg := io.a_n.asUInt | (~mux2_out)
-    S_EA := reg.asBool
-    io.v_n := mux2_out.asBool
+    when(regAreg) {
+        regDin1 := io.din
+        regDin2 := regDin1
 
-    io.a_p := S_EA | (~io.v_p)
-    EM := io.a_p
+        regDinV1 := io.din_v
+        regDinV2 := regDinV1
+    }
 
-    main.io.in := io.d_p
-    aux.io.in := main.io.out 
-    reg_1.io.in := io.v_p
-    reg_2.io.in := reg_1.io.out  
+    regAreg := ~io.dout_v | io.dout_r
 
-    main.io.en := EM 
-    aux.io.en := S_EA
-    reg_1.io.en := EM 
-    reg_2.io.en := S_EA
+    // Combinational assignments
+    io.din_r := regAreg
 
-    io.d_n := Mux(S_EA, main.io.out, aux.io.out)
+    when(regAreg) {
+        io.dout := regDin1
+        io.dout_v := regDinV1
+    }.otherwise {
+        io.dout := regDin2
+        io.dout_v := regDinV2
+    }
 }
 
 // Generate the Verilog code

@@ -8,8 +8,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class ALUTest extends AnyFlatSpec with ChiselScalatestTester {
-    "ALUTest test" should "pass" in {
+class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "ALU_Test test" should "pass" in {
         test(new ALU(32, 4)) { dut =>
             var din_1 = 26
             var din_2 = 3

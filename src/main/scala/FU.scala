@@ -42,12 +42,11 @@ class FU
 
         
     })
-    //Clock, Reset
-    // val clk = IO(Input(Clock()))
-    // val reset = IO(Input(Reset())) 
 
     val alu_din_1 = RegInit(0.U(DATA_WIDTH.W))
     val alu_din_2 = RegInit(0.U(DATA_WIDTH.W))
+    ////////////////////// Temp Valid 
+    val temp_valid = RegInit(0.U)
     val alu_dout = RegInit(0.U(DATA_WIDTH.W))
     val dout_Reg = RegInit(0.U(DATA_WIDTH.W))
     // Fix
@@ -57,15 +56,22 @@ class FU
     val loaded = RegInit(0.U(1.W))
     val valid = RegInit(0.U(1.W))
 
+    val ALU = Module (new ALU(DATA_WIDTH, OP_WIDTH))
+    ALU.io.din_1 := alu_din_1
+    ALU.io.din_2 := alu_din_2
+    alu_dout := ALU.io.dout 
+    ALU.io.op_config := io.op_config
     
     when (io.loop_source === STATE_0) {
         alu_din_1 := io.din_1;
-        alu_din_2 := io.din_2;                  
+        alu_din_2 := io.din_2; 
+        temp_valid := io.din_v                      
     }
     .elsewhen (io.loop_source === STATE_1) {
         when (loaded === 0.U) {
             alu_din_1 := io.din_1;
-            alu_din_2 := io.din_2;                                
+            alu_din_2 := io.din_2; 
+                                      
         }  
         .otherwise {
             alu_din_1 := dout_Reg;
@@ -86,15 +92,7 @@ class FU
         alu_din_1 := (DATA_WIDTH - 1).U;
         alu_din_2 := (DATA_WIDTH - 1).U;
     }
-
-    //when (io.reset === RST_POL) {
-    withReset (reset.asBool) {
-        loaded := 0.U;
-        count := 0.U;
-        dout_Reg := 0.U;
-        valid := 0.U;  
-    }           
-    //}
+    
     // ********************************************
     // We have the following line in the vhdl code. 
     // ********************************************
@@ -111,7 +109,6 @@ class FU
             count := count + 1.U;                            
         }  
         when (count === io.iterations_reset && 
-            //when(
              (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
               io.dout_r === 1.U)
             {
@@ -125,33 +122,37 @@ class FU
                    io.dout_r === 1.U)
             {
             dout_Reg := alu_dout;
-        }                             
-    // }
+        } 
+
+    /*                              
     when (io.loop_source === STATE_0){
         io.dout_v := io.din_v
     }
     .otherwise{
         io.dout_v := valid;    
     } 
+    */
 
     io.din_r := io.dout_r;
 
     when (io.loop_source === STATE_0){
+        /////////////////////////////////////////
+        /*
         io.dout := alu_dout
+        */
+        /////////////////////////////////////////
+        io.dout := ALU.io.dout
+        io.dout_v := temp_valid
+        
     }
     .otherwise{
         io.dout := dout_Reg
-    } 
-
-    val ALU = Module (new ALU(DATA_WIDTH, OP_WIDTH))
-    ALU.io.din_1 := alu_din_1
-    ALU.io.din_2 := alu_din_2
-    alu_dout := ALU.io.dout 
-    ALU.io.op_config := io.op_config
+        io.dout_v := valid;    
+    }   
 }
 
 // Generate the Verilog code
 object FUMain extends App {
     println("Generating the hardware")
-    (new chisel3.stage.ChiselStage).emitVerilog(new FU(8, 8), Array("--target-dir", "generated"))
+    (new chisel3.stage.ChiselStage).emitVerilog(new FU(32, 5), Array("--target-dir", "generated"))
 }

@@ -33,12 +33,12 @@ class Join
 
     io.dout_v := io.din_1_v & io.din_2_v
 
-    io.din_1_r := io.din_2_v & io.dout_r
-    io.din_2_r := io.din_1_v & io.dout_r   
+    io.din_1_r := io.dout_r & io.din_2_v 
+    io.din_2_r := io.dout_r & io.din_1_v       
 }
 
 // Generate the Verilog code
 object JoinMain extends App {
     println("Generating the hardware")
-    (new chisel3.stage.ChiselStage).emitVerilog(new Join(8), Array("--target-dir", "generated"))
+    (new chisel3.stage.ChiselStage).emitVerilog(new Join(32), Array("--target-dir", "generated"))
 }
