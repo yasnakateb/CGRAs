@@ -8,8 +8,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class OverlayRoccTest extends AnyFlatSpec with ChiselScalatestTester {
-    "OverlayRoccTest test" should "pass" in {
+class OverlayRocc_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "OverlayRocc_Test test" should "pass" in {
         test(new OverlayRocc(32, 6, 6, 32)) { dut =>
             // Data
             var data_in = "h060504030201".U 

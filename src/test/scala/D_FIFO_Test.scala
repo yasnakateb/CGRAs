@@ -8,8 +8,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class D_FIFOTest extends AnyFlatSpec with ChiselScalatestTester {
-    "D_FIFOTest test" should "pass" in {
+class D_FIFO_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "D_FIFO_Test test" should "pass" in {
         test(new D_FIFO(32, 4)) { dut =>
             
             var din = "b101010".U 

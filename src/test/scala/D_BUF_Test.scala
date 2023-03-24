@@ -8,8 +8,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class D_BUFTest extends AnyFlatSpec with ChiselScalatestTester {
-    "D_BUFTest test" should "pass" in {
+class D_BUF_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "D_BUF_Test test" should "pass" in {
         test(new D_BUF(8)) { dut =>
             var d_p = 10
             var a_n = false

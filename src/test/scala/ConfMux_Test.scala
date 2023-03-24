@@ -8,8 +8,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class ConfMuxTest extends AnyFlatSpec with ChiselScalatestTester {
-    "ConfMuxTest test" should "pass" in {
+class ConfMux_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "ConfMux_Test test" should "pass" in {
         test(new ConfMux(2,2)) { dut =>
             // mux_input: 1011, selector: 1 ==> Mux Output: 10
             val selector = 1

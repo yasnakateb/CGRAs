@@ -8,8 +8,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class D_REGTest extends AnyFlatSpec with ChiselScalatestTester {
-    "D_REGTest test" should "pass" in {
+class D_REG_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "D_REG_Test test" should "pass" in {
         test(new D_REG(8)) { dut =>
             var din = 10
             var dout_r = false

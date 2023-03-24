@@ -8,8 +8,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class ProcessingElementTest extends AnyFlatSpec with ChiselScalatestTester {
-    "ProcessingElementTest test" should "pass" in {
+class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "ProcessingElement_Test test" should "pass" in {
         test(new ProcessingElement(32, 4)) { dut =>
             
             var north_din = 0.U 
@@ -56,13 +56,22 @@ class ProcessingElementTest extends AnyFlatSpec with ChiselScalatestTester {
             config_bits = 0.U
             dut.io.config_bits.poke(config_bits)
             
-            dut.io.north_din.poke(12.U)
-            dut.io.west_din.poke(13.U)
+            dut.io.north_din.poke(1.U)
+            dut.io.west_din.poke(2.U)
             dut.io.north_din_v.poke(true.B)
             dut.io.west_din_v.poke(true.B)
             dut.clock.step(1)
-            dut.io.north_din.poke(14.U)
-            dut.io.west_din.poke(15.U)
+            dut.io.north_din.poke(3.U)
+            dut.io.west_din.poke(4.U)
+            dut.clock.step(1)
+            dut.io.north_din.poke(5.U)
+            dut.io.west_din.poke(6.U)
+            dut.clock.step(1)
+            dut.io.north_din.poke(7.U)
+            dut.io.west_din.poke(8.U)
+            dut.clock.step(1)
+            dut.io.north_din.poke(9.U)
+            dut.io.west_din.poke(10.U)
             dut.clock.step(1)
             dut.io.north_din_v.poke(false.B)
             dut.io.west_din_v.poke(false.B)

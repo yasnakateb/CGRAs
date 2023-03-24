@@ -8,8 +8,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class FSTest extends AnyFlatSpec with ChiselScalatestTester {
-    "FSTest test" should "pass" in {
+class FS_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "FS_Test test" should "pass" in {
         test(new FS(6)) { dut =>
             
             var ready_out = "b1010".U 

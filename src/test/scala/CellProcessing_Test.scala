@@ -8,8 +8,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class CellProcessingTest extends AnyFlatSpec with ChiselScalatestTester {
-    "CellProcessingTest test" should "pass" in {
+class CellProcessing_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "CellProcessing_Test test" should "pass" in {
         test(new CellProcessing(32)) { dut =>
             var north_din = 1.U 
             var north_din_v = true.B 
