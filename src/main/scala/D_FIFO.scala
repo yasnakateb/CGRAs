@@ -27,6 +27,7 @@ class D_FIFO
 
     val memory = SyncReadMem(FIFO_DEPTH, UInt(DATA_WIDTH.W))
 
+    
     val write_pointer = RegInit(0.U(FIFO_DEPTH.W)) 
     val read_pointer = RegInit(0.U(FIFO_DEPTH.W)) 
     val num_data = RegInit(0.U(FIFO_DEPTH.W)) 
@@ -36,14 +37,14 @@ class D_FIFO
     val rd_en = Wire(Bool()) 
     val wr_en = Wire(Bool()) 
 
-
+    /*
     empty := true.B
     full := false.B 
-    write_pointer := 0.U 
-    read_pointer := 0.U 
-    num_data := 0.U 
     io.dout := 0.U 
     io.dout_v := false.B  
+    */
+    io.dout_v := false.B  
+    io.dout := 0.U 
 
     wr_en := io.din_v & (~full) 
     rd_en := io.dout_r & (~empty) 

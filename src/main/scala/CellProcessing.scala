@@ -38,6 +38,23 @@ class CellProcessing
     })
 
     //  Config signals
+    /*****************/
+    // Changing std_logic_vector
+    /***************/
+
+    val selector_mux_1 = Wire(UInt(3.W))
+    val selector_mux_2 = Wire(UInt(3.W))
+    val fork_receiver_mask_1 = Wire(UInt(4.W))
+    val fork_receiver_mask_2 = Wire(UInt(4.W))
+    val op_config = Wire(UInt(5.W))
+    val fork_sender_mask = Wire(UInt(5.W))
+    val I1_const = Wire(UInt(DATA_WIDTH.W))
+    val initial_value_load = Wire(UInt(DATA_WIDTH.W))
+    val iterations_reset_load = Wire(UInt(16.W))
+    val fifo_length_load = Wire(UInt(16.W))
+    val load_initial_value = Wire(UInt(2.W))
+    
+    /*
     val selector_mux_1 = RegInit(0.U(3.W))
     val selector_mux_2 = RegInit(0.U(3.W))
     val fork_receiver_mask_1 = RegInit(0.U(4.W))
@@ -49,19 +66,39 @@ class CellProcessing
     val iterations_reset_load = RegInit(0.U(16.W))
     val fifo_length_load = RegInit(0.U(16.W))
     val load_initial_value = RegInit(0.U(2.W))
+    */
+    /***************/
     
     //  Interconnect signals
     
+    /*****************/
+    // Changing std_logic_vector
+    /***************/
+
+    val FU_dout = Wire(UInt(DATA_WIDTH.W))
+    
+    val EB_din_1 = Wire(UInt(DATA_WIDTH.W))
+    val EB_din_2 = Wire(UInt(DATA_WIDTH.W))
+    val join_din_1 = Wire(UInt(DATA_WIDTH.W))
+    val join_din_2 = Wire(UInt(DATA_WIDTH.W))
+
+    
+    /*
     val FU_dout = RegInit(0.U(DATA_WIDTH.W))
     
     val EB_din_1 = RegInit(0.U(DATA_WIDTH.W))
     val EB_din_2 = RegInit(0.U(DATA_WIDTH.W))
     val join_din_1 = RegInit(0.U(DATA_WIDTH.W))
     val join_din_2 = RegInit(0.U(DATA_WIDTH.W))
+    */
+
+
     /********************************
     val join_dout_1 = RegInit(0.U(DATA_WIDTH.W))
     val join_dout_2 = RegInit(0.U(DATA_WIDTH.W))
     *********************************/
+    val join_dout_1 = Wire(UInt(DATA_WIDTH.W))
+    val join_dout_2 = Wire(UInt(DATA_WIDTH.W))
 
     
     val FU_dout_v = Wire(Bool())
@@ -72,11 +109,13 @@ class CellProcessing
     /********************************
     val join_din_1_v = Wire(Bool())
     *********************************/
+    val join_din_1_v = Wire(Bool())
 
     val join_din_1_r = Wire(Bool())
     /********************************
     val join_din_2_v = Wire(Bool())
     *********************************/
+    val join_din_2_v = Wire(Bool())
     val join_din_2_r = Wire(Bool())
     val join_dout_v = Wire(Bool())
     val join_dout_r = Wire(Bool())
@@ -115,6 +154,7 @@ class CellProcessing
     /********************************
     EB_din_1 := MUX_1.io.mux_output
     ********************************/
+    EB_din_1 := MUX_1.io.mux_output
 
     val FR_2 = Module (new FR(6, 4))
     val ready_FR2 = Cat(io.north_dout_r, io.east_dout_r, io.south_dout_r, io.west_dout_r)  
@@ -131,24 +171,29 @@ class CellProcessing
     /*********************************
     EB_din_2 := MUX_2.io.mux_output
     *********************************/
+    EB_din_2 := MUX_2.io.mux_output
 
     val EB_1 = Module (new D_EB(DATA_WIDTH))
     /**********************************
     EB_1.io.din := EB_din_1
     **********************************/
-    EB_1.io.din := MUX_1.io.mux_output
+    EB_1.io.din := EB_din_1
+    //EB_1.io.din := MUX_1.io.mux_output
     EB_1.io.din_v := EB_din_1_v
     io.FU_din_1_r := EB_1.io.din_r 
     /**********************************
     join_din_1 := EB_1.io.dout   
     join_din_1_v := EB_1.io.dout_v 
     **********************************/
+    join_din_1 := EB_1.io.dout   
+    join_din_1_v := EB_1.io.dout_v 
     EB_1.io.dout_r := join_din_1_r
 
     val EB_2 = Module (new D_EB(DATA_WIDTH))
     /*********************************
     EB_2.io.din := EB_din_2
     *********************************/
+    EB_2.io.din := EB_din_2
     EB_2.io.din := MUX_2.io.mux_output
     EB_2.io.din_v := EB_din_2_v
     io.FU_din_2_r := EB_2.io.din_r 
@@ -156,6 +201,8 @@ class CellProcessing
     join_din_2 := EB_2.io.dout   
     join_din_2_v := EB_2.io.dout_v
     *********************************/
+    join_din_2 := EB_2.io.dout   
+    join_din_2_v := EB_2.io.dout_v
     EB_2.io.dout_r := join_din_2_r 
 
     val JOIN_INST = Module (new Join(DATA_WIDTH))
@@ -163,6 +210,8 @@ class CellProcessing
     JOIN_INST.io.din_1 := join_din_1
     JOIN_INST.io.din_2 := join_din_2
     *********************************/
+    JOIN_INST.io.din_1 := join_din_1
+    JOIN_INST.io.din_2 := join_din_2
     JOIN_INST.io.din_1 := EB_1.io.dout   
     JOIN_INST.io.din_2 := EB_2.io.dout   
 
@@ -171,6 +220,8 @@ class CellProcessing
     JOIN_INST.io.din_1_v := join_din_1_v
     JOIN_INST.io.din_2_v := join_din_2_v
     *********************************/
+    JOIN_INST.io.din_1_v := join_din_1_v
+    JOIN_INST.io.din_2_v := join_din_2_v
     JOIN_INST.io.din_1_v := EB_1.io.dout_v
     JOIN_INST.io.din_2_v := EB_2.io.dout_v
 
@@ -181,6 +232,8 @@ class CellProcessing
     join_dout_1 := JOIN_INST.io.dout_1 
     join_dout_2 := JOIN_INST.io.dout_2 
     *********************************/
+    join_dout_1 := JOIN_INST.io.dout_1 
+    join_dout_2 := JOIN_INST.io.dout_2 
 
     val FU_INST = Module (new FU(DATA_WIDTH, 5))
     FU_INST.io.din_1 := JOIN_INST.io.dout_1 
@@ -189,6 +242,8 @@ class CellProcessing
     FU_INST.io.din_1 := join_dout_1
     FU_INST.io.din_2 := join_dout_2
     *********************************/
+    FU_INST.io.din_1 := join_dout_1
+    FU_INST.io.din_2 := join_dout_2
     FU_INST.io.din_v := join_dout_v
     join_dout_r := FU_INST.io.din_r 
     FU_INST.io.loop_source := load_initial_value
@@ -205,6 +260,8 @@ class CellProcessing
     EB_OUT.io.din := FU_dout
     EB_OUT.io.din_v := FU_dout_v
     *********************************/
+    EB_OUT.io.din := FU_dout
+    EB_OUT.io.din_v := FU_dout_v
     EB_OUT.io.din := FU_INST.io.dout    
     EB_OUT.io.din_v := FU_INST.io.dout_v
 
