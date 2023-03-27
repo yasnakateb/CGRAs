@@ -1,8 +1,35 @@
-///////////////////////////////////////
-//                                   //
-//      Arithmetic Logic Unit        //
-//                                   //
-///////////////////////////////////////
+/****************************************** 
+ *      \`-._           __                *
+ *       \\  `-..____,.'  `.              *
+ *        :`.         /    \`.            *
+ *        :  )       :      : \           *
+ *         ;'        '   ;  |  :          *
+ *         )..      .. .:.`.;  :          *
+ *        /::...  .:::...   ` ;           *
+ *        ; _ '    __        /:\          *
+ *        `:o>   /\o_>      ;:. `.        *
+ *       `-`.__ ;   __..--- /:.   \       *
+ *       === \_/   ;=====_.':.     ;      *
+ *        ,/'`--'...`--....        ;      *
+ *             ;                    ;     *
+ *           .'                      ;    *
+ *         .'                        ;    *
+ *       .'     ..     ,      .       ;   *
+ *      :       ::..  /      ;::.     |   *
+ *     /      `.;::.  |       ;:..    ;   *
+ *    :         |:.   :       ;:.    ;    *
+ *    :         ::     ;:..   |.    ;     *
+ *     :       :;      :::....|     |     *
+ *     /\     ,/ \      ;:::::;     ;     *
+ *   .:. \:..|    :     ; '.--|     ;     *
+ *  ::.  :''  `-.,,;     ;'   ;     ;     *
+ * .-'. _.'\      / `;      \,__:      \  *
+ * `---'    `----'   ;      /    \,.,,,/  *
+ *                  `----`                *
+ * ****************************************
+ * Yasna Katebzadeh                       *
+ * yasna.katebzadeh@gmail.com             *
+ ******************************************/
 
 import chisel3._
 import chisel3.util._
@@ -38,34 +65,26 @@ class ALU
         val dout = Output(UInt(DATA_WIDTH.W))
     })
 
-    // Converting din_1 to signed integer for shift right arithmetic
+    // Converte din_1 to signed integer for shift right arithmetic (SRA)
     val din_1_signed = RegInit(0.S(DATA_WIDTH.W))
 
     // Store din_1 in reg_out for barrel shifter 
     val reg_out = RegInit(0.U(32.W))
     reg_out := io.din_1 
     val reg_inbit = RegInit(0.U(1.W))
-    reg_inbit := io.din_1(31)
-    
+    reg_inbit := 0.U
     // Default output 
     io.dout := 0.U 
 
-    when (io.op_config === SUM) {
-      io.dout := io.din_1 + io.din_2                            // SUM
+    when (io.op_config === SUM) {                               // SUM
+      io.dout := io.din_1 + io.din_2                            
     }
-    .elsewhen (io.op_config === MUL) {
-      io.dout := io.din_1 * io.din_2                            // MUL
+    .elsewhen (io.op_config === MUL) {                          // MUL
+      io.dout := io.din_1 * io.din_2                            
     } 
-    .elsewhen (io.op_config === SUB) {
-      io.dout := io.din_1 - io.din_2                            // SUB
+    .elsewhen (io.op_config === SUB) {                          // SUB
+      io.dout := io.din_1 - io.din_2                            
     }
-
-    //////////////////////////////////////////////////////////////////////
-    // A shift left logical of one position moves each bit to the left 
-    // by one. The low-order bit (the right-most bit) is replaced by 
-    // a zero bit and the high-order bit (the left-most bit) is discarded.
-    ///////////////////////////////////////////////////////////////////////
-
     .elsewhen (io.op_config === SLL) {                          // SLL
       switch(io.din_2) {
         is(0.U) {
@@ -166,49 +185,36 @@ class ALU
         }
       }      
     } 
-
-    ///////////////////////////////////////////////////////////////////////
-    // An arithmetic right shift fills bits vacated by the right shift with 
-    // the value of the most significant bit, which indicates the sign of 
-    // the number in twos complement notation.
-    ///////////////////////////////////////////////////////////////////////
-    
-    .elsewhen (io.op_config === SRA) {
+    .elsewhen (io.op_config === SRA) {                          // SRA
       din_1_signed := io.din_1.asSInt
-      io.dout := (din_1_signed >> io.din_2).asUInt              // SRA
+      io.dout := (din_1_signed >> io.din_2).asUInt              
     } 
-
-    ///////////////////////////////////////////////////////////////////////
-    // When shifting right with a logical right shift, the 
-    // least-significant bit is lost and a 0 is inserted on the other end.
-    ///////////////////////////////////////////////////////////////////////
-
-    .elsewhen (io.op_config === SRL) {
-      io.dout := io.din_1 >> io.din_2                           // SRL
+    .elsewhen (io.op_config === SRL) {                          // SRL
+      io.dout := io.din_1 >> io.din_2                           
     }
-    .elsewhen (io.op_config === AND) {
-      io.dout := io.din_1 & io.din_2                            // AND
+    .elsewhen (io.op_config === AND) {                          // AND
+      io.dout := io.din_1 & io.din_2                            
     } 
-    .elsewhen (io.op_config === OR) {
-      io.dout := io.din_1 | io.din_2                            // OR
+    .elsewhen (io.op_config === OR) {                           // OR
+      io.dout := io.din_1 | io.din_2                            
     } 
-    .elsewhen (io.op_config === XOR) {
-      io.dout := io.din_1 ^ io.din_2                            // XOR
+    .elsewhen (io.op_config === XOR) {                          // XOR
+      io.dout := io.din_1 ^ io.din_2                            
     } 
     .elsewhen (io.op_config === MIN) {                          // MIN
       when (io.din_1 <= io.din_2) {
-        io.dout := io.din_1                                     // If din_1 <= din_2 then MIN = din_1 
+        io.dout := io.din_1                                     
       }  
       .elsewhen(io.din_1 > io.din_2) {
-        io.dout := io.din_2                                     // If din_1 > din_2 then MIN = din_2
+        io.dout := io.din_2                                     
       }                             
     }
     .elsewhen (io.op_config === MAX) {                          // MAX
       when (io.din_1 >= io.din_2) {
-        io.dout := io.din_1                                     // If din_1 >= din_2 then MAX = din_1 
+        io.dout := io.din_1                                    
       }  
       .elsewhen(io.din_1 < io.din_2) {
-        io.dout := io.din_2                                     // If din_1 < din_2 then MAX = din_2
+        io.dout := io.din_2                                    
       }     
     } 
     .otherwise { 
