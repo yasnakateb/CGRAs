@@ -38,6 +38,7 @@ class D_EB_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("Vp: " + dut.io.din_v.peek().toString)
             println("An: " + dut.io.dout_r.peek().toString)
             dut.clock.step(1)
+            dut.clock.step(1)
             println("--------------------------------------")
             println("Dn: " + dut.io.dout.peek().toString)
             println("Vn: " + dut.io.dout_v.peek().toString)
@@ -46,8 +47,9 @@ class D_EB_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
 
             // Vp: false, An: false
+            dut.io.din.poke(5.U)
             din_v = false.B  
-            dout_r = false.B  
+            //dout_r = false.B  
             dut.io.din_v.poke(din_v)
             dut.io.dout_r.poke(dout_r)
             println("Vp: " + dut.io.din_v.peek().toString)
