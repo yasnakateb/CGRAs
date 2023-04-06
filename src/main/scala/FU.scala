@@ -1,8 +1,35 @@
-///////////////////////////////////////
-//                                   //
-//                FU                 //
-//                                   //
-///////////////////////////////////////
+/****************************************** 
+ *      \`-._           __                *
+ *       \\  `-..____,.'  `.              *
+ *        :`.         /    \`.            *
+ *        :  )       :      : \           *
+ *         ;'        '   ;  |  :          *
+ *         )..      .. .:.`.;  :          *
+ *        /::...  .:::...   ` ;           *
+ *        ; _ '    __        /:\          *
+ *        `:o>   /\o_>      ;:. `.        *
+ *       `-`.__ ;   __..--- /:.   \       *
+ *       === \_/   ;=====_.':.     ;      *
+ *        ,/'`--'...`--....        ;      *
+ *             ;                    ;     *
+ *           .'                      ;    *
+ *         .'                        ;    *
+ *       .'     ..     ,      .       ;   *
+ *      :       ::..  /      ;::.     |   *
+ *     /      `.;::.  |       ;:..    ;   *
+ *    :         |:.   :       ;:.    ;    *
+ *    :         ::     ;:..   |.    ;     *
+ *     :       :;      :::....|     |     *
+ *     /\     ,/ \      ;:::::;     ;     *
+ *   .:. \:..|    :     ; '.--|     ;     *
+ *  ::.  :''  `-.,,;     ;'   ;     ;     *
+ * .-'. _.'\      / `;      \,__:      \  *
+ * `---'    `----'   ;      /    \,.,,,/  *
+ *                  `----`                *
+ * ****************************************
+ * Yasna Katebzadeh                       *
+ * yasna.katebzadeh@gmail.com             *
+ ******************************************/
 
 import chisel3._
 import chisel3.util._
@@ -43,16 +70,15 @@ class FU
         
     })
 
-    val alu_din_1 = RegInit(0.U(DATA_WIDTH.W))
-    val alu_din_2 = RegInit(0.U(DATA_WIDTH.W))
+    val alu_din_1 = Wire(UInt(DATA_WIDTH.W))
+    val alu_din_2 = Wire(UInt(DATA_WIDTH.W))
     ////////////////////// Temp Valid 
-    val temp_valid = RegInit(0.U)
-    val alu_dout = RegInit(0.U(DATA_WIDTH.W))
-    val dout_Reg = RegInit(0.U(DATA_WIDTH.W))
+    //val temp_valid = RegInit(0.U)
+    val alu_dout = Wire(UInt(DATA_WIDTH.W))
+    val dout_reg = RegInit(0.U(DATA_WIDTH.W))
     // Fix
     // 2 ** 16 - 1
-    val counter = 65535
-    val count = RegInit(counter.U(16.W))
+    val count = RegInit(0.U(16.W))
     val loaded = RegInit(0.U(1.W))
     val valid = RegInit(0.U(1.W))
 
@@ -63,34 +89,34 @@ class FU
     ALU.io.op_config := io.op_config
     
     when (io.loop_source === STATE_0) {
-        alu_din_1 := io.din_1;
-        alu_din_2 := io.din_2; 
-        temp_valid := io.din_v                      
+        alu_din_1 := io.din_1
+        alu_din_2 := io.din_2 
+        //temp_valid := io.din_v                      
     }
     .elsewhen (io.loop_source === STATE_1) {
         when (loaded === 0.U) {
-            alu_din_1 := io.din_1;
-            alu_din_2 := io.din_2; 
+            alu_din_1 := io.din_1
+            alu_din_2 := io.din_2
                                       
         }  
         .otherwise {
-            alu_din_1 := dout_Reg;
-            alu_din_2 := io.din_2;                      
+            alu_din_1 := dout_reg
+            alu_din_2 := io.din_2                      
         }                               
     } 
     .elsewhen (io.loop_source === STATE_2) {
         when (loaded === 0.U) {
-            alu_din_1 := io.din_1;
-            alu_din_2 := io.din_2;                                
+            alu_din_1 := io.din_1
+            alu_din_2 := io.din_2                                
         }  
         .otherwise {
             alu_din_1 := io.din_1
-            alu_din_2 := dout_Reg;                      
+            alu_din_2 := dout_reg                      
         }                               
     } 
     .otherwise { 
-        alu_din_1 := (DATA_WIDTH - 1).U;
-        alu_din_2 := (DATA_WIDTH - 1).U;
+        alu_din_1 := (DATA_WIDTH - 1).U
+        alu_din_2 := (DATA_WIDTH - 1).U
     }
     
     // ********************************************
@@ -100,28 +126,28 @@ class FU
     //.elsewhen (io.clk === 1.U) {
     
         when (io.dout_r === 1.U) {
-            valid := 0.U;                             
+            valid := 0.U                            
         }  
         when (io.din_v === 1.U && io.dout_r === 1.U && 
              (io.loop_source === STATE_1 || io.loop_source === STATE_2)) 
             {
-            loaded := 1.U;
-            count := count + 1.U;                            
+            loaded := 1.U
+            count := count + 1.U                    
         }  
         when (count === io.iterations_reset && 
              (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
               io.dout_r === 1.U)
             {
-            count := 0.U;
-            loaded := 0.U;
-            valid := 1.U;
-            dout_Reg := alu_dout;
+            count := 0.U
+            loaded := 0.U
+            valid := 1.U
+            dout_reg := alu_dout
         }    
         .elsewhen ((io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
                    io.din_v === 1.U && 
                    io.dout_r === 1.U)
             {
-            dout_Reg := alu_dout;
+            dout_reg := alu_dout
         } 
 
     /*                              
@@ -129,25 +155,26 @@ class FU
         io.dout_v := io.din_v
     }
     .otherwise{
-        io.dout_v := valid;    
+        io.dout_v := valid    
     } 
     */
 
-    io.din_r := io.dout_r;
+    io.din_r := io.dout_r
 
     when (io.loop_source === STATE_0){
         /////////////////////////////////////////
-        /*
+        
         io.dout := alu_dout
-        */
+        
         /////////////////////////////////////////
-        io.dout := ALU.io.dout
-        io.dout_v := temp_valid
+        //io.dout := ALU.io.dout
+        //io.dout_v := temp_valid
+        io.dout_v := io.din_v
         
     }
     .otherwise{
-        io.dout := dout_Reg
-        io.dout_v := valid;    
+        io.dout := dout_reg
+        io.dout_v := valid    
     }   
 }
 

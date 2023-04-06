@@ -1,9 +1,36 @@
-///////////////////////////////////////
-//                                   //
-//              FU Test              //
-//                                   //
-///////////////////////////////////////
-
+/****************************************** 
+ *      \`-._           __                *
+ *       \\  `-..____,.'  `.              *
+ *        :`.         /    \`.            *
+ *        :  )       :      : \           *
+ *         ;'        '   ;  |  :          *
+ *         )..      .. .:.`.;  :          *
+ *        /::...  .:::...   ` ;           *
+ *        ; _ '    __        /:\          *
+ *        `:o>   /\o_>      ;:. `.        *
+ *       `-`.__ ;   __..--- /:.   \       *
+ *       === \_/   ;=====_.':.     ;      *
+ *        ,/'`--'...`--....        ;      *
+ *             ;                    ;     *
+ *           .'                      ;    *
+ *         .'                        ;    *
+ *       .'     ..     ,      .       ;   *
+ *      :       ::..  /      ;::.     |   *
+ *     /      `.;::.  |       ;:..    ;   *
+ *    :         |:.   :       ;:.    ;    *
+ *    :         ::     ;:..   |.    ;     *
+ *     :       :;      :::....|     |     *
+ *     /\     ,/ \      ;:::::;     ;     *
+ *   .:. \:..|    :     ; '.--|     ;     *
+ *  ::.  :''  `-.,,;     ;'   ;     ;     *
+ * .-'. _.'\      / `;      \,__:      \  *
+ * `---'    `----'   ;      /    \,.,,,/  *
+ *                  `----`                *
+ * ****************************************
+ * Yasna Katebzadeh                       *
+ * yasna.katebzadeh@gmail.com             *
+ ******************************************/
+ 
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
@@ -11,19 +38,26 @@ import org.scalatest.flatspec.AnyFlatSpec
 class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
     "FU_Test test" should "pass" in {
         test(new FU(32, 5)) { dut =>
-            val din_1 = 10
-            val din_2 = 5
-            var din_v = false
-            var dout_r = true
-            var loop_source = 0
-            var iterations_reset = 0
-            var op_config = 0 
-            dut.io.din_1.poke(din_1.U)
-            dut.io.din_2.poke(din_2.U)
-            dut.io.din_v.poke(din_v.B)
-            dut.io.dout_r.poke(dout_r.B)
-            dut.io.loop_source.poke(loop_source.U)
-            dut.io.iterations_reset.poke(iterations_reset.U)
+            var din_1 = 8.U
+            var din_2 = 3.U
+            var op_config = 0.U
+            var din_v = true.B
+            var dout_r = true.B
+            var loop_source = 0.U
+            var iterations_reset = 0.U
+            ////////////////////////////////////////////////////////////////
+            // Test 1 
+            ////////////////////////////////////////////////////////////////
+            println("*************************************")
+            println("Test 1: Loop source: 0, Iterations Reset: 0")
+            println("*************************************")
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            dut.io.op_config.poke(op_config)
+            dut.io.din_v.poke(din_v)
+            dut.io.dout_r.poke(dout_r)
+            dut.io.loop_source.poke(loop_source)
+            dut.io.iterations_reset.poke(iterations_reset)
             println("*************************************")
             println("*************************************")
             println("Din1: " + dut.io.din_1.peek().toString)
@@ -35,142 +69,265 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("Op Config: " + dut.io.op_config.peek().toString)
             // Summation  
             dut.clock.step(1)
-            dut.clock.step(1)
-            dut.io.op_config.poke(op_config.U)
-            dut.io.din_v.poke(true.B)
-            dut.clock.step(1)
-            dut.clock.step(1)
             println("*************************************")
-            println("*************************************")
-            println("ROut: " + dut.io.dout_r.peek().toString)
-            println("Loop Source: " + dut.io.loop_source.peek().toString)
-            println("Rin: " + dut.io.din_r.peek().toString)
-            println("Dout: " + dut.io.dout.peek().toString)
-            println("Vout: " + dut.io.dout_v.peek().toString)
-            println("************ Test operators")
             println("Summation: " + dut.io.dout.peek().toString)
-            dut.io.din_v.poke(false.B)
-            // Multiplication
-            op_config = 1
-            dut.io.op_config.poke(op_config.U)
+            op_config = 1.U
+            dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Multiplication: " + dut.io.dout.peek().toString)
-            op_config = 2
-            dut.io.op_config.poke(op_config.U)
+            op_config = 2.U
+            dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Subtraction: " + dut.io.dout.peek().toString)
-            op_config = 3
-            dut.io.op_config.poke(op_config.U)
+            op_config = 3.U
+            dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Shift Left Logical: " + dut.io.dout.peek().toString)
-            op_config = 4
-            dut.io.op_config.poke(op_config.U)
+            op_config = 4.U
+            dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Shift Right Arithmetic: " + dut.io.dout.peek().toString)
-            op_config = 5
-            dut.io.op_config.poke(op_config.U)
+            op_config = 5.U
+            dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Shift Right Logical: " + dut.io.dout.peek().toString)
-            op_config = 6
-            dut.io.op_config.poke(op_config.U)
+            op_config = 6.U
+            dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("And: " + dut.io.dout.peek().toString)
-            op_config = 7
-            dut.io.op_config.poke(op_config.U)
+            op_config = 7.U
+            dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Or: " + dut.io.dout.peek().toString)
-            op_config = 8
-            dut.io.op_config.poke(op_config.U)
+            op_config = 8.U
+            dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Xor: " + dut.io.dout.peek().toString)
-            op_config = 9
-            dut.io.op_config.poke(op_config.U)
+            op_config = 10.U
+            dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Minimum: " + dut.io.dout.peek().toString)
-            op_config = 10
-            dut.io.op_config.poke(op_config.U)
+            op_config = 11.U
+            dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Maximum: " + dut.io.dout.peek().toString)
-            /////////////////////////////////////////////////////////////////////
-            op_config = 1
-            dout_r = false 
-            dut.io.dout_r.poke(dout_r.B)
-            dut.io.op_config.poke(op_config.U)
+            ////////////////////////////////////////////////////////////////
+            // Test 2
+            ////////////////////////////////////////////////////////////////
+            println("*************************************")
+            println("Test 2: Loop source: 1, Iterations Reset: 4")
+            println("*************************************")
+            // din_v: true
+            // dout_r: true
+            din_1 = 1.U
+            din_2 = 2.U
+            op_config = 0.U
+            loop_source = 1.U
+            iterations_reset = 4.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            dut.io.op_config.poke(op_config)
+            dut.io.loop_source.poke(loop_source)
+            dut.io.iterations_reset.poke(iterations_reset)
             dut.clock.step(1)
             println("*************************************")
-            println("*************************************")
-            println("Multiplication: " + dut.io.dout.peek().toString)
-            println("ROut: " + dut.io.dout_r.peek().toString)
-            println("Loop Source: " + dut.io.loop_source.peek().toString)
-            println("Rin: " + dut.io.din_r.peek().toString)
-            println("Dout: " + dut.io.dout.peek().toString)
-            println("Vout: " + dut.io.dout_v.peek().toString)
-            // Subtraction
-            op_config = 2
-            dout_r = false 
-            dut.io.dout_r.poke(dout_r.B)
-            dut.io.op_config.poke(op_config.U)
+            println("Summation: " + dut.io.dout.peek().toString)
             dut.clock.step(1)
             println("*************************************")
-            println("*************************************")
-            println("Subtraction: " + dut.io.dout.peek().toString)
-            println("ROut: " + dut.io.dout_r.peek().toString)
-            println("Loop Source: " + dut.io.loop_source.peek().toString)
-            println("Rin: " + dut.io.din_r.peek().toString)
-            println("Dout: " + dut.io.dout.peek().toString)
-            println("Vout: " + dut.io.dout_v.peek().toString)
-            // Shift Left Logical
-            op_config = 3
-            dout_r = true
-            dut.io.dout_r.poke(dout_r.B)
-            dut.io.op_config.poke(op_config.U)
+            println("Summation: " + dut.io.dout.peek().toString)
             dut.clock.step(1)
             println("*************************************")
-            println("*************************************")
-            println("Shift Left Logical: " + dut.io.dout.peek().toString)
-            println("ROut: " + dut.io.dout_r.peek().toString)
-            println("Loop Source: " + dut.io.loop_source.peek().toString)
-            println("Rin: " + dut.io.din_r.peek().toString)
-            println("Dout: " + dut.io.dout.peek().toString)
-            println("Vout: " + dut.io.dout_v.peek().toString)
-            // Shift Right Logical
-            op_config = 5
-            dut.io.op_config.poke(op_config.U)
+            println("Summation: " + dut.io.dout.peek().toString)
             dut.clock.step(1)
             println("*************************************")
+            println("Summation: " + dut.io.dout.peek().toString)
+            dut.clock.step(1)
             println("*************************************")
-            println("Shift Right Logical: " + dut.io.dout.peek().toString)
-            // And
-            op_config = 6
-            dut.io.op_config.poke(op_config.U)
-            dut.clock.step(1)
-            println("And: " + dut.io.dout.peek().toString)
-            // Or
-            op_config = 7
-            din_v = false
-            dut.io.din_v.poke(din_v.B)
-            dut.io.op_config.poke(op_config.U)
-            dut.clock.step(1)
-            println("Or: " + dut.io.dout.peek().toString)
-            // Xor
-            op_config = 8
-            din_v = true
-            dut.io.din_v.poke(din_v.B)
-            dut.io.op_config.poke(op_config.U)
-            dut.clock.step(1)
-            println("Xor: " + dut.io.dout.peek().toString)
-            // Minimum
-            op_config = 10
-            dut.io.op_config.poke(op_config.U)
-            dut.clock.step(1)
-            println("Minimum: " + dut.io.dout.peek().toString)
-            // Maximum
-            op_config = 11
-            dut.io.op_config.poke(op_config.U)
-            dut.clock.step(1)
-            println("Maximum: " + dut.io.dout.peek().toString)
+            println("Summation: " + dut.io.dout.peek().toString)
+            ////////////////////////////////////////////////////////////////
+            // Test 3
+            ////////////////////////////////////////////////////////////////
             println("*************************************")
+            println("Test 3: Loop source: 3, Iterations Reset: 3")
             println("*************************************")
+            // din_v: true
+            // dout_r: true
+            din_1 = 2.U
+            din_2 = 3.U
+            op_config = 0.U
+            loop_source = 3.U
+            iterations_reset = 3.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            dut.io.op_config.poke(op_config)
+            dut.io.loop_source.poke(loop_source)
+            dut.io.iterations_reset.poke(iterations_reset)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            ////////////////////////////////////////////////////////////////
+            // Test 4
+            ////////////////////////////////////////////////////////////////
+            println("*************************************")
+            println("Test 4: Loop source: 0, Iterations Reset: 5")
+            println("*************************************")
+            // din_v: true
+            // dout_r: true
+            din_1 = 3.U
+            din_2 = 4.U
+            op_config = 0.U
+            loop_source = 0.U
+            iterations_reset = 5.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            dut.io.op_config.poke(op_config)
+            dut.io.loop_source.poke(loop_source)
+            dut.io.iterations_reset.poke(iterations_reset)
+            dut.clock.step(1)
+            ////////////////////////////////////////////////////////////////
+            // Test 5
+            ////////////////////////////////////////////////////////////////
+            println("*************************************")
+            println("Test 5: din_v: 0, dout_r: 0")
+            println("*************************************")
+            // Loop source: 0
+            // Iterations Reset: 0
+            din_1 = 1.U
+            din_2 = 2.U
+            din_v = false.B
+            dout_r = false.B
+            op_config = 0.U
+            loop_source = 0.U
+            iterations_reset = 0.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            dut.io.din_v.poke(din_v)
+            dut.io.dout_r.poke(dout_r)
+            dut.io.op_config.poke(op_config)
+            dut.io.loop_source.poke(loop_source)
+            dut.io.iterations_reset.poke(iterations_reset)
+            dut.clock.step(1)
+            ////////////////////////////////////////////////////////////////
+            // Test 6
+            ////////////////////////////////////////////////////////////////
+            println("*************************************")
+            println("Test 5: din_v: 0, dout_r: 1")
+            println("*************************************")
+            // Loop source: 0
+            // Iterations Reset: 0
+            din_1 = 2.U
+            din_2 = 3.U
+            din_v = false.B
+            dout_r = true.B
+            op_config = 0.U
+            loop_source = 0.U
+            iterations_reset = 0.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            dut.io.din_v.poke(din_v)
+            dut.io.dout_r.poke(dout_r)
+            dut.io.op_config.poke(op_config)
+            dut.io.loop_source.poke(loop_source)
+            dut.io.iterations_reset.poke(iterations_reset)
+            dut.clock.step(1)
+            ////////////////////////////////////////////////////////////////
+            // Test 7
+            ////////////////////////////////////////////////////////////////
+            println("*************************************")
+            println("Test 5: din_v: 1, dout_r: 0")
+            println("*************************************")
+            // Loop source: 0
+            // Iterations Reset: 0
+            din_1 = 3.U
+            din_2 = 4.U
+            din_v = true.B
+            dout_r = false.B
+            op_config = 0.U
+            loop_source = 0.U
+            iterations_reset = 0.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            dut.io.din_v.poke(din_v)
+            dut.io.dout_r.poke(dout_r)
+            dut.io.op_config.poke(op_config)
+            dut.io.loop_source.poke(loop_source)
+            dut.io.iterations_reset.poke(iterations_reset)
+            dut.clock.step(1)
+            ////////////////////////////////////////////////////////////////
+            // Test 8
+            ////////////////////////////////////////////////////////////////
+            println("*************************************")
+            println("Multiple inputs (din_1 and din_2)")
+            println("*************************************")
+            // din_v: true
+            // dout_r: true
+            // Loop source: 0
+            // Iterations Reset: 0
+            din_1 = 1.U
+            din_2 = 2.U
+            din_v = true.B
+            dout_r = true.B
+            op_config = 0.U
+            loop_source = 0.U
+            iterations_reset = 0.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            dut.io.din_v.poke(din_v)
+            dut.io.dout_r.poke(dout_r)
+            dut.io.op_config.poke(op_config)
+            dut.io.loop_source.poke(loop_source)
+            dut.io.iterations_reset.poke(iterations_reset)
+            println("Din1: " + dut.io.din_1.peek().toString)
+            println("Din2: " + dut.io.din_2.peek().toString)
+            dut.clock.step(1)
+            println("*************************************")
+            println("Summation: " + dut.io.dout.peek().toString)
+            din_1 = 2.U
+            din_2 = 3.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            println("Din1: " + dut.io.din_1.peek().toString)
+            println("Din2: " + dut.io.din_2.peek().toString)
+            dut.clock.step(1)
+            println("*************************************")
+            println("Summation: " + dut.io.dout.peek().toString)
+            din_1 = 3.U
+            din_2 = 4.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            println("Din1: " + dut.io.din_1.peek().toString)
+            println("Din2: " + dut.io.din_2.peek().toString)
+            dut.clock.step(1)
+            println("*************************************")
+            println("Summation: " + dut.io.dout.peek().toString)
+            din_1 = 4.U
+            din_2 = 5.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            println("Din1: " + dut.io.din_1.peek().toString)
+            println("Din2: " + dut.io.din_2.peek().toString)
+            dut.clock.step(1)
+            println("*************************************")
+            println("Summation: " + dut.io.dout.peek().toString)
+            din_1 = 5.U
+            din_2 = 6.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            println("Din1: " + dut.io.din_1.peek().toString)
+            println("Din2: " + dut.io.din_2.peek().toString)
+            dut.clock.step(1)
+            println("*************************************")
+            println("Summation: " + dut.io.dout.peek().toString)
+            din_1 = 6.U
+            din_2 = 7.U
+            dut.io.din_1.poke(din_1)
+            dut.io.din_2.poke(din_2)
+            println("Din1: " + dut.io.din_1.peek().toString)
+            println("Din2: " + dut.io.din_2.peek().toString)
+            dut.clock.step(1)
+            println("*************************************")
+            println("Summation: " + dut.io.dout.peek().toString)
         }
     } 
 }
