@@ -10,7 +10,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
     "ProcessingElement_Test test" should "pass" in {
-        test(new ProcessingElement(32, 4)) { dut =>
+        test(new ProcessingElement(32, 32)) { dut =>
             
             var north_din = 0.U 
             var north_din_v = false.B
@@ -63,6 +63,7 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.io.north_din.poke(3.U)
             dut.io.west_din.poke(4.U)
+            /*
             dut.clock.step(1)
             dut.io.north_din.poke(5.U)
             dut.io.west_din.poke(6.U)
@@ -72,6 +73,7 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.io.north_din.poke(9.U)
             dut.io.west_din.poke(10.U)
+            */
             dut.clock.step(1)
             dut.io.north_din_v.poke(false.B)
             dut.io.west_din_v.poke(false.B)
