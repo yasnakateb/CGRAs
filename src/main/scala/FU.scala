@@ -65,20 +65,18 @@ class FU
         // Outputs
         val din_r = Output(Bool())
         val dout = Output(UInt(DATA_WIDTH.W))
-        val dout_v = Output(Bool())
-
-        
+        val dout_v = Output(Bool()) 
     })
 
     val alu_din_1 = Wire(UInt(DATA_WIDTH.W))
     val alu_din_2 = Wire(UInt(DATA_WIDTH.W))
-    ////////////////////// Temp Valid 
-    //val temp_valid = RegInit(0.U)
+    
     val alu_dout = Wire(UInt(DATA_WIDTH.W))
     val dout_reg = RegInit(0.U(DATA_WIDTH.W))
     // Fix
     // 2 ** 16 - 1
     val count = RegInit(0.U(16.W))
+
     val loaded = RegInit(0.U(1.W))
     val valid = RegInit(0.U(1.W))
 
@@ -90,8 +88,7 @@ class FU
     
     when (io.loop_source === STATE_0) {
         alu_din_1 := io.din_1
-        alu_din_2 := io.din_2 
-        //temp_valid := io.din_v                      
+        alu_din_2 := io.din_2  
     }
     .elsewhen (io.loop_source === STATE_1) {
         when (loaded === 0.U) {
@@ -119,58 +116,37 @@ class FU
         alu_din_2 := (DATA_WIDTH - 1).U
     }
     
-    // ********************************************
-    // We have the following line in the vhdl code. 
-    // ********************************************
-
-    //.elsewhen (io.clk === 1.U) {
-    
-        when (io.dout_r === 1.U) {
-            valid := 0.U                            
-        }  
-        when (io.din_v === 1.U && io.dout_r === 1.U && 
-             (io.loop_source === STATE_1 || io.loop_source === STATE_2)) 
-            {
-            loaded := 1.U
-            count := count + 1.U                    
-        }  
-        when (count === io.iterations_reset && 
-             (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
-              io.dout_r === 1.U)
-            {
-            count := 0.U
-            loaded := 0.U
-            valid := 1.U
-            dout_reg := alu_dout
-        }    
-        .elsewhen ((io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
-                   io.din_v === 1.U && 
-                   io.dout_r === 1.U)
-            {
-            dout_reg := alu_dout
-        } 
-
-    /*                              
-    when (io.loop_source === STATE_0){
-        io.dout_v := io.din_v
-    }
-    .otherwise{
-        io.dout_v := valid    
+    when (io.dout_r === 1.U) {
+        valid := 0.U                            
+    }  
+    when (io.din_v === 1.U && io.dout_r === 1.U && 
+            (io.loop_source === STATE_1 || io.loop_source === STATE_2)) 
+        {
+        loaded := 1.U
+        count := count + 1.U                    
+    }  
+    // Fix io.iterations_reset (verilog vs vhdl)
+    when (count === io.iterations_reset - 1.U && 
+            (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
+            io.dout_r === 1.U)
+        {
+        count := 0.U
+        loaded := 0.U
+        valid := 1.U
+        dout_reg := alu_dout
+    }    
+    .elsewhen ((io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
+                io.din_v === 1.U && 
+                io.dout_r === 1.U)
+        {
+        dout_reg := alu_dout
     } 
-    */
 
     io.din_r := io.dout_r
 
     when (io.loop_source === STATE_0){
-        /////////////////////////////////////////
-        
         io.dout := alu_dout
-        
-        /////////////////////////////////////////
-        //io.dout := ALU.io.dout
-        //io.dout_v := temp_valid
-        io.dout_v := io.din_v
-        
+        io.dout_v := io.din_v 
     }
     .otherwise{
         io.dout := dout_reg
