@@ -1,8 +1,35 @@
-///////////////////////////////////////
-//                                   //
-//               D-REG               //
-//                                   //
-///////////////////////////////////////
+/****************************************** 
+ *      \`-._           __                *
+ *       \\  `-..____,.'  `.              *
+ *        :`.         /    \`.            *
+ *        :  )       :      : \           *
+ *         ;'        '   ;  |  :          *
+ *         )..      .. .:.`.;  :          *
+ *        /::...  .:::...   ` ;           *
+ *        ; _ '    __        /:\          *
+ *        `:o>   /\o_>      ;:. `.        *
+ *       `-`.__ ;   __..--- /:.   \       *
+ *       === \_/   ;=====_.':.     ;      *
+ *        ,/'`--'...`--....        ;      *
+ *             ;                    ;     *
+ *           .'                      ;    *
+ *         .'                        ;    *
+ *       .'     ..     ,      .       ;   *
+ *      :       ::..  /      ;::.     |   *
+ *     /      `.;::.  |       ;:..    ;   *
+ *    :         |:.   :       ;:.    ;    *
+ *    :         ::     ;:..   |.    ;     *
+ *     :       :;      :::....|     |     *
+ *     /\     ,/ \      ;:::::;     ;     *
+ *   .:. \:..|    :     ; '.--|     ;     *
+ *  ::.  :''  `-.,,;     ;'   ;     ;     *
+ * .-'. _.'\      / `;      \,__:      \  *
+ * `---'    `----'   ;      /    \,.,,,/  *
+ *                  `----`                *
+ * ****************************************
+ * Yasna Katebzadeh                       *
+ * yasna.katebzadeh@gmail.com             *
+ ******************************************/
 
 import chisel3._
 import chisel3.util._
@@ -21,16 +48,21 @@ class D_REG
         val din_r = Output(Bool())  
     })
 
-    val reg_1  = Module (new RegEnable(DATA_WIDTH))
-    val reg_2  = Module (new RegEnable(1))
+    val data = Wire(UInt(DATA_WIDTH.W))
+    val valid = Wire(Bool())
+
+    // Default value 
+    data := 0.U 
+    valid := false.B 
     
-    reg_1.io.in := io.din
-    reg_2.io.in := io.din_v
-    reg_1.io.en := io.dout_r
-    reg_2.io.en := io.dout_r
-    io.dout := reg_1.io.out 
-    io.dout_v := reg_2.io.out 
-    io.din_r := io.dout_r     
+    when (io.dout_r === true.B) {
+        data := io.din
+        valid := io.din_v
+    } 
+
+    io.dout := data
+    io.dout_v := valid
+    io.din_r := io.dout_r
 }
 
 // Generate the Verilog code
