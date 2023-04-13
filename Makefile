@@ -25,12 +25,6 @@ d-eb:
 d-eb-test:
 	$(SBT) "testOnly D_EB_Test -- -DwriteVcd=1"
 
-d-buf:
-	$(SBT) "runMain D_BUFMain"
-
-d-buf-test:
-	$(SBT) "testOnly D_BUF_Test -- -DwriteVcd=1"
-
 d-reg:
 	$(SBT) "runMain D_REGMain"
 
