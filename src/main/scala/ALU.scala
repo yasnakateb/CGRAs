@@ -64,7 +64,6 @@ class ALU
         val op_config = Input(UInt(OP_WIDTH.W))
         val dout = Output(UInt(DATA_WIDTH.W))
     })
-
     // Converte din_1 to signed integer for shift right arithmetic (SRA)
     val din_1_signed = RegInit(0.S(DATA_WIDTH.W))
 

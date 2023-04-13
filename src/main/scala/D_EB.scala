@@ -1,8 +1,35 @@
-///////////////////////////////////////
-//                                   //
-//               D-EB                //
-//                                   //
-///////////////////////////////////////
+/****************************************** 
+ *      \`-._           __                *
+ *       \\  `-..____,.'  `.              *
+ *        :`.         /    \`.            *
+ *        :  )       :      : \           *
+ *         ;'        '   ;  |  :          *
+ *         )..      .. .:.`.;  :          *
+ *        /::...  .:::...   ` ;           *
+ *        ; _ '    __        /:\          *
+ *        `:o>   /\o_>      ;:. `.        *
+ *       `-`.__ ;   __..--- /:.   \       *
+ *       === \_/   ;=====_.':.     ;      *
+ *        ,/'`--'...`--....        ;      *
+ *             ;                    ;     *
+ *           .'                      ;    *
+ *         .'                        ;    *
+ *       .'     ..     ,      .       ;   *
+ *      :       ::..  /      ;::.     |   *
+ *     /      `.;::.  |       ;:..    ;   *
+ *    :         |:.   :       ;:.    ;    *
+ *    :         ::     ;:..   |.    ;     *
+ *     :       :;      :::....|     |     *
+ *     /\     ,/ \      ;:::::;     ;     *
+ *   .:. \:..|    :     ; '.--|     ;     *
+ *  ::.  :''  `-.,,;     ;'   ;     ;     *
+ * .-'. _.'\      / `;      \,__:      \  *
+ * `---'    `----'   ;      /    \,.,,,/  *
+ *                  `----`                *
+ * ****************************************
+ * Yasna Katebzadeh                       *
+ * yasna.katebzadeh@gmail.com             *
+ ******************************************/
 
 import chisel3._
 import chisel3.util._
@@ -24,31 +51,31 @@ class D_EB
     })
 
     // Registers
-    val regDin1 = RegInit(0.U(DATA_WIDTH.W))
-    val regDin2 = RegInit(0.U(DATA_WIDTH.W))
-    val regDinV1 = RegInit(0.B)
-    val regDinV2 = RegInit(0.B)
-    val regAreg = RegInit(0.B)
+    val reg_din_1 = RegInit(0.U(DATA_WIDTH.W))
+    val reg_din_2 = RegInit(0.U(DATA_WIDTH.W))
+    val reg_din_v_1 = RegInit(0.B)
+    val reg_din_v_2 = RegInit(0.B)
+    val reg_areg = RegInit(0.B)
 
-    when(regAreg) {
-        regDin1 := io.din
-        regDin2 := regDin1
-
-        regDinV1 := io.din_v
-        regDinV2 := regDinV1
+    when(reg_areg) {
+        reg_din_1 := io.din
+        reg_din_2 := reg_din_1
+        
+        reg_din_v_1 := io.din_v
+        reg_din_v_2 := reg_din_v_1
     }
 
-    regAreg := ~io.dout_v | io.dout_r
+    reg_areg := ~io.dout_v | io.dout_r
 
     // Combinational assignments
-    io.din_r := regAreg
+    io.din_r := reg_areg
 
-    when(regAreg) {
-        io.dout := regDin1
-        io.dout_v := regDinV1
+    when(reg_areg) {
+        io.dout := reg_din_1
+        io.dout_v := reg_din_v_1
     }.otherwise {
-        io.dout := regDin2
-        io.dout_v := regDinV2
+        io.dout := reg_din_2
+        io.dout_v := reg_din_v_2
     }
 }
 
