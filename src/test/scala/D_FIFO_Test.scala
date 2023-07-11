@@ -1,8 +1,35 @@
-///////////////////////////////////////
-//                                   //
-//           D-FIFO Test             //
-//                                   //
-///////////////////////////////////////
+/****************************************** 
+ *      \`-._           __                *
+ *       \\  `-..____,.'  `.              *
+ *        :`.         /    \`.            *
+ *        :  )       :      : \           *
+ *         ;'        '   ;  |  :          *
+ *         )..      .. .:.`.;  :          *
+ *        /::...  .:::...   ` ;           *
+ *        ; _ '    __        /:\          *
+ *        `:o>   /\o_>      ;:. `.        *
+ *       `-`.__ ;   __..--- /:.   \       *
+ *       === \_/   ;=====_.':.     ;      *
+ *        ,/'`--'...`--....        ;      *
+ *             ;                    ;     *
+ *           .'                      ;    *
+ *         .'                        ;    *
+ *       .'     ..     ,      .       ;   *
+ *      :       ::..  /      ;::.     |   *
+ *     /      `.;::.  |       ;:..    ;   *
+ *    :         |:.   :       ;:.    ;    *
+ *    :         ::     ;:..   |.    ;     *
+ *     :       :;      :::....|     |     *
+ *     /\     ,/ \      ;:::::;     ;     *
+ *   .:. \:..|    :     ; '.--|     ;     *
+ *  ::.  :''  `-.,,;     ;'   ;     ;     *
+ * .-'. _.'\      / `;      \,__:      \  *
+ * `---'    `----'   ;      /    \,.,,,/  *
+ *                  `----`                *
+ * ****************************************
+ * Yasna Katebzadeh                       *
+ * yasna.katebzadeh@gmail.com             *
+ ******************************************/
 
 import chisel3._
 import chiseltest._
@@ -10,12 +37,41 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class D_FIFO_Test extends AnyFlatSpec with ChiselScalatestTester {
     "D_FIFO_Test test" should "pass" in {
-        test(new D_FIFO(32, 4)) { dut =>
+        test(new D_FIFO(32, 32)) { dut =>
             
-            var din = "b101010".U 
+            var din = "b00001".U 
             var din_v = true.B 
             var dout_r = true.B 
+            
+            dut.io.dout_r.poke(dout_r)
+            dut.clock.step(1)
+            dut.io.din.poke(1.U)
+            dut.io.din_v.poke(din_v)
+            dut.clock.step(1)
+            dut.io.din.poke(3.U)
+            dut.clock.step(1)
+            dut.io.din.poke(5.U)
+            dut.clock.step(1)
+            dut.io.din.poke(7.U)
+            dut.clock.step(1)
+            dut.io.din.poke(9.U)
+            dut.clock.step(1)
+            dut.io.din.poke(0.U)
+            dut.io.din_v.poke(false.B)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
 
+            /*
             dut.io.din.poke(din)
             dut.io.din_v.poke(din_v)
             dut.io.dout_r.poke(dout_r)
@@ -136,9 +192,226 @@ class D_FIFO_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("Dout V: " + dut.io.dout_v.peek().toString)
             println("*************************************")
             println("*************************************")
+
+
+            /// ====
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
+            din = "b101110".U 
+            dout_r = true.B 
+            dut.io.din.poke(din)
+            dut.io.din_v.poke(din_v)
+            dut.io.dout_r.poke(dout_r)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 2.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            din = 1.U 
+            dut.io.din.poke(din)
+            dut.clock.step(1)
+            */
         }
     } 
 }

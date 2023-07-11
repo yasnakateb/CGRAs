@@ -1,8 +1,35 @@
-///////////////////////////////////////
-//                                   //
-//              D-FIFO               //
-//                                   //
-///////////////////////////////////////
+/****************************************** 
+ *      \`-._           __                *
+ *       \\  `-..____,.'  `.              *
+ *        :`.         /    \`.            *
+ *        :  )       :      : \           *
+ *         ;'        '   ;  |  :          *
+ *         )..      .. .:.`.;  :          *
+ *        /::...  .:::...   ` ;           *
+ *        ; _ '    __        /:\          *
+ *        `:o>   /\o_>      ;:. `.        *
+ *       `-`.__ ;   __..--- /:.   \       *
+ *       === \_/   ;=====_.':.     ;      *
+ *        ,/'`--'...`--....        ;      *
+ *             ;                    ;     *
+ *           .'                      ;    *
+ *         .'                        ;    *
+ *       .'     ..     ,      .       ;   *
+ *      :       ::..  /      ;::.     |   *
+ *     /      `.;::.  |       ;:..    ;   *
+ *    :         |:.   :       ;:.    ;    *
+ *    :         ::     ;:..   |.    ;     *
+ *     :       :;      :::....|     |     *
+ *     /\     ,/ \      ;:::::;     ;     *
+ *   .:. \:..|    :     ; '.--|     ;     *
+ *  ::.  :''  `-.,,;     ;'   ;     ;     *
+ * .-'. _.'\      / `;      \,__:      \  *
+ * `---'    `----'   ;      /    \,.,,,/  *
+ *                  `----`                *
+ * ****************************************
+ * Yasna Katebzadeh                       *
+ * yasna.katebzadeh@gmail.com             *
+ ******************************************/
 
 import chisel3._
 import chisel3.util._
@@ -63,7 +90,6 @@ class D_FIFO
     } 
 
     when(full === false.B  &  wr_en === true.B){ 
-        
         memory(write_pointer) := io.din;
         num_data := num_data + 1.U
 
@@ -92,5 +118,5 @@ class D_FIFO
 // Generate the Verilog code
 object D_FIFOMain extends App {
     println("Generating the hardware")
-    (new chisel3.stage.ChiselStage).emitVerilog(new D_FIFO(32, 4), Array("--target-dir", "generated"))
+    (new chisel3.stage.ChiselStage).emitVerilog(new D_FIFO(32, 32), Array("--target-dir", "generated"))
 }

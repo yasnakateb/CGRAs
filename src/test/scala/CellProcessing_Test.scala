@@ -1,8 +1,35 @@
-///////////////////////////////////////
-//                                   //
-//       Cell Processing Test        //
-//                                   //
-///////////////////////////////////////
+/****************************************** 
+ *      \`-._           __                *
+ *       \\  `-..____,.'  `.              *
+ *        :`.         /    \`.            *
+ *        :  )       :      : \           *
+ *         ;'        '   ;  |  :          *
+ *         )..      .. .:.`.;  :          *
+ *        /::...  .:::...   ` ;           *
+ *        ; _ '    __        /:\          *
+ *        `:o>   /\o_>      ;:. `.        *
+ *       `-`.__ ;   __..--- /:.   \       *
+ *       === \_/   ;=====_.':.     ;      *
+ *        ,/'`--'...`--....        ;      *
+ *             ;                    ;     *
+ *           .'                      ;    *
+ *         .'                        ;    *
+ *       .'     ..     ,      .       ;   *
+ *      :       ::..  /      ;::.     |   *
+ *     /      `.;::.  |       ;:..    ;   *
+ *    :         |:.   :       ;:.    ;    *
+ *    :         ::     ;:..   |.    ;     *
+ *     :       :;      :::....|     |     *
+ *     /\     ,/ \      ;:::::;     ;     *
+ *   .:. \:..|    :     ; '.--|     ;     *
+ *  ::.  :''  `-.,,;     ;'   ;     ;     *
+ * .-'. _.'\      / `;      \,__:      \  *
+ * `---'    `----'   ;      /    \,.,,,/  *
+ *                  `----`                *
+ * ****************************************
+ * Yasna Katebzadeh                       *
+ * yasna.katebzadeh@gmail.com             *
+ ******************************************/
 
 import chisel3._
 import chiseltest._
@@ -48,19 +75,65 @@ class CellProcessing_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.west_din.poke(west_din)
             dut.io.west_din_v.poke(west_din_v)
             
-            
-
-            
 
             println("*************************************")
             println("*************************************")
             dut.clock.step(1)
+            dut.clock.step(1)
+
+            dut.io.north_din.poke(3.U)
+            dut.io.west_din.poke(4.U)
+
+            dut.clock.step(1)
+
+            dut.io.north_din.poke(5.U)
+            dut.io.west_din.poke(6.U)
+
+            dut.clock.step(1)
+
+            dut.io.north_din.poke(7.U)
+            dut.io.west_din.poke(8.U)
+
+            dut.clock.step(1)
+
+
+            dut.io.north_din.poke(9.U)
+            dut.io.west_din.poke(10.U)
+
             dut.clock.step(1)
 
             dut.io.north_din.poke(6.U)
             dut.io.west_din.poke(7.U)
 
             dut.clock.step(1)
+
+            dut.io.north_din.poke(3.U)
+            dut.io.west_din.poke(4.U)
+
+            dut.clock.step(1)
+
+            dut.io.north_din.poke(5.U)
+            dut.io.west_din.poke(6.U)
+
+            dut.clock.step(1)
+
+            dut.io.north_din.poke(7.U)
+            dut.io.west_din.poke(8.U)
+
+            dut.clock.step(1)
+
+
+            dut.io.north_din.poke(9.U)
+            dut.io.west_din.poke(10.U)
+
+            dut.clock.step(1)
+
+            dut.io.north_din.poke(6.U)
+            dut.io.west_din.poke(7.U)
+
+            dut.clock.step(1)
+
+
             dut.io.north_din.poke(0.U)
             dut.io.north_din_v.poke(false.B)
 

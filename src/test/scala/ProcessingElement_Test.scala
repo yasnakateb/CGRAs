@@ -55,7 +55,7 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             var west_din_v = false.B 
             val west_dout_r = true.B 
 
-            var config_bits = "b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
+            var config_bits = "b01000000000111101100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
             val catch_config = true.B 
             
             dut.io.north_din.poke(north_din)
@@ -79,6 +79,8 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.catch_config.poke(true.B)
             dut.io.config_bits.poke(config_bits)
             dut.clock.step(1)
+            dut.clock.step(1)
+
             dut.io.catch_config.poke(false.B)
             config_bits = 0.U
             dut.io.config_bits.poke(config_bits)
@@ -90,7 +92,7 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.io.north_din.poke(3.U)
             dut.io.west_din.poke(4.U)
-            /*
+            
             dut.clock.step(1)
             dut.io.north_din.poke(5.U)
             dut.io.west_din.poke(6.U)
@@ -100,7 +102,7 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.io.north_din.poke(9.U)
             dut.io.west_din.poke(10.U)
-            */
+            
             dut.clock.step(1)
             dut.io.north_din_v.poke(false.B)
             dut.io.west_din_v.poke(false.B)
