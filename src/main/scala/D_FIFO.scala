@@ -49,7 +49,7 @@ class D_FIFO
         // Outputs
         val din_r = Output(Bool())
         val dout = Output(UInt(DATA_WIDTH.W))  
-        val dout_v = Output(Bool()) 
+        val dout_v = Output(UInt(1.W)) 
     })
 
     val memory = SyncReadMem(FIFO_DEPTH, UInt(DATA_WIDTH.W))
@@ -82,7 +82,7 @@ class D_FIFO
     // FIX (Read and write at the same time)
     when(empty === false.B  &  rd_en === true.B){ 
         dout := memory(read_pointer)
-        dout_v := true.B 
+        dout_v := 1.U 
         num_data := num_data - 1.U 
         
         when (read_pointer === FIFO_DEPTH.U - 1.U)  {
