@@ -58,25 +58,24 @@ class D_FIFO
     val read_pointer = RegInit(0.U(FIFO_DEPTH.W)) 
     val num_data = RegInit(0.U(FIFO_DEPTH.W)) 
 
-    val full = RegInit(0.U) 
+    val full = RegInit(0.U)  	
     val empty = RegInit(0.U) 
-    val rd_en = RegInit(0.U) 
-    val wr_en = RegInit(0.U) 
+    val rd_en = RegInit(0.U)  	
+    val wr_en = RegInit(0.U)  	
 
-    //val dout_v = RegInit(0.U) 
-    //val dout = RegInit(0.U(DATA_WIDTH.W)) 
-
+    val dout_v = RegInit(0.U) 
+    val dout = RegInit(0.U(DATA_WIDTH.W)) 
 
     empty := true.B
     full := false.B 
-    io.dout := 0.U 
-    io.dout_v := false.B  
+    dout := 0.U 
+    dout_v := false.B  
 
     wr_en := io.din_v & (~full) 
     rd_en := io.dout_r & (~empty) 
 
     when (io.dout_r) {
-        io.dout_v := false.B  
+        dout_v := false.B  
     }
 
     when(full === false.B  &  wr_en === true.B){ 
@@ -92,8 +91,8 @@ class D_FIFO
 
     // FIX (Read and write at the same time)
     when(empty === false.B  &  rd_en === true.B){ 
-        io.dout := memory(read_pointer)
-        io.dout_v := true.B 
+        dout := memory(read_pointer)
+        dout_v := true.B 
         num_data := num_data - 1.U 
         
         when (read_pointer === FIFO_DEPTH.U - 1.U)  {
@@ -115,9 +114,9 @@ class D_FIFO
         empty := false.B
     }  
 
-    io.din_r := (~full) 
-    //io.dout_v := dout_v
-    //io.dout := dout                       
+    io.din_r := (~full)  
+    io.dout_v := dout_v  
+    io.dout := dout                    
 }
 
 // Generate the Verilog code

@@ -39,7 +39,6 @@ class D_FIFO_Test extends AnyFlatSpec with ChiselScalatestTester {
     "D_FIFO_Test test" should "pass" in {
         test(new D_FIFO(32, 32)) { dut =>
             
-            var din = "b00001".U 
             var din_v = true.B 
             var dout_r = true.B 
             
