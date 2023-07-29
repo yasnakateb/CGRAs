@@ -82,5 +82,9 @@ barrel-shifter:
 barrel-shifter-test:
 	$(SBT) "testOnly BarrelShifter_Test -- -DwriteVcd=1"
 
-	
+fifo:
+	$(SBT) "runMain FIFOMain"
+
+fifo-test:
+	$(SBT) "testOnly FIFO_Test -- -DwriteVcd=1"	
 	

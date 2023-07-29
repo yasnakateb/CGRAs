@@ -1,0 +1,18 @@
+[
+  {
+    "class":"firrtl.EmitCircuitAnnotation",
+    "emitter":"firrtl.VerilogEmitter"
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxTargetDirAnno",
+    "targetDir":"generated"
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~FIFO|FIFO>io_dout_v",
+    "sources":[
+      "~FIFO|FIFO>io_reset",
+      "~FIFO|FIFO>io_dout_r"
+    ]
+  }
+]
