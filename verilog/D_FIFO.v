@@ -27,7 +27,7 @@ module D_FIFO(
             full  <= 1'b0;
             write_pointer <= 5'b0;
             read_pointer <= 5'b0;
-            num_data <= 32'b0;
+            //num_data <= 32'b0;
             io_dout <= 32'b0;
             io_dout_v <= 1'b0;	
         end 
@@ -35,11 +35,31 @@ module D_FIFO(
         if  (io_dout_r)
             io_dout_v <= 1'b0;
 
-        
+        ////////////////////////////////////////////////////////////////////////////
+        if( reset )
+            num_data <= 0;		// Reset the counter of FIFO
+
+        else if( (!full && wr_en) && ( !empty && rd_en ) )  //When doing read and write operation simultaneously
+            num_data <= num_data;			// At this state, counter value will remain same.
+
+        else if( !full && wr_en )			// When doing only write operation
+            num_data <= num_data + 1;
+
+        else if( !empty && rd_en ) begin  	//When doing only read operation
+            if (num_data != 0)
+                num_data <= num_data - 1;
+            else 
+               num_data <= num_data; 
+        end 
+
+        else
+            num_data <= num_data;			// When doing nothing.
+       
+
 
         if (~full & wr_en) begin 
             memory[write_pointer] <= io_din;
-            num_data <= num_data + 32'd1;
+            //num_data <= num_data + 32'd1;
                     
             if (write_pointer == 32'd31) 
                 write_pointer <= 5'b0;
@@ -51,7 +71,7 @@ module D_FIFO(
             
             io_dout <= memory[read_pointer];
             io_dout_v <= 1'b1;
-            num_data <= num_data - 32'd1;
+            //num_data <= num_data - 32'd1;
 
             if (read_pointer == 32'd31) 
                 read_pointer <= 0;

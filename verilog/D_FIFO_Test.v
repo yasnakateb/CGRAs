@@ -33,7 +33,9 @@ module D_FIFO_Test();
         $dumpfile("D_FIFO_Test.vcd");
         $dumpvars(0,D_FIFO_Test);
         for (idx = 0; idx < 32; idx = idx + 1) 
-            $dumpvars(0, D_FIFO_Test.DUT.memory[idx]);  
+            $dumpvars(0, D_FIFO_Test.DUT.memory[idx]);
+
+      
 
         reset = 1'b1;
         io_dout_r = 1'b1;
@@ -52,7 +54,16 @@ module D_FIFO_Test();
         #10
         io_din = 32'd9;
         #10
-        io_din = 32'b0;
+        io_din = 32'd1;
+        #10
+        io_din = 32'd3;
+        #10
+        io_din = 32'd5;
+        #10
+        io_din = 32'd7;
+        #10
+        io_din = 32'd9;
+        #10
         io_din_v = 1'b0;
 
         #100;
