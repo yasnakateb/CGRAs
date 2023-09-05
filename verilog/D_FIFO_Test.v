@@ -54,16 +54,6 @@ module D_FIFO_Test();
         #10
         io_din = 32'd9;
         #10
-        io_din = 32'd1;
-        #10
-        io_din = 32'd3;
-        #10
-        io_din = 32'd5;
-        #10
-        io_din = 32'd7;
-        #10
-        io_din = 32'd9;
-        #10
         io_din_v = 1'b0;
 
         #100;

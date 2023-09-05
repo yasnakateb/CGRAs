@@ -70,7 +70,8 @@ module D_FIFO(
         if (~empty & rd_en) begin
             
             io_dout <= memory[read_pointer];
-            io_dout_v <= 1'b1;
+            if (num_data != 0)
+                io_dout_v <= 1'b1;
             //num_data <= num_data - 32'd1;
 
             if (read_pointer == 32'd31) 
