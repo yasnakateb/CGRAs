@@ -33,7 +33,7 @@ module D_FIFO_Test();
         $dumpfile("D_FIFO_Test.vcd");
         $dumpvars(0,D_FIFO_Test);
         for (idx = 0; idx < 32; idx = idx + 1) 
-            $dumpvars(0, D_FIFO_Test.DUT.memory[idx]);
+            $dumpvars(0, D_FIFO_Test.DUT.memory[idx]);  
 
         reset = 1'b1;
         io_dout_r = 1'b1;
