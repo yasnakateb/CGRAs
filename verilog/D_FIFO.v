@@ -36,7 +36,7 @@ module D_FIFO(
             io_dout_v <= 1'b0;
 
         ////////////////////////////////////////////////////////////////////////////
-        if( reset )
+        if(reset)
             num_data <= 0;		// Reset the counter of FIFO
 
         else if( (!full && wr_en) && ( !empty && rd_en ) )  //When doing read and write operation simultaneously

@@ -44,7 +44,7 @@ class D_FIFO_Test extends AnyFlatSpec with ChiselScalatestTester {
             
             dut.io.dout_r.poke(dout_r)
             dut.clock.step(1)
-            dut.io.din.poke(1.U)
+            dut.io.din.poke(66.U)
             dut.io.din_v.poke(din_v)
             dut.clock.step(1)
             dut.io.din.poke(3.U)
@@ -55,6 +55,25 @@ class D_FIFO_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.io.din.poke(9.U)
             dut.clock.step(1)
+            dut.io.din.poke(0.U)
+            dut.io.din_v.poke(false.B)
+            
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+
+            
+            
+            /*
             dut.io.din.poke(1.U)
             dut.io.din_v.poke(din_v)
             dut.clock.step(1)
@@ -74,6 +93,7 @@ class D_FIFO_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.io.din.poke(3.U)
             dut.io.din_v.poke(false.B)
+            
 
             dut.clock.step(1)
             dut.clock.step(1)
@@ -87,7 +107,7 @@ class D_FIFO_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
-
+            */
             /*
             dut.io.din.poke(din)
             dut.io.din_v.poke(din_v)

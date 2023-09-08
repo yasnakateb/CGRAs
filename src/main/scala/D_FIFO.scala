@@ -71,26 +71,26 @@ class D_FIFO
     val wr_en = Wire(Bool()) 
 
     val dout_v = RegInit(0.U) 
-    //val dout = RegInit(0.U(DATA_WIDTH.W)) 
+    val dout = RegInit(0.U(DATA_WIDTH.W)) 
 
     empty := true.B
     full := false.B 
-    //dout := 0.U 
-    //dout_v := false.B  
+    dout := 0.U 
+    dout_v := false.B  
 
-    io.dout := 0.U 
-    io.dout_v := false.B 
+    //io.dout := 0.U 
+    //io.dout_v := false.B 
 
     wr_en := io.din_v & (~full) 
     rd_en := io.dout_r & (~empty) 
 
     when (io.dout_r) {
-        io.dout_v := false.B  
+        dout_v := false.B  
     }
 
-    when (empty === false.B  &  rd_en === true.B & full === false.B  &  wr_en === true.B){
+    when ( (empty === false.B  &  rd_en === true.B) & (full === false.B  &  wr_en === true.B)){
         num_data := num_data
-        io.dout := io.din
+        dout := io.din
     }.elsewhen(full === false.B  &  wr_en === true.B){
         num_data := num_data + 1.U
         memory(write_pointer) := io.din
@@ -98,7 +98,8 @@ class D_FIFO
     }.elsewhen(empty === false.B  &  rd_en === true.B){
         when(num_data =/= 0.U){
             num_data := num_data - 1.U 
-            io.dout := memory(read_pointer)
+            dout := memory(read_pointer)
+            
         }.otherwise{
             num_data := num_data
         }
@@ -121,7 +122,7 @@ class D_FIFO
     when(empty === false.B  &  rd_en === true.B){ 
         // io.dout := memory(read_pointer)
         when (num_data =/= 0.U){
-            io.dout_v := true.B 
+            dout_v := true.B 
         }
         when (read_pointer === FIFO_DEPTH.U - 1.U)  {
             read_pointer := 0.U 
@@ -143,8 +144,8 @@ class D_FIFO
     }  
 
     io.din_r := (~full)  
-    //io.dout_v := dout_v  
-    //io.dout := dout                    
+    io.dout_v := dout_v  
+    io.dout := dout                    
 }
 
 // Generate the Verilog code
