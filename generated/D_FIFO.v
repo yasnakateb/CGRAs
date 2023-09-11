@@ -53,8 +53,12 @@ module D_FIFO(
   assign memory_MPORT_mask = 1'h1;
   assign memory_MPORT_en = _T_6 & wr_en;
   assign io_din_r = ~full; // @[D_FIFO.scala 116:18]
+
+  //////////////////////////////////////////// Reg?
   assign io_dout = ~empty & rd_en ? memory_io_dout_MPORT_data : 32'h0; // @[D_FIFO.scala 70:13 78:49 79:17]
   assign io_dout_v = ~empty & rd_en; // @[D_FIFO.scala 78:29]
+
+  ////////////////////////////////////////////////////////////////
   always @(posedge clock) begin
     if (memory_MPORT_en & memory_MPORT_mask) begin
       memory[memory_MPORT_addr] <= memory_MPORT_data; // @[D_FIFO.scala 55:29]
