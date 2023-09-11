@@ -69,10 +69,16 @@ class D_FIFO
     empty := true.B
     full := false.B 
     dout := 0.U 
-    dout_v := false.B  
+    dout_v := false.B 
+
+    wr_en := io.din_v & (~full) 
+    rd_en := io.dout_r & (~empty) 
+    
+    io.din_r := (~full) 
+    
 
     when (io.dout_r) {
-        io.dout_v := false.B  
+        dout_v := false.B  
     }
 
     when(full === false.B  &  wr_en === true.B){ 
@@ -109,12 +115,8 @@ class D_FIFO
         empty := true.B 
     }.otherwise {
         empty := false.B
-    }  
+    }   
 
-    wr_en := io.din_v & (~full) 
-    rd_en := io.dout_r & (~empty) 
-    
-    io.din_r := (~full) 
     io.dout_v := dout_v  
     io.dout := dout                    
 }
