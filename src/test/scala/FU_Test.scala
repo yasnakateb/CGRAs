@@ -30,7 +30,7 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
- 
+
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
@@ -68,6 +68,7 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("Iterarions Reset: " + dut.io.iterations_reset.peek().toString)
             println("Op Config: " + dut.io.op_config.peek().toString)
             // Summation  
+            dut.clock.step(1)
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
@@ -111,9 +112,20 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Maximum: " + dut.io.dout.peek().toString)
+            dut.clock.step(1)
+            dut.io.din_v.poke(false.B)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+
+
             ////////////////////////////////////////////////////////////////
             // Test 2
             ////////////////////////////////////////////////////////////////
+            /*
+            
             println("*************************************")
             println("Test 2: Loop source: 1, Iterations Reset: 3")
             println("*************************************")
@@ -336,6 +348,8 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
+
+            */
         }
     } 
 }

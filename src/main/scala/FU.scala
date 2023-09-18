@@ -71,8 +71,8 @@ class FU
     val alu_din_1 = RegInit(0.S(DATA_WIDTH.W))
     val alu_din_2 = RegInit(0.S(DATA_WIDTH.W))
     
-    val alu_dout = RegInit(0.S(DATA_WIDTH.W))
-    val reg_dout = RegInit(0.S(DATA_WIDTH.W))
+    val alu_dout = Wire(SInt(DATA_WIDTH.W))
+    val dout_reg = RegInit(0.S(DATA_WIDTH.W))
     // Fix
     // 2 ** 16 - 1
     val count = RegInit(0.U(16.W))
@@ -82,7 +82,7 @@ class FU
     */
     // Does loaded behave like a register? 
     val loaded = RegInit(0.U(1.W))
-    val valid = Wire(UInt(1.W))
+    val valid = RegInit(0.U(1.W))
 
     valid := 0.U
 
@@ -103,7 +103,7 @@ class FU
                                       
         }  
         .otherwise {
-            alu_din_1 := reg_dout
+            alu_din_1 := dout_reg
             alu_din_2 := io.din_2                      
         }                               
     } 
@@ -114,7 +114,7 @@ class FU
         }  
         .otherwise {
             alu_din_1 := io.din_1
-            alu_din_2 := reg_dout                      
+            alu_din_2 := dout_reg                      
         }                               
     } 
     .otherwise { 
@@ -135,17 +135,17 @@ class FU
     when (count === io.iterations_reset && 
             (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
             io.dout_r === 1.U)
-        {
+        {    
         count := 0.U
         loaded := 0.U
         valid := 1.U
-        reg_dout := alu_dout
+        dout_reg := alu_dout
     }    
     .elsewhen ((io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
                 io.din_v === 1.U && 
                 io.dout_r === 1.U)
         {
-        reg_dout := alu_dout
+        dout_reg := alu_dout
     } 
 
     io.din_r := io.dout_r
@@ -155,7 +155,7 @@ class FU
         io.dout_v := io.din_v 
     }
     .otherwise{
-        io.dout := reg_dout
+        io.dout := dout_reg
         io.dout_v := valid    
     }   
 }
