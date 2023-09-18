@@ -52,8 +52,8 @@ class FU
     extends Module {
     val io = IO(new Bundle {
         //  Inputs
-        val din_1 = Input(UInt(DATA_WIDTH.W))
-        val din_2 = Input(UInt(DATA_WIDTH.W))
+        val din_1 = Input(SInt(DATA_WIDTH.W))
+        val din_2 = Input(SInt(DATA_WIDTH.W))
         val din_v = Input(Bool())
         val dout_r = Input(Bool())
 
@@ -64,15 +64,15 @@ class FU
 
         // Outputs
         val din_r = Output(Bool())
-        val dout = Output(UInt(DATA_WIDTH.W))
+        val dout = Output(SInt(DATA_WIDTH.W))
         val dout_v = Output(Bool()) 
     })
 
-    val alu_din_1 = Wire(UInt(DATA_WIDTH.W))
-    val alu_din_2 = Wire(UInt(DATA_WIDTH.W))
+    val alu_din_1 = RegInit(0.S(DATA_WIDTH.W))
+    val alu_din_2 = RegInit(0.S(DATA_WIDTH.W))
     
-    val alu_dout = Wire(UInt(DATA_WIDTH.W))
-    val reg_dout = RegInit(0.U(DATA_WIDTH.W))
+    val alu_dout = RegInit(0.S(DATA_WIDTH.W))
+    val reg_dout = RegInit(0.S(DATA_WIDTH.W))
     // Fix
     // 2 ** 16 - 1
     val count = RegInit(0.U(16.W))
@@ -118,8 +118,8 @@ class FU
         }                               
     } 
     .otherwise { 
-        alu_din_1 := (DATA_WIDTH - 1).U
-        alu_din_2 := (DATA_WIDTH - 1).U
+        alu_din_1 := (DATA_WIDTH - 1).S 
+        alu_din_2 := (DATA_WIDTH - 1).S 
     }
     
     when (io.dout_r === 1.U) {

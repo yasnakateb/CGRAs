@@ -38,13 +38,13 @@ import org.scalatest.flatspec.AnyFlatSpec
 class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
     "FU_Test test" should "pass" in {
         test(new FU(32, 5)) { dut =>
-            var din_1 = 8.U
-            var din_2 = 3.U
-            var op_config = 0.U
+            var din_1 = 8.S
+            var din_2 = 3.S
+            var op_config = 0.U 
             var din_v = true.B
             var dout_r = true.B
-            var loop_source = 0.U
-            var iterations_reset = 0.U
+            var loop_source = 0.U 
+            var iterations_reset = 0.U 
             ////////////////////////////////////////////////////////////////
             // Test 1 
             ////////////////////////////////////////////////////////////////
@@ -119,11 +119,11 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             // din_v: true
             // dout_r: true
-            din_1 = 1.U
-            din_2 = 2.U
+            din_1 = 1.S
+            din_2 = 2.S
             op_config = 0.U
             loop_source = 1.U
-            iterations_reset = 3.U
+            iterations_reset = 3.U 
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.op_config.poke(op_config)
@@ -160,8 +160,8 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             // din_v: true
             // dout_r: true
-            din_1 = 2.U
-            din_2 = 3.U
+            din_1 = 2.S
+            din_2 = 3.S
             op_config = 0.U
             loop_source = 3.U
             iterations_reset = 3.U
@@ -182,11 +182,11 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             // din_v: true
             // dout_r: true
-            din_1 = 3.U
-            din_2 = 4.U
+            din_1 = 3.S
+            din_2 = 4.S
             op_config = 0.U
-            loop_source = 0.U
-            iterations_reset = 5.U
+            loop_source = 0.U 
+            iterations_reset = 5.U 
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.op_config.poke(op_config)
@@ -201,13 +201,13 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             // Loop source: 0
             // Iterations Reset: 0
-            din_1 = 1.U
-            din_2 = 2.U
+            din_1 = 1.S
+            din_2 = 2.S
             din_v = false.B
             dout_r = false.B
-            op_config = 0.U
-            loop_source = 0.U
-            iterations_reset = 0.U
+            op_config = 0.U 
+            loop_source = 0.U 
+            iterations_reset = 0.U  
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.din_v.poke(din_v)
@@ -224,13 +224,13 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             // Loop source: 0
             // Iterations Reset: 0
-            din_1 = 2.U
-            din_2 = 3.U
+            din_1 = 2.S
+            din_2 = 3.S
             din_v = false.B
             dout_r = true.B
-            op_config = 0.U
-            loop_source = 0.U
-            iterations_reset = 0.U
+            op_config = 0.U 
+            loop_source = 0.U 
+            iterations_reset = 0.U 
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.din_v.poke(din_v)
@@ -247,13 +247,13 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             // Loop source: 0
             // Iterations Reset: 0
-            din_1 = 3.U
-            din_2 = 4.U
+            din_1 = 3.S
+            din_2 = 4.S
             din_v = true.B
             dout_r = false.B
-            op_config = 0.U
-            loop_source = 0.U
-            iterations_reset = 0.U
+            op_config = 0.U 
+            loop_source = 0.U 
+            iterations_reset = 0.U 
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.din_v.poke(din_v)
@@ -272,13 +272,13 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             // dout_r: true
             // Loop source: 0
             // Iterations Reset: 0
-            din_1 = 1.U
-            din_2 = 2.U
+            din_1 = 1.S
+            din_2 = 2.S
             din_v = true.B
             dout_r = true.B
-            op_config = 0.U
-            loop_source = 0.U
-            iterations_reset = 0.U
+            op_config = 0.U 
+            loop_source = 0.U 
+            iterations_reset = 0.U 
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.din_v.poke(din_v)
@@ -291,8 +291,8 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
-            din_1 = 2.U
-            din_2 = 3.U
+            din_1 = 2.S
+            din_2 = 3.S
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             println("Din1: " + dut.io.din_1.peek().toString)
@@ -300,8 +300,8 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
-            din_1 = 3.U
-            din_2 = 4.U
+            din_1 = 3.S
+            din_2 = 4.S
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             println("Din1: " + dut.io.din_1.peek().toString)
@@ -309,8 +309,8 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
-            din_1 = 4.U
-            din_2 = 5.U
+            din_1 = 4.S
+            din_2 = 5.S
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             println("Din1: " + dut.io.din_1.peek().toString)
@@ -318,8 +318,8 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
-            din_1 = 5.U
-            din_2 = 6.U
+            din_1 = 5.S
+            din_2 = 6.S
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             println("Din1: " + dut.io.din_1.peek().toString)
@@ -327,8 +327,8 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
-            din_1 = 6.U
-            din_2 = 7.U
+            din_1 = 6.S
+            din_2 = 7.S
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             println("Din1: " + dut.io.din_1.peek().toString)
