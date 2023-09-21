@@ -114,12 +114,12 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("Maximum: " + dut.io.dout.peek().toString)
             dut.clock.step(1)
             dut.io.din_v.poke(false.B)
+            dut.io.din_1.poke(0.S)
+            dut.io.din_2.poke(0.S)
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-
+            
 
             ////////////////////////////////////////////////////////////////
             // Test 2
