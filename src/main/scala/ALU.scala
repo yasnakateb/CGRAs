@@ -65,11 +65,8 @@ class ALU
         val dout = Output(SInt(DATA_WIDTH.W))
     })
     // Converte din_1 to signed integer for shift right arithmetic (SRA)
-    val din_1_signed = RegInit(0.S(DATA_WIDTH.W))
+    // val din_1_signed = RegInit(0.S(DATA_WIDTH.W))
 
-    // Store din_1 in reg_out for barrel shifter 
-    //val reg_out = RegInit(0.S(32.W))
-    //reg_out := io.din_1 
     val reg_inbit = RegInit(0.U(1.W))
     reg_inbit := 0.U
   
@@ -190,8 +187,8 @@ class ALU
       }      
     } 
     .elsewhen (io.op_config === SRA) {                          // SRA
-      din_1_signed := io.din_1
-      out_aux := (din_1_signed >> io.din_2.asUInt)   
+      //din_1_signed := io.din_1
+      out_aux := (io.din_1 >> io.din_2.asUInt)   
     } 
     .elsewhen (io.op_config === SRL) {                          // SRL
       out_aux := io.din_1 >> io.din_2.asUInt                           

@@ -308,8 +308,11 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             // Shift Right Arithmetic
             op_config = 4.U
-            dut.io.din_1.poke(13.S)
-            dut.io.din_2.poke(14.S)
+
+            // -5 (in decimal) = 32-bit binary: 11111111111111111111111111111011
+            // Calculation with python
+            dut.io.din_1.poke((-5).S)
+            dut.io.din_2.poke(1.S)
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             // Shift Left Logical
