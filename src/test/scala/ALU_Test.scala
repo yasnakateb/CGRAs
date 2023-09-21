@@ -263,6 +263,7 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             println("Test 3: Random inputs and operations")
             println("*************************************")
+            
             var op_config = 0.U
             // Summation  
             dut.io.din_1.poke(1.S)
@@ -283,8 +284,8 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             // Subtraction
             op_config = 2.U
-            dut.io.din_1.poke(7.S)
-            dut.io.din_2.poke(8.S)
+            dut.io.din_1.poke(8.S)
+            dut.io.din_2.poke(7.S)
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             // Multiplication
@@ -301,8 +302,8 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             // Subtraction
             op_config = 2.U
-            dut.io.din_1.poke(11.S)
-            dut.io.din_2.poke(12.S)
+            dut.io.din_1.poke(12.S)
+            dut.io.din_2.poke(11.S)
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             // Shift Right Arithmetic
@@ -383,6 +384,7 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.din_2.poke(38.S)
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
+            
         }
     } 
 }
