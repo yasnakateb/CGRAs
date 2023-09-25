@@ -6,19 +6,5 @@
   {
     "class":"firrtl.transforms.BlackBoxTargetDirAnno",
     "targetDir":"generated"
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~D_FIFO|D_FIFO>io_dout_v",
-    "sources":[
-      "~D_FIFO|D_FIFO>io_dout_r"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~D_FIFO|D_FIFO>io_dout",
-    "sources":[
-      "~D_FIFO|D_FIFO>io_dout_r"
-    ]
   }
 ]

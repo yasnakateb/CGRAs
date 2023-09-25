@@ -52,6 +52,9 @@ class CellProcessing_Test extends AnyFlatSpec with ChiselScalatestTester {
             var east_dout_r = true.B 
             var south_dout_r = true.B 
             var west_dout_r = true.B 
+            println("*************************************")
+            println("Test 1: Summation")
+            println("*************************************")
             var config_bits = "b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
             
             dut.io.config_bits.poke(config_bits)
@@ -164,6 +167,9 @@ class CellProcessing_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("dout_v: " + dut.io.dout_v.peek().toString)
             println("*************************************")
             println("*************************************")
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         }
     } 
 }
