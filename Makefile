@@ -58,6 +58,12 @@ d-fifo:
 d-fifo-test:
 	$(SBT) "testOnly D_FIFO_Test -- -DwriteVcd=1"	
 
+d-fifo-v2:
+	$(SBT) "runMain D_FIFO_V2Main"
+
+d-fifo-v2-test:
+	$(SBT) "testOnly D_FIFO_V2_Test -- -DwriteVcd=1"	
+
 cell-processing:
 	$(SBT) "runMain CellProcessingMain"
 
