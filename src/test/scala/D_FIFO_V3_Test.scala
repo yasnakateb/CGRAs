@@ -35,15 +35,15 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class D_FIFO_V2_Test extends AnyFlatSpec with ChiselScalatestTester {
-    "D_FIFO_V2_Test test" should "pass" in {
-        test(new D_FIFO_V2(32, 32)) { dut =>
+class D_FIFO_V3_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "D_FIFO_V3_Test test" should "pass" in {
+        test(new D_FIFO_V3(32, 32)) { dut =>
             
             var din_v = true.B 
             var dout_r = true.B 
-            dut.io.din_v.poke(din_v)
             
             dut.io.dout_r.poke(dout_r)
+            dut.io.din_v.poke(din_v)
             dut.clock.step(1)
             dut.io.din.poke(76.U)
             

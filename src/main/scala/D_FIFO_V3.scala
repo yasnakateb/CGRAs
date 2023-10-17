@@ -34,7 +34,7 @@
 import chisel3._
 import chisel3.util._
 
-class D_FIFO_V2 
+class D_FIFO_V3 
     (
         DATA_WIDTH: Int, 
         FIFO_DEPTH: Int
@@ -52,120 +52,33 @@ class D_FIFO_V2
         val dout_v = Output(Bool()) 
     })
 
-    val memory = SyncReadMem(FIFO_DEPTH, UInt(DATA_WIDTH.W))
+    // Create a synchronous memory
+    val mem = SyncReadMem(FIFO_DEPTH, UInt(DATA_WIDTH.W))
 
-    val mem_r_en = Wire(Bool())
-    val mem_w_en = Wire(Bool())
+    // Pointers for read and write
+    val readPtr = RegInit(0.U(log2Ceil(FIFO_DEPTH).W))
+    val writePtr = RegInit(0.U(log2Ceil(FIFO_DEPTH).W))
 
-
-    val cnt_w_en = Wire(Bool())
-    val cnt_r_en = Wire(Bool())
-
-    // Check next
-    val dout_v = RegNext(0.U) 
-
-
-    val full = Wire(Bool())
-
-
-    val empty = Wire(Bool())
-
-
-    val cnt_w = RegInit(0.U(log2Ceil(FIFO_DEPTH).W)) 
-    val cnt_r = RegInit(0.U(log2Ceil(FIFO_DEPTH).W)) 
-    val cnt_data = RegInit(0.U(log2Ceil(FIFO_DEPTH).W)) 
-
-    // 6 
-    mem_w_en := io.din_v & (~full) 
-    // 9
-    mem_r_en := io.dout_r & (~empty) 
-
-    // 10 
-    cnt_w_en := mem_r_en
-    // 11 
-    cnt_r_en := mem_w_en
-
-    dout_v := mem_r_en
-
-    // Reference io is not fully initialized. io.dout <= mux(_T_14, memory.io_dout_MPORT.data, VOID
-
-    //val mem_dout = RegInit(UInt(DATA_WIDTH.W), 0.U) 
-    //val mem_dout = Wire(UInt(DATA_WIDTH.W))
-    
-    /// Counter Write => 14
-    when (cnt_w_en === true.B)  {
-        when (cnt_w === FIFO_DEPTH.U - 1.U)  {
-            cnt_w := 0.U 
-        }.otherwise {
-            cnt_w := cnt_w + 1.U 
-        }
+    // Write data to the memory when valid is asserted
+    when(io.din_v) {
+        mem.write(writePtr, io.din)
+        writePtr := Mux(writePtr === (FIFO_DEPTH - 1).U, 0.U, writePtr + 1.U)
     }
 
-    /// Counter Read => 15
-    when (cnt_r_en === true.B)  {
-        when (cnt_r === FIFO_DEPTH.U - 1.U)  {
-            cnt_r := 0.U 
-        }.otherwise {
-            cnt_r := cnt_r + 1.U 
-        }
-    }
-       
-    /// Counter Num Data => 16
+    // Read data from the memory when read request is asserted
+    io.dout := mem.read(readPtr, io.dout_r)
+    io.din_r := readPtr === writePtr && !io.din_v
 
-    // 12
-    when (mem_w_en === true.B &  mem_r_en === false.B)  {
-        cnt_data := cnt_data + 1.U  
-    
-    }
-    // 13 
-    when (mem_w_en === false.B &  mem_r_en === true.B)  {
-        cnt_data := cnt_data - 1.U  
-    
+    // Update read pointer
+    when(io.dout_r && io.dout_v) {
+        readPtr := Mux(readPtr === (FIFO_DEPTH - 1).U, 0.U, readPtr + 1.U)
     }
 
-    
-    // Memory => 17
-    /*when(mem_r_en === true.B){ 
-        // 8
-        io.dout := memory.read(cnt_r)
-        //mem_dout := memory(cnt_r)
+    // Output valid signal
+    io.dout_v := io.dout_r
 
-    }.otherwise {
-        io.dout := 0.U
-    }
-    */
-    io.dout := memory.read(cnt_r)
-    
-    when(mem_w_en === true.B){ 
-        // 4 , 5 
-        memory.write(cnt_w, io.din) 
-    }
-    
 
-    ///*****************************************************// 
-    ///*****************************************************// 
 
-    when (cnt_data === FIFO_DEPTH.U)  {
-        full := true.B 
-    }.otherwise {
-        full := false.B 
-    }           
-
-    when (cnt_data === 0.U)  {
-        empty := true.B 
-    }.otherwise {
-        empty := false.B
-    }  
-
-    // 2 => mem_r_en registerd 1 cycle 
-    io.dout_v := dout_v 
-
-    // 3, 7 
-    
-    //io.dout := mem_dout 
-
-    // 1
-    io.din_r := (~full) 
 
 
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -238,7 +151,7 @@ class D_FIFO_V2
 }
 
 // Generate the Verilog code
-object D_FIFO_V2Main extends App {
+object D_FIFO_V3Main extends App {
     println("Generating the hardware")
-    (new chisel3.stage.ChiselStage).emitVerilog(new D_FIFO_V2(32, 32), Array("--target-dir", "generated"))
+    (new chisel3.stage.ChiselStage).emitVerilog(new D_FIFO_V3(32, 32), Array("--target-dir", "generated"))
 }
