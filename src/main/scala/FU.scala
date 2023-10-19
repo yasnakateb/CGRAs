@@ -82,9 +82,9 @@ class FU
     */
     // Does loaded behave like a register? 
     val loaded = RegInit(0.U(1.W))
-    val valid = Wire(UInt(1.W))
+    val valid = RegInit(0.U(1.W))
 
-    valid := 0.U
+    // valid := 0.U
 
     val ALU = Module (new ALU(DATA_WIDTH, OP_WIDTH))
     ALU.io.din_1 := alu_din_1
@@ -123,7 +123,7 @@ class FU
     }
     
     when (io.dout_r === 1.U) {
-        valid := 0.U                            
+        valid := 0.U           
     }  
     when (io.din_v === 1.U && io.dout_r === 1.U && 
             (io.loop_source === STATE_1 || io.loop_source === STATE_2)) 
@@ -138,7 +138,7 @@ class FU
         {
         count := 0.U
         loaded := 0.U
-        valid := 1.U
+        valid := 1.U         
         reg_dout := alu_dout
     }    
     .elsewhen ((io.loop_source === STATE_1 || io.loop_source === STATE_2) && 

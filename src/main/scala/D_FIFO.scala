@@ -58,7 +58,6 @@ class D_FIFO
 
     val mem = SyncReadMem(FIFO_DEPTH, UInt(DATA_WIDTH.W))
 
-
     val wen = Wire(Bool())
     val ren = Wire(Bool())
     val empty = Wire(Bool())
