@@ -14,22 +14,17 @@ class ConfMux
     )
     extends Module {
     val io = IO(new Bundle {
-        // Inputs
-        // Note: log2Ceil() is a good function to find size of a word. 
-        // But be aware that it's not "synthesizable" for UInt() Wire or Reg. 
-        // log2Ceil() calculation is done once at synthesize time, it's not an hardware function. 
-        // Then your output signal tl_out.a.bits.size will be a constant.
-
+        
         val selector = Input(UInt(log2Ceil(NUM_INPUTS).W))
-        val mux_input = Input(UInt((NUM_INPUTS*DATA_WIDTH).W))
+        val mux_input = Input(SInt((NUM_INPUTS*DATA_WIDTH).W))
        
         // Output
-        val mux_output = Output(UInt(DATA_WIDTH.W))
+        val mux_output = Output(SInt(DATA_WIDTH.W))
     })
 
-    val inputs = Wire(Vec(NUM_INPUTS, UInt(DATA_WIDTH.W))) 
+    val inputs = Wire(Vec(NUM_INPUTS, SInt(DATA_WIDTH.W))) 
     for (i <- 0 until NUM_INPUTS) {
-        inputs(i) := io.mux_input((i+1)*DATA_WIDTH-1,i*DATA_WIDTH) 
+        inputs(i) := (io.mux_input((i+1)*DATA_WIDTH-1,i*DATA_WIDTH)).asSInt
     }
     io.mux_output := inputs(io.selector)
 }
