@@ -41,11 +41,11 @@ class D_EB
     extends Module {
     val io = IO(new Bundle {
         // Data in
-        val din = Input(UInt(DATA_WIDTH.W))
+        val din = Input(SInt(DATA_WIDTH.W))
         val din_v = Input(Bool())
         val din_r = Output(Bool())
         // Data out
-        val dout = Output(UInt(DATA_WIDTH.W))
+        val dout = Output(SInt(DATA_WIDTH.W))
         val dout_v = Output(Bool())
         val dout_r = Input(Bool())  
     })

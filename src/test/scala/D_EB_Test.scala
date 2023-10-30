@@ -38,7 +38,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 class D_EB_Test extends AnyFlatSpec with ChiselScalatestTester {
     "D_EB_Test test" should "pass" in {
         test(new D_EB(32)) { dut =>
-            var din = 10.U 
+            var din = 10.S  
             var dout_r = false.B 
             var din_v = false.B 
             dut.io.din.poke(din)
