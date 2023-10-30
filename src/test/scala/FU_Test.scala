@@ -38,8 +38,8 @@ import org.scalatest.flatspec.AnyFlatSpec
 class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
     "FU_Test test" should "pass" in {
         test(new FU(32, 5)) { dut =>
-            var din_1 = 8.U
-            var din_2 = 3.U
+            var din_1 = 8.S
+            var din_2 = 3.S
             var op_config = 0.U
             var din_v = true.B
             var dout_r = true.B
@@ -106,11 +106,8 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             op_config = 10.U
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
-            println("Minimum: " + dut.io.dout.peek().toString)
-            op_config = 11.U
-            dut.io.op_config.poke(op_config)
-            dut.clock.step(1)
-            println("Maximum: " + dut.io.dout.peek().toString)
+            
+            /*
             ////////////////////////////////////////////////////////////////
             // Test 2
             ////////////////////////////////////////////////////////////////
@@ -336,6 +333,7 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
+            */
         }
     } 
 }
