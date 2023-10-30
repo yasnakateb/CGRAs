@@ -46,8 +46,8 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.op_config.poke(0.U)
 
             for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke(i.U)
-                dut.io.din_2.poke((i+1).U)
+                dut.io.din_1.poke(i.S)
+                dut.io.din_2.poke((i+1).S)
                 dut.clock.step(1)
             }
             ////////////////////////////////////////////////////////////////
@@ -56,8 +56,8 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.op_config.poke(1.U)
 
             for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke(i.U)
-                dut.io.din_2.poke((i+1).U)
+                dut.io.din_1.poke(i.S)
+                dut.io.din_2.poke((i+1).S)
                 dut.clock.step(1)
             }
             ////////////////////////////////////////////////////////////////
@@ -66,8 +66,8 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.op_config.poke(2.U)
 
             for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke((i+2).U)
-                dut.io.din_2.poke((i).U)
+                dut.io.din_1.poke((i+2).S)
+                dut.io.din_2.poke((i).S)
                 dut.clock.step(1)
             }
             ////////////////////////////////////////////////////////////////
@@ -75,9 +75,9 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             ////////////////////////////////////////////////////////////////
             dut.io.op_config.poke(3.U)
 
-            dut.io.din_1.poke(1.U)
+            dut.io.din_1.poke(1.S)
             for (i <- 1 until number_of_tests) {
-                dut.io.din_2.poke(i.U)
+                dut.io.din_2.poke(i.S)
                 dut.clock.step(1)
             }
             ////////////////////////////////////////////////////////////////
@@ -85,9 +85,9 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             ////////////////////////////////////////////////////////////////
             dut.io.op_config.poke(4.U)
 
-            dut.io.din_2.poke(1.U)
+            dut.io.din_2.poke(1.S)
             for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke((i*2).U)
+                dut.io.din_1.poke((i*2).S)
                 dut.clock.step(1)
             }
             ////////////////////////////////////////////////////////////////
@@ -95,9 +95,9 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             ////////////////////////////////////////////////////////////////
             dut.io.op_config.poke(5.U)
 
-            dut.io.din_2.poke(1.U)
+            dut.io.din_2.poke(1.S)
             for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke((i*2).U)
+                dut.io.din_1.poke((i*2).S)
                 dut.clock.step(1)
             }
             ////////////////////////////////////////////////////////////////
@@ -106,8 +106,8 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.op_config.poke(6.U)
 
             for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke(i.U)
-                dut.io.din_2.poke((i+1).U)
+                dut.io.din_1.poke(i.S)
+                dut.io.din_2.poke((i+1).S)
                 dut.clock.step(1)
             }
             ////////////////////////////////////////////////////////////////
@@ -116,8 +116,8 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.op_config.poke(7.U)
 
             for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke(i.U)
-                dut.io.din_2.poke((i+1).U)
+                dut.io.din_1.poke(i.S)
+                dut.io.din_2.poke((i+1).S)
                 dut.clock.step(1)
             }
             ////////////////////////////////////////////////////////////////
@@ -126,8 +126,8 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.op_config.poke(8.U)
 
             for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke(i.U)
-                dut.io.din_2.poke((i+1).U)
+                dut.io.din_1.poke(i.S)
+                dut.io.din_2.poke((i+1).S)
                 dut.clock.step(1)
             }   
         }
