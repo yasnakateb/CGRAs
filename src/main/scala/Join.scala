@@ -41,8 +41,8 @@ class Join
     extends Module {
     val io = IO(new Bundle {
         //  Inputs
-        val din_1 = Input(UInt(DATA_WIDTH.W))
-        val din_2 = Input(UInt(DATA_WIDTH.W))
+        val din_1 = Input(SInt(DATA_WIDTH.W))
+        val din_2 = Input(SInt(DATA_WIDTH.W))
         val dout_r = Input(Bool())
         val din_1_v = Input(Bool())
         val din_2_v = Input(Bool())
@@ -51,8 +51,8 @@ class Join
         val dout_v = Output(Bool())
         val din_1_r = Output(Bool())
         val din_2_r = Output(Bool())
-        val dout_1 = Output(UInt(DATA_WIDTH.W))
-        val dout_2 = Output(UInt(DATA_WIDTH.W))
+        val dout_1 = Output(SInt(DATA_WIDTH.W))
+        val dout_2 = Output(SInt(DATA_WIDTH.W))
     })
 
     io.dout_1 := io.din_1
