@@ -38,14 +38,14 @@ import org.scalatest.flatspec.AnyFlatSpec
 class CellProcessing_Test extends AnyFlatSpec with ChiselScalatestTester {
     "CellProcessing_Test test" should "pass" in {
         test(new CellProcessing(32)) { dut =>
-            var north_din = 1.U 
+            var north_din = 1.S 
             var north_din_v = true.B 
-            var east_din = 0.U  
+            var east_din = 0.S  
             var east_din_v = false.B 
 
-            var south_din = 0.U  
+            var south_din = 0.S 
             var south_din_v = false.B 
-            var west_din = 2.U  
+            var west_din = 2.S  
             var west_din_v = true.B 
 
             var north_dout_r = true.B 
@@ -66,8 +66,8 @@ class CellProcessing_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.clock.step(1)
 
-            dut.io.north_din.poke(north_din)
-            dut.io.north_din_v.poke(north_din_v)
+            
+            
 
             dut.io.east_din.poke(east_din)
             dut.io.east_din_v.poke(east_din_v)
@@ -75,72 +75,37 @@ class CellProcessing_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.south_din.poke(south_din)
             dut.io.south_din_v.poke(south_din_v)
 
+            
+            
+            
+            println("*************************************")
+            println("*************************************")
+            dut.clock.step(1)
+            dut.io.north_din.poke(north_din)
+            dut.io.north_din_v.poke(north_din_v)
             dut.io.west_din.poke(west_din)
             dut.io.west_din_v.poke(west_din_v)
-            
-
-            println("*************************************")
-            println("*************************************")
-            dut.clock.step(1)
             dut.clock.step(1)
 
-            dut.io.north_din.poke(3.U)
-            dut.io.west_din.poke(4.U)
+            dut.io.north_din.poke(3.S)
+            dut.io.west_din.poke(4.S)
 
             dut.clock.step(1)
 
-            dut.io.north_din.poke(5.U)
-            dut.io.west_din.poke(6.U)
+            dut.io.north_din.poke(5.S)
+            dut.io.west_din.poke(6.S)
 
             dut.clock.step(1)
 
-            dut.io.north_din.poke(7.U)
-            dut.io.west_din.poke(8.U)
+            dut.io.north_din.poke(7.S)
+            dut.io.west_din.poke(8.S)
 
             dut.clock.step(1)
-
-
-            dut.io.north_din.poke(9.U)
-            dut.io.west_din.poke(10.U)
-
-            dut.clock.step(1)
-
-            dut.io.north_din.poke(6.U)
-            dut.io.west_din.poke(7.U)
-
-            dut.clock.step(1)
-
-            dut.io.north_din.poke(3.U)
-            dut.io.west_din.poke(4.U)
-
-            dut.clock.step(1)
-
-            dut.io.north_din.poke(5.U)
-            dut.io.west_din.poke(6.U)
-
-            dut.clock.step(1)
-
-            dut.io.north_din.poke(7.U)
-            dut.io.west_din.poke(8.U)
-
-            dut.clock.step(1)
-
-
-            dut.io.north_din.poke(9.U)
-            dut.io.west_din.poke(10.U)
-
-            dut.clock.step(1)
-
-            dut.io.north_din.poke(6.U)
-            dut.io.west_din.poke(7.U)
-
-            dut.clock.step(1)
-
-
-            dut.io.north_din.poke(0.U)
+        
+            dut.io.north_din.poke(0.S)
             dut.io.north_din_v.poke(false.B)
 
-            dut.io.west_din.poke(0.U)
+            dut.io.west_din.poke(0.S)
             dut.io.west_din_v.poke(false.B)
 
             dut.clock.step(1)
@@ -169,7 +134,6 @@ class CellProcessing_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         }
     } 
 }
