@@ -51,8 +51,8 @@ class D_EB
     })
 
     // Registers
-    val reg_din_1 = RegInit(0.U(DATA_WIDTH.W))
-    val reg_din_2 = RegInit(0.U(DATA_WIDTH.W))
+    val reg_din_1 = RegInit(0.S(DATA_WIDTH.W))
+    val reg_din_2 = RegInit(0.S(DATA_WIDTH.W))
     val reg_din_v_1 = RegInit(0.B)
     val reg_din_v_2 = RegInit(0.B)
     val reg_areg = RegInit(0.B)
