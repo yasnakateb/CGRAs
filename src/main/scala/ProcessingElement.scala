@@ -42,36 +42,36 @@ class ProcessingElement
     extends Module {
     val io = IO(new Bundle {
         //  Data in
-        val north_din = Input(UInt(DATA_WIDTH.W))
+        val north_din = Input(SInt(DATA_WIDTH.W))
         val north_din_v = Input(Bool())
         val north_din_r = Output(Bool())
 
-        val east_din = Input(UInt(DATA_WIDTH.W))
+        val east_din = Input(SInt(DATA_WIDTH.W))
         val east_din_v = Input(Bool())
         val east_din_r = Output(Bool())
 
-        val south_din = Input(UInt(DATA_WIDTH.W))
+        val south_din = Input(SInt(DATA_WIDTH.W))
         val south_din_v = Input(Bool())
         val south_din_r = Output(Bool())
 
-        val west_din = Input(UInt(DATA_WIDTH.W))
+        val west_din = Input(SInt(DATA_WIDTH.W))
         val west_din_v = Input(Bool())
         val west_din_r = Output(Bool())
 
         //  Data out
-        val north_dout = Output(UInt(DATA_WIDTH.W))
+        val north_dout = Output(SInt(DATA_WIDTH.W))
         val north_dout_v = Output(Bool())
         val north_dout_r = Input(Bool())
 
-        val east_dout = Output(UInt(DATA_WIDTH.W))
+        val east_dout = Output(SInt(DATA_WIDTH.W))
         val east_dout_v = Output(Bool())
         val east_dout_r = Input(Bool())
 
-        val south_dout = Output(UInt(DATA_WIDTH.W))
+        val south_dout = Output(SInt(DATA_WIDTH.W))
         val south_dout_v = Output(Bool())
         val south_dout_r = Input(Bool())
 
-        val west_dout = Output(UInt(DATA_WIDTH.W))
+        val west_dout = Output(SInt(DATA_WIDTH.W))
         val west_dout_v = Output(Bool())
         val west_dout_r = Input(Bool())
         
@@ -100,10 +100,10 @@ class ProcessingElement
     
     //  Interconnect signals
     //  FIFO signals
-    val north_buffer = Wire(UInt(DATA_WIDTH.W))
-    val east_buffer = Wire(UInt(DATA_WIDTH.W))
-    val south_buffer = Wire(UInt(DATA_WIDTH.W))
-    val west_buffer = Wire(UInt(DATA_WIDTH.W))
+    val north_buffer = Wire(SInt(DATA_WIDTH.W))
+    val east_buffer = Wire(SInt(DATA_WIDTH.W))
+    val south_buffer = Wire(SInt(DATA_WIDTH.W))
+    val west_buffer = Wire(SInt(DATA_WIDTH.W))
 
     val north_buffer_v = Wire(UInt(1.W))
     val east_buffer_v = Wire(UInt(1.W))
@@ -115,14 +115,16 @@ class ProcessingElement
     val south_buffer_r = Wire(UInt(1.W))
     val west_buffer_r = Wire(UInt(1.W))
     //  REG signals
-    val north_REG_din = Wire(UInt(DATA_WIDTH.W))
-    val east_REG_din = Wire(UInt(DATA_WIDTH.W))
-    val south_REG_din = Wire(UInt(DATA_WIDTH.W))
-    val west_REG_din = Wire(UInt(DATA_WIDTH.W))
+    val north_REG_din = Wire(SInt(DATA_WIDTH.W))
+    val east_REG_din = Wire(SInt(DATA_WIDTH.W))
+    val south_REG_din = Wire(SInt(DATA_WIDTH.W))
+    val west_REG_din = Wire(SInt(DATA_WIDTH.W))
+
     val north_REG_din_v = Wire(UInt(1.W))
     val east_REG_din_v = Wire(UInt(1.W))
     val south_REG_din_v = Wire(UInt(1.W))
     val west_REG_din_v = Wire(UInt(1.W))
+
     val north_REG_din_r = Wire(UInt(1.W))
     val east_REG_din_r = Wire(UInt(1.W))
     val south_REG_din_r = Wire(UInt(1.W))
@@ -130,7 +132,7 @@ class ProcessingElement
     //  Cell processing signals
     val FU_din_1_r = Wire(UInt(1.W))
     val FU_din_2_r = Wire(UInt(1.W))
-    val FU_dout = Wire(UInt(DATA_WIDTH.W))
+    val FU_dout = Wire(SInt(DATA_WIDTH.W))
     val FU_dout_v = Wire(UInt(1.W))
     // Question ?? 
     //val FU_dout_r = Wire(UInt(1.W))
@@ -224,7 +226,7 @@ class ProcessingElement
     
     val MUX_Nout  = Module (new ConfMux(4, DATA_WIDTH))
     MUX_Nout.io.selector := mux_N_sel
-    MUX_Nout.io.mux_input := Cat(west_buffer, south_buffer, east_buffer, FU_dout)  
+    MUX_Nout.io.mux_input := (Cat(west_buffer, south_buffer, east_buffer, FU_dout)).asSInt 
     north_REG_din := MUX_Nout.io.mux_output
     
     val FR_Nout = Module (new FR(4, 5))
@@ -266,7 +268,7 @@ class ProcessingElement
 
     val MUX_Eout  = Module (new ConfMux(4, DATA_WIDTH))
     MUX_Eout.io.selector := mux_E_sel
-    MUX_Eout.io.mux_input := Cat(west_buffer, south_buffer, north_buffer, FU_dout) 
+    MUX_Eout.io.mux_input := (Cat(west_buffer, south_buffer, north_buffer, FU_dout)).asSInt
     east_REG_din := MUX_Eout.io.mux_output
     
     val FR_Eout = Module (new FR(4, 5))
@@ -307,7 +309,7 @@ class ProcessingElement
     
     val MUX_Sout  = Module (new ConfMux(4, DATA_WIDTH))
     MUX_Sout.io.selector := mux_S_sel
-    MUX_Sout.io.mux_input := Cat(west_buffer, east_buffer, north_buffer, FU_dout)
+    MUX_Sout.io.mux_input := (Cat(west_buffer, east_buffer, north_buffer, FU_dout)).asSInt
     south_REG_din := MUX_Sout.io.mux_output
 
     val FR_Sout = Module (new FR(4, 5))
@@ -349,7 +351,7 @@ class ProcessingElement
 
     val MUX_Wout  = Module (new ConfMux(4, DATA_WIDTH))
     MUX_Wout.io.selector := mux_W_sel
-    MUX_Wout.io.mux_input := Cat(south_buffer, east_buffer, north_buffer, FU_dout) 
+    MUX_Wout.io.mux_input := (Cat(south_buffer, east_buffer, north_buffer, FU_dout)).asSInt 
     west_REG_din := MUX_Wout.io.mux_output
 
     val FR_Wout = Module (new FR(4, 5))

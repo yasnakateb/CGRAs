@@ -51,19 +51,19 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
 
         test(new ProcessingElement(DATA_WIDTH, FIFO_DEPTH)) { dut =>
             
-            var north_din = 0.U 
+            var north_din = 0.S
             var north_din_v = false.B
             val north_dout_r = true.B  
 
-            var east_din = 0.U  
+            var east_din = 0.S  
             var east_din_v = false.B 
             val east_dout_r = true.B 
 
-            var south_din = 0.U  
+            var south_din = 0.S  
             var south_din_v = false.B 
             val south_dout_r = true.B 
 
-            var west_din = 0.U  
+            var west_din = 0.S  
             var west_din_v = false.B 
             val west_dout_r = true.B 
 
@@ -103,8 +103,8 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.west_din_v.poke(true.B)
             // FIFO_DEPTH + 3 => The last output is FIFO[3], dout_v = false 
             for (i <- 1 until FIFO_DEPTH + 3) {
-                dut.io.north_din.poke(i.U)
-                dut.io.west_din.poke((i+1).U)
+                dut.io.north_din.poke(i.S)
+                dut.io.west_din.poke((i+1).S)
                 dut.clock.step(1)
             }
             dut.io.north_din_v.poke(false.B)
@@ -131,8 +131,8 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.west_din_v.poke(true.B)
             // FIFO_DEPTH + 3 => The last output is FIFO[3], dout_v = false 
             for (i <- 1 until FIFO_DEPTH + 3) {
-                dut.io.north_din.poke(i.U)
-                dut.io.west_din.poke((i+1).U)
+                dut.io.north_din.poke(i.S)
+                dut.io.west_din.poke((i+1).S)
                 dut.clock.step(1)
             }
             dut.io.north_din_v.poke(false.B)
@@ -159,8 +159,8 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.west_din_v.poke(true.B)
            
             for (i <- 1 until FIFO_DEPTH) {
-                dut.io.north_din.poke(i.U)
-                dut.io.west_din.poke((i+1).U)
+                dut.io.north_din.poke(i.S)
+                dut.io.west_din.poke((i+1).S)
                 dut.clock.step(1)
             }
             dut.io.north_din_v.poke(false.B)
@@ -188,11 +188,11 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             
             // dut.io.west_din.poke((i+3).U) => Result of subtraction: 1 or 2 
             for (i <- 1 until FIFO_DEPTH + 3) {
-                dut.io.north_din.poke(i.U)
+                dut.io.north_din.poke(i.S)
                 if (i % 2 == 0) {
-                    dut.io.west_din.poke((i+1).U)
+                    dut.io.west_din.poke((i+1).S)
                 } else {
-                    dut.io.west_din.poke((i+2).U)
+                    dut.io.west_din.poke((i+2).S)
                 }
                 dut.clock.step(1)
             }
@@ -220,9 +220,9 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.north_din_v.poke(true.B)
             dut.io.west_din_v.poke(true.B)
             // FIFO_DEPTH + 3 => The last output is FIFO[3], dout_v = false
-            dut.io.west_din.poke(1.U)
+            dut.io.west_din.poke(1.S)
             for (i <- 1 until FIFO_DEPTH + 3) {
-                dut.io.north_din.poke(i.U)
+                dut.io.north_din.poke(i.S)
                 dut.clock.step(1)
             }
             dut.io.north_din_v.poke(false.B)
@@ -249,10 +249,10 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.north_din_v.poke(true.B)
             dut.io.west_din_v.poke(true.B)
             
-            dut.io.north_din.poke(1.U)
+            dut.io.north_din.poke(1.S)
             for (i <- 1 until FIFO_DEPTH + 3) {
             
-                dut.io.west_din.poke((i*2).U)
+                dut.io.west_din.poke((i*2).S)
                 dut.clock.step(1)
             }
             dut.io.north_din_v.poke(false.B)
@@ -279,10 +279,10 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.north_din_v.poke(true.B)
             dut.io.west_din_v.poke(true.B)
             
-            dut.io.north_din.poke(1.U)
+            dut.io.north_din.poke(1.S)
             for (i <- 1 until FIFO_DEPTH + 3) {
             
-                dut.io.west_din.poke((i*2).U)
+                dut.io.west_din.poke((i*2).S)
                 dut.clock.step(1)
             }
             
@@ -311,11 +311,11 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             
            
             for (i <- 1 until FIFO_DEPTH + 3) {
-                dut.io.north_din.poke(i.U)
+                dut.io.north_din.poke(i.S)
                 if (i % 2 == 0) {
-                    dut.io.west_din.poke((i+1).U)
+                    dut.io.west_din.poke((i+1).S)
                 } else {
-                    dut.io.west_din.poke((i+2).U)
+                    dut.io.west_din.poke((i+2).S)
                 }
                 dut.clock.step(1)
             }
@@ -345,11 +345,11 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             
             
             for (i <- 1 until FIFO_DEPTH + 3) {
-                dut.io.north_din.poke(i.U)
+                dut.io.north_din.poke(i.S)
                 if (i % 2 == 0) {
-                    dut.io.west_din.poke((i+1).U)
+                    dut.io.west_din.poke((i+1).S)
                 } else {
-                    dut.io.west_din.poke((i+2).U)
+                    dut.io.west_din.poke((i+2).S)
                 }
                 dut.clock.step(1)
             }
@@ -379,11 +379,11 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             
             
             for (i <- 1 until FIFO_DEPTH + 3) {
-                dut.io.north_din.poke(i.U)
+                dut.io.north_din.poke(i.S)
                 if (i % 2 == 0) {
-                    dut.io.west_din.poke((i+1).U)
+                    dut.io.west_din.poke((i+1).S)
                 } else {
-                    dut.io.west_din.poke((i+2).U)
+                    dut.io.west_din.poke((i+2).S)
                 }
                 dut.clock.step(1)
             }
