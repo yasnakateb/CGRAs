@@ -42,13 +42,13 @@ class D_FIFO
     extends Module {
     val io = IO(new Bundle {
         // Inputs 
-        val din = Input(UInt(DATA_WIDTH.W))  
+        val din = Input(SInt(DATA_WIDTH.W))  
         val din_v = Input(Bool())
         val dout_r = Input(Bool())
 
         // Outputs
         val din_r = Output(Bool())
-        val dout = Output(UInt(DATA_WIDTH.W))  
+        val dout = Output(SInt(DATA_WIDTH.W))  
         val dout_v = Output(Bool()) 
     })
 
@@ -56,7 +56,7 @@ class D_FIFO
     val cntRead = RegInit(0.U(log2Ceil(FIFO_DEPTH).W))
     val cntData = RegInit(0.U(log2Ceil(FIFO_DEPTH + 1).W))
 
-    val mem = SyncReadMem(FIFO_DEPTH, UInt(DATA_WIDTH.W))
+    val mem = SyncReadMem(FIFO_DEPTH, SInt(DATA_WIDTH.W))
 
     val wen = Wire(Bool())
     val ren = Wire(Bool())
