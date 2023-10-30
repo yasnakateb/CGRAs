@@ -39,6 +39,16 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
     "ALU_Test test" should "pass" in {
         test(new ALU(32, 4)) { dut =>
 
+            var op_config = 3.U
+            dut.io.op_config.poke(op_config)
+
+            dut.io.din_1.poke(1.U)
+            for (i <- 1 until 32) {
+                
+                dut.io.din_2.poke(i.U)
+                dut.clock.step(1)
+            }
+
             /*
             dut.io.din_1.poke(1.U)
             dut.io.din_2.poke(2.U)
@@ -254,7 +264,7 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Maximum: " + dut.io.dout.peek().toString)
-            */
+            
 
             
             ////////////////////////////////////////////////////////////////
@@ -383,6 +393,7 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.din_2.poke(38.U)
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
+            */
         }
     } 
 }

@@ -35,9 +35,21 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
+object ProcessingElementParams
+{
+    def DATA_WIDTH = 32
+    def FIFO_DEPTH = 32 
+    def INSTRUCTION_CHANGE_DELAY = 5  
+    
+}
+
+import ProcessingElementParams._
+
 class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
     "ProcessingElement_Test test" should "pass" in {
-        test(new ProcessingElement(32, 32)) { dut =>
+        // Test code for summation with positive numbers
+
+        test(new ProcessingElement(DATA_WIDTH, FIFO_DEPTH)) { dut =>
             
             var north_din = 0.U 
             var north_din_v = false.B
@@ -55,9 +67,7 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             var west_din_v = false.B 
             val west_dout_r = true.B 
 
-            var config_bits = "b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
-            val catch_config = true.B 
-            
+            // Initialization
             dut.io.north_din.poke(north_din)
             dut.io.north_din_v.poke(north_din_v)
             dut.io.north_dout_r.poke(north_dout_r)
@@ -74,228 +84,154 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.west_din_v.poke(west_din_v)
             dut.io.west_dout_r.poke(west_dout_r)
 
+
+            // **** Test case for summation
+            var config_bits = "b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
+            var catch_config = true.B 
+            // Configuration 
             dut.io.catch_config.poke(catch_config)
-            
             dut.io.catch_config.poke(true.B)
             dut.io.config_bits.poke(config_bits)
             dut.clock.step(1)
             dut.clock.step(1)
-
             dut.io.catch_config.poke(false.B)
             config_bits = 0.U
             dut.io.config_bits.poke(config_bits)
             
-            dut.io.north_din.poke(0.U)
-            dut.io.west_din.poke(1.U)
+            // Inserting Data 
             dut.io.north_din_v.poke(true.B)
             dut.io.west_din_v.poke(true.B)
-            dut.clock.step(1)
-            dut.io.north_din.poke(1.U)
-            dut.io.west_din.poke(2.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(2.U)
-            dut.io.west_din.poke(3.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(3.U)
-            dut.io.west_din.poke(4.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(4.U)
-            dut.io.west_din.poke(5.U)
-            
-            dut.clock.step(1)
-            dut.io.north_din.poke(5.U)
-            dut.io.west_din.poke(6.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(6.U)
-            dut.io.west_din.poke(7.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(7.U)
-            dut.io.west_din.poke(8.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(8.U)
-            dut.io.west_din.poke(9.U)
-
-            dut.clock.step(1)
-            dut.io.north_din.poke(9.U)
-            dut.io.west_din.poke(10.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(10.U)
-            dut.io.west_din.poke(11.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(11.U)
-            dut.io.west_din.poke(12.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(12.U)
-            dut.io.west_din.poke(13.U)
-
-            dut.clock.step(1)
-            dut.io.north_din.poke(13.U)
-            dut.io.west_din.poke(14.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(14.U)
-            dut.io.west_din.poke(15.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(15.U)
-            dut.io.west_din.poke(16.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(16.U)
-            dut.io.west_din.poke(17.U)
-
-            dut.clock.step(1)
-            dut.io.north_din.poke(17.U)
-            dut.io.west_din.poke(18.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(18.U)
-            dut.io.west_din.poke(19.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(199.U)
-            dut.io.west_din.poke(20.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(20.U)
-            dut.io.west_din.poke(21.U)
-
-            dut.clock.step(1)
-            dut.io.north_din.poke(21.U)
-            dut.io.west_din.poke(22.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(22.U)
-            dut.io.west_din.poke(23.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(23.U)
-            dut.io.west_din.poke(24.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(24.U)
-            dut.io.west_din.poke(25.U)
-
-
-            dut.clock.step(1)
-            dut.io.north_din.poke(25.U)
-            dut.io.west_din.poke(26.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(26.U)
-            dut.io.west_din.poke(27.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(27.U)
-            dut.io.west_din.poke(28.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(28.U)
-            dut.io.west_din.poke(29.U)
-
-
-            dut.clock.step(1)
-            dut.io.north_din.poke(29.U)
-            dut.io.west_din.poke(30.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(30.U)
-            dut.io.west_din.poke(31.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(31.U)
-            dut.io.west_din.poke(32.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(32.U)
-            dut.io.west_din.poke(0.U)
-
-
-            dut.clock.step(1)
-            dut.io.north_din.poke(1.U)
-            dut.io.west_din.poke(2.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(3.U)
-            dut.io.west_din.poke(4.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(5.U)
-            dut.io.west_din.poke(6.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(7.U)
-            dut.io.west_din.poke(8.U)            
-            dut.clock.step(1)
-            dut.io.north_din.poke(444.U)
-            dut.io.west_din.poke(1.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(1.U)
-            dut.io.west_din.poke(2.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(3.U)
-            dut.io.west_din.poke(4.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(5.U)
-            dut.io.west_din.poke(6.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(7.U)
-            dut.io.west_din.poke(8.U)            
-            dut.clock.step(1)
-            dut.io.north_din.poke(1.U)
-            dut.io.west_din.poke(2.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(3.U)
-            dut.io.west_din.poke(4.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(5.U)
-            dut.io.west_din.poke(6.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(7.U)
-            dut.io.west_din.poke(8.U)            
-            dut.clock.step(1)
-            dut.io.north_din.poke(444.U)
-            dut.io.west_din.poke(1.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(1.U)
-            dut.io.west_din.poke(2.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(3.U)
-            dut.io.west_din.poke(4.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(5.U)
-            dut.io.west_din.poke(6.U)
-            dut.clock.step(1)
-            dut.io.north_din.poke(7.U)
-            dut.io.west_din.poke(8.U)            
-            dut.clock.step(1)
-            dut.io.north_din.poke(444.U)
-            dut.io.west_din.poke(1.U)
+            // FIFO_DEPTH + 3 => The last output is FIFO[3], dout_v = false 
+            for (i <- 1 until FIFO_DEPTH + 3) {
+                dut.io.north_din.poke(i.U)
+                dut.io.west_din.poke((i+1).U)
+                dut.clock.step(1)
+            }
             dut.io.north_din_v.poke(false.B)
             dut.io.west_din_v.poke(false.B)
-            dut.io.north_din.poke(0.U)
-            dut.io.west_din.poke(0.U)
+            for (i <- 0 until INSTRUCTION_CHANGE_DELAY) {
+                dut.clock.step(1)
+            }
+
+            // **** Test case: SUM
+            config_bits = "b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000110000000000000001000000000000000000000000011".U 
+            catch_config = true.B 
+            // Configuration 
+            dut.io.catch_config.poke(catch_config)
+            dut.io.catch_config.poke(true.B)
+            dut.io.config_bits.poke(config_bits)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.io.catch_config.poke(false.B)
+            config_bits = 0.U
+            dut.io.config_bits.poke(config_bits)
             
+            // Inserting Data 
+            dut.io.north_din_v.poke(true.B)
+            dut.io.west_din_v.poke(true.B)
+            // FIFO_DEPTH + 3 => The last output is FIFO[3], dout_v = false 
+            for (i <- 1 until FIFO_DEPTH + 3) {
+                dut.io.north_din.poke(i.U)
+                dut.io.west_din.poke((i+1).U)
+                dut.clock.step(1)
+            }
+            dut.io.north_din_v.poke(false.B)
+            dut.io.west_din_v.poke(false.B)
+            for (i <- 0 until INSTRUCTION_CHANGE_DELAY) {
+                dut.clock.step(1)
+            }
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // **** Test case: Mul
+            config_bits = "b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000110000000000000001000000000000000000000000011".U 
+            catch_config = true.B 
+            // Configuration 
+            dut.io.catch_config.poke(catch_config)
+            dut.io.catch_config.poke(true.B)
+            dut.io.config_bits.poke(config_bits)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.io.catch_config.poke(false.B)
+            config_bits = 0.U
+            dut.io.config_bits.poke(config_bits)
+            
+            // Inserting Data 
+            dut.io.north_din_v.poke(true.B)
+            dut.io.west_din_v.poke(true.B)
+           
+            for (i <- 1 until FIFO_DEPTH) {
+                dut.io.north_din.poke(i.U)
+                dut.io.west_din.poke((i+1).U)
+                dut.clock.step(1)
+            }
+            dut.io.north_din_v.poke(false.B)
+            dut.io.west_din_v.poke(false.B)
+            for (i <- 0 until INSTRUCTION_CHANGE_DELAY) {
+                dut.clock.step(1)
+            }
 
+            // **** Test case: Sub
+            config_bits = "b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000001010000000000000001000000000000000000000000011".U 
+            catch_config = true.B 
+            // Configuration 
+            dut.io.catch_config.poke(catch_config)
+            dut.io.catch_config.poke(true.B)
+            dut.io.config_bits.poke(config_bits)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.io.catch_config.poke(false.B)
+            config_bits = 0.U
+            dut.io.config_bits.poke(config_bits)
+            
+            // Inserting Data 
+            dut.io.north_din_v.poke(true.B)
+            dut.io.west_din_v.poke(true.B)
+            
+            // dut.io.west_din.poke((i+3).U) => Result of subtraction: 1 or 2 
+            for (i <- 1 until FIFO_DEPTH + 3) {
+                dut.io.north_din.poke(i.U)
+                if (i % 2 == 0) {
+                    dut.io.west_din.poke((i+1).U)
+                } else {
+                    dut.io.west_din.poke((i+2).U)
+                }
+                dut.clock.step(1)
+            }
+            dut.io.north_din_v.poke(false.B)
+            dut.io.west_din_v.poke(false.B)
+            for (i <- 0 until INSTRUCTION_CHANGE_DELAY) {
+                dut.clock.step(1)
+            }
+
+            // **** Test case: Shift left (logic)
+            //////////// North: din_2, West: din_1 
+            config_bits = "b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000001110000000000000001000000000000000000000000011".U 
+            catch_config = true.B 
+            // Configuration 
+            dut.io.catch_config.poke(catch_config)
+            dut.io.catch_config.poke(true.B)
+            dut.io.config_bits.poke(config_bits)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.io.catch_config.poke(false.B)
+            config_bits = 0.U
+            dut.io.config_bits.poke(config_bits)
+            
+            // Inserting Data 
+            dut.io.north_din_v.poke(true.B)
+            dut.io.west_din_v.poke(true.B)
+            // FIFO_DEPTH + 3 => The last output is FIFO[3], dout_v = false
+            dut.io.west_din.poke(1.U)
+            for (i <- 1 until FIFO_DEPTH + 3) {
+                dut.io.north_din.poke(i.U)
+                dut.clock.step(1)
+            }
+            dut.io.north_din_v.poke(false.B)
+            dut.io.west_din_v.poke(false.B)
+            for (i <- 0 until INSTRUCTION_CHANGE_DELAY) {
+                dut.clock.step(1)
+            }
 
             
-            println("*************************************")
-            println("*************************************")
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)    
-            // Outputs
-            println("Outputs")
-            println("north_din_r: " + dut.io.north_din_r.peek().toString)
-            println("east_din_r: " + dut.io.east_din_r.peek().toString)
-            println("south_din_r: " + dut.io.south_din_r.peek().toString)
-            println("west_din_r: " + dut.io.west_din_r.peek().toString)
-            println("north_dout: " + dut.io.north_dout.peek().toString)
-            println("north_dout_v: " + dut.io.north_dout_v.peek().toString)
-            println("east_dout: " + dut.io.east_dout.peek().toString)
-            println("east_dout_v: " + dut.io.east_dout_v.peek().toString)
-            println("south_dout: " + dut.io.south_dout.peek().toString)
-            println("south_dout_v: " + dut.io.south_dout_v.peek().toString)
-            println("west_dout: " + dut.io.west_dout.peek().toString)
-            println("west_dout_v: " + dut.io.west_dout_v.peek().toString)
-            println("*************************************")
-            println("*************************************")
         }
     } 
 }

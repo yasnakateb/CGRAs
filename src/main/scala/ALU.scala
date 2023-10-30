@@ -172,7 +172,7 @@ class ALU
           out_aux := Cat(reg_out(5, 0), Fill(26, reg_inbit))
         }
         is(27.U) {
-          reg_out := Cat(reg_out(4, 0), Fill(27, reg_inbit))
+          out_aux := Cat(reg_out(4, 0), Fill(27, reg_inbit))
         }
         is(28.U) {
           out_aux := Cat(reg_out(3, 0), Fill(28, reg_inbit))
@@ -190,7 +190,10 @@ class ALU
     } 
     .elsewhen (io.op_config === SRA) {                          // SRA
       din_1_signed := io.din_1.asSInt
-      out_aux := (din_1_signed >> io.din_2).asUInt              
+      out_aux := (din_1_signed >> io.din_2).asUInt 
+
+      // out_aux := io.din_1 >> io.din_2
+
     } 
     .elsewhen (io.op_config === SRL) {                          // SRL
       out_aux := io.din_1 >> io.din_2                           
