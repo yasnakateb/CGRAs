@@ -46,8 +46,8 @@ object ALU
     def OR  = 7.U    // Or
     def XOR = 8.U    // Xor 
     def DIV = 9.U    // Div (NOT IMPLEMENTED)
-    def MIN = 10.U   // Minimum
-    def MAX = 11.U   // Maximum
+    def MIN = 10.U   // Minimum (NOT IMPLEMENTED)
+    def MAX = 11.U   // Maximum (NOT IMPLEMENTED)
 }
 
 import ALU._
@@ -64,6 +64,7 @@ class ALU
         val op_config = Input(UInt(OP_WIDTH.W))
         val dout = Output(UInt(DATA_WIDTH.W))
     })
+
     // Converte din_1 to signed integer for shift right arithmetic (SRA)
     val din_1_signed = RegInit(0.S(DATA_WIDTH.W))
 
@@ -189,11 +190,11 @@ class ALU
       }      
     } 
     .elsewhen (io.op_config === SRA) {                          // SRA
+      /*
       din_1_signed := io.din_1.asSInt
       out_aux := (din_1_signed >> io.din_2).asUInt 
-
-      // out_aux := io.din_1 >> io.din_2
-
+      */
+      out_aux := io.din_1 >> io.din_2
     } 
     .elsewhen (io.op_config === SRL) {                          // SRL
       out_aux := io.din_1 >> io.din_2                           
@@ -206,22 +207,6 @@ class ALU
     } 
     .elsewhen (io.op_config === XOR) {                          // XOR
       out_aux := io.din_1 ^ io.din_2                            
-    } 
-    .elsewhen (io.op_config === MIN) {                          // MIN
-      when (io.din_1 <= io.din_2) {
-        out_aux := io.din_1                                     
-      }  
-      .elsewhen(io.din_1 > io.din_2) {
-        out_aux := io.din_2                                     
-      }                             
-    }
-    .elsewhen (io.op_config === MAX) {                          // MAX
-      when (io.din_1 >= io.din_2) {
-        out_aux := io.din_1                                    
-      }  
-      .elsewhen(io.din_1 < io.din_2) {
-        out_aux := io.din_2                                    
-      }     
     } 
     .otherwise { 
       out_aux := 0.U                                            // Default 

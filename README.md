@@ -17,5 +17,5 @@
 
 
 ### Todo
-- ✅ Fix Conf Mask
-- ⭕ Fix D_FIFO
+- ⭕ Fix SRA
+
