@@ -53,14 +53,14 @@ class FR
 
     var aux = Wire(Vec(NUMBER_OF_READYS, Bool()))
     var temp = Wire(Vec(NUMBER_OF_READYS, Bool()))
-    var Vaux = Wire(UInt(1.W))
+    var Vaux = Wire(SInt(1.W))
 
     for (i <- 0 until NUMBER_OF_READYS - 1) {
         aux(i) := ((~io.fork_mask(i)) | io.ready_out(i)).asBool
     }
     val conf_mux  = Module (new ConfMux(NUMBER_OF_VALIDS, 1))
     conf_mux.io.selector := io.valid_mux_sel
-    conf_mux.io.mux_input := io.valid_in
+    conf_mux.io.mux_input := (io.valid_in).asSInt 
     Vaux := conf_mux.io.mux_output
 
     aux(NUMBER_OF_READYS-1) := Vaux(0) 
