@@ -200,14 +200,10 @@ class ALU
       }      
     } 
     .elsewhen (io.op_config === SRA) {                          // SRA
-      /*
-      din_1_signed := io.din_1.asSInt
-      out_aux := (din_1_signed >> io.din_2).asUInt 
-      */
       out_aux := io.din_1 >> io.din_2.asUInt
     } 
     .elsewhen (io.op_config === SRL) {                          // SRL
-      out_aux := io.din_1 >> io.din_2.asUInt                            
+      out_aux := (io.din_1.asUInt >> io.din_2.asUInt).asSInt                            
     }
     .elsewhen (io.op_config === AND) {                          // AND
       out_aux := io.din_1 & io.din_2                            

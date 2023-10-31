@@ -40,6 +40,7 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
         test(new ALU(32, 4)) { dut =>
 
             var number_of_tests = 33 
+            
             ////////////////////////////////////////////////////////////////
             // Test 1: SUM
             ////////////////////////////////////////////////////////////////
@@ -87,7 +88,7 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
 
             dut.io.din_2.poke(1.S)
             for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke((i*2).S)
+                dut.io.din_1.poke((-(i*2)).S)
                 dut.clock.step(1)
             }
             ////////////////////////////////////////////////////////////////
@@ -95,9 +96,10 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             ////////////////////////////////////////////////////////////////
             dut.io.op_config.poke(5.U)
 
-            dut.io.din_2.poke(1.S)
+            
             for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke((i*2).S)
+                dut.io.din_1.poke((-(i*2)).S)
+                dut.io.din_2.poke(i.S)
                 dut.clock.step(1)
             }
             ////////////////////////////////////////////////////////////////
@@ -129,7 +131,7 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
                 dut.io.din_1.poke(i.S)
                 dut.io.din_2.poke((i+1).S)
                 dut.clock.step(1)
-            }   
+            } 
         }
     } 
 }
