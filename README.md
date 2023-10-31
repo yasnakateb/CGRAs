@@ -19,7 +19,7 @@
 ### Todo
 - ✅ Fix  SRA
 - ✅ Fix  SRL
-- ⭕ PE:  Test SRA, SRL 
+- ✅ PE:  Test SRA, SRL 
 - ⭕ ALU: Test feedback loop 
 - ⭕ FU:  Test feedback loop  
 - ⭕ PE:  Test feedback loop  
