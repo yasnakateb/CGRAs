@@ -33,28 +33,38 @@
 
 import chisel3._
 import chiseltest._
+import chisel3.util._
 import org.scalatest.flatspec.AnyFlatSpec
 
 class OverlayRocc_Test extends AnyFlatSpec with ChiselScalatestTester {
     "OverlayRocc_Test test" should "pass" in {
         test(new OverlayRocc(32, 6, 6, 32)) { dut =>
             // Data
-            var data_in = "h060504030201".U  
+            // var data_in = "h060504030201".U 
+            var data_in = BigInt("0807060504030201",16).S 
             var data_in_valid = "b111111".U 
             var data_out_ready = "b111111".U 
             // Config 
-            var cell_config = "b100010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000100000000".U 
+            var cell_config = "b100010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
 
-            dut.io.data_in.poke(data_in.asSInt)
+
+           
+
+            dut.io.data_in.poke(data_in)
             dut.io.data_in_valid.poke(data_in_valid)
             dut.io.data_out_ready.poke(data_out_ready)
             dut.io.cell_config.poke(cell_config)
             
+            println("Overlay******************************")
             println("*************************************")
-            println("*************************************")
-            for( i <- 0 to 50){
+            for( i <- 0 to 100){
                 dut.clock.step(1)
             }
+
+
+
+            /*
+
             // Inputs
             println("Inputs")
             println("data_in: " + dut.io.data_in.peek().toString)
@@ -69,7 +79,8 @@ class OverlayRocc_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             println("*************************************")
 
-            data_in = "h090807060504".U   
+            // data_in = "h090807060504".U   
+            data_in = 222.S 
             data_in_valid = "b111111".U 
             data_out_ready = "b111111".U 
             // Config 
@@ -96,7 +107,8 @@ class OverlayRocc_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             println("*************************************")
 
-            data_in = "h060504030201".U    
+            //data_in = "h060504030201".U    
+            data_in = -150.S   
             data_in_valid = "b111111".U 
             data_out_ready = "b111111".U 
             // Config 
@@ -123,6 +135,7 @@ class OverlayRocc_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             println("*************************************")
 
+            */
 
         }
     } 

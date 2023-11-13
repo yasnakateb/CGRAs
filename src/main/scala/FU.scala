@@ -125,14 +125,15 @@ class FU
     when (io.dout_r === 1.U) {
         valid := 0.U           
     }  
+    // Conditions 
     when (io.din_v === 1.U && io.dout_r === 1.U && 
             (io.loop_source === STATE_1 || io.loop_source === STATE_2)) 
         {
         loaded := 1.U
         count := count + 1.U                    
-    }  
+    }
     // Fix io.iterations_reset (verilog vs vhdl)
-    when (count === io.iterations_reset && 
+    when (count === io.iterations_reset - 1.U && 
             (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
             io.dout_r === 1.U)
         {

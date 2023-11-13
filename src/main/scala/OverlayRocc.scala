@@ -46,7 +46,7 @@ class OverlayRocc
         val data_in = Input(SInt((DATA_WIDTH*INPUT_NODES).W))
         val data_in_valid = Input(UInt(INPUT_NODES.W))
         val data_in_ready = Output(UInt(INPUT_NODES.W))
-        val data_out = Output(SInt((DATA_WIDTH*INPUT_NODES).W))
+        val data_out = Output(UInt((DATA_WIDTH*INPUT_NODES).W))
         val data_out_valid = Output(UInt(INPUT_NODES.W))
         val data_out_ready = Input(UInt(INPUT_NODES.W))
 
@@ -54,13 +54,17 @@ class OverlayRocc
         val cell_config = Input(UInt(192.W))
     })
     
-    val north_din = Reg(Vec(INPUT_NODES, UInt(DATA_WIDTH.W)))
-    val north_din_v = RegInit(0.U(INPUT_NODES.W))
+    val north_din = Wire(Vec(INPUT_NODES, SInt(DATA_WIDTH.W)))
+    val north_din_v = Wire(Vec(INPUT_NODES, Bool()))
+
+    val vec_data_in_ready = Wire(Vec(INPUT_NODES, Bool()))
+
+    val vec_data_out_valid = Wire(Vec(INPUT_NODES, Bool()))
     val north_din_r = Wire(Vec(INPUT_NODES, Bool()))
 
-    val east_dout = Reg(Vec(INPUT_NODES, UInt(DATA_WIDTH.W)))
-    val east_dout_v = Wire(Vec(INPUT_NODES, Bool()))
-    val east_dout_r = RegInit(0.U(INPUT_NODES.W))
+    val east_dout = Wire(Vec(OUTPUT_NODES, SInt(DATA_WIDTH.W)))
+    val east_dout_v = Wire(Vec(OUTPUT_NODES, Bool()))
+    val east_dout_r = Wire(Vec(OUTPUT_NODES, Bool()))
     
     //  **************************************************
     // Type ? 
@@ -170,19 +174,28 @@ class OverlayRocc
     }
 
     for( i <- 0 to INPUT_NODES - 1){
-        north_din(i) := io.data_in(DATA_WIDTH*(i+1) - 1, DATA_WIDTH*i)
+        north_din(i) := (io.data_in(DATA_WIDTH*(i+1) - 1, DATA_WIDTH*i)).asSInt
+        
         // ==> Error: Cannot reassign to read-only
-        //north_din_v(i) := io.data_in_valid(i) 
-        //io.data_in_ready(i) := north_din_r(i)
+
+        // north_din_v(i) := io.data_in_valid(i) 
+
+        north_din_v(i) := io.data_in_valid(i) 
+        vec_data_in_ready(i) := north_din_r(i)
+        
     }
-    north_din_v := io.data_in_valid
-    io.data_in_ready := north_din_r.asUInt
+
+    io.data_in_ready := vec_data_in_ready.asUInt 
+    //north_din_v := io.data_in_valid
+    //io.data_in_ready := north_din_r.asUInt
     
     //  ***************************************************************** Fix 
-    var reg_data_out = Reg(Vec(INPUT_NODES, UInt(DATA_WIDTH.W)))
+   
+    val vec_data_out = Wire(Vec(OUTPUT_NODES, SInt(DATA_WIDTH.W)))
 
-    var I = 0
-    var J = 0
+    val I = RegInit(0.U(log2Ceil(INPUT_NODES).W))
+    val J = RegInit(0.U(log2Ceil(OUTPUT_NODES).W))
+
     for (I <- 0 until INPUT_NODES) 
     { 
         for (J <- 0 until OUTPUT_NODES) 
@@ -646,15 +659,19 @@ class OverlayRocc
     // Fix 
 
     for( i <- 0 to OUTPUT_NODES - 1){
-        reg_data_out(i) := east_dout(i) 
+        vec_data_out(i) := east_dout(i)
         // // ==> Error: Cannot reassign to read-only
+        //io.data_out(DATA_WIDTH*(i+1) - 1, DATA_WIDTH*i) := east_dout(i)
+        vec_data_out_valid (i) := east_dout_v(i) 
         // io.data_out_valid(i) := east_dout_v(i) 
-        // east_dout_r(i) := io.data_out_ready(i)
+        east_dout_r(i) := io.data_out_ready(i)
     }
     
-    io.data_out_valid := east_dout_v.asUInt 
-    io.data_out := reg_data_out.asUInt
-    east_dout_r := io.data_out_ready   
+    // io.data_out_valid := east_dout_v.asUInt 
+    io.data_out := vec_data_out.asUInt 
+    io.data_out_valid := vec_data_out_valid.asUInt 
+
+    // east_dout_r := io.data_out_ready   
      
 }
 

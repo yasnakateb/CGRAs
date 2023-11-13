@@ -56,11 +56,21 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             ////////////////////////////////////////////////////////////////
             dut.io.op_config.poke(1.U)
 
-            for (i <- 1 until number_of_tests) {
-                dut.io.din_1.poke(i.S)
-                dut.io.din_2.poke((i+1).S)
+            //for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke((65535).S)
+                dut.io.din_2.poke((65535).S)
                 dut.clock.step(1)
-            }
+                dut.io.din_1.poke((65535).S)
+                dut.io.din_2.poke((65536).S)
+                dut.clock.step(1)
+                dut.io.din_1.poke((65535).S)
+                dut.io.din_2.poke((65537).S)
+                dut.clock.step(1)
+                dut.io.din_1.poke((65537).S)
+                dut.io.din_2.poke((65547).S)
+                dut.clock.step(1)
+                dut.clock.step(1)
+            //}
             ////////////////////////////////////////////////////////////////
             // Test 3: SUB 
             ////////////////////////////////////////////////////////////////

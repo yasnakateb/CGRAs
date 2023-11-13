@@ -125,7 +125,7 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.din_v.poke(true.B)
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
-            dut.io.op_config.poke(3.U)
+            dut.io.op_config.poke(0.U)
             dut.io.loop_source.poke(loop_source)
             dut.io.iterations_reset.poke(iterations_reset)
             dut.clock.step(1)
@@ -155,20 +155,31 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             // Test 3
             ////////////////////////////////////////////////////////////////
             println("*************************************")
-            println("Test 3: Loop source: 3, Iterations Reset: 3")
+            println("Test 3: Loop source: 1, Iterations Reset: 3")
             println("*************************************")
             // din_v: true
             // dout_r: true
-            din_1 = 2.S
-            din_2 = 3.S
-            op_config = 0.U 
-            loop_source = 3.U  
+            din_1 = 8.S
+            din_2 = 1.S
+            loop_source = 1.U  
             iterations_reset = 3.U    
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
-            dut.io.op_config.poke(1.U)
+            dut.io.op_config.poke(3.U)
             dut.io.loop_source.poke(loop_source)
             dut.io.iterations_reset.poke(iterations_reset)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)

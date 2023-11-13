@@ -43,7 +43,7 @@ class BarrelShifter_Test extends AnyFlatSpec with ChiselScalatestTester {
             var load = 1.B 
             *************************************/
             //?
-            // var load = 1.B 
+            var load = 1.B 
             var inbit = 0.U
             var in = 2048.U
             // Load ? 
@@ -66,10 +66,10 @@ class BarrelShifter_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("Output: " + dut.io.out.peek().toString)
             // ?
             //load = 1.B 
-            in = 1.U
+            in = 8.U
             // Load ===> Make sure that rshift = 0
             //?
-            //dut.io.load.poke(load)
+            dut.io.load.poke(load)
             dut.io.in.poke(in)
             rshift = 0.B 
             dut.io.rshift.poke(rshift)
@@ -78,15 +78,18 @@ class BarrelShifter_Test extends AnyFlatSpec with ChiselScalatestTester {
 
             // Left Shift
             //? 
-            //load = 0.B
-            shiftnum = 9.U
+            load = 0.B
+            shiftnum = 3.U
             
             var lshift = 1.B 
             dut.io.shiftnum.poke(shiftnum) 
             //?
-            //dut.io.load.poke(load)
+            dut.io.load.poke(load)
             dut.io.lshift.poke(lshift) 
             
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
