@@ -87,9 +87,9 @@ class ALU
     // Result 
     val out_aux = Wire(SInt((DATA_WIDTH).W))
     
-    out_aux := 0.S 
+   // out_aux := 0.S 
     // Default output 
-    io.dout := 0.S
+   // io.dout := 0.S
 
     when (io.op_config === SUM) {                               // SUM
       out_aux := io.din_1 + io.din_2                            
