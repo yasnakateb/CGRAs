@@ -30,7 +30,7 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
-
+ 
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
@@ -68,7 +68,6 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("Iterarions Reset: " + dut.io.iterations_reset.peek().toString)
             println("Op Config: " + dut.io.op_config.peek().toString)
             // Summation  
-            dut.clock.step(1)
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
@@ -110,42 +109,20 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.din_v.poke(false.B)
             dut.clock.step(1)
             dut.clock.step(1)
-<<<<<<< HEAD
-            println("Maximum: " + dut.io.dout.peek().toString)
-            dut.clock.step(1)
-            dut.io.din_v.poke(false.B)
-            dut.io.din_1.poke(0.S)
-            dut.io.din_2.poke(0.S)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            
-
-=======
->>>>>>> feature/shift-right-arithmetic
             ////////////////////////////////////////////////////////////////
             // Test 2
             ////////////////////////////////////////////////////////////////
-            /*
-            
             println("*************************************")
             println("Test 2: Loop source: 1, Iterations Reset: 3")
             println("*************************************")
             // din_v: true
             // dout_r: true
             din_1 = 1.S
-<<<<<<< HEAD
-            din_2 = 2.S
-            op_config = 0.U
-            loop_source = 1.U
-            iterations_reset = 3.U 
-=======
             din_2 = 1.S
             op_config = 0.U 
             loop_source = 1.U 
             iterations_reset = 3.U 
             dut.io.din_v.poke(true.B)
->>>>>>> feature/shift-right-arithmetic
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.op_config.poke(0.U)
@@ -182,18 +159,10 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("*************************************")
             // din_v: true
             // dout_r: true
-<<<<<<< HEAD
-            din_1 = 2.S
-            din_2 = 3.S
-            op_config = 0.U
-            loop_source = 3.U
-            iterations_reset = 3.U
-=======
             din_1 = 8.S
             din_2 = 1.S
             loop_source = 1.U  
             iterations_reset = 3.U    
->>>>>>> feature/shift-right-arithmetic
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.op_config.poke(3.U)
@@ -225,15 +194,9 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             // dout_r: true
             din_1 = 3.S
             din_2 = 4.S
-<<<<<<< HEAD
-            op_config = 0.U
-            loop_source = 0.U 
-            iterations_reset = 5.U 
-=======
             op_config = 0.U 
             loop_source = 0.U 
             iterations_reset = 5.U   
->>>>>>> feature/shift-right-arithmetic
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.op_config.poke(op_config)
@@ -254,11 +217,7 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dout_r = false.B
             op_config = 0.U 
             loop_source = 0.U 
-<<<<<<< HEAD
-            iterations_reset = 0.U  
-=======
             iterations_reset = 0.U   
->>>>>>> feature/shift-right-arithmetic
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.din_v.poke(din_v)
@@ -387,8 +346,6 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
-
-            */
         }
     } 
 }
