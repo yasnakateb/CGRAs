@@ -31,6 +31,16 @@
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
 
+
+/******************************************/
+// Notes 
+/******************************************/
+// For shifting (L/R) => din_2 = UInt
+
+// SLL => after CAT => asSInt 
+
+
+
 import chisel3._
 import chisel3.util._
 
@@ -46,8 +56,8 @@ object ALU
     def OR  = 7.U    // Or
     def XOR = 8.U    // Xor 
     def DIV = 9.U    // Div (NOT IMPLEMENTED)
-    def MIN = 10.U   // Minimum
-    def MAX = 11.U   // Maximum
+    def MIN = 10.U   // Minimum (NOT IMPLEMENTED)
+    def MAX = 11.U   // Maximum (NOT IMPLEMENTED)
 }
 
 import ALU._
@@ -64,9 +74,11 @@ class ALU
         val op_config = Input(UInt(OP_WIDTH.W))
         val dout = Output(SInt(DATA_WIDTH.W))
     })
+
     // Converte din_1 to signed integer for shift right arithmetic (SRA)
     // val din_1_signed = RegInit(0.S(DATA_WIDTH.W))
 
+<<<<<<< HEAD
     val reg_inbit = RegInit(0.U(1.W))
     reg_inbit := 0.U
   
@@ -76,6 +88,20 @@ class ALU
     
     // Default output 
     io.dout := 0.S 
+=======
+    // Store din_1 in reg_out for barrel shifter 
+    val reg_out = RegInit(0.S(32.W))
+    reg_out := io.din_1 
+    val reg_inbit = RegInit(0.U(1.W))
+    reg_inbit := 0.U   
+
+    // Result 
+    val out_aux = Wire(SInt((DATA_WIDTH).W))
+    
+   // out_aux := 0.S 
+    // Default output 
+   // io.dout := 0.S
+>>>>>>> feature/shift-right-arithmetic
 
     when (io.op_config === SUM) {                               // SUM
       out_aux := io.din_1 + io.din_2                            
@@ -87,6 +113,7 @@ class ALU
       out_aux := io.din_1 - io.din_2                            
     }
     .elsewhen (io.op_config === SLL) {                          // SLL
+<<<<<<< HEAD
       switch(io.din_2.asUInt) {
         is(0.U) {
           out_aux := io.din_1
@@ -192,6 +219,16 @@ class ALU
     } 
     .elsewhen (io.op_config === SRL) {                          // SRL
       out_aux := io.din_1 >> io.din_2.asUInt                           
+=======
+
+      out_aux := io.din_1 << (io.din_2(18, 0)).asUInt
+    } 
+    .elsewhen (io.op_config === SRA) {                          // SRA
+      out_aux := io.din_1 >> io.din_2.asUInt
+    } 
+    .elsewhen (io.op_config === SRL) {                          // SRL
+      out_aux := (io.din_1.asUInt >> io.din_2.asUInt).asSInt                            
+>>>>>>> feature/shift-right-arithmetic
     }
     .elsewhen (io.op_config === AND) {                          // AND
       out_aux := io.din_1 & io.din_2                            
@@ -201,22 +238,6 @@ class ALU
     } 
     .elsewhen (io.op_config === XOR) {                          // XOR
       out_aux := io.din_1 ^ io.din_2                            
-    } 
-    .elsewhen (io.op_config === MIN) {                          // MIN
-      when (io.din_1 <= io.din_2) {
-        out_aux := io.din_1                                     
-      }  
-      .elsewhen(io.din_1 > io.din_2) {
-        out_aux := io.din_2                                     
-      }                             
-    }
-    .elsewhen (io.op_config === MAX) {                          // MAX
-      when (io.din_1 >= io.din_2) {
-        out_aux := io.din_1                                    
-      }  
-      .elsewhen(io.din_1 < io.din_2) {
-        out_aux := io.din_2                                    
-      }     
     } 
     .otherwise { 
       out_aux := 0.S                                            // Default 

@@ -39,13 +39,19 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
     "ALU_Test test" should "pass" in {
         test(new ALU(32, 4)) { dut =>
 
+<<<<<<< HEAD
             /*
             dut.io.din_1.poke(1.S)
             dut.io.din_2.poke(2.S)
             var op_config = 0.S
+=======
+            var number_of_tests = 33 
+            
+>>>>>>> feature/shift-right-arithmetic
             ////////////////////////////////////////////////////////////////
-            // Test 1 
+            // Test 1: SUM
             ////////////////////////////////////////////////////////////////
+<<<<<<< HEAD
             println("*************************************")
             println("Test 1: Positive numbers")
             println("*************************************")
@@ -190,9 +196,28 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.din_2.poke(3.S)
             dut.clock.step(1)
             println("Maximum: " + dut.io.dout.peek().toString)
+=======
+            dut.io.op_config.poke(0.U)
+
+            // Pos
+            for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke(i.S)
+                dut.io.din_2.poke((i+1).S)
+                dut.clock.step(1)
+            }
+            // Neg 
+
+            for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke((-i).S)
+                dut.io.din_2.poke((-(i+1)).S)
+                dut.clock.step(1)
+            }
+
+>>>>>>> feature/shift-right-arithmetic
             ////////////////////////////////////////////////////////////////
-            // Test 2
+            // Test 2: MUL 
             ////////////////////////////////////////////////////////////////
+<<<<<<< HEAD
             val din_1 = "b1000_0000_0000_0000_0000_0000_0000_1111".S
             dut.io.din_1.poke(din_1)
             println("*************************************")
@@ -255,11 +280,104 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("Maximum: " + dut.io.dout.peek().toString)
             */
+=======
+            dut.io.op_config.poke(1.U)
+>>>>>>> feature/shift-right-arithmetic
 
-            
+            //for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke(5.S)
+                dut.io.din_2.poke(100.S)
+                dut.clock.step(1)
+                dut.io.din_1.poke(-5.S)
+                dut.io.din_2.poke(100.S)
+                dut.clock.step(1)
+                dut.io.din_1.poke(-5.S)
+                dut.io.din_2.poke(-100.S)
+                dut.clock.step(1)
+                dut.io.din_1.poke(65535.S)
+                dut.io.din_2.poke(65535.S)
+                dut.clock.step(1)
+                dut.io.din_1.poke(65535.S)
+                dut.io.din_2.poke(65536.S)
+                dut.clock.step(1)
+                dut.io.din_1.poke(65535.S)
+                dut.io.din_2.poke(65537.S)
+                dut.clock.step(1)
+                dut.io.din_1.poke(65537.S)
+                dut.io.din_2.poke(65547.S)
+                dut.clock.step(1)
+                
+            //}
             ////////////////////////////////////////////////////////////////
-            // Test 3 
+            // Test 3: SUB 
             ////////////////////////////////////////////////////////////////
+            dut.io.op_config.poke(2.U)
+
+            for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke((i+2).S)
+                dut.io.din_2.poke((i).S)
+                dut.clock.step(1)
+            }
+            ////////////////////////////////////////////////////////////////
+            // Test 4: SLL 
+            ////////////////////////////////////////////////////////////////
+            dut.io.op_config.poke(3.U)
+
+            dut.io.din_1.poke(1.S)
+            for (i <- 1 until number_of_tests) {
+                dut.io.din_2.poke(i.S)
+                dut.clock.step(1)
+            }
+            ////////////////////////////////////////////////////////////////
+            // Test 5: SRA
+            ////////////////////////////////////////////////////////////////
+            dut.io.op_config.poke(4.U)
+
+            dut.io.din_2.poke(1.S)
+            for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke(((i*2)).S)
+                dut.clock.step(1)
+            }
+            dut.io.din_2.poke(2.S)
+            for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke((-(i*2)).S)
+                dut.clock.step(1)
+            }
+            ////////////////////////////////////////////////////////////////
+            // Test 6: SRL 
+            ////////////////////////////////////////////////////////////////
+            dut.io.op_config.poke(5.U)
+
+            dut.io.din_2.poke(1.S)
+            for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke((-(i*2)).S)
+                dut.io.din_2.poke(i.S)
+                dut.clock.step(1)
+            }
+            ////////////////////////////////////////////////////////////////
+            // Test 7: AND 
+            ////////////////////////////////////////////////////////////////
+            dut.io.op_config.poke(6.U)
+
+            for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke(i.S)
+                dut.io.din_2.poke((i+1).S)
+                dut.clock.step(1)
+            }
+            ////////////////////////////////////////////////////////////////
+            // Test 8: OR 
+            ////////////////////////////////////////////////////////////////
+            dut.io.op_config.poke(7.U)
+
+            for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke(i.S)
+                dut.io.din_2.poke((i+1).S)
+                dut.clock.step(1)
+            }
+            ////////////////////////////////////////////////////////////////
+            // Test 9: XOR 
+            ////////////////////////////////////////////////////////////////
+<<<<<<< HEAD
             println("*************************************")
             println("Test 3: Random inputs and operations")
             println("*************************************")
@@ -388,6 +506,15 @@ class ALU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             
+=======
+            dut.io.op_config.poke(8.U)
+
+            for (i <- 1 until number_of_tests) {
+                dut.io.din_1.poke(i.S)
+                dut.io.din_2.poke((i+1).S)
+                dut.clock.step(1)
+            } 
+>>>>>>> feature/shift-right-arithmetic
         }
     } 
 }

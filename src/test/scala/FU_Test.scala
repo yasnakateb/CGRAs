@@ -72,45 +72,45 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             println("*************************************")
             println("Summation: " + dut.io.dout.peek().toString)
-            op_config = 1.U
+            op_config = 1.U 
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Multiplication: " + dut.io.dout.peek().toString)
-            op_config = 2.U
+            op_config = 2.U 
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Subtraction: " + dut.io.dout.peek().toString)
-            op_config = 3.U
+            op_config = 3.U 
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Shift Left Logical: " + dut.io.dout.peek().toString)
-            op_config = 4.U
+            op_config = 4.U  
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Shift Right Arithmetic: " + dut.io.dout.peek().toString)
-            op_config = 5.U
+            op_config = 5.U  
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Shift Right Logical: " + dut.io.dout.peek().toString)
-            op_config = 6.U
+            op_config = 6.U  
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("And: " + dut.io.dout.peek().toString)
-            op_config = 7.U
+            op_config = 7.U 
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Or: " + dut.io.dout.peek().toString)
-            op_config = 8.U
+            op_config = 8.U  
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
             println("Xor: " + dut.io.dout.peek().toString)
-            op_config = 10.U
+            op_config = 10.U 
             dut.io.op_config.poke(op_config)
             dut.clock.step(1)
-            println("Minimum: " + dut.io.dout.peek().toString)
-            op_config = 11.U
-            dut.io.op_config.poke(op_config)
+            dut.io.din_v.poke(false.B)
             dut.clock.step(1)
+            dut.clock.step(1)
+<<<<<<< HEAD
             println("Maximum: " + dut.io.dout.peek().toString)
             dut.clock.step(1)
             dut.io.din_v.poke(false.B)
@@ -121,6 +121,8 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             
 
+=======
+>>>>>>> feature/shift-right-arithmetic
             ////////////////////////////////////////////////////////////////
             // Test 2
             ////////////////////////////////////////////////////////////////
@@ -132,13 +134,21 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             // din_v: true
             // dout_r: true
             din_1 = 1.S
+<<<<<<< HEAD
             din_2 = 2.S
             op_config = 0.U
             loop_source = 1.U
             iterations_reset = 3.U 
+=======
+            din_2 = 1.S
+            op_config = 0.U 
+            loop_source = 1.U 
+            iterations_reset = 3.U 
+            dut.io.din_v.poke(true.B)
+>>>>>>> feature/shift-right-arithmetic
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
-            dut.io.op_config.poke(op_config)
+            dut.io.op_config.poke(0.U)
             dut.io.loop_source.poke(loop_source)
             dut.io.iterations_reset.poke(iterations_reset)
             dut.clock.step(1)
@@ -168,20 +178,39 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             // Test 3
             ////////////////////////////////////////////////////////////////
             println("*************************************")
-            println("Test 3: Loop source: 3, Iterations Reset: 3")
+            println("Test 3: Loop source: 1, Iterations Reset: 3")
             println("*************************************")
             // din_v: true
             // dout_r: true
+<<<<<<< HEAD
             din_1 = 2.S
             din_2 = 3.S
             op_config = 0.U
             loop_source = 3.U
             iterations_reset = 3.U
+=======
+            din_1 = 8.S
+            din_2 = 1.S
+            loop_source = 1.U  
+            iterations_reset = 3.U    
+>>>>>>> feature/shift-right-arithmetic
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
-            dut.io.op_config.poke(op_config)
+            dut.io.op_config.poke(3.U)
             dut.io.loop_source.poke(loop_source)
             dut.io.iterations_reset.poke(iterations_reset)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
@@ -196,9 +225,15 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             // dout_r: true
             din_1 = 3.S
             din_2 = 4.S
+<<<<<<< HEAD
             op_config = 0.U
             loop_source = 0.U 
             iterations_reset = 5.U 
+=======
+            op_config = 0.U 
+            loop_source = 0.U 
+            iterations_reset = 5.U   
+>>>>>>> feature/shift-right-arithmetic
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.op_config.poke(op_config)
@@ -219,7 +254,11 @@ class FU_Test extends AnyFlatSpec with ChiselScalatestTester {
             dout_r = false.B
             op_config = 0.U 
             loop_source = 0.U 
+<<<<<<< HEAD
             iterations_reset = 0.U  
+=======
+            iterations_reset = 0.U   
+>>>>>>> feature/shift-right-arithmetic
             dut.io.din_1.poke(din_1)
             dut.io.din_2.poke(din_2)
             dut.io.din_v.poke(din_v)

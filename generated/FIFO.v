@@ -1,14 +1,12 @@
 module FIFO(
   input         clock,
   input         reset,
-  input         io_clk,
-  input         io_reset,
   input  [31:0] io_din,
-  input         io_din_v,
-  output        io_din_r,
+  input         io_wen,
+  output        io_full,
   output [31:0] io_dout,
-  output        io_dout_v,
-  input         io_dout_r
+  input         io_ren,
+  output        io_empty
 );
 `ifdef RANDOMIZE_MEM_INIT
   reg [31:0] _RAND_0;
@@ -17,73 +15,74 @@ module FIFO(
   reg [31:0] _RAND_1;
   reg [31:0] _RAND_2;
   reg [31:0] _RAND_3;
+  reg [31:0] _RAND_4;
+  reg [31:0] _RAND_5;
 `endif // RANDOMIZE_REG_INIT
-  reg [31:0] memory [0:31]; // @[FIFO.scala 20:19]
-  wire  memory_io_dout_MPORT_en; // @[FIFO.scala 20:19]
-  wire [4:0] memory_io_dout_MPORT_addr; // @[FIFO.scala 20:19]
-  wire [31:0] memory_io_dout_MPORT_data; // @[FIFO.scala 20:19]
-  wire [31:0] memory_MPORT_data; // @[FIFO.scala 20:19]
-  wire [4:0] memory_MPORT_addr; // @[FIFO.scala 20:19]
-  wire  memory_MPORT_mask; // @[FIFO.scala 20:19]
-  wire  memory_MPORT_en; // @[FIFO.scala 20:19]
-  reg [4:0] write_pointer; // @[FIFO.scala 21:30]
-  reg [4:0] read_pointer; // @[FIFO.scala 22:29]
-  reg [5:0] num_data; // @[FIFO.scala 23:25]
-  wire  empty = num_data == 6'h0; // @[FIFO.scala 25:24]
-  wire  full = num_data == 6'h20; // @[FIFO.scala 26:23]
-  wire  _io_din_r_T = ~full; // @[FIFO.scala 28:15]
-  wire  _io_dout_v_T = ~empty; // @[FIFO.scala 30:16]
-  wire  _T = ~io_reset; // @[FIFO.scala 32:17]
-  wire  _GEN_0 = io_dout_r ? 1'h0 : ~empty; // @[FIFO.scala 30:13 39:21 40:17]
-  wire  _T_2 = _io_din_r_T & io_din_v; // @[FIFO.scala 43:16]
-  wire [5:0] _num_data_T_1 = num_data + 6'h1; // @[FIFO.scala 45:28]
-  wire [4:0] _write_pointer_T_2 = write_pointer + 5'h1; // @[FIFO.scala 46:87]
-  wire [5:0] _num_data_T_3 = num_data - 6'h1; // @[FIFO.scala 50:28]
-  wire [4:0] _read_pointer_T_2 = read_pointer + 5'h1; // @[FIFO.scala 51:84]
-  assign memory_io_dout_MPORT_en = 1'h1;
-  assign memory_io_dout_MPORT_addr = read_pointer;
-  assign memory_io_dout_MPORT_data = memory[memory_io_dout_MPORT_addr]; // @[FIFO.scala 20:19]
-  assign memory_MPORT_data = io_din;
-  assign memory_MPORT_addr = write_pointer;
-  assign memory_MPORT_mask = 1'h1;
-  assign memory_MPORT_en = _T ? 1'h0 : _T_2;
-  assign io_din_r = ~full; // @[FIFO.scala 28:15]
-  assign io_dout = memory_io_dout_MPORT_data; // @[FIFO.scala 29:11]
-  assign io_dout_v = ~io_reset ? 1'h0 : _GEN_0; // @[FIFO.scala 32:34 36:15]
+  reg [31:0] mem [0:31]; // @[FIFO.scala 18:24]
+  wire  mem_io_dout_MPORT_en; // @[FIFO.scala 18:24]
+  wire [4:0] mem_io_dout_MPORT_addr; // @[FIFO.scala 18:24]
+  wire [31:0] mem_io_dout_MPORT_data; // @[FIFO.scala 18:24]
+  wire [31:0] mem_MPORT_data; // @[FIFO.scala 18:24]
+  wire [4:0] mem_MPORT_addr; // @[FIFO.scala 18:24]
+  wire  mem_MPORT_mask; // @[FIFO.scala 18:24]
+  wire  mem_MPORT_en; // @[FIFO.scala 18:24]
+  reg  mem_io_dout_MPORT_en_pipe_0;
+  reg [4:0] mem_io_dout_MPORT_addr_pipe_0;
+  reg [4:0] cntWrite; // @[FIFO.scala 14:25]
+  reg [4:0] cntRead; // @[FIFO.scala 15:24]
+  reg [5:0] cntData; // @[FIFO.scala 16:24]
+  wire  _T = ~io_full; // @[FIFO.scala 21:17]
+  wire  _T_1 = io_wen & ~io_full; // @[FIFO.scala 21:15]
+  wire [5:0] _T_3 = 6'h20 - 6'h1; // @[FIFO.scala 22:31]
+  wire [5:0] _GEN_17 = {{1'd0}, cntWrite}; // @[FIFO.scala 22:19]
+  wire [4:0] _cntWrite_T_1 = cntWrite + 5'h1; // @[FIFO.scala 25:28]
+  wire  _T_6 = io_ren & ~io_empty; // @[FIFO.scala 30:15]
+  wire [5:0] _GEN_18 = {{1'd0}, cntRead}; // @[FIFO.scala 31:18]
+  wire [4:0] _cntRead_T_1 = cntRead + 5'h1; // @[FIFO.scala 34:26]
+  wire [5:0] _cntData_T_1 = cntData + 6'h1; // @[FIFO.scala 40:24]
+  wire [5:0] _cntData_T_3 = cntData - 6'h1; // @[FIFO.scala 42:24]
+  assign mem_io_dout_MPORT_en = mem_io_dout_MPORT_en_pipe_0;
+  assign mem_io_dout_MPORT_addr = mem_io_dout_MPORT_addr_pipe_0;
+  assign mem_io_dout_MPORT_data = mem[mem_io_dout_MPORT_addr]; // @[FIFO.scala 18:24]
+  assign mem_MPORT_data = io_din;
+  assign mem_MPORT_addr = cntWrite;
+  assign mem_MPORT_mask = 1'h1;
+  assign mem_MPORT_en = io_wen & _T;
+  assign io_full = cntData == 6'h20; // @[FIFO.scala 52:16]
+  assign io_dout = mem_io_dout_MPORT_data; // @[FIFO.scala 49:11]
+  assign io_empty = cntData == 6'h0; // @[FIFO.scala 57:16]
   always @(posedge clock) begin
-    if (memory_MPORT_en & memory_MPORT_mask) begin
-      memory[memory_MPORT_addr] <= memory_MPORT_data; // @[FIFO.scala 20:19]
+    if (mem_MPORT_en & mem_MPORT_mask) begin
+      mem[mem_MPORT_addr] <= mem_MPORT_data; // @[FIFO.scala 18:24]
     end
-    if (reset) begin // @[FIFO.scala 21:30]
-      write_pointer <= 5'h0; // @[FIFO.scala 21:30]
-    end else if (~io_reset) begin // @[FIFO.scala 32:34]
-      write_pointer <= 5'h0; // @[FIFO.scala 34:19]
-    end else if (_io_din_r_T & io_din_v) begin // @[FIFO.scala 43:29]
-      if (write_pointer == 5'h1f) begin // @[FIFO.scala 46:27]
-        write_pointer <= 5'h0;
+    mem_io_dout_MPORT_en_pipe_0 <= 1'h1;
+    if (1'h1) begin
+      mem_io_dout_MPORT_addr_pipe_0 <= cntRead;
+    end
+    if (reset) begin // @[FIFO.scala 14:25]
+      cntWrite <= 5'h0; // @[FIFO.scala 14:25]
+    end else if (io_wen & ~io_full) begin // @[FIFO.scala 21:27]
+      if (_GEN_17 == _T_3) begin // @[FIFO.scala 22:38]
+        cntWrite <= 5'h0; // @[FIFO.scala 23:16]
       end else begin
-        write_pointer <= _write_pointer_T_2;
+        cntWrite <= _cntWrite_T_1; // @[FIFO.scala 25:16]
       end
     end
-    if (reset) begin // @[FIFO.scala 22:29]
-      read_pointer <= 5'h0; // @[FIFO.scala 22:29]
-    end else if (~io_reset) begin // @[FIFO.scala 32:34]
-      read_pointer <= 5'h0; // @[FIFO.scala 35:18]
-    end else if (io_dout_r & _io_dout_v_T) begin // @[FIFO.scala 49:31]
-      if (read_pointer == 5'h1f) begin // @[FIFO.scala 51:26]
-        read_pointer <= 5'h0;
+    if (reset) begin // @[FIFO.scala 15:24]
+      cntRead <= 5'h0; // @[FIFO.scala 15:24]
+    end else if (io_ren & ~io_empty) begin // @[FIFO.scala 30:28]
+      if (_GEN_18 == _T_3) begin // @[FIFO.scala 31:37]
+        cntRead <= 5'h0; // @[FIFO.scala 32:15]
       end else begin
-        read_pointer <= _read_pointer_T_2;
+        cntRead <= _cntRead_T_1; // @[FIFO.scala 34:15]
       end
     end
-    if (reset) begin // @[FIFO.scala 23:25]
-      num_data <= 6'h0; // @[FIFO.scala 23:25]
-    end else if (~io_reset) begin // @[FIFO.scala 32:34]
-      num_data <= 6'h0; // @[FIFO.scala 33:14]
-    end else if (io_dout_r & _io_dout_v_T) begin // @[FIFO.scala 49:31]
-      num_data <= _num_data_T_3; // @[FIFO.scala 50:16]
-    end else if (_io_din_r_T & io_din_v) begin // @[FIFO.scala 43:29]
-      num_data <= _num_data_T_1; // @[FIFO.scala 45:16]
+    if (reset) begin // @[FIFO.scala 16:24]
+      cntData <= 6'h0; // @[FIFO.scala 16:24]
+    end else if (_T_1 & ~_T_6) begin // @[FIFO.scala 39:53]
+      cntData <= _cntData_T_1; // @[FIFO.scala 40:13]
+    end else if (~_T_1 & _T_6) begin // @[FIFO.scala 41:59]
+      cntData <= _cntData_T_3; // @[FIFO.scala 42:13]
     end
   end
 // Register and memory initialization
@@ -124,15 +123,19 @@ initial begin
 `ifdef RANDOMIZE_MEM_INIT
   _RAND_0 = {1{`RANDOM}};
   for (initvar = 0; initvar < 32; initvar = initvar+1)
-    memory[initvar] = _RAND_0[31:0];
+    mem[initvar] = _RAND_0[31:0];
 `endif // RANDOMIZE_MEM_INIT
 `ifdef RANDOMIZE_REG_INIT
   _RAND_1 = {1{`RANDOM}};
-  write_pointer = _RAND_1[4:0];
+  mem_io_dout_MPORT_en_pipe_0 = _RAND_1[0:0];
   _RAND_2 = {1{`RANDOM}};
-  read_pointer = _RAND_2[4:0];
+  mem_io_dout_MPORT_addr_pipe_0 = _RAND_2[4:0];
   _RAND_3 = {1{`RANDOM}};
-  num_data = _RAND_3[5:0];
+  cntWrite = _RAND_3[4:0];
+  _RAND_4 = {1{`RANDOM}};
+  cntRead = _RAND_4[4:0];
+  _RAND_5 = {1{`RANDOM}};
+  cntData = _RAND_5[5:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial

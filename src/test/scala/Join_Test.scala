@@ -36,10 +36,10 @@ import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
 class Join_Test extends AnyFlatSpec with ChiselScalatestTester {
-    "Join_Test test" should "pass" in {
+    "Join_Test test" should "pass" in {  
         test(new Join(32)) { dut =>
-            var din_1 = 10.U
-            var din_2 = 5.U
+            var din_1 = 10.S
+            var din_2 = 5.S
             var din_1_v = false.B
             var din_2_v = false.B 
             var dout_r = false.B

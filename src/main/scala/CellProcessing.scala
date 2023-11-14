@@ -41,19 +41,19 @@ class CellProcessing
     extends Module {
     val io = IO(new Bundle {
         //  Data in
-        val north_din = Input(UInt(DATA_WIDTH.W))
+        val north_din = Input(SInt(DATA_WIDTH.W))
         val north_din_v = Input(Bool())
-        val east_din = Input(UInt(DATA_WIDTH.W))
+        val east_din = Input(SInt(DATA_WIDTH.W))
         val east_din_v = Input(Bool())
-        val south_din = Input(UInt(DATA_WIDTH.W))
+        val south_din = Input(SInt(DATA_WIDTH.W))
         val south_din_v = Input(Bool())
-        val west_din = Input(UInt(DATA_WIDTH.W))
+        val west_din = Input(SInt(DATA_WIDTH.W))
         val west_din_v = Input(Bool())
         val FU_din_1_r = Output(Bool())  
         val FU_din_2_r = Output(Bool())  
          
         //  Data out
-        val dout = Output(UInt(DATA_WIDTH.W))
+        val dout = Output(SInt(DATA_WIDTH.W))
         val dout_v = Output(Bool())  
         val north_dout_r = Input(Bool())
         val east_dout_r = Input(Bool())
@@ -102,12 +102,12 @@ class CellProcessing
     // Changing std_logic_vector
     /***************/
 
-    val FU_dout = Wire(UInt(DATA_WIDTH.W))
+    val FU_dout = Wire(SInt(DATA_WIDTH.W))
     
-    val EB_din_1 = Wire(UInt(DATA_WIDTH.W))
-    val EB_din_2 = Wire(UInt(DATA_WIDTH.W))
-    val join_din_1 = Wire(UInt(DATA_WIDTH.W))
-    val join_din_2 = Wire(UInt(DATA_WIDTH.W))
+    val EB_din_1 = Wire(SInt(DATA_WIDTH.W))
+    val EB_din_2 = Wire(SInt(DATA_WIDTH.W))
+    val join_din_1 = Wire(SInt(DATA_WIDTH.W))
+    val join_din_2 = Wire(SInt(DATA_WIDTH.W))
 
     
     /*
@@ -124,8 +124,8 @@ class CellProcessing
     val join_dout_1 = RegInit(0.U(DATA_WIDTH.W))
     val join_dout_2 = RegInit(0.U(DATA_WIDTH.W))
     *********************************/
-    val join_dout_1 = Wire(UInt(DATA_WIDTH.W))
-    val join_dout_2 = Wire(UInt(DATA_WIDTH.W))
+    val join_dout_1 = Wire(SInt(DATA_WIDTH.W))
+    val join_dout_2 = Wire(SInt(DATA_WIDTH.W))
 
     
     val FU_dout_v = Wire(Bool())
@@ -176,7 +176,7 @@ class CellProcessing
 
     val MUX_1 = Module (new ConfMux(6, DATA_WIDTH))
     MUX_1.io.selector := selector_mux_1
-    MUX_1.io.mux_input := Cat(FU_dout, I1_const, io.west_din, io.south_din, io.east_din, io.north_din)
+    MUX_1.io.mux_input := (Cat(FU_dout, I1_const, io.west_din, io.south_din, io.east_din, io.north_din)).asSInt
     /********************************
     EB_din_1 := MUX_1.io.mux_output
     ********************************/
@@ -193,7 +193,7 @@ class CellProcessing
 
     val MUX_2 = Module (new ConfMux(6, DATA_WIDTH))
     MUX_2.io.selector := selector_mux_2
-    MUX_2.io.mux_input := Cat(FU_dout, I1_const, io.west_din, io.south_din, io.east_din, io.north_din) 
+    MUX_2.io.mux_input := (Cat(FU_dout, I1_const, io.west_din, io.south_din, io.east_din, io.north_din)).asSInt 
     /*********************************
     EB_din_2 := MUX_2.io.mux_output
     *********************************/

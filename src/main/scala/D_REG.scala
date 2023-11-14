@@ -40,19 +40,19 @@ class D_REG
     )
     extends Module {
     val io = IO(new Bundle {
-        val din = Input(UInt(DATA_WIDTH.W))
+        val din = Input(SInt(DATA_WIDTH.W))
         val din_v = Input(Bool())
         val dout_r = Input(Bool())
-        val dout = Output(UInt(DATA_WIDTH.W))
+        val dout = Output(SInt(DATA_WIDTH.W))
         val dout_v = Output(Bool())
         val din_r = Output(Bool())  
     })
 
-    val data = Wire(UInt(DATA_WIDTH.W))
+    val data = Wire(SInt(DATA_WIDTH.W))
     val valid = Wire(Bool())
 
     // Default value 
-    data := 0.U 
+    data := 0.S  
     valid := false.B 
     
     when (io.dout_r === true.B) {

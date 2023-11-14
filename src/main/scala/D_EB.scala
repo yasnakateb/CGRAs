@@ -41,18 +41,18 @@ class D_EB
     extends Module {
     val io = IO(new Bundle {
         // Data in
-        val din = Input(UInt(DATA_WIDTH.W))
+        val din = Input(SInt(DATA_WIDTH.W))
         val din_v = Input(Bool())
         val din_r = Output(Bool())
         // Data out
-        val dout = Output(UInt(DATA_WIDTH.W))
+        val dout = Output(SInt(DATA_WIDTH.W))
         val dout_v = Output(Bool())
         val dout_r = Input(Bool())  
     })
 
     // Registers
-    val reg_din_1 = RegInit(0.U(DATA_WIDTH.W))
-    val reg_din_2 = RegInit(0.U(DATA_WIDTH.W))
+    val reg_din_1 = RegInit(0.S(DATA_WIDTH.W))
+    val reg_din_2 = RegInit(0.S(DATA_WIDTH.W))
     val reg_din_v_1 = RegInit(0.B)
     val reg_din_v_2 = RegInit(0.B)
     val reg_areg = RegInit(0.B)
