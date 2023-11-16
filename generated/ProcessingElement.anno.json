@@ -9,319 +9,199 @@
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FS",
     "duplicate":"~ProcessingElement|ProcessingElement/FS_Nin:FS",
-    "index":0.017241379310344827
+    "index":0.02631578947368421
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux",
     "duplicate":"~ProcessingElement|ProcessingElement/MUX_Nout:ConfMux",
-    "index":0.034482758620689655
+    "index":0.05263157894736842
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_1",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Nout:FR/conf_mux:ConfMux_1",
-    "index":0.05172413793103448
+    "index":0.07894736842105263
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Nout:FR",
-    "index":0.06896551724137931
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable",
-    "duplicate":"~ProcessingElement|ProcessingElement/REG_Nout:D_REG/reg_1:RegEnable",
-    "index":0.08620689655172414
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_1",
-    "duplicate":"~ProcessingElement|ProcessingElement/REG_Nout:D_REG/reg_2:RegEnable_1",
-    "index":0.10344827586206896
+    "index":0.10526315789473684
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_REG",
     "duplicate":"~ProcessingElement|ProcessingElement/REG_Nout:D_REG",
-    "index":0.1206896551724138
+    "index":0.13157894736842105
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_FIFO_1",
     "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Ein:D_FIFO",
-    "index":0.13793103448275862
+    "index":0.15789473684210525
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FS_1",
     "duplicate":"~ProcessingElement|ProcessingElement/FS_Ein:FS",
-    "index":0.15517241379310345
+    "index":0.18421052631578946
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_2",
     "duplicate":"~ProcessingElement|ProcessingElement/MUX_Eout:ConfMux",
-    "index":0.1724137931034483
+    "index":0.21052631578947367
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_3",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Eout:FR/conf_mux:ConfMux_1",
-    "index":0.1896551724137931
+    "index":0.23684210526315788
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR_1",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Eout:FR",
-    "index":0.20689655172413793
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_2",
-    "duplicate":"~ProcessingElement|ProcessingElement/REG_Eout:D_REG/reg_1:RegEnable",
-    "index":0.22413793103448276
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_3",
-    "duplicate":"~ProcessingElement|ProcessingElement/REG_Eout:D_REG/reg_2:RegEnable_1",
-    "index":0.2413793103448276
+    "index":0.2631578947368421
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_REG_1",
     "duplicate":"~ProcessingElement|ProcessingElement/REG_Eout:D_REG",
-    "index":0.25862068965517243
+    "index":0.2894736842105263
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_FIFO_2",
     "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Sin:D_FIFO",
-    "index":0.27586206896551724
+    "index":0.3157894736842105
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FS_2",
     "duplicate":"~ProcessingElement|ProcessingElement/FS_Sin:FS",
-    "index":0.29310344827586204
+    "index":0.34210526315789475
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_4",
     "duplicate":"~ProcessingElement|ProcessingElement/MUX_Sout:ConfMux",
-    "index":0.3103448275862069
+    "index":0.3684210526315789
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_5",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Sout:FR/conf_mux:ConfMux_1",
-    "index":0.3275862068965517
+    "index":0.39473684210526316
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR_2",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Sout:FR",
-    "index":0.3448275862068966
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_4",
-    "duplicate":"~ProcessingElement|ProcessingElement/REG_Sout:D_REG/reg_1:RegEnable",
-    "index":0.3620689655172414
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_5",
-    "duplicate":"~ProcessingElement|ProcessingElement/REG_Sout:D_REG/reg_2:RegEnable_1",
-    "index":0.3793103448275862
+    "index":0.42105263157894735
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_REG_2",
     "duplicate":"~ProcessingElement|ProcessingElement/REG_Sout:D_REG",
-    "index":0.39655172413793105
+    "index":0.4473684210526316
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_FIFO_3",
     "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Win:D_FIFO",
-    "index":0.41379310344827586
+    "index":0.47368421052631576
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FS_3",
     "duplicate":"~ProcessingElement|ProcessingElement/FS_Win:FS",
-    "index":0.43103448275862066
+    "index":0.5
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_6",
     "duplicate":"~ProcessingElement|ProcessingElement/MUX_Wout:ConfMux",
-    "index":0.4482758620689655
+    "index":0.5263157894736842
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_7",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Wout:FR/conf_mux:ConfMux_1",
-    "index":0.46551724137931033
+    "index":0.5526315789473685
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR_3",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Wout:FR",
-    "index":0.4827586206896552
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_6",
-    "duplicate":"~ProcessingElement|ProcessingElement/REG_Wout:D_REG/reg_1:RegEnable",
-    "index":0.5
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_7",
-    "duplicate":"~ProcessingElement|ProcessingElement/REG_Wout:D_REG/reg_2:RegEnable_1",
-    "index":0.5172413793103449
+    "index":0.5789473684210527
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_REG_3",
     "duplicate":"~ProcessingElement|ProcessingElement/REG_Wout:D_REG",
-    "index":0.5344827586206896
+    "index":0.6052631578947368
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_8",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/FR_1:FR_4/conf_mux:ConfMux_8",
-    "index":0.5517241379310345
+    "index":0.631578947368421
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR_4",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/FR_1:FR_4",
-    "index":0.5689655172413793
+    "index":0.6578947368421053
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_9",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/MUX_1:ConfMux_9",
-    "index":0.5862068965517241
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_8",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_1:D_SEB/main:RegEnable",
-    "index":0.603448275862069
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_9",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_1:D_SEB/aux:RegEnable",
-    "index":0.6206896551724138
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_10",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_1:D_SEB/reg_1:RegEnable_1",
-    "index":0.6379310344827587
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_11",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_1:D_SEB/reg_2:RegEnable_1",
-    "index":0.6551724137931034
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|D_SEB",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_1:D_SEB",
-    "index":0.6724137931034483
+    "index":0.6842105263157895
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_10",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/FR_2:FR_4/conf_mux:ConfMux_8",
-    "index":0.6896551724137931
+    "index":0.7105263157894737
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR_5",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/FR_2:FR_4",
-    "index":0.7068965517241379
+    "index":0.7368421052631579
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_11",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/MUX_2:ConfMux_9",
-    "index":0.7241379310344828
+    "index":0.7631578947368421
   },
   {
     "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_12",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_2:D_SEB/main:RegEnable",
-    "index":0.7413793103448276
+    "original":"~ProcessingElement|D_EB",
+    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/EB_1:D_EB",
+    "index":0.7894736842105263
   },
   {
     "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_13",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_2:D_SEB/aux:RegEnable",
-    "index":0.7586206896551724
+    "original":"~ProcessingElement|D_EB_1",
+    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/EB_2:D_EB",
+    "index":0.8157894736842105
   },
   {
     "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_14",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_2:D_SEB/reg_1:RegEnable_1",
-    "index":0.7758620689655172
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_15",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_2:D_SEB/reg_2:RegEnable_1",
-    "index":0.7931034482758621
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|D_SEB_1",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_2:D_SEB",
-    "index":0.8103448275862069
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_16",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_OUT:D_SEB/main:RegEnable",
-    "index":0.8793103448275862
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_17",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_OUT:D_SEB/aux:RegEnable",
-    "index":0.896551724137931
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_18",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_OUT:D_SEB/reg_1:RegEnable_1",
-    "index":0.9137931034482759
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|RegEnable_19",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_OUT:D_SEB/reg_2:RegEnable_1",
-    "index":0.9310344827586207
-  },
-  {
-    "class":"firrtl.transforms.DedupedResult",
-    "original":"~ProcessingElement|D_SEB_2",
-    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/SEB_OUT:D_SEB",
-    "index":0.9482758620689655
+    "original":"~ProcessingElement|D_EB_2",
+    "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/EB_OUT:D_EB",
+    "index":0.9210526315789473
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FS_4",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/FS:FS",
-    "index":0.9655172413793104
+    "index":0.9473684210526315
   },
   {
     "class":"firrtl.EmitCircuitAnnotation",
@@ -330,5 +210,73 @@
   {
     "class":"firrtl.transforms.BlackBoxTargetDirAnno",
     "targetDir":"generated"
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~ProcessingElement|ProcessingElement>io_east_dout_v",
+    "sources":[
+      "~ProcessingElement|ProcessingElement>io_east_dout_r",
+      "~ProcessingElement|ProcessingElement>io_north_dout_r",
+      "~ProcessingElement|ProcessingElement>io_south_dout_r",
+      "~ProcessingElement|ProcessingElement>io_west_dout_r"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~ProcessingElement|ProcessingElement>io_north_dout",
+    "sources":[
+      "~ProcessingElement|ProcessingElement>io_north_dout_r"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~ProcessingElement|ProcessingElement>io_south_dout",
+    "sources":[
+      "~ProcessingElement|ProcessingElement>io_south_dout_r"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~ProcessingElement|ProcessingElement>io_west_dout_v",
+    "sources":[
+      "~ProcessingElement|ProcessingElement>io_west_dout_r",
+      "~ProcessingElement|ProcessingElement>io_north_dout_r",
+      "~ProcessingElement|ProcessingElement>io_east_dout_r",
+      "~ProcessingElement|ProcessingElement>io_south_dout_r"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~ProcessingElement|ProcessingElement>io_west_dout",
+    "sources":[
+      "~ProcessingElement|ProcessingElement>io_west_dout_r"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~ProcessingElement|ProcessingElement>io_south_dout_v",
+    "sources":[
+      "~ProcessingElement|ProcessingElement>io_south_dout_r",
+      "~ProcessingElement|ProcessingElement>io_north_dout_r",
+      "~ProcessingElement|ProcessingElement>io_east_dout_r",
+      "~ProcessingElement|ProcessingElement>io_west_dout_r"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~ProcessingElement|ProcessingElement>io_east_dout",
+    "sources":[
+      "~ProcessingElement|ProcessingElement>io_east_dout_r"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~ProcessingElement|ProcessingElement>io_north_dout_v",
+    "sources":[
+      "~ProcessingElement|ProcessingElement>io_north_dout_r",
+      "~ProcessingElement|ProcessingElement>io_east_dout_r",
+      "~ProcessingElement|ProcessingElement>io_south_dout_r",
+      "~ProcessingElement|ProcessingElement>io_west_dout_r"
+    ]
   }
 ]

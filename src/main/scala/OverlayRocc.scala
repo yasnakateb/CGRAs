@@ -350,7 +350,7 @@ class OverlayRocc
                     SOUTHWEST_OV.io.catch_config := catch_config(I+INPUT_NODES*J) 
                 }
             } 
-            
+            //////////////////////////////////////////////////// Get data from the west 
             // MIDDLE_OV 
             if (I != 0 & I != INPUT_NODES - 1) 
             {
