@@ -116,11 +116,13 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             
             dut.io.north_din.poke(1.S)
             dut.io.west_din.poke(1.S)
-            for (i <- 1 until number_of_tests) {
+            for (i <- 1 until 123) {
                 //dut.io.north_din.poke(i.S)
                 //dut.io.west_din.poke((i+1).S)
                 dut.clock.step(1)
             }
+            dut.io.north_din.poke(0.S)
+            dut.io.west_din.poke(0.S)
             dut.io.north_din_v.poke(false.B)
             dut.io.west_din_v.poke(false.B)
             for (i <- 0 until INSTRUCTION_CHANGE_DELAY) {
@@ -128,7 +130,7 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             }
 
             // **** Test case: Mul
-            config_bits = "b01000000000111101100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000110000000000000001000000000000000000000000011".U 
+            config_bits = "b01000000000001101100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000110000000000000001000000000000000000000000011".U 
             catch_config = true.B 
             // Configuration 
             dut.io.catch_config.poke(catch_config)
@@ -143,12 +145,17 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             // Inserting Data 
             dut.io.north_din_v.poke(true.B)
             dut.io.west_din_v.poke(true.B)
+
+            dut.io.north_din.poke(2.S)
+            dut.io.west_din.poke(1.S)
            
-            for (i <- 1 until FIFO_DEPTH) {
-                dut.io.north_din.poke(i.S)
-                dut.io.west_din.poke((i+1).S)
+            for (i <- 1 until 27) {
+                //dut.io.north_din.poke(i.S)
+                //dut.io.west_din.poke((i+1).S)
                 dut.clock.step(1)
             }
+            dut.io.north_din.poke(0.S)
+            dut.io.west_din.poke(0.S)
             dut.io.north_din_v.poke(false.B)
             dut.io.west_din_v.poke(false.B)
             for (i <- 0 until INSTRUCTION_CHANGE_DELAY) {
@@ -172,15 +179,15 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.north_din_v.poke(true.B)
             dut.io.west_din_v.poke(true.B)
             
-            for (i <- 1 until number_of_tests) {
-                dut.io.north_din.poke(i.S)
-                if (i % 2 == 0) {
-                    dut.io.west_din.poke((i+1).S)
-                } else {
-                    dut.io.west_din.poke((i+2).S)
-                }
+            dut.io.north_din.poke(1.S)
+            dut.io.west_din.poke(124.S)
+            
+            for (i <- 1 until 123) {
+                
                 dut.clock.step(1)
             }
+            dut.io.north_din.poke(0.S)
+            dut.io.west_din.poke(0.S)
             dut.io.north_din_v.poke(false.B)
             dut.io.west_din_v.poke(false.B)
             for (i <- 0 until INSTRUCTION_CHANGE_DELAY) {
@@ -189,7 +196,7 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
 
             // **** Test case: Shift left (logic)
             //////////// North: din_2, West: din_1 
-            config_bits = "b01000000000111101100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000001110000000000000001000000000000000000000000011".U 
+            config_bits = "b01000000000001111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000001110000000000000001000000000000000000000000011".U 
             catch_config = true.B 
             // Configuration 
             dut.io.catch_config.poke(catch_config)
@@ -206,10 +213,12 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.west_din_v.poke(true.B)
             
             dut.io.west_din.poke(1.S)
-            for (i <- 1 until number_of_tests) {
-                dut.io.north_din.poke(i.S)
+            dut.io.north_din.poke(1.S)
+            for (i <- 1 until 31) {
                 dut.clock.step(1)
             }
+            dut.io.west_din.poke(0.S)
+            dut.io.north_din.poke(0.S)
             dut.io.north_din_v.poke(false.B)
             dut.io.west_din_v.poke(false.B)
             for (i <- 0 until INSTRUCTION_CHANGE_DELAY) {
