@@ -96,6 +96,7 @@ class ProcessingElement
     val accept_mask_fsiE = Wire(UInt(5.W))
     val accept_mask_fsiS = Wire(UInt(5.W))
     val accept_mask_fsiW = Wire(UInt(5.W))
+
     val config_bits_reg = RegInit(0.U(182.W))
     
     //  Interconnect signals
@@ -193,6 +194,7 @@ class ProcessingElement
     }
 
     // Configuration bits arrangement
+    // val mux_N_sel = config_bits_reg(7, 6)
     mux_N_sel := config_bits_reg(7, 6)
     mux_E_sel := config_bits_reg(9, 8)
     mux_S_sel := config_bits_reg(11, 10)
