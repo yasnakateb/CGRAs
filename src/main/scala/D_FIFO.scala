@@ -60,13 +60,9 @@ class D_FIFO
 
     val wen = Wire(Bool())
     val ren = Wire(Bool())
-    val empty = Wire(Bool())
-    val full = Wire(Bool())
+    val empty = RegNext(0.B) 
+    val full = RegNext(0.B) 
     val dout_v = RegNext(0.U) 
-
-    io.din_r := ~full 
-    wen := io.din_v & ~full
-    ren := io.dout_r & ~empty
 
     dout_v := ren
     
@@ -114,6 +110,9 @@ class D_FIFO
         empty := false.B
     }
 
+    io.din_r := ~full 
+    wen := io.din_v & ~full
+    ren := io.dout_r & ~empty
 }
 
 // Generate the Verilog code
