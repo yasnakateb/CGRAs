@@ -110,7 +110,7 @@ class ProcessingElement
     val north_buffer_r = Wire(UInt(1.W))
     val east_buffer_r = Wire(UInt(1.W))
     val south_buffer_r = Wire(UInt(1.W))
-    val west_buffer_r = Wire(UInt(1.W))
+    val west_buffer_r = Wire(UInt(1.W))   
     
     val north_REG_din = Wire(SInt(DATA_WIDTH.W))
     val east_REG_din = Wire(SInt(DATA_WIDTH.W))

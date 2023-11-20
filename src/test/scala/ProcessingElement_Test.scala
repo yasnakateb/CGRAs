@@ -97,8 +97,8 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             ////////
             ////////////////////////////////////////////////////////////////////////
 
-            // **** Test case: SUM
-            var config_bits = "b01000000000111101100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
+            // **** Test case: SUM without feedback loop
+            var config_bits = "b00000000000111101100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
             var catch_config = true.B 
             // Configuration 
             dut.io.catch_config.poke(catch_config)
@@ -114,11 +114,11 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.north_din_v.poke(true.B)
             dut.io.west_din_v.poke(true.B)
             
-            dut.io.north_din.poke(1.S)
-            dut.io.west_din.poke(1.S)
+            //dut.io.north_din.poke(1.S)
+            //dut.io.west_din.poke(1.S)
             for (i <- 1 until 123) {
-                //dut.io.north_din.poke(i.S)
-                //dut.io.west_din.poke((i+1).S)
+                dut.io.north_din.poke(i.S)
+                dut.io.west_din.poke((i+1).S)
                 dut.clock.step(1)
             }
             dut.io.north_din.poke(0.S)
