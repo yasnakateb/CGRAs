@@ -21,8 +21,9 @@ class ConfMux
         // Output
         val mux_output = Output(SInt(DATA_WIDTH.W))
     })
-
+    // All wires
     val inputs = Wire(Vec(NUM_INPUTS, SInt(DATA_WIDTH.W))) 
+
     for (i <- 0 until NUM_INPUTS) {
         inputs(i) := (io.mux_input((i+1)*DATA_WIDTH-1,i*DATA_WIDTH)).asSInt
     }
