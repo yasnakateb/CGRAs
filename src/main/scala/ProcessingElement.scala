@@ -81,9 +81,6 @@ class ProcessingElement
     })
 
     // Config signals
-    /*****************/
-    // Changing std_logic_vector
-    /***************/
     val mux_N_sel = Wire(UInt(2.W))
     val mux_E_sel = Wire(UInt(2.W))
     val mux_S_sel = Wire(UInt(2.W))
@@ -100,7 +97,6 @@ class ProcessingElement
     val config_bits_reg = RegInit(0.U(182.W))
     
     //  Interconnect signals
-    //  FIFO signals
     val north_buffer = Wire(SInt(DATA_WIDTH.W))
     val east_buffer = Wire(SInt(DATA_WIDTH.W))
     val south_buffer = Wire(SInt(DATA_WIDTH.W))
@@ -115,7 +111,7 @@ class ProcessingElement
     val east_buffer_r = Wire(UInt(1.W))
     val south_buffer_r = Wire(UInt(1.W))
     val west_buffer_r = Wire(UInt(1.W))
-    //  REG signals
+    /
     val north_REG_din = Wire(SInt(DATA_WIDTH.W))
     val east_REG_din = Wire(SInt(DATA_WIDTH.W))
     val south_REG_din = Wire(SInt(DATA_WIDTH.W))
@@ -135,59 +131,7 @@ class ProcessingElement
     val FU_din_2_r = Wire(UInt(1.W))
     val FU_dout = Wire(SInt(DATA_WIDTH.W))
     val FU_dout_v = Wire(UInt(1.W))
-    // Question ?? 
-    //val FU_dout_r = Wire(UInt(1.W))
-    /*
-    val mux_N_sel = RegInit(0.U(2.W))
-    val mux_E_sel = RegInit(0.U(2.W))
-    val mux_S_sel = RegInit(0.U(2.W))
-    val mux_W_sel = RegInit(0.U(2.W))
-    val accept_mask_frN = RegInit(0.U(5.W))
-    val accept_mask_frE = RegInit(0.U(5.W))
-    val accept_mask_frS = RegInit(0.U(5.W))
-    val accept_mask_frW = RegInit(0.U(5.W))
-    val accept_mask_fsiN = RegInit(0.U(5.W))
-    val accept_mask_fsiE = RegInit(0.U(5.W))
-    val accept_mask_fsiS = RegInit(0.U(5.W))
-    val accept_mask_fsiW = RegInit(0.U(5.W))
-    val config_bits_reg = RegInit(0.U(182.W))
     
-    //  Interconnect signals
-    //  FIFO signals
-    val north_buffer = RegInit(0.U(DATA_WIDTH.W))
-    val east_buffer = RegInit(0.U(DATA_WIDTH.W))
-    val south_buffer = RegInit(0.U(DATA_WIDTH.W))
-    val west_buffer = RegInit(0.U(DATA_WIDTH.W))
-
-    val north_buffer_v = RegInit(0.U(1.W))
-    val east_buffer_v = RegInit(0.U(1.W))
-    val south_buffer_v = RegInit(0.U(1.W))
-    val west_buffer_v = RegInit(0.U(1.W))
-
-    val north_buffer_r = RegInit(0.U(1.W))
-    val east_buffer_r = RegInit(0.U(1.W))
-    val south_buffer_r = RegInit(0.U(1.W))
-    val west_buffer_r = RegInit(0.U(1.W))
-    //  REG signals
-    val north_REG_din = RegInit(0.U(DATA_WIDTH.W))
-    val east_REG_din = RegInit(0.U(DATA_WIDTH.W))
-    val south_REG_din = RegInit(0.U(DATA_WIDTH.W))
-    val west_REG_din = RegInit(0.U(DATA_WIDTH.W))
-    val north_REG_din_v = RegInit(0.U(1.W))
-    val east_REG_din_v = RegInit(0.U(1.W))
-    val south_REG_din_v = RegInit(0.U(1.W))
-    val west_REG_din_v = RegInit(0.U(1.W))
-    val north_REG_din_r = RegInit(0.U(1.W))
-    val east_REG_din_r = RegInit(0.U(1.W))
-    val south_REG_din_r = RegInit(0.U(1.W))
-    val west_REG_din_r = RegInit(0.U(1.W))
-    //  Cell processing signals
-    val FU_din_1_r = RegInit(0.U(1.W))
-    val FU_din_2_r = RegInit(0.U(1.W))
-    val FU_dout = RegInit(0.U(DATA_WIDTH.W))
-    val FU_dout_v = RegInit(0.U(1.W))
-    val FU_dout_r = RegInit(0.U(1.W))
-    */
 
     when (io.catch_config) {
         config_bits_reg := io.config_bits
