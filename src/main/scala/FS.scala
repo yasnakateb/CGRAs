@@ -47,7 +47,7 @@ class FS
         // Outputs
         val ready_in = Output(Bool())  
     })
-
+    // All wires
     var aux = Wire(Vec(NUMBER_OF_READYS, Bool()))
     var temp = Wire(Vec(NUMBER_OF_READYS, Bool()))
 
