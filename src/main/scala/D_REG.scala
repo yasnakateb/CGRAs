@@ -48,8 +48,9 @@ class D_REG
         val din_r = Output(Bool())  
     })
 
-    val data = Wire(SInt(DATA_WIDTH.W))
-    val valid = Wire(Bool())
+    
+    val data = RegInit(0.S(DATA_WIDTH.W))
+    val valid = RegInit(0.B)
 
     // Default value 
     data := 0.S  
