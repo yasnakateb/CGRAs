@@ -30,17 +30,6 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
-
-
-/******************************************/
-// Notes 
-/******************************************/
-// For shifting (L/R) => din_2 = UInt
-
-// SLL => after CAT => asSInt 
-
-
-
 import chisel3._
 import chisel3.util._
 
@@ -75,22 +64,9 @@ class ALU
         val dout = Output(SInt(DATA_WIDTH.W))
     })
 
-    // Converte din_1 to signed integer for shift right arithmetic (SRA)
-    val din_1_signed = RegInit(0.S(DATA_WIDTH.W))
-
-    // Store din_1 in reg_out for barrel shifter 
-    val reg_out = RegInit(0.S(32.W))
-    reg_out := io.din_1 
-    val reg_inbit = RegInit(0.U(1.W))
-    reg_inbit := 0.U   
-
     // Result 
     val out_aux = Wire(SInt((DATA_WIDTH).W))
     
-   // out_aux := 0.S 
-    // Default output 
-   // io.dout := 0.S
-
     when (io.op_config === SUM) {                               // SUM
       out_aux := io.din_1 + io.din_2                            
     }
@@ -122,7 +98,9 @@ class ALU
     .otherwise { 
       out_aux := 0.S                                            // Default 
     }
+
   io.dout := out_aux
+  
 }
 
 // Generate the Verilog code
