@@ -50,7 +50,7 @@ class FR
         // Outputs
         val valid_out = Output(Bool())  
     })
-
+    // All wires 
     var aux = Wire(Vec(NUMBER_OF_READYS, Bool()))
     var temp = Wire(Vec(NUMBER_OF_READYS, Bool()))
     var Vaux = Wire(SInt(1.W))
