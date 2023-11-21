@@ -78,18 +78,23 @@ class OverlayRocc
     //  **************************************************
     // UInt(DATA_WIDTH*INPUT_NODES.W)
     // UInt(1.W)
+    // RegInit(0.U(182.W))
+    // Wire(UInt(1.W))   
     //  **************************************************
 
-    //val interc_data_we = Wire(Vec(OUTPUT_NODES, UInt(DATA_WIDTH.W)))
+    
+    //val interc_data_we = Wire(Vec(INPUT_NODES -1, (Vec(OUTPUT_NODES, SInt(DATA_WIDTH.W)))))
+
 
     val interc_data_we = Array.ofDim[SInt](INPUT_NODES-1, OUTPUT_NODES)
     val interc_data_ew = Array.ofDim[SInt](INPUT_NODES-1, OUTPUT_NODES)
+
     val interc_valid_we = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
     val interc_valid_ew = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
     val interc_ready_we = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
     val interc_ready_ew = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
 
-    // Fix
+    // Wrong => always Zero 
     // Error ==> java.lang.NullPointerException: 
     // Cannot invoke "chisel3.Data._parent()" because "node" is null
     for( i <- 0 to INPUT_NODES - 2){
