@@ -80,6 +80,8 @@ class OverlayRocc
     // UInt(1.W)
     //  **************************************************
 
+    //val interc_data_we = Wire(Vec(OUTPUT_NODES, UInt(DATA_WIDTH.W)))
+
     val interc_data_we = Array.ofDim[SInt](INPUT_NODES-1, OUTPUT_NODES)
     val interc_data_ew = Array.ofDim[SInt](INPUT_NODES-1, OUTPUT_NODES)
     val interc_valid_we = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
@@ -122,9 +124,16 @@ class OverlayRocc
         }    
     }
 
+    /*
     val config_bits = Reg(Vec(INPUT_NODES*OUTPUT_NODES, UInt(182.W)))
     val catch_config = Reg(Vec(INPUT_NODES*OUTPUT_NODES, UInt(182.W)))
+    */
     
+
+    val config_bits = Wire(UInt(182.W))
+    val catch_config = Wire(Vec(INPUT_NODES*OUTPUT_NODES, Bool()))
+
+
     /*****************************************************************************************************
     CONFIG_PROC : process(cell_config)
     begin
@@ -163,14 +172,14 @@ class OverlayRocc
     
     // ***************************************************************** Needs test
     val unsigned_cell_config = io.cell_config(190,185).asUInt
-    config_bits(unsigned_cell_config) := io.cell_config(181,0)
+    config_bits := io.cell_config(181,0)
 
     for( i <- 0 to INPUT_NODES*OUTPUT_NODES - 1){
-        catch_config(i) := 0.U 
+        catch_config(i) := 0.B 
     }
 
     when (io.cell_config(191) === 1.U){
-        catch_config(unsigned_cell_config) := 1.U
+        catch_config(unsigned_cell_config) := 1.B 
     }
 
     for( i <- 0 to INPUT_NODES - 1){
@@ -248,7 +257,7 @@ class OverlayRocc
                     NORTHWEST_OV.io.west_dout_r := 0.U  
 
                     // ********* Config
-                    NORTHWEST_OV.io.config_bits := config_bits(I+INPUT_NODES*J) 
+                    NORTHWEST_OV.io.config_bits := config_bits
                     NORTHWEST_OV.io.catch_config := catch_config(I+INPUT_NODES*J) 
                 }
 
@@ -297,7 +306,7 @@ class OverlayRocc
                     MIDWEST_OV.io.west_dout_r := 0.U 
 
                     // ********* Config
-                    MIDWEST_OV.io.config_bits := config_bits(I+INPUT_NODES*J) 
+                    MIDWEST_OV.io.config_bits := config_bits
                     MIDWEST_OV.io.catch_config := catch_config(I+INPUT_NODES*J) 
                 }
 
@@ -346,7 +355,7 @@ class OverlayRocc
                     SOUTHWEST_OV.io.west_dout_r := 0.U 
 
                     // ********* Config
-                    SOUTHWEST_OV.io.config_bits := config_bits(I+INPUT_NODES*J) 
+                    SOUTHWEST_OV.io.config_bits := config_bits
                     SOUTHWEST_OV.io.catch_config := catch_config(I+INPUT_NODES*J) 
                 }
             } 
@@ -399,7 +408,7 @@ class OverlayRocc
                     MIDDLENORTH_OV.io.west_dout_r := interc_ready_we(I-1)(J)
 
                     // ********* Config
-                    MIDDLENORTH_OV.io.config_bits := config_bits(I+INPUT_NODES*J) 
+                    MIDDLENORTH_OV.io.config_bits := config_bits 
                     MIDDLENORTH_OV.io.catch_config := catch_config(I+INPUT_NODES*J) 
                 }
 
@@ -448,7 +457,7 @@ class OverlayRocc
                     MIDDLEMIDDLE_OV.io.west_dout_r := interc_ready_we(I-1)(J) 
 
                     // ********* Config
-                    MIDDLEMIDDLE_OV.io.config_bits := config_bits(I+INPUT_NODES*J)  
+                    MIDDLEMIDDLE_OV.io.config_bits := config_bits
                     MIDDLEMIDDLE_OV.io.catch_config:= catch_config(I+INPUT_NODES*J) 
                 } 
 
@@ -497,7 +506,7 @@ class OverlayRocc
                     MIDDLESOUTH_OV.io.west_dout_r := interc_ready_we(I-1)(J) 
 
                     // ********* Config
-                    MIDDLESOUTH_OV.io.config_bits := config_bits(I+INPUT_NODES*J)
+                    MIDDLESOUTH_OV.io.config_bits := config_bits
                     MIDDLESOUTH_OV.io.catch_config := catch_config(I+INPUT_NODES*J) 
                 }       
             }
@@ -550,7 +559,7 @@ class OverlayRocc
                     NORTHEAST_OV.io.west_dout_r := interc_ready_we(I-1)(J)
 
                     // ********* Config
-                    NORTHEAST_OV.io.config_bits := config_bits(I+INPUT_NODES*J) 
+                    NORTHEAST_OV.io.config_bits := config_bits
                     NORTHEAST_OV.io.catch_config := catch_config(I+INPUT_NODES*J) 
                 }
 
@@ -599,7 +608,7 @@ class OverlayRocc
                     MIDDLEEAST_OV.io.west_dout_r := interc_ready_we(I-1)(J)
 
                     // ********* Config
-                    MIDDLEEAST_OV.io.config_bits := config_bits(I+INPUT_NODES*J) 
+                    MIDDLEEAST_OV.io.config_bits := config_bits
                     MIDDLEEAST_OV.io.catch_config := catch_config(I+INPUT_NODES*J) 
                 }  
 
@@ -648,7 +657,7 @@ class OverlayRocc
                     MIDDLESOUTH_OV.io.west_dout_r := interc_ready_we(I-1)(J)
 
                     // ********* Config
-                    MIDDLESOUTH_OV.io.config_bits := config_bits(I+INPUT_NODES*J)
+                    MIDDLESOUTH_OV.io.config_bits := config_bits
                     MIDDLESOUTH_OV.io.catch_config := catch_config(I+INPUT_NODES*J)
                 }            
             }
