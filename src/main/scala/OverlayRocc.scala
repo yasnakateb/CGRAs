@@ -82,52 +82,89 @@ class OverlayRocc
     // Wire(UInt(1.W))   
     //  **************************************************
 
+    /*
+    type interconnection_data_hor is array(0 to C_INPUT_NODES-2, 0 to C_OUTPUT_NODES-1) of std_logic_vector(C_DATA_WIDTH-1 downto 0);
+    type interconnection_data_ver is array(0 to C_INPUT_NODES-1, 0 to C_OUTPUT_NODES-2) of std_logic_vector(C_DATA_WIDTH-1 downto 0);
+    type interconnection_control_hor is array(0 to C_INPUT_NODES-2, 0 to C_OUTPUT_NODES-1) of std_logic;
+    type interconnection_control_ver is array(0 to C_INPUT_NODES-1, 0 to C_OUTPUT_NODES-2) of std_logic;
+    signal interc_data_we, interc_data_ew: interconnection_data_hor;
+    signal interc_valid_we, interc_valid_ew : interconnection_control_hor;
+    signal interc_ready_we, interc_ready_ew : interconnection_control_hor;
+    signal interc_data_ns, interc_data_sn: interconnection_data_ver;
+    signal interc_valid_ns, interc_valid_sn : interconnection_control_ver;
+    signal interc_ready_ns, interc_ready_sn : interconnection_control_ver;
+    */
+
     
     //val interc_data_we = Wire(Vec(INPUT_NODES -1, (Vec(OUTPUT_NODES, SInt(DATA_WIDTH.W)))))
 
+    val interc_data_we = VecInit.fill(INPUT_NODES -1, OUTPUT_NODES)(0.asSInt(DATA_WIDTH.W)) 
+    val interc_data_ew = VecInit.fill(INPUT_NODES -1, OUTPUT_NODES)(0.asSInt(DATA_WIDTH.W)) 
 
-    val interc_data_we = Array.ofDim[SInt](INPUT_NODES-1, OUTPUT_NODES)
-    val interc_data_ew = Array.ofDim[SInt](INPUT_NODES-1, OUTPUT_NODES)
+    val interc_valid_we = VecInit.fill(INPUT_NODES -1, OUTPUT_NODES)(0.asUInt(1.W)) 
+    val interc_valid_ew = VecInit.fill(INPUT_NODES -1, OUTPUT_NODES)(0.asUInt(1.W)) 
 
-    val interc_valid_we = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
-    val interc_valid_ew = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
-    val interc_ready_we = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
-    val interc_ready_ew = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
+    val interc_ready_we = VecInit.fill(INPUT_NODES -1, OUTPUT_NODES)(0.asUInt(1.W)) 
+    val interc_ready_ew = VecInit.fill(INPUT_NODES -1, OUTPUT_NODES)(0.asUInt(1.W)) 
+
+
+    val interc_data_ns = VecInit.fill(INPUT_NODES, OUTPUT_NODES - 1)(0.asSInt(DATA_WIDTH.W)) 
+    val interc_data_sn = VecInit.fill(INPUT_NODES, OUTPUT_NODES - 1)(0.asSInt(DATA_WIDTH.W)) 
+
+    val interc_valid_ns = VecInit.fill(INPUT_NODES, OUTPUT_NODES -1)(0.asUInt(1.W))
+    val interc_valid_sn = VecInit.fill(INPUT_NODES, OUTPUT_NODES -1)(0.asUInt(1.W))
+
+    val interc_ready_ns = VecInit.fill(INPUT_NODES, OUTPUT_NODES -1)(0.asUInt(1.W))
+    val interc_ready_sn = VecInit.fill(INPUT_NODES, OUTPUT_NODES -1)(0.asUInt(1.W))
+
+
+
+    //val interc_data_we = Array.ofDim[SInt](INPUT_NODES-1, OUTPUT_NODES)
+    //val interc_data_ew = Array.ofDim[SInt](INPUT_NODES-1, OUTPUT_NODES)
+
+    //val interc_valid_we = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
+    //val interc_valid_ew = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
+    //val interc_ready_we = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
+    //val interc_ready_ew = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
+
+
+    //val interc_data_ns = Array.ofDim[SInt](INPUT_NODES, OUTPUT_NODES-1)
+    //val interc_data_sn = Array.ofDim[SInt](INPUT_NODES, OUTPUT_NODES-1)
+    //val interc_valid_ns = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
+    //val interc_valid_sn = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
+    //val interc_ready_ns = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
+    //val interc_ready_sn = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
 
     // Wrong => always Zero 
     // Error ==> java.lang.NullPointerException: 
     // Cannot invoke "chisel3.Data._parent()" because "node" is null
+    /*
     for( i <- 0 to INPUT_NODES - 2){
         for( j <- 0 to OUTPUT_NODES - 1){
-            interc_data_we (i)(j) = 0.S 
-            interc_data_ew (i)(j) = 0.S 
-            interc_valid_we (i)(j) = 0.U 
-            interc_valid_ew (i)(j) = 0.U  
-            interc_ready_we (i)(j) = 0.U    
-            interc_ready_ew (i)(j) = 0.U     
+            //interc_data_we (i)(j) = 0.S 
+            //interc_data_ew (i)(j) = 0.S 
+            //interc_valid_we (i)(j) = 0.U 
+            //interc_valid_ew (i)(j) = 0.U  
+            //interc_ready_we (i)(j) = 0.U    
+            //interc_ready_ew (i)(j) = 0.U     
         }
     }
+    */
     
-    val interc_data_ns = Array.ofDim[SInt](INPUT_NODES, OUTPUT_NODES-1)
-    val interc_data_sn = Array.ofDim[SInt](INPUT_NODES, OUTPUT_NODES-1)
-    val interc_valid_ns = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
-    val interc_valid_sn = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
-    val interc_ready_ns = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
-    val interc_ready_sn = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
-
-    // Fix
     // Error ==> java.lang.NullPointerException: 
     // Cannot invoke "chisel3.Data._parent()" because "node" is null
+    /*
     for( i <- 0 to INPUT_NODES - 1){
         for( j <- 0 to OUTPUT_NODES - 2){
-            interc_data_ns (i)(j) = 0.S  
-            interc_data_sn (i)(j) = 0.S   
-            interc_valid_ns (i)(j) = 0.U 
-            interc_valid_sn (i)(j) = 0.U 
-            interc_ready_ns (i)(j) = 0.U 
-            interc_ready_sn (i)(j) = 0.U 
+            //interc_data_ns (i)(j) = 0.S  
+            //interc_data_sn (i)(j) = 0.S   
+            //interc_valid_ns (i)(j) = 0.U 
+            //interc_valid_sn (i)(j) = 0.U 
+            //interc_ready_ns (i)(j) = 0.U 
+            //interc_ready_sn (i)(j) = 0.U 
         }    
     }
+    */
 
     /*
     val config_bits = Reg(Vec(INPUT_NODES*OUTPUT_NODES, UInt(182.W)))
@@ -229,12 +266,12 @@ class OverlayRocc
                     // ********* East
                     NORTHWEST_OV.io.east_din := interc_data_we(I)(J)
                     NORTHWEST_OV.io.east_din_v := interc_valid_we(I)(J)
-                    interc_ready_we(I)(J) = NORTHWEST_OV.io.east_din_r 
+                    interc_ready_we(I)(J) := NORTHWEST_OV.io.east_din_r 
 
                     // ********* South 
                     NORTHWEST_OV.io.south_din := interc_data_ns(I)(J)
                     NORTHWEST_OV.io.south_din_v := interc_valid_ns(I)(J)
-                    interc_ready_ns(I)(J) = NORTHWEST_OV.io.south_din_r 
+                    interc_ready_ns(I)(J) := NORTHWEST_OV.io.south_din_r 
 
                     // ********* West
                     NORTHWEST_OV.io.west_din := 0.S     
@@ -247,13 +284,13 @@ class OverlayRocc
                     NORTHWEST_OV.io.north_dout_r := 0.U 
 
                     // ********* East
-                    interc_data_ew(I)(J) = NORTHWEST_OV.io.east_dout 
-                    interc_valid_ew(I)(J) = NORTHWEST_OV.io.east_dout_v 
+                    interc_data_ew(I)(J) := NORTHWEST_OV.io.east_dout 
+                    interc_valid_ew(I)(J) := NORTHWEST_OV.io.east_dout_v 
                     NORTHWEST_OV.io.east_dout_r := interc_ready_ew(I)(J)
 
                     // ********* South
-                    interc_data_sn(I)(J) = NORTHWEST_OV.io.south_dout 
-                    interc_valid_sn(I)(J) = NORTHWEST_OV.io.south_dout_v 
+                    interc_data_sn(I)(J) := NORTHWEST_OV.io.south_dout 
+                    interc_valid_sn(I)(J) := NORTHWEST_OV.io.south_dout_v 
                     NORTHWEST_OV.io.south_dout_r := interc_ready_sn(I)(J)
 
                     // ********* West
@@ -273,17 +310,17 @@ class OverlayRocc
                     // ********* North
                     MIDWEST_OV.io.north_din := interc_data_sn(I)(J-1) 
                     MIDWEST_OV.io.north_din_v := interc_valid_sn(I)(J-1) 
-                    interc_ready_sn(I)(J-1) = MIDWEST_OV.io.north_din_r 
+                    interc_ready_sn(I)(J-1) := MIDWEST_OV.io.north_din_r 
 
                     // ********* East
                     MIDWEST_OV.io.east_din := interc_data_we(I)(J) 
                     MIDWEST_OV.io.east_din_v := interc_valid_we(I)(J)  
-                    interc_ready_we(I)(J) = MIDWEST_OV.io.east_din_r 
+                    interc_ready_we(I)(J) := MIDWEST_OV.io.east_din_r 
 
                     // ********* South
                     MIDWEST_OV.io.south_din := interc_data_ns(I)(J) 
                     MIDWEST_OV.io.south_din_v := interc_valid_ns(I)(J) 
-                    interc_ready_ns(I)(J) = MIDWEST_OV.io.south_din_r 
+                    interc_ready_ns(I)(J) := MIDWEST_OV.io.south_din_r 
 
                     // ********* West
                     MIDWEST_OV.io.west_din := 0.S  
@@ -291,18 +328,18 @@ class OverlayRocc
                     //west_din_r = open  
 
                     // ********* North
-                    interc_data_ns(I)(J-1) = MIDWEST_OV.io.north_dout  
-                    interc_valid_ns(I)(J-1) = MIDWEST_OV.io.north_dout_v 
+                    interc_data_ns(I)(J-1) := MIDWEST_OV.io.north_dout  
+                    interc_valid_ns(I)(J-1) := MIDWEST_OV.io.north_dout_v 
                     MIDWEST_OV.io.north_dout_r := interc_ready_ns(I)(J-1)   
 
                     // ********* East
-                    interc_data_ew(I)(J) = MIDWEST_OV.io.east_dout 
-                    interc_valid_ew(I)(J) = MIDWEST_OV.io.east_dout_v 
+                    interc_data_ew(I)(J) := MIDWEST_OV.io.east_dout 
+                    interc_valid_ew(I)(J) := MIDWEST_OV.io.east_dout_v 
                     MIDWEST_OV.io.east_dout_r := interc_ready_ew(I)(J) 
 
                     // ********* South
-                    interc_data_sn(I)(J) = MIDWEST_OV.io.south_dout 
-                    interc_valid_sn(I)(J) = MIDWEST_OV.io.south_dout_v 
+                    interc_data_sn(I)(J) := MIDWEST_OV.io.south_dout 
+                    interc_valid_sn(I)(J) := MIDWEST_OV.io.south_dout_v 
                     MIDWEST_OV.io.south_dout_r := interc_ready_sn(I)(J) 
 
                     // ********* West
@@ -322,12 +359,12 @@ class OverlayRocc
                     // ********* North
                     SOUTHWEST_OV.io.north_din := interc_data_sn(I)(J-1) 
                     SOUTHWEST_OV.io.north_din_v := interc_valid_sn(I)(J-1) 
-                    interc_ready_sn(I)(J-1) = SOUTHWEST_OV.io.north_din_r 
+                    interc_ready_sn(I)(J-1) := SOUTHWEST_OV.io.north_din_r 
 
                     // ********* East
                     SOUTHWEST_OV.io.east_din := interc_data_we(I)(J)  
                     SOUTHWEST_OV.io.east_din_v := interc_valid_we(I)(J) 
-                    interc_ready_we(I)(J) = SOUTHWEST_OV.io.east_din_r  
+                    interc_ready_we(I)(J) := SOUTHWEST_OV.io.east_din_r  
 
                     // ********* South
                     SOUTHWEST_OV.io.south_din := 0.S    
@@ -340,13 +377,13 @@ class OverlayRocc
                     // west_din_r = open 
 
                     // ********* North
-                    interc_data_ns(I)(J-1) = SOUTHWEST_OV.io.north_dout 
-                    interc_valid_ns(I)(J-1) = SOUTHWEST_OV.io.north_dout_v 
+                    interc_data_ns(I)(J-1) := SOUTHWEST_OV.io.north_dout 
+                    interc_valid_ns(I)(J-1) := SOUTHWEST_OV.io.north_dout_v 
                     SOUTHWEST_OV.io.north_dout_r := interc_ready_ns(I)(J-1) 
 
                     // ********* East
-                    interc_data_ew(I)(J) = SOUTHWEST_OV.io.east_dout
-                    interc_valid_ew(I)(J) = SOUTHWEST_OV.io.east_dout_v
+                    interc_data_ew(I)(J) := SOUTHWEST_OV.io.east_dout
+                    interc_valid_ew(I)(J) := SOUTHWEST_OV.io.east_dout_v
                     SOUTHWEST_OV.io.east_dout_r := interc_ready_ew(I)(J) 
 
                     // ********* South
@@ -380,17 +417,17 @@ class OverlayRocc
                     // ********* East
                     MIDDLENORTH_OV.io.east_din:= interc_data_we(I)(J)  
                     MIDDLENORTH_OV.io.east_din_v := interc_valid_we(I)(J) 
-                    interc_ready_we(I)(J) = MIDDLENORTH_OV.io.east_din_r  
+                    interc_ready_we(I)(J) := MIDDLENORTH_OV.io.east_din_r  
 
                     // ********* South
                     MIDDLENORTH_OV.io.south_din := interc_data_ns(I)(J) 
                     MIDDLENORTH_OV.io.south_din_v := interc_valid_ns(I)(J) 
-                    interc_ready_ns(I)(J) = MIDDLENORTH_OV.io.south_din_r 
+                    interc_ready_ns(I)(J) := MIDDLENORTH_OV.io.south_din_r 
 
                     // ********* West
                     MIDDLENORTH_OV.io.west_din:= interc_data_ew(I-1)(J) 
                     MIDDLENORTH_OV.io.west_din_v := interc_valid_ew(I-1)(J)  
-                    interc_ready_ew(I-1)(J) = MIDDLENORTH_OV.io.west_din_r 
+                    interc_ready_ew(I-1)(J) := MIDDLENORTH_OV.io.west_din_r 
                     
                     // ********* North
                     // north_dout = open 
@@ -398,18 +435,18 @@ class OverlayRocc
                     MIDDLENORTH_OV.io.north_dout_r := 0.U
 
                     // ********* East 
-                    interc_data_ew(I)(J) = MIDDLENORTH_OV.io.east_dout  
-                    interc_valid_ew(I)(J) = MIDDLENORTH_OV.io.east_dout_v 
+                    interc_data_ew(I)(J) := MIDDLENORTH_OV.io.east_dout  
+                    interc_valid_ew(I)(J) := MIDDLENORTH_OV.io.east_dout_v 
                     MIDDLENORTH_OV.io.east_dout_r := interc_ready_ew(I)(J)
 
                     // ********* South
-                    interc_data_sn(I)(J) = MIDDLENORTH_OV.io.south_dout 
-                    interc_valid_sn(I)(J) = MIDDLENORTH_OV.io.south_dout_v
-                    MIDDLENORTH_OV.io.south_dout_r:= interc_ready_sn(I)(J)
+                    interc_data_sn(I)(J) := MIDDLENORTH_OV.io.south_dout 
+                    interc_valid_sn(I)(J) := MIDDLENORTH_OV.io.south_dout_v
+                    MIDDLENORTH_OV.io.south_dout_r := interc_ready_sn(I)(J)
 
                     // ********* West
-                    interc_data_we(I-1)(J) = MIDDLENORTH_OV.io.west_dout 
-                    interc_valid_we(I-1)(J) = MIDDLENORTH_OV.io.west_dout_v 
+                    interc_data_we(I-1)(J) := MIDDLENORTH_OV.io.west_dout 
+                    interc_valid_we(I-1)(J) := MIDDLENORTH_OV.io.west_dout_v 
                     MIDDLENORTH_OV.io.west_dout_r := interc_ready_we(I-1)(J)
 
                     // ********* Config
@@ -424,41 +461,41 @@ class OverlayRocc
                     // ********* North
                     MIDDLEMIDDLE_OV.io.north_din := interc_data_sn(I)(J-1) 
                     MIDDLEMIDDLE_OV.io.north_din_v := interc_valid_sn(I)(J-1) 
-                    interc_ready_sn(I)(J-1) = MIDDLEMIDDLE_OV.io.north_din_r  
+                    interc_ready_sn(I)(J-1) := MIDDLEMIDDLE_OV.io.north_din_r  
 
                     // ********* East
-                    MIDDLEMIDDLE_OV.io.east_din:= interc_data_we(I)(J)  
+                    MIDDLEMIDDLE_OV.io.east_din := interc_data_we(I)(J)  
                     MIDDLEMIDDLE_OV.io.east_din_v := interc_valid_we(I)(J)    
-                    interc_ready_we(I)(J) = MIDDLEMIDDLE_OV.io.east_din_r  
+                    interc_ready_we(I)(J) := MIDDLEMIDDLE_OV.io.east_din_r  
 
                     // ********* South
                     MIDDLEMIDDLE_OV.io.south_din := interc_data_ns(I)(J) 
                     MIDDLEMIDDLE_OV.io.south_din_v := interc_valid_ns(I)(J) 
-                    interc_ready_ns(I)(J) = MIDDLEMIDDLE_OV.io.south_din_r  
+                    interc_ready_ns(I)(J) := MIDDLEMIDDLE_OV.io.south_din_r  
 
                     // ********* West
-                    MIDDLEMIDDLE_OV.io.west_din:= interc_data_ew(I-1)(J) 
+                    MIDDLEMIDDLE_OV.io.west_din := interc_data_ew(I-1)(J) 
                     MIDDLEMIDDLE_OV.io.west_din_v := interc_valid_ew(I-1)(J)
-                    interc_ready_ew(I-1)(J) = MIDDLEMIDDLE_OV.io.west_din_r  
+                    interc_ready_ew(I-1)(J) := MIDDLEMIDDLE_OV.io.west_din_r  
 
                     // ********* North
-                    interc_data_ns(I)(J-1) = MIDDLEMIDDLE_OV.io.north_dout 
-                    interc_valid_ns(I)(J-1) = MIDDLEMIDDLE_OV.io.north_dout_v
-                    MIDDLEMIDDLE_OV.io.north_dout_r:= interc_ready_ns(I)(J-1)
+                    interc_data_ns(I)(J-1) := MIDDLEMIDDLE_OV.io.north_dout 
+                    interc_valid_ns(I)(J-1) := MIDDLEMIDDLE_OV.io.north_dout_v
+                    MIDDLEMIDDLE_OV.io.north_dout_r := interc_ready_ns(I)(J-1)
 
                     // ********* East
-                    interc_data_ew(I)(J) = MIDDLEMIDDLE_OV.io.east_dout
-                    interc_valid_ew(I)(J) = MIDDLEMIDDLE_OV.io.east_dout_v 
+                    interc_data_ew(I)(J) := MIDDLEMIDDLE_OV.io.east_dout
+                    interc_valid_ew(I)(J) := MIDDLEMIDDLE_OV.io.east_dout_v 
                     MIDDLEMIDDLE_OV.io.east_dout_r := interc_ready_ew(I)(J)
 
                     // ********* South
-                    interc_data_sn(I)(J) = MIDDLEMIDDLE_OV.io.south_dout  
-                    interc_valid_sn(I)(J) = MIDDLEMIDDLE_OV.io.south_dout_v
-                    MIDDLEMIDDLE_OV.io.south_dout_r:= interc_ready_sn(I)(J) 
+                    interc_data_sn(I)(J) := MIDDLEMIDDLE_OV.io.south_dout  
+                    interc_valid_sn(I)(J) := MIDDLEMIDDLE_OV.io.south_dout_v
+                    MIDDLEMIDDLE_OV.io.south_dout_r := interc_ready_sn(I)(J) 
 
                     // ********* West
-                    interc_data_we(I-1)(J) = MIDDLEMIDDLE_OV.io.west_dout 
-                    interc_valid_we(I-1)(J) = MIDDLEMIDDLE_OV.io.west_dout_v 
+                    interc_data_we(I-1)(J) := MIDDLEMIDDLE_OV.io.west_dout 
+                    interc_valid_we(I-1)(J) := MIDDLEMIDDLE_OV.io.west_dout_v 
                     MIDDLEMIDDLE_OV.io.west_dout_r := interc_ready_we(I-1)(J) 
 
                     // ********* Config
@@ -473,12 +510,12 @@ class OverlayRocc
                     // ********* North
                     MIDDLESOUTH_OV.io.north_din := interc_data_sn(I)(J-1) 
                     MIDDLESOUTH_OV.io.north_din_v := interc_valid_sn(I)(J-1)
-                    interc_ready_sn(I)(J-1) = MIDDLESOUTH_OV.io.north_din_r  
+                    interc_ready_sn(I)(J-1) := MIDDLESOUTH_OV.io.north_din_r  
 
                     // ********* East
                     MIDDLESOUTH_OV.io.east_din := interc_data_we(I)(J) 
                     MIDDLESOUTH_OV.io.east_din_v := interc_valid_we(I)(J) 
-                    interc_ready_we(I)(J) = MIDDLESOUTH_OV.io.east_din_r 
+                    interc_ready_we(I)(J) := MIDDLESOUTH_OV.io.east_din_r 
 
                     // ********* South
                     MIDDLESOUTH_OV.io.south_din := 0.S  
@@ -488,16 +525,16 @@ class OverlayRocc
                     // ********* West
                     MIDDLESOUTH_OV.io.west_din := interc_data_ew(I-1)(J) 
                     MIDDLESOUTH_OV.io.west_din_v := interc_valid_ew(I-1)(J) 
-                    interc_ready_ew(I-1)(J) = MIDDLESOUTH_OV.io.west_din_r 
+                    interc_ready_ew(I-1)(J) := MIDDLESOUTH_OV.io.west_din_r 
                     
                     // ********* North
-                    interc_data_ns(I)(J-1) = MIDDLESOUTH_OV.io.north_dout 
-                    interc_valid_ns(I)(J-1) = MIDDLESOUTH_OV.io.north_dout_v 
+                    interc_data_ns(I)(J-1) := MIDDLESOUTH_OV.io.north_dout 
+                    interc_valid_ns(I)(J-1) := MIDDLESOUTH_OV.io.north_dout_v 
                     MIDDLESOUTH_OV.io.north_dout_r := interc_ready_ns(I)(J-1) 
 
                     // ********* East
-                    interc_data_ew(I)(J) = MIDDLESOUTH_OV.io.east_dout 
-                    interc_valid_ew(I)(J) = MIDDLESOUTH_OV.io.east_dout_v 
+                    interc_data_ew(I)(J) := MIDDLESOUTH_OV.io.east_dout 
+                    interc_valid_ew(I)(J) := MIDDLESOUTH_OV.io.east_dout_v 
                     MIDDLESOUTH_OV.io.east_dout_r := interc_ready_ew(I)(J)
 
                     // ********* South
@@ -506,8 +543,8 @@ class OverlayRocc
                     MIDDLESOUTH_OV.io.south_dout_r := 0.U
 
                     // ********* West
-                    interc_data_we(I-1)(J) = MIDDLESOUTH_OV.io.west_dout 
-                    interc_valid_we(I-1)(J) = MIDDLESOUTH_OV.io.west_dout_v 
+                    interc_data_we(I-1)(J) := MIDDLESOUTH_OV.io.west_dout 
+                    interc_valid_we(I-1)(J) := MIDDLESOUTH_OV.io.west_dout_v 
                     MIDDLESOUTH_OV.io.west_dout_r := interc_ready_we(I-1)(J) 
 
                     // ********* Config
@@ -536,12 +573,12 @@ class OverlayRocc
                     // ********* South
                     NORTHEAST_OV.io.south_din := interc_data_ns(I)(J) 
                     NORTHEAST_OV.io.south_din_v := interc_valid_ns(I)(J) 
-                    interc_ready_ns(I)(J) = NORTHEAST_OV.io.south_din_r  
+                    interc_ready_ns(I)(J) := NORTHEAST_OV.io.south_din_r  
 
                     // ********* West
                     NORTHEAST_OV.io.west_din := interc_data_ew(I-1)(J) 
                     NORTHEAST_OV.io.west_din_v := interc_valid_ew(I-1)(J) 
-                    interc_ready_ew(I-1)(J) = NORTHEAST_OV.io.west_din_r  
+                    interc_ready_ew(I-1)(J) := NORTHEAST_OV.io.west_din_r  
 
                     // ********* North
                     // north_dout = open 
@@ -554,13 +591,13 @@ class OverlayRocc
                     NORTHEAST_OV.io.east_dout_r := east_dout_r(J) 
 
                     // ********* South
-                    interc_data_sn(I)(J) = NORTHEAST_OV.io.south_dout 
-                    interc_valid_sn(I)(J) = NORTHEAST_OV.io.south_dout_v 
+                    interc_data_sn(I)(J) := NORTHEAST_OV.io.south_dout 
+                    interc_valid_sn(I)(J) := NORTHEAST_OV.io.south_dout_v 
                     NORTHEAST_OV.io.south_dout_r := interc_ready_sn(I)(J) 
 
                     // ********* West
-                    interc_data_we(I-1)(J) = NORTHEAST_OV.io.west_dout 
-                    interc_valid_we(I-1)(J) = NORTHEAST_OV.io.west_dout_v 
+                    interc_data_we(I-1)(J) := NORTHEAST_OV.io.west_dout 
+                    interc_valid_we(I-1)(J) := NORTHEAST_OV.io.west_dout_v 
                     NORTHEAST_OV.io.west_dout_r := interc_ready_we(I-1)(J)
 
                     // ********* Config
@@ -575,7 +612,7 @@ class OverlayRocc
                     // ********* North
                     MIDDLEEAST_OV.io.north_din := interc_data_sn(I)(J-1) 
                     MIDDLEEAST_OV.io.north_din_v := interc_valid_sn(I)(J-1)
-                    interc_ready_sn(I)(J-1) = MIDDLEEAST_OV.io.north_din_r  
+                    interc_ready_sn(I)(J-1) := MIDDLEEAST_OV.io.north_din_r  
                     
                     // ********* East
                     MIDDLEEAST_OV.io.east_din := 0.S      
@@ -585,16 +622,16 @@ class OverlayRocc
                     // ********* South
                     MIDDLEEAST_OV.io.south_din := interc_data_ns(I)(J)
                     MIDDLEEAST_OV.io.south_din_v:= interc_valid_ns(I)(J)
-                    interc_ready_ns(I)(J) = MIDDLEEAST_OV.io.south_din_r 
+                    interc_ready_ns(I)(J) := MIDDLEEAST_OV.io.south_din_r 
 
                     // ********* West
                     MIDDLEEAST_OV.io.west_din := interc_data_ew(I-1)(J)
                     MIDDLEEAST_OV.io.west_din_v := interc_valid_ew(I-1)(J) 
-                    interc_ready_ew(I-1)(J) = MIDDLEEAST_OV.io.west_din_r  
+                    interc_ready_ew(I-1)(J) := MIDDLEEAST_OV.io.west_din_r  
 
                     // ********* North
-                    interc_data_ns(I)(J-1) = MIDDLEEAST_OV.io.north_dout 
-                    interc_valid_ns(I)(J-1) = MIDDLEEAST_OV.io.north_dout_v  
+                    interc_data_ns(I)(J-1) := MIDDLEEAST_OV.io.north_dout 
+                    interc_valid_ns(I)(J-1) := MIDDLEEAST_OV.io.north_dout_v  
                     MIDDLEEAST_OV.io.north_dout_r := interc_ready_ns(I)(J-1)
 
                     // ********* East
@@ -603,13 +640,13 @@ class OverlayRocc
                     MIDDLEEAST_OV.io.east_dout_r := east_dout_r(J)
 
                     // ********* South
-                    interc_data_sn(I)(J) = MIDDLEEAST_OV.io.south_dout 
-                    interc_valid_sn(I)(J) = MIDDLEEAST_OV.io.south_dout_v 
+                    interc_data_sn(I)(J) := MIDDLEEAST_OV.io.south_dout 
+                    interc_valid_sn(I)(J) := MIDDLEEAST_OV.io.south_dout_v 
                     MIDDLEEAST_OV.io.south_dout_r := interc_ready_sn(I)(J)
 
                     // ********* West
-                    interc_data_we(I-1)(J) = MIDDLEEAST_OV.io.west_dout 
-                    interc_valid_we(I-1)(J) = MIDDLEEAST_OV.io.west_dout_v 
+                    interc_data_we(I-1)(J) := MIDDLEEAST_OV.io.west_dout 
+                    interc_valid_we(I-1)(J) := MIDDLEEAST_OV.io.west_dout_v 
                     MIDDLEEAST_OV.io.west_dout_r := interc_ready_we(I-1)(J)
 
                     // ********* Config
@@ -624,7 +661,7 @@ class OverlayRocc
                     // ********* North
                     MIDDLESOUTH_OV.io.north_din := interc_data_sn(I)(J-1)
                     MIDDLESOUTH_OV.io.north_din_v := interc_valid_sn(I)(J-1)
-                    interc_ready_sn(I)(J-1) = MIDDLESOUTH_OV.io.north_din_r   
+                    interc_ready_sn(I)(J-1) := MIDDLESOUTH_OV.io.north_din_r   
 
                     // ********* East
                     MIDDLESOUTH_OV.io.east_din := 0.S   
@@ -639,11 +676,11 @@ class OverlayRocc
                     // ********* West
                     MIDDLESOUTH_OV.io.west_din := interc_data_ew(I-1)(J)
                     MIDDLESOUTH_OV.io.west_din_v := interc_valid_ew(I-1)(J)
-                    interc_ready_ew(I-1)(J) = MIDDLESOUTH_OV.io.west_din_r 
+                    interc_ready_ew(I-1)(J) := MIDDLESOUTH_OV.io.west_din_r 
 
                     // ********* North
-                    interc_data_ns(I)(J-1) = MIDDLESOUTH_OV.io.north_dout 
-                    interc_valid_ns(I)(J-1) = MIDDLESOUTH_OV.io.north_dout_v 
+                    interc_data_ns(I)(J-1) := MIDDLESOUTH_OV.io.north_dout 
+                    interc_valid_ns(I)(J-1) := MIDDLESOUTH_OV.io.north_dout_v 
                     MIDDLESOUTH_OV.io.north_dout_r := interc_ready_ns(I)(J-1)
 
                     // ********* East
@@ -657,8 +694,8 @@ class OverlayRocc
                     MIDDLESOUTH_OV.io.south_dout_r := 0.U
 
                     // ********* West
-                    interc_data_we(I-1)(J) = MIDDLESOUTH_OV.io.west_dout 
-                    interc_valid_we(I-1)(J) = MIDDLESOUTH_OV.io.west_dout_v 
+                    interc_data_we(I-1)(J) := MIDDLESOUTH_OV.io.west_dout 
+                    interc_valid_we(I-1)(J) := MIDDLESOUTH_OV.io.west_dout_v 
                     MIDDLESOUTH_OV.io.west_dout_r := interc_ready_we(I-1)(J)
 
                     // ********* Config

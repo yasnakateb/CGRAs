@@ -61,7 +61,7 @@ class OverlayRocc_Test extends AnyFlatSpec with ChiselScalatestTester {
             cell_config = "b100010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
             dut.io.cell_config.poke(cell_config)
             dut.clock.step(1)
-            var data_in = BigInt("580706054403020132030405260708091807060504030201",16).S 
+            var data_in = BigInt("510101014010101032030405260708091807060504030201",16).S 
             dut.io.data_in_valid.poke(data_in_valid)
             dut.io.data_in.poke(data_in)
             
