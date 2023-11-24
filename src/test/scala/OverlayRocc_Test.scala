@@ -64,6 +64,25 @@ class OverlayRocc_Test extends AnyFlatSpec with ChiselScalatestTester {
             var data_in = BigInt("510101014010101032030405260708091807060504030201",16).S 
             dut.io.data_in_valid.poke(data_in_valid)
             dut.io.data_in.poke(data_in)
+            /*dut.clock.step(3)
+
+            dut.io.data_in_valid.poke("b000000".U)
+            dut.clock.step(10)
+            dut.io.data_in_valid.poke("b110000".U)
+            dut.clock.step(1)
+            dut.io.data_in_valid.poke("b000000".U)
+            dut.clock.step(10)*/
+
+            for (i <- 1 to 16) {
+                val c4 = i.toString()
+                val c5 = i.toString()
+                val din = BigInt(f"$i%08d" + f"$i%08d" + "00000000000000000000000000000000",16).S 
+                dut.io.data_in.poke(din)
+                dut.io.data_in_valid.poke("b110000".U)
+                dut.clock.step(i)
+                dut.io.data_in_valid.poke("b000000".U)
+                dut.clock.step(10)
+            }
             
             
             

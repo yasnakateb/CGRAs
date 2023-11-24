@@ -60,11 +60,13 @@ class D_FIFO
 
     val wen = Wire(Bool())
     val ren = Wire(Bool())
-    val empty = RegNext(0.B) 
-    val full = RegNext(0.B) 
+    //val empty = RegNext(0.B) 
+    //val full = RegNext(0.B) 
+    val empty = Wire(Bool())
+    val full = Wire(Bool())
     val dout_v = RegNext(0.U) 
 
-    dout_v := ren
+    dout_v :=  ~empty
     
     io.dout_v := dout_v 
     // Write pointer
@@ -86,7 +88,7 @@ class D_FIFO
         }
 
     // Data counter
-    when((wen & ~ full) & ~(ren & ~empty)) {
+    when((wen & ~full) & ~(ren & ~empty)) {
         cntData := cntData + 1.U
         }.elsewhen(~(wen & ~full) & (ren & ~empty)) {
         cntData := cntData - 1.U
@@ -111,8 +113,10 @@ class D_FIFO
     }
 
     io.din_r := ~full 
-    wen := io.din_v & ~full
-    ren := io.dout_r & ~empty
+    //wen := io.din_v & ~full
+    wen := io.din_v
+    //ren := io.dout_r & ~empty
+    ren := io.dout_r
 }
 
 // Generate the Verilog code
