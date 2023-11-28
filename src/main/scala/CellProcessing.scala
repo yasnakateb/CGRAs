@@ -159,15 +159,10 @@ class CellProcessing
 
     val JOIN_INST = Module (new Join(DATA_WIDTH))
     JOIN_INST.io.din_1 := join_din_1
-    JOIN_INST.io.din_2 := join_din_2
-    JOIN_INST.io.din_1 := EB_1.io.dout   
-    JOIN_INST.io.din_2 := EB_2.io.dout   
-
+    JOIN_INST.io.din_2 := join_din_2 
     JOIN_INST.io.dout_r := join_dout_r
     JOIN_INST.io.din_1_v := join_din_1_v
     JOIN_INST.io.din_2_v := join_din_2_v
-    JOIN_INST.io.din_1_v := EB_1.io.dout_v
-    JOIN_INST.io.din_2_v := EB_2.io.dout_v
 
     join_dout_v := JOIN_INST.io.dout_v 
     join_din_1_r := JOIN_INST.io.din_1_r 
@@ -176,8 +171,6 @@ class CellProcessing
     join_dout_2 := JOIN_INST.io.dout_2 
 
     val FU_INST = Module (new FU(DATA_WIDTH, 5))
-    FU_INST.io.din_1 := JOIN_INST.io.dout_1 
-    FU_INST.io.din_2 := JOIN_INST.io.dout_2 
     FU_INST.io.din_1 := join_dout_1
     FU_INST.io.din_2 := join_dout_2
     FU_INST.io.din_v := join_dout_v
