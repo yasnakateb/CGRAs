@@ -150,7 +150,6 @@ class CellProcessing
 
     val EB_2 = Module (new D_EB(DATA_WIDTH))
     EB_2.io.din := EB_din_2
-    EB_2.io.din := MUX_2.io.mux_output
     EB_2.io.din_v := EB_din_2_v
     io.FU_din_2_r := EB_2.io.din_r 
     join_din_2 := EB_2.io.dout   

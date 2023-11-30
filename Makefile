@@ -111,3 +111,6 @@ barrel-shifter:
 barrel-shifter-test:
 	$(SBT) "testOnly BarrelShifter_Test -- -DwriteVcd=1"
 
+clean:
+	rm -R test_run_dir/
+
