@@ -126,6 +126,14 @@ class CellProcessing
     MUX_1.io.mux_input := (Cat(FU_dout, I1_const, io.west_din, io.south_din, io.east_din, io.north_din)).asSInt
     EB_din_1 := MUX_1.io.mux_output
 
+    val EB_1 = Module (new D_EB(DATA_WIDTH))
+    EB_1.io.din := EB_din_1
+    EB_1.io.din_v := EB_din_1_v
+    io.FU_din_1_r := EB_1.io.din_r 
+    join_din_1 := EB_1.io.dout   
+    join_din_1_v := EB_1.io.dout_v 
+    EB_1.io.dout_r := join_din_1_r
+
     val FR_2 = Module (new FR(6, 4))
     val ready_FR2 = Cat(io.north_dout_r, io.east_dout_r, io.south_dout_r, io.west_dout_r)  
     val valid_in_FR2 = Cat(FU_dout_v.asUInt, "b1".U, io.west_din_v, io.south_din_v, io.east_din_v, io.north_din_v)  
@@ -139,14 +147,6 @@ class CellProcessing
     MUX_2.io.selector := selector_mux_2
     MUX_2.io.mux_input := (Cat(FU_dout, I1_const, io.west_din, io.south_din, io.east_din, io.north_din)).asSInt 
     EB_din_2 := MUX_2.io.mux_output
-
-    val EB_1 = Module (new D_EB(DATA_WIDTH))
-    EB_1.io.din := EB_din_1
-    EB_1.io.din_v := EB_din_1_v
-    io.FU_din_1_r := EB_1.io.din_r 
-    join_din_1 := EB_1.io.dout   
-    join_din_1_v := EB_1.io.dout_v 
-    EB_1.io.dout_r := join_din_1_r
 
     val EB_2 = Module (new D_EB(DATA_WIDTH))
     EB_2.io.din := EB_din_2
