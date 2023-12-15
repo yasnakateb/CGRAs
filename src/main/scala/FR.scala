@@ -51,11 +51,11 @@ class FR
         val valid_out = Output(Bool())  
     })
     // All wires 
-    var aux = Wire(Vec(NUMBER_OF_READYS, Bool()))
-    var temp = Wire(Vec(NUMBER_OF_READYS, Bool()))
-    var Vaux = Wire(SInt(1.W))
+    val aux = Wire(Vec(NUMBER_OF_READYS+1, Bool()))
+    val temp = Wire(Vec(NUMBER_OF_READYS+1, Bool()))
+    val Vaux = Wire(SInt(1.W))
 
-    for (i <- 0 until NUMBER_OF_READYS - 1) {
+    for (i <- 0 until NUMBER_OF_READYS) {
         aux(i) := ((~io.fork_mask(i)) | io.ready_out(i)).asBool
     }
     val conf_mux  = Module (new ConfMux(NUMBER_OF_VALIDS, 1))
@@ -63,13 +63,13 @@ class FR
     conf_mux.io.mux_input := (io.valid_in).asSInt 
     Vaux := conf_mux.io.mux_output
 
-    aux(NUMBER_OF_READYS-1) := Vaux(0) 
+    aux(NUMBER_OF_READYS) := Vaux(0).asBool 
     temp(0) := aux(0)
 
-    for (i <- 1 until NUMBER_OF_READYS) {
+    for (i <- 1 until NUMBER_OF_READYS+1) {
         temp(i) := temp(i-1) & aux(i)
     }
-    io.valid_out := temp(NUMBER_OF_READYS-1)   
+    io.valid_out := temp(NUMBER_OF_READYS)   
 }
 
 // Generate the Verilog code
@@ -77,3 +77,4 @@ object FRMain extends App {
     println("Generating the hardware")
     (new chisel3.stage.ChiselStage).emitVerilog(new FR(5, 5), Array("--target-dir", "generated"))
 }
+

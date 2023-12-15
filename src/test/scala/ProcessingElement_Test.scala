@@ -116,10 +116,15 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
             
             //dut.io.north_din.poke(1.S)
             //dut.io.west_din.poke(1.S)
-            for (i <- 1 until 123) {
+            for (i <- 1 until 16) {
                 dut.io.north_din.poke(i.S)
-                dut.io.west_din.poke((i+1).S)
-                dut.clock.step(1)
+                dut.io.west_din.poke((i).S)
+                dut.io.north_din_v.poke(true.B)
+                dut.io.west_din_v.poke(true.B)
+                dut.clock.step(i)
+                dut.io.north_din_v.poke(false.B)
+                dut.io.west_din_v.poke(false.B)
+                dut.clock.step(10)
             }
             dut.io.north_din.poke(0.S)
             dut.io.west_din.poke(0.S)

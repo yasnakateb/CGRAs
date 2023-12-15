@@ -48,8 +48,8 @@ class FS
         val ready_in = Output(Bool())  
     })
     // All wires
-    var aux = Wire(Vec(NUMBER_OF_READYS, Bool()))
-    var temp = Wire(Vec(NUMBER_OF_READYS, Bool()))
+    val aux = Wire(Vec(NUMBER_OF_READYS, Bool()))
+    val temp = Wire(Vec(NUMBER_OF_READYS, Bool()))
 
     for (i <- 0 until NUMBER_OF_READYS) {
         aux(i) := ((~io.fork_mask(i)) | io.ready_out(i)).asBool
@@ -61,7 +61,7 @@ class FS
         temp(i) := temp(i-1) & aux(i)
     }
 
-    io.ready_in := temp(NUMBER_OF_READYS - 1)   
+    io.ready_in := temp(NUMBER_OF_READYS - 1).asBool   
 }
 
 // Generate the Verilog code

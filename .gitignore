@@ -7,4 +7,14 @@ src/.metals/
 .metals/
 *.vcd
 *.out
+*.str
+*.log
+*.jou
+overlay_rocc_tb_behav.wcfg
+overlay_vhdl.cache/
+overlay_vhdl.hw/
+overlay_vhdl.ip_user_files/
+overlay_vhdl.sim/
+overlay_vhdl.srcs/
+overlay_vhdl.xpr
 

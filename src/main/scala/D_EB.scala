@@ -78,7 +78,7 @@ class D_EB
         io.dout_v := reg_din_v_2
     }
 }
-
+    
 // Generate the Verilog code
 object D_EBMain extends App {
     println("Generating the hardware")
