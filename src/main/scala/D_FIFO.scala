@@ -113,10 +113,10 @@ class D_FIFO
     }
 
     io.din_r := ~full 
-    //wen := io.din_v & ~full
-    wen := io.din_v
-    //ren := io.dout_r & ~empty
-    ren := io.dout_r
+    wen := io.din_v & ~full
+    //wen := io.din_v
+    ren := io.dout_r & ~empty
+    //ren := io.dout_r
 }
 
 // Generate the Verilog code

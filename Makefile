@@ -66,27 +66,6 @@ fifo:
 fifo-test:
 	$(SBT) "testOnly FIFO_Test -- -DwriteVcd=1"	
 
-# Seprated Blocks 
-d-fifo-v2:
-	$(SBT) "runMain D_FIFO_V2Main"
-
-d-fifo-v2-test:
-	$(SBT) "testOnly D_FIFO_V2_Test -- -DwriteVcd=1"	
-
-# Simple fifo
-d-fifo-v3:
-	$(SBT) "runMain D_FIFO_V3Main"
-
-d-fifo-v3-test:
-	$(SBT) "testOnly D_FIFO_V3_Test -- -DwriteVcd=1"
-
-# Change the fifo with empty/full to din_v and ...
-d-fifo-v4:
-	$(SBT) "runMain D_FIFO_V4Main"
-
-d-fifo-v4-test:
-	$(SBT) "testOnly D_FIFO_V4_Test -- -DwriteVcd=1"		
-
 cell-processing:
 	$(SBT) "runMain CellProcessingMain"
 

@@ -37,13 +37,18 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class FS_Test extends AnyFlatSpec with ChiselScalatestTester {
     "FS_Test test" should "pass" in {
-        test(new FS(6)) { dut =>
+        test(new FS(5)) { dut =>
             
-            var ready_out = "b1010".U 
-            var fork_mask = "b1010".U 
+            dut.io.ready_out.poke("b00000".U)
+            dut.io.fork_mask.poke("b00000".U)
+
+            dut.clock.step(5)
         
-            dut.io.ready_out.poke(ready_out)
-            dut.io.fork_mask.poke(fork_mask)
+            dut.io.ready_out.poke("b11111".U)
+            dut.io.fork_mask.poke("b11000".U)
+
+
+            dut.clock.step(1)
             println("*************************************")
             println("*************************************")
             println("Ready Out: " + dut.io.ready_out.peek().toString)

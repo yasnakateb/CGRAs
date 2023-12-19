@@ -37,12 +37,12 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class FR_Test extends AnyFlatSpec with ChiselScalatestTester {
     "FR_Test test" should "pass" in {
-        test(new FR(6,4)) { dut =>
+        test(new FR(5,5)) { dut =>
             
-            var valid_in = "b101010".U 
-            var ready_out = "b1010".U 
+            var valid_in = "b11011".U 
+            var ready_out = "b11011".U 
             var valid_mux_sel = "b10".U 
-            var fork_mask = "b1010".U 
+            var fork_mask = "b11011".U 
         
             dut.io.valid_in.poke(valid_in)
             dut.io.ready_out.poke(ready_out)
