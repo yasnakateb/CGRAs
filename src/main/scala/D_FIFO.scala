@@ -64,11 +64,7 @@ class D_FIFO
     //val full = RegNext(0.B) 
     val empty = Wire(Bool())
     val full = Wire(Bool())
-    val dout_v = RegNext(0.U) 
-
-    dout_v :=  ~empty
     
-    io.dout_v := dout_v 
     // Write pointer
     when(wen & ~full) {
         when(cntWrite === FIFO_DEPTH.U - 1.U) {
@@ -85,7 +81,7 @@ class D_FIFO
         }.otherwise {
             cntRead := cntRead + 1.U
         }
-        }
+    }
 
     // Data counter
     when((wen & ~full) & ~(ren & ~empty)) {
@@ -99,6 +95,7 @@ class D_FIFO
         mem.write(cntWrite, io.din)
         }
     io.dout := mem.read(cntRead)
+    io.dout_v := ~empty 
 
     // Control signal generation
     when(cntData === FIFO_DEPTH.U) {
@@ -114,8 +111,9 @@ class D_FIFO
 
     io.din_r := ~full 
     wen := io.din_v & ~full
-    //wen := io.din_v
     ren := io.dout_r & ~empty
+
+    //wen := io.din_v
     //ren := io.dout_r
 }
 

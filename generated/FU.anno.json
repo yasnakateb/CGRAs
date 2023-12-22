@@ -26,7 +26,10 @@
     "class":"firrtl.transforms.CombinationalPath",
     "sink":"~FU|FU>io_dout",
     "sources":[
-      "~FU|FU>io_loop_source"
+      "~FU|FU>io_loop_source",
+      "~FU|FU>io_op_config",
+      "~FU|FU>io_din_1",
+      "~FU|FU>io_din_2"
     ]
   }
 ]
