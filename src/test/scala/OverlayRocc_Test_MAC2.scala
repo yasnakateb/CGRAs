@@ -45,6 +45,8 @@ class OverlayRocc_Test_MAC2 extends AnyFlatSpec with ChiselScalatestTester {
             // MAC 2
             ///////////////////////////////////////////
 
+            // Note: Changing the last cell_config => Removing the feedback loop ========> Did not work with feedback loop
+
             var cell_config = "b100011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000100000000".U
             dut.io.cell_config.poke(cell_config)
             dut.clock.step(1)
@@ -164,10 +166,10 @@ class OverlayRocc_Test_MAC2 extends AnyFlatSpec with ChiselScalatestTester {
             for (i <- 1 to 16) {
                 val c4 = i.toString()
                 val c5 = i.toString()
-                val din = BigInt("00000001"  + "00000002" + "00000001"+ "00000001" + "00000000" + "00000000" ,16).S
+                val din = BigInt("00000001" + "00000000" + "00000001"+ "00000001" + "00000001" + f"$i%08d" ,16).S
                 
                 dut.io.data_in.poke(din)
-                dut.io.data_in_valid.poke("b111000".U)
+                dut.io.data_in_valid.poke("b111111".U)
                 dut.clock.step(i)
                 dut.io.data_in_valid.poke("b000000".U)
                 dut.clock.step(10)

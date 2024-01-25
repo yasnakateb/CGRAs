@@ -173,7 +173,7 @@ class OverlayRocc_Test_CAP extends AnyFlatSpec with ChiselScalatestTester {
                 val c5 = i.toString()
                 val a = 4
                 val b = 1 
-                val din = BigInt(f"$b%08d"  + "00000000000000000000000000000000" + f"$a%08d" ,16).S
+                val din = BigInt("00000008"  + "00000000000000000000000000000000" + "00000002" ,16).S
                 
                 dut.io.data_in.poke(din)
                 dut.io.data_in_valid.poke("b100001".U)
