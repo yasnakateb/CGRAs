@@ -90,6 +90,25 @@ barrel-shifter:
 barrel-shifter-test:
 	$(SBT) "testOnly BarrelShifter_Test -- -DwriteVcd=1"
 
+
+overlay-sum:
+	$(SBT) "testOnly OverlayRocc_Test_SUM -- -DwriteVcd=1"
+
+overlay-cap:
+	$(SBT) "testOnly OverlayRocc_Test_CAP -- -DwriteVcd=1"
+
+overlay-acc:
+	$(SBT) "testOnly OverlayRocc_Test_ACC -- -DwriteVcd=1"
+
+
+overlay-mac:
+	$(SBT) "testOnly OverlayRocc_Test_MAC -- -DwriteVcd=1"
+
+overlay-mac2:
+	$(SBT) "testOnly OverlayRocc_Test_MAC2 -- -DwriteVcd=1"	
+
+
+
 clean:
 	rm -R test_run_dir/
 

@@ -548,7 +548,7 @@ class OverlayRocc_Test extends AnyFlatSpec with ChiselScalatestTester {
             ///////////////////////////////////////////
 
 
-            /*
+            
             var cell_config = "b100011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000100000000".U
             dut.io.cell_config.poke(cell_config)
             dut.clock.step(1)
@@ -668,7 +668,7 @@ class OverlayRocc_Test extends AnyFlatSpec with ChiselScalatestTester {
             for (i <- 1 to 16) {
                 val c4 = i.toString()
                 val c5 = i.toString()
-                val din = BigInt("00000001"  + "00000001" + "00000001"+ "00000000" + "00000000" + "00000000" ,16).S
+                val din = BigInt("00000001"  + "00000002" + "00000001"+ "00000001" + "00000000" + "00000000" ,16).S
                 
                 dut.io.data_in.poke(din)
                 dut.io.data_in_valid.poke("b111000".U)
@@ -684,7 +684,7 @@ class OverlayRocc_Test extends AnyFlatSpec with ChiselScalatestTester {
             }
 
 
-            */
+            
         }
     } 
 }
