@@ -40,6 +40,12 @@ class OverlayRocc_Test_MAC2 extends AnyFlatSpec with ChiselScalatestTester {
     "OverlayRocc_Test_MAC2 test" should "pass" in {
         test(new OverlayRocc(32, 6, 6, 32)) { dut =>
             
+            
+            var data_in_valid = "b000000".U 
+            var data_out_ready = "b111111".U 
+            dut.io.data_in_valid.poke(data_in_valid)
+            dut.io.data_out_ready.poke(data_out_ready)
+            dut.clock.step(1)
 
             ///////////////////////////////////////////
             // MAC 2
@@ -185,7 +191,7 @@ class OverlayRocc_Test_MAC2 extends AnyFlatSpec with ChiselScalatestTester {
                 
                 dut.io.data_in.poke(din)
                 dut.io.data_in_valid.poke("b111111".U)
-                dut.clock.step(1)
+                dut.clock.step(10)
                 dut.io.data_in_valid.poke("b000000".U)
                 dut.clock.step(10)
 

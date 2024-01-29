@@ -66,37 +66,6 @@ class OverlayRocc
     val east_dout_v = Wire(Vec(OUTPUT_NODES, Bool()))
     val east_dout_r = Wire(Vec(OUTPUT_NODES, Bool()))
     
-    //  **************************************************
-    // Type ? 
-    //  **************************************************
-
-    // val interconnection_data_hor = Array.ofDim[UInt(DATA_WIDTH*INPUT_NODES.W)](INPUT_NODES-1, OUTPUT_NODES)
-    // val interconnection_data_ver = Array.ofDim[UInt(DATA_WIDTH*INPUT_NODES.W)](INPUT_NODES, OUTPUT_NODES-1)
-    // val interconnection_control_hor = Array.ofDim[UInt(1.W)](INPUT_NODES-1, OUTPUT_NODES)
-    // val interconnection_control_ver = Array.ofDim[UInt(1.W)](INPUT_NODES, OUTPUT_NODES-1)
-
-    //  **************************************************
-    // UInt(DATA_WIDTH*INPUT_NODES.W)
-    // UInt(1.W)
-    // RegInit(0.U(182.W))
-    // Wire(UInt(1.W))   
-    //  **************************************************
-
-    /*
-    type interconnection_data_hor is array(0 to C_INPUT_NODES-2, 0 to C_OUTPUT_NODES-1) of std_logic_vector(C_DATA_WIDTH-1 downto 0);
-    type interconnection_data_ver is array(0 to C_INPUT_NODES-1, 0 to C_OUTPUT_NODES-2) of std_logic_vector(C_DATA_WIDTH-1 downto 0);
-    type interconnection_control_hor is array(0 to C_INPUT_NODES-2, 0 to C_OUTPUT_NODES-1) of std_logic;
-    type interconnection_control_ver is array(0 to C_INPUT_NODES-1, 0 to C_OUTPUT_NODES-2) of std_logic;
-    signal interc_data_we, interc_data_ew: interconnection_data_hor;
-    signal interc_valid_we, interc_valid_ew : interconnection_control_hor;
-    signal interc_ready_we, interc_ready_ew : interconnection_control_hor;
-    signal interc_data_ns, interc_data_sn: interconnection_data_ver;
-    signal interc_valid_ns, interc_valid_sn : interconnection_control_ver;
-    signal interc_ready_ns, interc_ready_sn : interconnection_control_ver;
-    */
-
-    
-    //val interc_data_we = Wire(Vec(INPUT_NODES -1, (Vec(OUTPUT_NODES, SInt(DATA_WIDTH.W)))))
 
     val interc_data_we = VecInit.fill(INPUT_NODES -1, OUTPUT_NODES)(0.asSInt(DATA_WIDTH.W)) 
     val interc_data_ew = VecInit.fill(INPUT_NODES -1, OUTPUT_NODES)(0.asSInt(DATA_WIDTH.W)) 
@@ -117,100 +86,11 @@ class OverlayRocc
     val interc_ready_ns = VecInit.fill(INPUT_NODES, OUTPUT_NODES -1)(0.asUInt(1.W))
     val interc_ready_sn = VecInit.fill(INPUT_NODES, OUTPUT_NODES -1)(0.asUInt(1.W))
 
-
-
-    //val interc_data_we = Array.ofDim[SInt](INPUT_NODES-1, OUTPUT_NODES)
-    //val interc_data_ew = Array.ofDim[SInt](INPUT_NODES-1, OUTPUT_NODES)
-
-    //val interc_valid_we = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
-    //val interc_valid_ew = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
-    //val interc_ready_we = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
-    //val interc_ready_ew = Array.ofDim[UInt](INPUT_NODES-1, OUTPUT_NODES)
-
-
-    //val interc_data_ns = Array.ofDim[SInt](INPUT_NODES, OUTPUT_NODES-1)
-    //val interc_data_sn = Array.ofDim[SInt](INPUT_NODES, OUTPUT_NODES-1)
-    //val interc_valid_ns = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
-    //val interc_valid_sn = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
-    //val interc_ready_ns = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
-    //val interc_ready_sn = Array.ofDim[UInt](INPUT_NODES, OUTPUT_NODES-1)
-
-    // Wrong => always Zero 
-    // Error ==> java.lang.NullPointerException: 
-    // Cannot invoke "chisel3.Data._parent()" because "node" is null
-    /*
-    for( i <- 0 to INPUT_NODES - 2){
-        for( j <- 0 to OUTPUT_NODES - 1){
-            //interc_data_we (i)(j) = 0.S 
-            //interc_data_ew (i)(j) = 0.S 
-            //interc_valid_we (i)(j) = 0.U 
-            //interc_valid_ew (i)(j) = 0.U  
-            //interc_ready_we (i)(j) = 0.U    
-            //interc_ready_ew (i)(j) = 0.U     
-        }
-    }
-    */
-    
-    // Error ==> java.lang.NullPointerException: 
-    // Cannot invoke "chisel3.Data._parent()" because "node" is null
-    /*
-    for( i <- 0 to INPUT_NODES - 1){
-        for( j <- 0 to OUTPUT_NODES - 2){
-            //interc_data_ns (i)(j) = 0.S  
-            //interc_data_sn (i)(j) = 0.S   
-            //interc_valid_ns (i)(j) = 0.U 
-            //interc_valid_sn (i)(j) = 0.U 
-            //interc_ready_ns (i)(j) = 0.U 
-            //interc_ready_sn (i)(j) = 0.U 
-        }    
-    }
-    */
-
-    /*
-    val config_bits = Reg(Vec(INPUT_NODES*OUTPUT_NODES, UInt(182.W)))
-    val catch_config = Reg(Vec(INPUT_NODES*OUTPUT_NODES, UInt(182.W)))
-    */
-    
-
     val config_bits = Wire(UInt(182.W))
     val catch_config = Wire(Vec(INPUT_NODES*OUTPUT_NODES, Bool()))
 
 
-    /*****************************************************************************************************
-    CONFIG_PROC : process(cell_config)
-    begin
-        config_bits <= ( others => (others => '0'));
-
-        /// 
-        /// One bit or Multiple bits ?????????????????
-        /// config_bits(0) <= 1 or config_bits(3, 0) <= cell_config(3, 0);
-        
-        config_bits(to_integer(unsigned(cell_config(190 downto 185)))) <= cell_config(181 downto 0);
-        
-        catch_config <= (others => '0');
-        if cell_config(191) = '1' then
-            catch_config(to_integer(unsigned(cell_config(190 downto 185)))) <= '1';
-        end if;
-    end process;
-
-    INPUTS_PROC : process (data_in, data_in_valid, north_din_r)
-    begin
-        for I in 0 to INPUT_NODES-1 loop
-            north_din(I) <= data_in(C_DATA_WIDTH*(I+1) - 1 downto C_DATA_WIDTH*I);
-            north_din_v(I) <= data_in_valid(I);
-            data_in_ready(I) <= north_din_r(I);
-        end loop;
-    end process;
-
-    OUTPUTS_PROC : process (east_dout, east_dout_v, data_out_ready)
-    begin
-        for I in 0 to C_OUTPUT_NODES-1 loop
-            data_out(C_DATA_WIDTH*(I+1) - 1 downto C_DATA_WIDTH*I) <= east_dout(I);
-            data_out_valid(I) <= east_dout_v(I);
-            east_dout_r(I) <= data_out_ready(I);
-        end loop;
-    end process;
-    *****************************************************************************************************/
+    
     
     // ***************************************************************** Needs test
     val unsigned_cell_config = io.cell_config(190,185).asUInt

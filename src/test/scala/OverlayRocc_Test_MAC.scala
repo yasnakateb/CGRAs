@@ -76,7 +76,7 @@ class OverlayRocc_Test_MAC extends AnyFlatSpec with ChiselScalatestTester {
                 val c4 = i.toString()
                 val c5 = i.toString()
                 
-                val din = BigInt("00000000"  + f"$i%08d" + "00000001"+ "00000000" + "00000000" + "00000000" ,16).S
+                val din = BigInt("00000000"  + f"$i%08d" + "00000002"+ "00000000" + "00000000" + "00000000" ,16).S
                 //val din = BigInt(f"$i%08d"  + f"$i%08d" + "00000001"+ "00000000" + "00000000" + "00000000" ,16).S
                 
                 dut.io.data_in.poke(din)
