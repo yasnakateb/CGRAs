@@ -152,17 +152,21 @@ class OverlayRocc_Test_MAC2 extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
-            cell_config = "b100101100001000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000010000000000000000000000000000000010011".U
+            // Changed 
+            cell_config = "b100101100000000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000010000000000000000000000000000000010011".U
             dut.io.cell_config.poke(cell_config)
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
-            cell_config = "b100010100010000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U
+            // Changed 
+            cell_config = "b1100010100000000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U
             dut.io.cell_config.poke(cell_config)
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
 
+
+            /*
             for (i <- 1 to 16) {
                 val c4 = i.toString()
                 val c5 = i.toString()
@@ -174,6 +178,17 @@ class OverlayRocc_Test_MAC2 extends AnyFlatSpec with ChiselScalatestTester {
                 dut.io.data_in_valid.poke("b000000".U)
                 dut.clock.step(10)
             }
+
+            */
+
+            val din = BigInt("00000003" + "00000003" + "00000001"+ "00000001" + "00000001" + "00000001" ,16).S
+                
+                dut.io.data_in.poke(din)
+                dut.io.data_in_valid.poke("b111111".U)
+                dut.clock.step(1)
+                dut.io.data_in_valid.poke("b000000".U)
+                dut.clock.step(10)
+
 
             println("Overlay******************************")
             println("*************************************")
