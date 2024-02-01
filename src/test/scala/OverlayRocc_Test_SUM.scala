@@ -66,13 +66,15 @@ class OverlayRocc_Test_SUM extends AnyFlatSpec with ChiselScalatestTester {
             for (i <- 1 to 16) {
                 val c4 = i.toString()
                 val c5 = i.toString()
-                
-                val din = BigInt(f"$i%08d" + f"$i%08d" + "00000000000000000000000000000000",16).S
+                // ------------------------------------------------------------------------------------------------
+            // |                 |    C5     |    C4      |      C3   |     C2     |     C1     |      C0     |
+            // ------------------------------------------------------------------------------------------------
+                val din = BigInt( (i + 1).formatted("%08X") + f"$i%08X" + "00000000000000000000000000000000",16).S
                 dut.io.data_in.poke(din)
                 dut.io.data_in_valid.poke("b110000".U)
                 dut.clock.step(i)
                 dut.io.data_in_valid.poke("b000000".U)
-                dut.clock.step(10)
+                dut.clock.step(5)
             }
             
             for( i <- 0 to 100){

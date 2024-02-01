@@ -207,6 +207,19 @@ class OverlayRocc_Test_CAP extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(10)
 
 
+            for (i <- 1 to 16) {
+                val c4 = i.toString()
+                val c5 = i.toString()
+                // ------------------------------------------------------------------------------------------------
+                // |                 |    C5     |    C4      |      C3   |     C2     |     C1     |      C0     |
+                // ------------------------------------------------------------------------------------------------
+                din = BigInt(f"$i%08X"  + "00000000000000000000000000000000" + "00000020"  ,16).S   
+                dut.io.data_in.poke(din)
+                dut.io.data_in_valid.poke("b100001".U)
+                dut.clock.step(i)
+                dut.io.data_in_valid.poke("b000000".U)
+                dut.clock.step(5)
+            }
 
             for( i <- 0 to 100){
                 dut.clock.step(1)

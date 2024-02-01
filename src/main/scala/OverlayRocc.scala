@@ -89,8 +89,6 @@ class OverlayRocc
     val config_bits = Wire(UInt(182.W))
     val catch_config = Wire(Vec(INPUT_NODES*OUTPUT_NODES, Bool()))
 
-
-    
     
     // ***************************************************************** Needs test
     val unsigned_cell_config = io.cell_config(190,185).asUInt
@@ -106,20 +104,13 @@ class OverlayRocc
 
     for( i <- 0 to INPUT_NODES - 1){
         north_din(i) := (io.data_in(DATA_WIDTH*(i+1) - 1, DATA_WIDTH*i)).asSInt
-        
-        // ==> Error: Cannot reassign to read-only
-
-        // north_din_v(i) := io.data_in_valid(i) 
-
         north_din_v(i) := io.data_in_valid(i) 
         vec_data_in_ready(i) := north_din_r(i)
         
     }
 
     io.data_in_ready := vec_data_in_ready.asUInt 
-    //north_din_v := io.data_in_valid
-    //io.data_in_ready := north_din_r.asUInt
-    
+
     //  ***************************************************************** Fix 
    
     val vec_data_out = Wire(Vec(OUTPUT_NODES, SInt(DATA_WIDTH.W)))
@@ -591,19 +582,11 @@ class OverlayRocc
 
     for( i <- 0 to OUTPUT_NODES - 1){
         vec_data_out(i) := east_dout(i)
-        // // ==> Error: Cannot reassign to read-only
-        //io.data_out(DATA_WIDTH*(i+1) - 1, DATA_WIDTH*i) := east_dout(i)
         vec_data_out_valid (i) := east_dout_v(i) 
-        // io.data_out_valid(i) := east_dout_v(i) 
         east_dout_r(i) := io.data_out_ready(i)
     }
-    
-    // io.data_out_valid := east_dout_v.asUInt 
     io.data_out := vec_data_out.asUInt 
-    io.data_out_valid := vec_data_out_valid.asUInt 
-
-    // east_dout_r := io.data_out_ready   
-     
+    io.data_out_valid := vec_data_out_valid.asUInt     
 }
 
 // Generate the Verilog code

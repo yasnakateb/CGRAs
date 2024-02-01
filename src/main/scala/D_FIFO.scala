@@ -95,8 +95,17 @@ class D_FIFO
         mem.write(cntWrite, io.din)
         }
     io.dout := mem.read(cntRead)
+
+    
     io.dout_v := ~empty 
 
+    /*
+    val dout_v = RegNext(0.U) 
+    dout_v :=  ~empty
+    io.dout_v := dout_v
+    */
+    
+    
     // Control signal generation
     when(cntData === FIFO_DEPTH.U) {
         full := true.B
