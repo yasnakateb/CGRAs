@@ -31,6 +31,49 @@
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
 
+
+import chisel3._
+import chisel3.util._
+
+
+class D_FIFO
+    (
+        DATA_WIDTH: Int, 
+        FIFO_DEPTH: Int
+    ) 
+    extends D_FIFO_V{ 
+
+    val io = IO(new D_FIFO_V(DATA_WIDTH, FIFO_DEPTH))
+    // Inputs 
+    val din = Input(SInt(DATA_WIDTH.W))  
+    val din_v = Input(Bool())
+    val dout_r = Input(Bool())
+
+    // Outputs
+    val din_r = Output(Bool())
+    val dout = Output(SInt(DATA_WIDTH.W))  
+    val dout_v = Output(Bool()) 
+
+
+    io.din := din 
+    io.din_v := din_v
+    io.dout_r := dout_r
+
+    // Outputs
+    io.din_r := din_r
+    io.dout := dout 
+    io.dout_v := dout_v   
+}
+
+
+// Generate the Verilog code
+object D_FIFOMain extends App {
+    println("Generating the hardware")
+    (new chisel3.stage.ChiselStage).emitVerilog(new D_FIFO(32, 32), Array("--target-dir", "generated"))
+}
+
+
+/*
 import chisel3._
 import chisel3.util._
 
@@ -131,3 +174,4 @@ object D_FIFOMain extends App {
     println("Generating the hardware")
     (new chisel3.stage.ChiselStage).emitVerilog(new D_FIFO(32, 32), Array("--target-dir", "generated"))
 }
+*/
