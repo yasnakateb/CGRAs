@@ -41,28 +41,34 @@ class D_FIFO
         DATA_WIDTH: Int, 
         FIFO_DEPTH: Int
     ) 
-    extends D_FIFO_V{ 
+    extends Module {
+    val io = IO(new Bundle {
+        val clock           = Input(Clock())
+        val reset           = Input(Bool())
+        // Inputs 
+        val din = Input(SInt(DATA_WIDTH.W))  
+        val din_v = Input(Bool())
+        val dout_r = Input(Bool())
 
-    val io = IO(new D_FIFO_V(DATA_WIDTH, FIFO_DEPTH))
-    // Inputs 
-    val din = Input(SInt(DATA_WIDTH.W))  
-    val din_v = Input(Bool())
-    val dout_r = Input(Bool())
+        // Outputs
+        val din_r = Output(Bool())
+        val dout = Output(SInt(DATA_WIDTH.W))  
+        val dout_v = Output(Bool()) 
+    })
+
+
+    val fifo = Module(new D_FIFO_V(DATA_WIDTH, FIFO_DEPTH))
+
+    fifo.io.clock := io.clock 
+    fifo.io.reset := io.reset
+    fifo.io.din := io.din 
+    fifo.io.din_v := io.din_v
+    fifo.io.dout_r := io.dout_r
 
     // Outputs
-    val din_r = Output(Bool())
-    val dout = Output(SInt(DATA_WIDTH.W))  
-    val dout_v = Output(Bool()) 
-
-
-    io.din := din 
-    io.din_v := din_v
-    io.dout_r := dout_r
-
-    // Outputs
-    io.din_r := din_r
-    io.dout := dout 
-    io.dout_v := dout_v   
+    io.din_r := fifo.io.din_r
+    io.dout  := fifo.io.dout 
+    io.dout_v := fifo.io.dout_v 
 }
 
 
