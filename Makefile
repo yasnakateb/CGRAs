@@ -54,7 +54,7 @@ conf-mux-test:
 
 # Original (Dani)
 d-fifo:
-	$(SBT) "runMain D_FIFOMain"
+	$(SBT) "runMain D_FIFOMain "
 
 d-fifo-test:
 	$(SBT) "testOnly D_FIFO_Test -- -DwriteVcd=1"	

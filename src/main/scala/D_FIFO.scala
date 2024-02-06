@@ -43,8 +43,8 @@ class D_FIFO
     ) 
     extends Module {
     val io = IO(new Bundle {
-        val clock           = Input(Clock())
-        val reset           = Input(Bool())
+ 
+      
         // Inputs 
         val din = Input(SInt(DATA_WIDTH.W))  
         val din_v = Input(Bool())
@@ -59,8 +59,9 @@ class D_FIFO
 
     val fifo = Module(new D_FIFO_V(DATA_WIDTH, FIFO_DEPTH))
 
-    fifo.io.clock := io.clock 
-    fifo.io.reset := io.reset
+    fifo.io.clock := clock 
+    fifo.io.reset := reset.asBool //|| rocc.io.clear
+
     fifo.io.din := io.din 
     fifo.io.din_v := io.din_v
     fifo.io.dout_r := io.dout_r
@@ -79,7 +80,13 @@ object D_FIFOMain extends App {
 }
 
 
+
+
+
+
+
 /*
+
 import chisel3._
 import chisel3.util._
 
@@ -180,4 +187,5 @@ object D_FIFOMain extends App {
     println("Generating the hardware")
     (new chisel3.stage.ChiselStage).emitVerilog(new D_FIFO(32, 32), Array("--target-dir", "generated"))
 }
+
 */

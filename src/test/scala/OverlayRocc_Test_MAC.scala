@@ -53,7 +53,23 @@ class OverlayRocc_Test_MAC extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.data_out_ready.poke(data_out_ready)
             dut.clock.step(1)
 
-            var cell_config = "b100001100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000100000000001000001000000000000000000000000001".U 
+
+            var cell_config: UInt = 0.U 
+            /*
+            // Note: Original 
+            val source = Source.fromFile("src/test/scala/Bitstreams/mac.txt")
+            for (line <- source.getLines()){
+                
+                cell_config = ("b" + line).U  
+                dut.io.cell_config.poke(cell_config)
+                dut.clock.step(1)
+                dut.clock.step(1)
+                dut.clock.step(1)
+            }
+            source.close()
+            */
+
+            cell_config = "b100001100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000100000000001000001000000000000000000000000001".U 
             dut.io.cell_config.poke(cell_config)
             dut.clock.step(1)
             dut.clock.step(1)

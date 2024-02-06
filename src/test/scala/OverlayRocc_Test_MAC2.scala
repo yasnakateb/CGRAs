@@ -47,13 +47,31 @@ class OverlayRocc_Test_MAC2 extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.data_out_ready.poke(data_out_ready)
             dut.clock.step(1)
 
+
+            var cell_config: UInt = 0.U 
+            /*
+            // Note: Original 
+            val source = Source.fromFile("src/test/scala/Bitstreams/mac2.txt")
+            for (line <- source.getLines()){
+                
+                cell_config = ("b" + line).U  
+                dut.io.cell_config.poke(cell_config)
+                dut.clock.step(1)
+                dut.clock.step(1)
+                dut.clock.step(1)
+            }
+            source.close()
+            */
+
+
+
             ///////////////////////////////////////////
             // MAC 2
             ///////////////////////////////////////////
 
             // Note: Changing the last cell_config => Removing the feedback loop ========> Did not work with feedback loop
 
-            var cell_config = "b100011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000100000000".U
+            cell_config = "b100011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000100000000".U
             dut.io.cell_config.poke(cell_config)
             dut.clock.step(1)
             dut.clock.step(1)

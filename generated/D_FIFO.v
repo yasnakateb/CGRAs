@@ -1,39 +1,80 @@
-module D_FIFO(
-  input         clock,
-  input         reset,
-  input         io_clock,
-  input         io_reset,
-  input  [31:0] io_din,
-  input         io_din_v,
-  input         io_dout_r,
-  output        io_din_r,
-  output [31:0] io_dout,
-  output        io_dout_v
-);
-  wire  fifo_clock; // @[D_FIFO.scala 60:22]
-  wire  fifo_reset; // @[D_FIFO.scala 60:22]
-  wire [31:0] fifo_din; // @[D_FIFO.scala 60:22]
-  wire  fifo_din_v; // @[D_FIFO.scala 60:22]
-  wire  fifo_dout_r; // @[D_FIFO.scala 60:22]
-  wire  fifo_din_r; // @[D_FIFO.scala 60:22]
-  wire [31:0] fifo_dout; // @[D_FIFO.scala 60:22]
-  wire  fifo_dout_v; // @[D_FIFO.scala 60:22]
-  D_FIFO_V #(.DATA_WIDTH(32), .FIFO_DEPTH(32)) fifo ( // @[D_FIFO.scala 60:22]
-    .clock(fifo_clock),
-    .reset(fifo_reset),
-    .din(fifo_din),
-    .din_v(fifo_din_v),
-    .dout_r(fifo_dout_r),
-    .din_r(fifo_din_r),
-    .dout(fifo_dout),
-    .dout_v(fifo_dout_v)
-  );
-  assign io_din_r = fifo_din_r; // @[D_FIFO.scala 69:14]
-  assign io_dout = fifo_dout; // @[D_FIFO.scala 70:14]
-  assign io_dout_v = fifo_dout_v; // @[D_FIFO.scala 71:15]
-  assign fifo_clock = io_clock; // @[D_FIFO.scala 62:19]
-  assign fifo_reset = io_reset; // @[D_FIFO.scala 63:19]
-  assign fifo_din = io_din; // @[D_FIFO.scala 64:17]
-  assign fifo_din_v = io_din_v; // @[D_FIFO.scala 65:19]
-  assign fifo_dout_r = io_dout_r; // @[D_FIFO.scala 66:20]
+module D_FIFO
+    
+    #(parameter DATA_WIDTH = 32, FIFO_DEPTH = 32)
+    
+    (
+    input                       clock,
+    input                       reset,
+    input  [DATA_WIDTH:0]       io_din,
+    input                       io_din_v,
+    input                       io_dout_r,
+    output                      io_din_r,
+    output reg [DATA_WIDTH:0]   io_dout,
+    output reg io_dout_v
+    );
+        
+    reg [0:DATA_WIDTH] memory [FIFO_DEPTH:0];
+
+    reg [4:0] write_pointer = 5'b0;
+    reg [4:0] read_pointer = 5'b0;
+    integer num_data = 0;
+
+    reg full;	
+    reg empty;
+    wire rd_en;
+    wire wr_en;
+
+    
+    always @(posedge clock) begin
+        if (reset) begin 
+            empty <= 1'b1;
+            full  <= 1'b0;
+            write_pointer <= 5'b0;
+            read_pointer <= 5'b0;
+            num_data = 0;
+            io_dout <= 32'b0;
+            io_dout_v <= 1'b0;	
+        end 
+
+        if  (io_dout_r)
+            io_dout_v <= 1'b0;
+
+        if (~full & wr_en) begin 
+            memory[write_pointer] <= io_din;
+            num_data = num_data + 1;
+                    
+            if (write_pointer == FIFO_DEPTH) 
+                write_pointer = 5'b0;
+            else
+                write_pointer = write_pointer + 1;     
+        end
+        
+        if (~empty & rd_en) begin
+            
+            io_dout <= memory[read_pointer];
+            io_dout_v <= 1'b1;
+            num_data = num_data - 1;
+
+            if (read_pointer == FIFO_DEPTH) 
+                read_pointer = 0;
+            else
+                read_pointer = read_pointer + 1; 
+            
+        end
+
+        if (num_data == FIFO_DEPTH)
+            full <= 1'b1;
+        else
+            full <= 1'b0;
+                    
+        if (num_data == 0) 
+            empty <= 1'b1;
+        else
+            empty <= 1'b0;
+    end 
+
+assign wr_en = io_din_v & (~full);
+assign rd_en = io_dout_r & (~empty);
+assign io_din_r = (~full);
+
 endmodule
