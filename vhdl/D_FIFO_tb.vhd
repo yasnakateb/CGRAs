@@ -60,29 +60,28 @@ begin
     
     process
     begin
-        reset          <= C_RST_POL;
+        reset      <= C_RST_POL;
         din        <= (others => '0');
         din_v  <= '0';
         dout_r <= '1';
         
-        wait for clk_period * 100.5;
+        wait for clk_period * 10;
         
         reset <= '0';
         wait for clk_period * 10;
         
         
         -- Operate
-        for i in 0 to 15 loop
-        
-            
+        for i in 0 to 5 loop
             din <= std_logic_vector(to_unsigned(i, C_DATA_WIDTH));
             din_v <= '1';
-            wait for (i + 1) * clk_period;
+            wait for (i) * clk_period;
             din_v <= '0';
             wait for clk_period * 10;
-            
         end loop;
         
         assert false report "End of Simulation!" severity failure;
         wait;
-end process;
+    end process;
+
+end testbench;
