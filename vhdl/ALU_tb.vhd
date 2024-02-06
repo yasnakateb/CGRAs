@@ -14,7 +14,8 @@ architecture testbench of ALU_tb is
     
   
     
-    
+    signal clk           : std_logic;
+    signal reset         : std_logic;
     signal din_1         : std_logic_vector(C_DATA_WIDTH - 1 downto 0);
     signal din_2         : std_logic_vector(C_DATA_WIDTH - 1 downto 0);
     signal dout          : std_logic_vector(C_DATA_WIDTH - 1 downto 0);
@@ -37,7 +38,7 @@ begin
         din_1       => din_1    ,
         din_2       => din_2    ,
         dout        => dout     ,
-        op_config => cell_config,
+        op_config => op_config
     );
 
     process
@@ -50,45 +51,33 @@ begin
     
     process
     begin
-        reset          <= C_RST_POL;
-        din_1        <= (others => '0');
+        reset  <= C_RST_POL;
+        din_1  <= (others => '0');
         din_2  <= (others => '0');
-        dout <= (others => '1');
+      
         
-        cell_config    <= (others => '0');
+        op_config  <= (others => '0');
         wait for clk_period * 100.5;
         
         reset <= '0';
         wait for clk_period * 10;
         
-        /*
-        -- Config
-        cell_config <= "100010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000100000000";
-        wait for clk_period;
-        cell_config <= "100010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011";
-        wait for clk_period;
-        cell_config <= (others => '0');
-        wait for clk_period * 10;
+       
+        for i in 0 to 8 loop
         
-        -- Operate
-        for i in 0 to 15 loop
-        
-            data_in(C_DATA_WIDTH*C_INPUT_NODES-1 downto C_DATA_WIDTH*(C_INPUT_NODES-1)) <= std_logic_vector(to_unsigned(i, C_DATA_WIDTH));
-            data_in(C_DATA_WIDTH*(C_INPUT_NODES-1)-1 downto C_DATA_WIDTH*(C_INPUT_NODES-2)) <= std_logic_vector(to_unsigned(2*i, C_DATA_WIDTH));
-            data_in_valid <= "110000";
-            wait for (i + 1) * clk_period;
-            data_in_valid <= "000000";
+            din_1 <= std_logic_vector(to_signed(i, C_DATA_WIDTH));
+            din_2 <= std_logic_vector(to_signed(2*i, C_DATA_WIDTH));
+            op_config    <= (others => '0');
+            
             wait for clk_period * 10;
             
-        end loop;
-
-        */
+       end loop;
+        
         
         assert false report "End of Simulation!" severity failure;
         wait;
     end process;
 
 end testbench;
-
 
 
