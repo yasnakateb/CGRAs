@@ -10,10 +10,10 @@ architecture testbench of FS_tb is
 
     constant C_NUMBER_OF_READYS : integer   := 5; 
     
-    signal ready_in    : std_logic;
-    signal ready_out   : std_logic_vector(C_NUMBER_OF_READYS-1 downto 0);
-    signal fork_mask   : std_logic_vector(C_NUMBER_OF_READYS-1 downto 0);
-    signal clk    : std_logic;
+    signal ready_in     : std_logic;
+    signal ready_out    : std_logic_vector(C_NUMBER_OF_READYS-1 downto 0);
+    signal fork_mask    : std_logic_vector(C_NUMBER_OF_READYS-1 downto 0);
+    signal clk          : std_logic;
     constant clk_period : time := 10 ns;
 
 begin

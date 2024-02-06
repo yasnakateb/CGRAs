@@ -17,7 +17,7 @@ architecture testbench of FR_tb is
     signal ready_out       :  std_logic_vector(C_NUMBER_OF_READYS-1 downto 0);
     signal valid_mux_sel   :  std_logic_vector( integer(ceil(log2(real(C_NUMBER_OF_VALIDS))))-1 downto 0);
     signal fork_mask       :  std_logic_vector (C_NUMBER_OF_READYS-1 downto 0); 
-    signal clk              :  std_logic;
+    signal clk             :  std_logic;
 
     constant clk_period : time := 10 ns;
 
