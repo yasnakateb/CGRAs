@@ -80,8 +80,6 @@ object D_FIFOMain extends App {
 }
 */
 
-
-
 import chisel3._
 import chisel3.util._
 
