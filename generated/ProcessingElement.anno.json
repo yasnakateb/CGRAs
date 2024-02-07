@@ -1,211 +1,241 @@
 [
   {
     "class":"firrtl.transforms.DedupedResult",
+    "original":"~ProcessingElement|D_FIFO_V",
+    "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Nin:D_FIFO/fifo:D_FIFO_V",
+    "index":0.0
+  },
+  {
+    "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_FIFO",
     "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Nin:D_FIFO",
-    "index":0.0
+    "index":0.023809523809523808
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FS",
     "duplicate":"~ProcessingElement|ProcessingElement/FS_Nin:FS",
-    "index":0.02631578947368421
+    "index":0.047619047619047616
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux",
     "duplicate":"~ProcessingElement|ProcessingElement/MUX_Nout:ConfMux",
-    "index":0.05263157894736842
+    "index":0.07142857142857142
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_1",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Nout:FR/conf_mux:ConfMux_1",
-    "index":0.07894736842105263
+    "index":0.09523809523809523
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Nout:FR",
-    "index":0.10526315789473684
+    "index":0.11904761904761904
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_REG",
     "duplicate":"~ProcessingElement|ProcessingElement/REG_Nout:D_REG",
-    "index":0.13157894736842105
+    "index":0.14285714285714285
+  },
+  {
+    "class":"firrtl.transforms.DedupedResult",
+    "original":"~ProcessingElement|D_FIFO_V_1",
+    "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Ein:D_FIFO/fifo:D_FIFO_V",
+    "index":0.16666666666666666
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_FIFO_1",
     "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Ein:D_FIFO",
-    "index":0.15789473684210525
+    "index":0.19047619047619047
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FS_1",
     "duplicate":"~ProcessingElement|ProcessingElement/FS_Ein:FS",
-    "index":0.18421052631578946
+    "index":0.21428571428571427
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_2",
     "duplicate":"~ProcessingElement|ProcessingElement/MUX_Eout:ConfMux",
-    "index":0.21052631578947367
+    "index":0.23809523809523808
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_3",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Eout:FR/conf_mux:ConfMux_1",
-    "index":0.23684210526315788
+    "index":0.2619047619047619
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR_1",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Eout:FR",
-    "index":0.2631578947368421
+    "index":0.2857142857142857
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_REG_1",
     "duplicate":"~ProcessingElement|ProcessingElement/REG_Eout:D_REG",
-    "index":0.2894736842105263
+    "index":0.30952380952380953
+  },
+  {
+    "class":"firrtl.transforms.DedupedResult",
+    "original":"~ProcessingElement|D_FIFO_V_2",
+    "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Sin:D_FIFO/fifo:D_FIFO_V",
+    "index":0.3333333333333333
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_FIFO_2",
     "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Sin:D_FIFO",
-    "index":0.3157894736842105
+    "index":0.35714285714285715
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FS_2",
     "duplicate":"~ProcessingElement|ProcessingElement/FS_Sin:FS",
-    "index":0.34210526315789475
+    "index":0.38095238095238093
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_4",
     "duplicate":"~ProcessingElement|ProcessingElement/MUX_Sout:ConfMux",
-    "index":0.3684210526315789
+    "index":0.40476190476190477
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_5",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Sout:FR/conf_mux:ConfMux_1",
-    "index":0.39473684210526316
+    "index":0.42857142857142855
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR_2",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Sout:FR",
-    "index":0.42105263157894735
+    "index":0.4523809523809524
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_REG_2",
     "duplicate":"~ProcessingElement|ProcessingElement/REG_Sout:D_REG",
-    "index":0.4473684210526316
+    "index":0.47619047619047616
+  },
+  {
+    "class":"firrtl.transforms.DedupedResult",
+    "original":"~ProcessingElement|D_FIFO_V_3",
+    "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Win:D_FIFO/fifo:D_FIFO_V",
+    "index":0.5
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_FIFO_3",
     "duplicate":"~ProcessingElement|ProcessingElement/FIFO_Win:D_FIFO",
-    "index":0.47368421052631576
+    "index":0.5238095238095238
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FS_3",
     "duplicate":"~ProcessingElement|ProcessingElement/FS_Win:FS",
-    "index":0.5
+    "index":0.5476190476190477
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_6",
     "duplicate":"~ProcessingElement|ProcessingElement/MUX_Wout:ConfMux",
-    "index":0.5263157894736842
+    "index":0.5714285714285714
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_7",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Wout:FR/conf_mux:ConfMux_1",
-    "index":0.5526315789473685
+    "index":0.5952380952380952
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR_3",
     "duplicate":"~ProcessingElement|ProcessingElement/FR_Wout:FR",
-    "index":0.5789473684210527
+    "index":0.6190476190476191
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_REG_3",
     "duplicate":"~ProcessingElement|ProcessingElement/REG_Wout:D_REG",
-    "index":0.6052631578947368
+    "index":0.6428571428571429
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_8",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/FR_1:FR_4/conf_mux:ConfMux_8",
-    "index":0.631578947368421
+    "index":0.6666666666666666
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR_4",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/FR_1:FR_4",
-    "index":0.6578947368421053
+    "index":0.6904761904761905
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_9",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/MUX_1:ConfMux_9",
-    "index":0.6842105263157895
+    "index":0.7142857142857143
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_EB",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/EB_1:D_EB",
-    "index":0.7105263157894737
+    "index":0.7380952380952381
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_10",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/FR_2:FR_4/conf_mux:ConfMux_8",
-    "index":0.7368421052631579
+    "index":0.7619047619047619
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FR_5",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/FR_2:FR_4",
-    "index":0.7631578947368421
+    "index":0.7857142857142857
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|ConfMux_11",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/MUX_2:ConfMux_9",
-    "index":0.7894736842105263
+    "index":0.8095238095238095
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_EB_1",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/EB_2:D_EB",
-    "index":0.8157894736842105
+    "index":0.8333333333333334
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|D_EB_2",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/EB_OUT:D_EB",
-    "index":0.9210526315789473
+    "index":0.9285714285714286
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~ProcessingElement|FS_4",
     "duplicate":"~ProcessingElement|ProcessingElement/CELL:CellProcessing/FS:FS",
-    "index":0.9473684210526315
+    "index":0.9523809523809523
   },
   {
     "class":"firrtl.EmitCircuitAnnotation",
     "emitter":"firrtl.VerilogEmitter"
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxInlineAnno",
+    "target":"ProcessingElement.D_FIFO_V",
+    "name":"D_FIFO.v",
+    "text":"module D_FIFO\n    \n    #(parameter DATA_WIDTH = 32, FIFO_DEPTH = 32)\n    \n    (\n    input                       clock,\n    input                       reset,\n    input  [DATA_WIDTH:0]       io_din,\n    input                       io_din_v,\n    input                       io_dout_r,\n    output                      io_din_r,\n    output reg [DATA_WIDTH:0]   io_dout,\n    output reg io_dout_v\n    );\n        \n    reg [0:DATA_WIDTH] memory [FIFO_DEPTH:0];\n\n    reg [4:0] write_pointer = 5'b0;\n    reg [4:0] read_pointer = 5'b0;\n    integer num_data = 0;\n\n    reg full;\t\n    reg empty;\n    wire rd_en;\n    wire wr_en;\n\n    \n    always @(posedge clock) begin\n        if (reset) begin \n            empty <= 1'b1;\n            full  <= 1'b0;\n            write_pointer <= 5'b0;\n            read_pointer <= 5'b0;\n            num_data = 0;\n            io_dout <= 32'b0;\n            io_dout_v <= 1'b0;\t\n        end \n\n        if  (io_dout_r)\n            io_dout_v <= 1'b0;\n\n        if (~full & wr_en) begin \n            memory[write_pointer] <= io_din;\n            num_data = num_data + 1;\n                    \n            if (write_pointer == FIFO_DEPTH) \n                write_pointer = 5'b0;\n            else\n                write_pointer = write_pointer + 1;     \n        end\n        \n        if (~empty & rd_en) begin\n            \n            io_dout <= memory[read_pointer];\n            io_dout_v <= 1'b1;\n            num_data = num_data - 1;\n\n            if (read_pointer == FIFO_DEPTH) \n                read_pointer = 0;\n            else\n                read_pointer = read_pointer + 1; \n            \n        end\n\n        if (num_data == FIFO_DEPTH)\n            full <= 1'b1;\n        else\n            full <= 1'b0;\n                    \n        if (num_data == 0) \n            empty <= 1'b1;\n        else\n            empty <= 1'b0;\n    end \n\nassign wr_en = io_din_v & (~full);\nassign rd_en = io_dout_r & (~empty);\nassign io_din_r = (~full);\n\nendmodule"
   },
   {
     "class":"firrtl.transforms.BlackBoxTargetDirAnno",
