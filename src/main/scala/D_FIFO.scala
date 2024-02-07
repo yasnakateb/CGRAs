@@ -59,7 +59,7 @@ class D_FIFO
 
     val fifo = Module(new D_FIFO_V(DATA_WIDTH, FIFO_DEPTH))
 
-    fifo.io.clock := clock 
+    fifo.io.clock := clock.asBool 
     fifo.io.reset := reset.asBool //|| rocc.io.clear
 
     fifo.io.din := io.din 

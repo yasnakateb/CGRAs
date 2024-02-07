@@ -5,12 +5,12 @@ module D_FIFO
     (
     input                       clock,
     input                       reset,
-    input  [DATA_WIDTH:0]       io_din,
-    input                       io_din_v,
-    input                       io_dout_r,
-    output                      io_din_r,
-    output reg [DATA_WIDTH:0]   io_dout,
-    output reg io_dout_v
+    input  [DATA_WIDTH:0]       din,
+    input                       din_v,
+    input                       dout_r,
+    output                      din_r,
+    output reg [DATA_WIDTH:0]   dout,
+    output reg dout_v
     );
         
     reg [0:DATA_WIDTH] memory [FIFO_DEPTH:0];
@@ -32,15 +32,15 @@ module D_FIFO
             write_pointer <= 5'b0;
             read_pointer <= 5'b0;
             num_data = 0;
-            io_dout <= 32'b0;
-            io_dout_v <= 1'b0;	
+            dout <= 32'b0;
+            dout_v <= 1'b0;	
         end 
 
-        if  (io_dout_r)
-            io_dout_v <= 1'b0;
+        if  (dout_r)
+            dout_v <= 1'b0;
 
         if (~full & wr_en) begin 
-            memory[write_pointer] <= io_din;
+            memory[write_pointer] <= din;
             num_data = num_data + 1;
                     
             if (write_pointer == FIFO_DEPTH) 
@@ -51,8 +51,8 @@ module D_FIFO
         
         if (~empty & rd_en) begin
             
-            io_dout <= memory[read_pointer];
-            io_dout_v <= 1'b1;
+            dout <= memory[read_pointer];
+            dout_v <= 1'b1;
             num_data = num_data - 1;
 
             if (read_pointer == FIFO_DEPTH) 
@@ -73,8 +73,8 @@ module D_FIFO
             empty <= 1'b0;
     end 
 
-assign wr_en = io_din_v & (~full);
-assign rd_en = io_dout_r & (~empty);
-assign io_din_r = (~full);
+assign wr_en = din_v & (~full);
+assign rd_en = dout_r & (~empty);
+assign din_r = (~full);
 
 endmodule

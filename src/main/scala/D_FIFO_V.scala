@@ -44,7 +44,7 @@ class D_FIFO_V
     extends BlackBox(Map("DATA_WIDTH" -> DATA_WIDTH, "FIFO_DEPTH" -> FIFO_DEPTH)) with HasBlackBoxResource{ 
     val io = IO(new Bundle {
         // Inputs 
-        val clock = Input(Clock())
+        val clock = Input(Bool())
         val reset = Input(Bool())
         val din = Input(SInt(DATA_WIDTH.W))  
         val din_v = Input(Bool())
