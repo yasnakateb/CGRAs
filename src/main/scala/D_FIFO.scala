@@ -31,7 +31,7 @@
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
 
-
+/*
 import chisel3._
 import chisel3.util._
 
@@ -79,13 +79,13 @@ object D_FIFOMain extends App {
     (new chisel3.stage.ChiselStage).emitVerilog(new D_FIFO(32, 32), Array("--target-dir", "generated"))
 }
 
+*/
 
 
 
 
 
 
-/*
 
 import chisel3._
 import chisel3.util._
@@ -188,4 +188,4 @@ object D_FIFOMain extends App {
     (new chisel3.stage.ChiselStage).emitVerilog(new D_FIFO(32, 32), Array("--target-dir", "generated"))
 }
 
-*/
+
