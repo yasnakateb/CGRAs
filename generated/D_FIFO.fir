@@ -1,96 +1,38 @@
 circuit D_FIFO :
+  extmodule D_FIFO_V :
+    input clock : Clock
+    input reset : UInt<1>
+    input din : SInt<32>
+    input din_v : UInt<1>
+    input dout_r : UInt<1>
+    output din_r : UInt<1>
+    output dout : SInt<32>
+    output dout_v : UInt<1>
+    defname = D_FIFO_V
+    parameter DATA_WIDTH = 32
+    parameter FIFO_DEPTH = 32
+
   module D_FIFO :
     input clock : Clock
     input reset : UInt<1>
     output io : { flip din : SInt<32>, flip din_v : UInt<1>, flip dout_r : UInt<1>, din_r : UInt<1>, dout : SInt<32>, dout_v : UInt<1>}
 
-    reg cntWrite : UInt<5>, clock with :
-      reset => (reset, UInt<5>("h0")) @[D_FIFO.scala 104:27]
-    reg cntRead : UInt<5>, clock with :
-      reset => (reset, UInt<5>("h0")) @[D_FIFO.scala 105:26]
-    reg cntData : UInt<6>, clock with :
-      reset => (reset, UInt<6>("h0")) @[D_FIFO.scala 106:26]
-    smem mem : SInt<32> [32] @[D_FIFO.scala 108:26]
-    wire wen : UInt<1> @[D_FIFO.scala 110:19]
-    wire ren : UInt<1> @[D_FIFO.scala 111:19]
-    wire empty : UInt<1> @[D_FIFO.scala 114:21]
-    wire full : UInt<1> @[D_FIFO.scala 115:20]
-    node _T = not(full) @[D_FIFO.scala 118:16]
-    node _T_1 = and(wen, _T) @[D_FIFO.scala 118:14]
-    when _T_1 : @[D_FIFO.scala 118:23]
-      node _T_2 = sub(UInt<6>("h20"), UInt<1>("h1")) @[D_FIFO.scala 119:40]
-      node _T_3 = tail(_T_2, 1) @[D_FIFO.scala 119:40]
-      node _T_4 = eq(cntWrite, _T_3) @[D_FIFO.scala 119:23]
-      when _T_4 : @[D_FIFO.scala 119:47]
-        cntWrite <= UInt<1>("h0") @[D_FIFO.scala 120:18]
-      else :
-        node _cntWrite_T = add(cntWrite, UInt<1>("h1")) @[D_FIFO.scala 122:30]
-        node _cntWrite_T_1 = tail(_cntWrite_T, 1) @[D_FIFO.scala 122:30]
-        cntWrite <= _cntWrite_T_1 @[D_FIFO.scala 122:18]
-    node _T_5 = not(empty) @[D_FIFO.scala 127:16]
-    node _T_6 = and(ren, _T_5) @[D_FIFO.scala 127:14]
-    when _T_6 : @[D_FIFO.scala 127:24]
-      node _T_7 = sub(UInt<6>("h20"), UInt<1>("h1")) @[D_FIFO.scala 128:39]
-      node _T_8 = tail(_T_7, 1) @[D_FIFO.scala 128:39]
-      node _T_9 = eq(cntRead, _T_8) @[D_FIFO.scala 128:22]
-      when _T_9 : @[D_FIFO.scala 128:46]
-        cntRead <= UInt<1>("h0") @[D_FIFO.scala 129:21]
-      else :
-        node _cntRead_T = add(cntRead, UInt<1>("h1")) @[D_FIFO.scala 131:32]
-        node _cntRead_T_1 = tail(_cntRead_T, 1) @[D_FIFO.scala 131:32]
-        cntRead <= _cntRead_T_1 @[D_FIFO.scala 131:21]
-    node _T_10 = not(full) @[D_FIFO.scala 136:17]
-    node _T_11 = and(wen, _T_10) @[D_FIFO.scala 136:15]
-    node _T_12 = not(empty) @[D_FIFO.scala 136:34]
-    node _T_13 = and(ren, _T_12) @[D_FIFO.scala 136:32]
-    node _T_14 = not(_T_13) @[D_FIFO.scala 136:26]
-    node _T_15 = and(_T_11, _T_14) @[D_FIFO.scala 136:24]
-    when _T_15 : @[D_FIFO.scala 136:43]
-      node _cntData_T = add(cntData, UInt<1>("h1")) @[D_FIFO.scala 137:28]
-      node _cntData_T_1 = tail(_cntData_T, 1) @[D_FIFO.scala 137:28]
-      cntData <= _cntData_T_1 @[D_FIFO.scala 137:17]
-    else :
-      node _T_16 = not(full) @[D_FIFO.scala 138:28]
-      node _T_17 = and(wen, _T_16) @[D_FIFO.scala 138:26]
-      node _T_18 = not(_T_17) @[D_FIFO.scala 138:20]
-      node _T_19 = not(empty) @[D_FIFO.scala 138:44]
-      node _T_20 = and(ren, _T_19) @[D_FIFO.scala 138:42]
-      node _T_21 = and(_T_18, _T_20) @[D_FIFO.scala 138:35]
-      when _T_21 : @[D_FIFO.scala 138:53]
-        node _cntData_T_2 = sub(cntData, UInt<1>("h1")) @[D_FIFO.scala 139:28]
-        node _cntData_T_3 = tail(_cntData_T_2, 1) @[D_FIFO.scala 139:28]
-        cntData <= _cntData_T_3 @[D_FIFO.scala 139:17]
-    node _T_22 = not(full) @[D_FIFO.scala 143:16]
-    node _T_23 = and(wen, _T_22) @[D_FIFO.scala 143:14]
-    when _T_23 : @[D_FIFO.scala 143:23]
-      write mport MPORT = mem[cntWrite], clock
-      MPORT <= io.din
-    wire _io_dout_WIRE : UInt @[D_FIFO.scala 146:24]
-    _io_dout_WIRE is invalid @[D_FIFO.scala 146:24]
-    when UInt<1>("h1") : @[D_FIFO.scala 146:24]
-      _io_dout_WIRE <= cntRead @[D_FIFO.scala 146:24]
-      node _io_dout_T = or(_io_dout_WIRE, UInt<5>("h0")) @[D_FIFO.scala 146:24]
-      node _io_dout_T_1 = bits(_io_dout_T, 4, 0) @[D_FIFO.scala 146:24]
-      read mport io_dout_MPORT = mem[_io_dout_T_1], clock @[D_FIFO.scala 146:24]
-    io.dout <= io_dout_MPORT @[D_FIFO.scala 146:13]
-    node _io_dout_v_T = not(empty) @[D_FIFO.scala 149:18]
-    io.dout_v <= _io_dout_v_T @[D_FIFO.scala 149:15]
-    node _T_24 = eq(cntData, UInt<6>("h20")) @[D_FIFO.scala 159:18]
-    when _T_24 : @[D_FIFO.scala 159:36]
-      full <= UInt<1>("h1") @[D_FIFO.scala 160:14]
-    else :
-      full <= UInt<1>("h0") @[D_FIFO.scala 162:14]
-    node _T_25 = eq(cntData, UInt<1>("h0")) @[D_FIFO.scala 164:18]
-    when _T_25 : @[D_FIFO.scala 164:27]
-      empty <= UInt<1>("h1") @[D_FIFO.scala 165:15]
-    else :
-      empty <= UInt<1>("h0") @[D_FIFO.scala 167:15]
-    node _io_din_r_T = not(full) @[D_FIFO.scala 170:17]
-    io.din_r <= _io_din_r_T @[D_FIFO.scala 170:14]
-    node _wen_T = not(full) @[D_FIFO.scala 171:23]
-    node _wen_T_1 = and(io.din_v, _wen_T) @[D_FIFO.scala 171:21]
-    wen <= _wen_T_1 @[D_FIFO.scala 171:9]
-    node _ren_T = not(empty) @[D_FIFO.scala 172:24]
-    node _ren_T_1 = and(io.dout_r, _ren_T) @[D_FIFO.scala 172:22]
-    ren <= _ren_T_1 @[D_FIFO.scala 172:9]
+    inst fifo of D_FIFO_V @[D_FIFO.scala 60:22]
+    fifo.dout_v is invalid
+    fifo.dout is invalid
+    fifo.din_r is invalid
+    fifo.dout_r is invalid
+    fifo.din_v is invalid
+    fifo.din is invalid
+    fifo.reset is invalid
+    fifo.clock is invalid
+    fifo.clock <= clock @[D_FIFO.scala 62:19]
+    node _fifo_io_reset_T = bits(reset, 0, 0) @[D_FIFO.scala 63:28]
+    fifo.reset <= _fifo_io_reset_T @[D_FIFO.scala 63:19]
+    fifo.din <= io.din @[D_FIFO.scala 65:17]
+    fifo.din_v <= io.din_v @[D_FIFO.scala 66:19]
+    fifo.dout_r <= io.dout_r @[D_FIFO.scala 67:20]
+    io.din_r <= fifo.din_r @[D_FIFO.scala 70:14]
+    io.dout <= fifo.dout @[D_FIFO.scala 71:14]
+    io.dout_v <= fifo.dout_v @[D_FIFO.scala 72:15]
 
