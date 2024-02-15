@@ -46,7 +46,7 @@ class D_FIFO_Test extends AnyFlatSpec with ChiselScalatestTester {
 
             dut.clock.step(1)
 
-            for (i <- 0 to 5) {
+            for (i <- 0 to 15) {
                 dut.io.din.poke(i.S) 
                 dut.io.din_v.poke(true.B)
                 dut.clock.step(1)
