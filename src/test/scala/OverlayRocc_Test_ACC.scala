@@ -38,7 +38,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class OverlayRocc_Test_ACC extends AnyFlatSpec with ChiselScalatestTester {
     "OverlayRocc_Test_ACC test" should "pass" in {
-        test(new OverlayRocc(32, 6, 6, 32)) { dut =>
+        test(new OverlayRocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
             
             // Note: Changing the cell_config 3 => Removing the feedback loop
 
@@ -290,6 +290,10 @@ class OverlayRocc_Test_ACC extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.clock.step(1)
 
+            dut.io.cell_config.poke(0.U)
+
+
+
 
             for (i <- 1 to 16) {
                 val c4 = i.toString()
@@ -312,7 +316,7 @@ class OverlayRocc_Test_ACC extends AnyFlatSpec with ChiselScalatestTester {
                 //ACC without loop
                 //dut.clock.step(i)
                 // ACC with loop
-                dut.clock.step(i)
+                dut.clock.step(1)
                 dut.io.data_in_valid.poke("b000000".U)
                 dut.clock.step(10)
             }

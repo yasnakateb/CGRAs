@@ -47,13 +47,13 @@ class D_FIFO_V
         // Inputs 
         val clock = Input(Clock())
         val reset = Input(Bool())
-        val din = Input(UInt(DATA_WIDTH.W))  
+        val din = Input(SInt(DATA_WIDTH.W))  
         val din_v = Input(Bool())
         val dout_r = Input(Bool())
 
         // Outputs
         val din_r = Output(Bool())
-        val dout = Output(UInt(DATA_WIDTH.W))  
+        val dout = Output(SInt(DATA_WIDTH.W))  
         val dout_v = Output(Bool()) 
     })
 

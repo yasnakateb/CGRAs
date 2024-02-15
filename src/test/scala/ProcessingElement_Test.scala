@@ -49,7 +49,7 @@ class ProcessingElement_Test extends AnyFlatSpec with ChiselScalatestTester {
     "ProcessingElement_Test test" should "pass" in {
         // Test code for summation with positive numbers
 
-        test(new ProcessingElement(DATA_WIDTH, FIFO_DEPTH)) { dut =>
+        test(new ProcessingElement(DATA_WIDTH, FIFO_DEPTH)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
             
             var number_of_tests = 150
 

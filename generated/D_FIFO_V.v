@@ -31,8 +31,8 @@ module D_FIFO_V
         if (reset) begin 
             empty <= 1'b1;
             full  <= 1'b0;
-            write_pointer <= 5'b0;
-            read_pointer <= 5'b0;
+            write_pointer = 5'b0;
+            read_pointer = 5'b0;
             num_data = 0;
             dout <= 32'b0;
             dout_v <= 1'b0;	

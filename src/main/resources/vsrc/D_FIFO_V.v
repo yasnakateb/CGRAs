@@ -15,7 +15,7 @@ module D_FIFO_V
     output reg dout_v
     );
         
-    reg [0:DATA_WIDTH-1] memory [FIFO_DEPTH-1:0];
+    reg [DATA_WIDTH-1:0] memory [FIFO_DEPTH-1:0];
 
     reg [4:0] write_pointer = 5'b0;
     reg [4:0] read_pointer = 5'b0;
