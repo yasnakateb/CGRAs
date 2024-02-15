@@ -23,7 +23,7 @@ int main (){
   for (int i = 0; i < 100; i++) {
         b[i] = i;
         c[i] = 2;
-        sum[i] = 1;
+        sum[i] = i;
         
   }
 

@@ -1,3 +1,5 @@
+// Original 
+
 module D_FIFO_V
     
     #(parameter DATA_WIDTH = 32, FIFO_DEPTH = 32)
@@ -5,11 +7,11 @@ module D_FIFO_V
     (
     input                       clock,
     input                       reset,
-    input  [DATA_WIDTH -1:0]       din,
+    input  [(DATA_WIDTH -1):0]    din,
     input                       din_v,
     input                       dout_r,
     output                      din_r,
-    output reg [DATA_WIDTH-1:0]   dout,
+    output reg [(DATA_WIDTH-1):0] dout,
     output reg dout_v
     );
         
