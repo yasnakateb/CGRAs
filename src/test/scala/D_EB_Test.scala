@@ -38,12 +38,40 @@ import org.scalatest.flatspec.AnyFlatSpec
 class D_EB_Test extends AnyFlatSpec with ChiselScalatestTester {
     "D_EB_Test test" should "pass" in {
         test(new D_EB(32)) { dut =>
-            var din = 10.S  
+            var din = 0.S  
             var dout_r = false.B 
             var din_v = false.B 
             dut.io.din.poke(din)
             dut.io.din_v.poke(din_v)
             dut.io.dout_r.poke(dout_r)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.io.din.poke(1.S)
+            dut.io.din_v.poke(true.B)
+            dut.io.dout_r.poke(true.B)
+            dut.clock.step(1)
+            dut.io.din.poke(2.S)
+            dut.clock.step(1)
+            dut.io.din.poke(3.S)
+            dut.clock.step(1)
+            dut.io.din.poke(4.S)
+            dut.clock.step(1)
+            dut.io.din.poke(5.S)
+            dut.clock.step(1)
+            dut.io.din.poke(6.S)
+            dut.clock.step(1)
+            dut.io.din.poke(7.S)
+            dut.clock.step(1)
+            dut.io.din.poke(0.S)
+            dut.io.din_v.poke(false.B)
+            
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+           
+
+            /*
             ////////////////////////////////////////////////////////////////
             // Test 1 
             ////////////////////////////////////////////////////////////////
@@ -125,6 +153,7 @@ class D_EB_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("Ap: " + dut.io.din_r.peek().toString)
             println("*************************************")
             println("*************************************") 
+            */
         }
     } 
 }

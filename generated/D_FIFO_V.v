@@ -1,19 +1,19 @@
-module D_FIFO
+module D_FIFO_V
     
     #(parameter DATA_WIDTH = 32, FIFO_DEPTH = 32)
     
     (
     input                       clock,
     input                       reset,
-    input  [DATA_WIDTH:0]       din,
+    input  [DATA_WIDTH -1:0]       din,
     input                       din_v,
     input                       dout_r,
     output                      din_r,
-    output reg [DATA_WIDTH:0]   dout,
+    output reg [DATA_WIDTH-1:0]   dout,
     output reg dout_v
     );
         
-    reg [0:DATA_WIDTH] memory [FIFO_DEPTH:0];
+    reg [0:DATA_WIDTH-1] memory [FIFO_DEPTH-1:0];
 
     reg [4:0] write_pointer = 5'b0;
     reg [4:0] read_pointer = 5'b0;
@@ -62,7 +62,7 @@ module D_FIFO
             
         end
 
-        if (num_data == FIFO_DEPTH)
+        if (num_data == FIFO_DEPTH-1)
             full <= 1'b1;
         else
             full <= 1'b0;

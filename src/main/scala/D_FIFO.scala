@@ -34,7 +34,7 @@
 
 import chisel3._
 import chisel3.util._
-
+import chisel3.stage.PrintFullStackTraceAnnotation
 
 class D_FIFO
     (
@@ -46,21 +46,21 @@ class D_FIFO
  
       
         // Inputs 
-        val din = Input(SInt(DATA_WIDTH.W))  
+        val din = Input(UInt(DATA_WIDTH.W))  
         val din_v = Input(Bool())
         val dout_r = Input(Bool())
 
         // Outputs
         val din_r = Output(Bool())
-        val dout = Output(SInt(DATA_WIDTH.W))  
+        val dout = Output(UInt(DATA_WIDTH.W))  
         val dout_v = Output(Bool()) 
     })
 
 
     val fifo = Module(new D_FIFO_V(DATA_WIDTH, FIFO_DEPTH))
 
-    fifo.io.clock := clock.asBool 
-    fifo.io.reset := reset.asBool //|| rocc.io.clear
+    fifo.io.clock := clock
+    fifo.io.reset := reset.asBool 
 
     fifo.io.din := io.din 
     fifo.io.din_v := io.din_v

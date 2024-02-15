@@ -2,11 +2,11 @@ circuit D_FIFO :
   extmodule D_FIFO_V :
     input clock : Clock
     input reset : UInt<1>
-    input din : SInt<32>
+    input din : UInt<32>
     input din_v : UInt<1>
     input dout_r : UInt<1>
     output din_r : UInt<1>
-    output dout : SInt<32>
+    output dout : UInt<32>
     output dout_v : UInt<1>
     defname = D_FIFO_V
     parameter DATA_WIDTH = 32
@@ -15,7 +15,7 @@ circuit D_FIFO :
   module D_FIFO :
     input clock : Clock
     input reset : UInt<1>
-    output io : { flip din : SInt<32>, flip din_v : UInt<1>, flip dout_r : UInt<1>, din_r : UInt<1>, dout : SInt<32>, dout_v : UInt<1>}
+    output io : { flip din : UInt<32>, flip din_v : UInt<1>, flip dout_r : UInt<1>, din_r : UInt<1>, dout : UInt<32>, dout_v : UInt<1>}
 
     inst fifo of D_FIFO_V @[D_FIFO.scala 60:22]
     fifo.dout_v is invalid
