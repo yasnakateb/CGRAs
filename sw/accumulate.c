@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define LOOP_SIZE 100
+#define LOOP_SIZE 4
 
 void accumulate(int *a, int *b, int *c, int *sum) {
   
@@ -17,8 +17,8 @@ int main (){
   
   int a[100]={0};
   int b[100];
-  int c[100];
-  int sum = 0;
+  int c[100]={2};
+  int sum = 1;
 
   for (int i = 0; i < 100; i++) {
         b[i] = i;

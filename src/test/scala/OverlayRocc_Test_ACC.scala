@@ -39,10 +39,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 class OverlayRocc_Test_ACC extends AnyFlatSpec with ChiselScalatestTester {
     "OverlayRocc_Test_ACC test" should "pass" in {
         test(new OverlayRocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
-            
-            // Note: Changing the cell_config 3 => Removing the feedback loop
-
-
             ///////////////////////////////////////////
             // Accumulate
             ///////////////////////////////////////////
@@ -54,6 +50,7 @@ class OverlayRocc_Test_ACC extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
 
             var cell_config: UInt = 0.U 
+
             /*
             // Note: Original 
             val source = Source.fromFile("src/test/scala/Bitstreams/acc.txt")
@@ -206,12 +203,9 @@ class OverlayRocc_Test_ACC extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
-            /////////////////////////////////////
-            /////////////////////////////////////
-            /////////////////////////////////////
-            cell_config = "b100001100001000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000100000000001010000001000000001010000000001001100011001".U
-            //cell_config = "b100001100000000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000100000000001010000001000000001010000000001001100011001".U
-
+            // Changing the iteration source            
+            //cell_config = "b100001100001000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000100000000001010000001000000001010000000001001100011001".U
+            cell_config = "b100001100001000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000100000000001010000001000000001010000000001001100011001".U
             dut.io.cell_config.poke(cell_config)
 
             dut.clock.step(1)
@@ -285,48 +279,36 @@ class OverlayRocc_Test_ACC extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             cell_config = "b100010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000010000000010000000000011011100000000".U
             dut.io.cell_config.poke(cell_config)
-
             dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-
-            dut.io.cell_config.poke(0.U)
-
-
-
+            
+            
+            val din1 = BigInt("00000000"  + "00000001" + "00000002"+ "00000000" + "00000000" + "00000000" ,16).S
+            dut.io.data_in.poke(din1)
+            dut.io.data_in_valid.poke("b011000".U)
+            dut.clock.step(30)
+            dut.io.data_in_valid.poke("b000000".U)
+            
 
             for (i <- 1 to 16) {
-                val c4 = i.toString()
-                val c5 = i.toString()
-                //val din = BigInt("00000001"  + "00000001" + "00000001"+ "00000000" + "00000000" + f"$i%08d" ,16).S
-                // ACC without loop
-                //val din = BigInt("00000000"  + "00000001" + "00000002"+ "00000000" + "00000000" + f"$i%08X" ,16).S
-
-            
-                // ACC with loop
-
             // ------------------------------------------------------------------------------------------------
             // |                 |    C5     |    C4      |      C3   |     C2     |     C1     |      C0     |
             // ------------------------------------------------------------------------------------------------
-                val din = BigInt("00000000"  + "00000001" + "00000002"+ "00000000" + "00000000" + f"$i%08X" ,16).S
-
-        
-                dut.io.data_in.poke(din)
-                dut.io.data_in_valid.poke("b111001".U)
-                //ACC without loop
-                //dut.clock.step(i)
-                // ACC with loop
+            // ------------------------------------------------------------------------------------------------
+            // |                 |    a      |     x      |      c    |     -      |     -       |      b     |
+            // ------------------------------------------------------------------------------------------------
+                val din2 = BigInt("00000000"  + "00000000" + "00000000"+ "00000000" + "00000000" + f"$i%08X" ,16).S
+                dut.io.data_in.poke(din2)
+                dut.io.data_in_valid.poke("b100001".U)
                 dut.clock.step(1)
                 dut.io.data_in_valid.poke("b000000".U)
                 dut.clock.step(10)
             }
 
-            println("Overlay******************************")
-            println("*************************************")
-            for( i <- 0 to 200){
+            // Finish 
+            for( i <- 0 to 50){
                 dut.clock.step(1)
-            }
-            
+            } 
+            println("End of the simulation")       
         }
     } 
 }
