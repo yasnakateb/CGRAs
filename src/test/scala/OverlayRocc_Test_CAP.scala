@@ -38,7 +38,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class OverlayRocc_Test_CAP extends AnyFlatSpec with ChiselScalatestTester {
     "OverlayRocc_CAP test" should "pass" in {
-        test(new OverlayRocc(32, 6, 6, 32)) { dut =>
+        test(new OverlayRocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
             
             ///////////////////////////////////////////
             // CAP
@@ -223,10 +223,11 @@ class OverlayRocc_Test_CAP extends AnyFlatSpec with ChiselScalatestTester {
 
 
             for (i <- 1 to 16) {
-                val c4 = i.toString()
-                val c5 = i.toString()
                 // ------------------------------------------------------------------------------------------------
-                // |                 |    C5     |    C4      |      C3   |     C2     |     C1     |      C0     |
+                // |                 |    C5     |    C4      |      C3    |     C2     |     C1     |      C0     |
+                // ------------------------------------------------------------------------------------------------
+                // ------------------------------------------------------------------------------------------------
+                // |                 |    b      |      -      |      -    |     -      |     -      |      a      |
                 // ------------------------------------------------------------------------------------------------
                 din = BigInt(f"$i%08X"  + "00000000000000000000000000000000" + "00000020"  ,16).S   
                 dut.io.data_in.poke(din)
