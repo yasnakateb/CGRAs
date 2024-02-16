@@ -40,8 +40,6 @@ import scala.io.Source
 class OverlayRocc_Test_SUM extends AnyFlatSpec with ChiselScalatestTester {
     "OverlayRocc_Test_SUM test" should "pass" in {
         test(new OverlayRocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation))  { dut =>
-            
-
             ///////////////////////////////////////////
             // SUM
             ///////////////////////////////////////////
@@ -86,7 +84,7 @@ class OverlayRocc_Test_SUM extends AnyFlatSpec with ChiselScalatestTester {
                 // ------------------------------------------------------------------------------------------------
                 // |                 |    a      |    b       |      -    |     -      |     -      |      -      |
                 // ------------------------------------------------------------------------------------------------
-                val din = BigInt((i+2).formatted("%08X")+ f"$i%08X" + "00000000000000000000000000000000",16).S
+                val din = BigInt((i+1).formatted("%08X")+ f"$i%08X" + "00000000000000000000000000000000",16).S
                 dut.io.data_in.poke(din)
                 dut.io.data_in_valid.poke("b110000".U)
                 dut.clock.step(i)
