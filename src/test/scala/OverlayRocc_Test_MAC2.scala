@@ -38,15 +38,16 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class OverlayRocc_Test_MAC2 extends AnyFlatSpec with ChiselScalatestTester {
     "OverlayRocc_Test_MAC2 test" should "pass" in {
-        test(new OverlayRocc(32, 6, 6, 32)) { dut =>
-            
+        test(new OverlayRocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
+            ///////////////////////////////////////////
+            // MAC2
+            ///////////////////////////////////////////
             
             var data_in_valid = "b000000".U 
             var data_out_ready = "b111111".U 
             dut.io.data_in_valid.poke(data_in_valid)
             dut.io.data_out_ready.poke(data_out_ready)
             dut.clock.step(1)
-
 
             var cell_config: UInt = 0.U 
             /*
@@ -62,14 +63,6 @@ class OverlayRocc_Test_MAC2 extends AnyFlatSpec with ChiselScalatestTester {
             }
             source.close()
             */
-
-
-
-            ///////////////////////////////////////////
-            // MAC 2
-            ///////////////////////////////////////////
-
-            // Note: Changing the last cell_config => Removing the feedback loop ========> Did not work with feedback loop
 
             cell_config = "b100011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000100000000".U
             dut.io.cell_config.poke(cell_config)
@@ -176,35 +169,46 @@ class OverlayRocc_Test_MAC2 extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
+           
             // Changed 
-            cell_config = "b100101100000000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000010000000000000000000000000000000010011".U
+            cell_config = "b100101100001000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000010000000000000000000000000000000010011".U 
+             
+            //cell_config = "b100101100000000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000010000000000000000000000000000000010011".U
             dut.io.cell_config.poke(cell_config)
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
+
             // Changed 
-            cell_config = "b1100010100000000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U
-            dut.io.cell_config.poke(cell_config)
-            dut.clock.step(1)
-            dut.clock.step(1)
-            dut.clock.step(1)
-
-
-            val din = BigInt("00000003" + "00000003" + "00000001"+ "00000001" + "00000001" + "00000001" ,16).S
-                
-                dut.io.data_in.poke(din)
-                dut.io.data_in_valid.poke("b111111".U)
-                dut.clock.step(1)
-                dut.io.data_in_valid.poke("b000000".U)
-                dut.clock.step(10)
-
-
-            println("Overlay******************************")
-            println("*************************************")
-            for( i <- 0 to 100){
-                dut.clock.step(1)
-            }
+            cell_config = "b100010100010000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U
             
+            //cell_config = "b1100010100000000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U
+            dut.io.cell_config.poke(cell_config)
+            dut.clock.step(1)
+            dut.clock.step(1)
+            dut.clock.step(1)
+
+            for (i <- 1 to 16) {
+                // ------------------------------------------------------------------------------------------------
+                // |                 |    C5     |    C4      |      C3   |     C2     |     C1     |      C0     |
+                // ------------------------------------------------------------------------------------------------
+                // ------------------------------------------------------------------------------------------------
+                // |                 |    y      |     x      |      d    |     c      |     a       |      b     |
+                // ------------------------------------------------------------------------------------------------
+                val din = BigInt("00000003" + "00000003" + "00000001"+ "00000001" + "00000001" + "00000001" ,16).S
+                    
+                    dut.io.data_in.poke(din)
+                    dut.io.data_in_valid.poke("b111111".U)
+                    dut.clock.step(1)
+                    dut.io.data_in_valid.poke("b000000".U)
+                    dut.clock.step(10)
+            }
+
+            // Finish 
+            for( i <- 0 to 10){
+                dut.clock.step(1)
+            } 
+            println("End of the simulation")         
         }
     } 
 }

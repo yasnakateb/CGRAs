@@ -38,15 +38,11 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class OverlayRocc_Test_MAC extends AnyFlatSpec with ChiselScalatestTester {
     "OverlayRocc_Test_MAC test" should "pass" in {
-        test(new OverlayRocc(32, 6, 6, 32)) { dut =>
-               
+        test(new OverlayRocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>  
             ///////////////////////////////////////////
             // MAC
             ///////////////////////////////////////////
 
-            // Note: Changing the last cell_config => Removing the feedback loop
-
-            
             var data_in_valid = "b000000".U 
             var data_out_ready = "b111111".U 
             dut.io.data_in_valid.poke(data_in_valid)
@@ -85,7 +81,7 @@ class OverlayRocc_Test_MAC extends AnyFlatSpec with ChiselScalatestTester {
             //cell_config = "b100010100000000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000001000000000000010000000000000000000000011000".U 
             
             // With feedback loop
-            cell_config = "b100010100001000000000110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000001000000000000010000000000000000000000011000".U 
+            cell_config = "b100010100001000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000001000000000000010000000000000000000000011000".U 
 
 
             dut.io.cell_config.poke(cell_config)
@@ -108,12 +104,11 @@ class OverlayRocc_Test_MAC extends AnyFlatSpec with ChiselScalatestTester {
                 dut.clock.step(10)
             }
 
-            println("Overlay******************************")
-            println("*************************************")
-            for( i <- 0 to 100){
+            // Finish 
+            for( i <- 0 to 10){
                 dut.clock.step(1)
-            }
- 
+            } 
+            println("End of the simulation")         
         }
     } 
 }
