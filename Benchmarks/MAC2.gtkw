@@ -1,0 +1,76 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Fri Feb 16 13:59:54 2024
+[*]
+[dumpfile] "/home/yasna/Work_Space/CGRAs/test_run_dir/OverlayRocc_Test_MAC2_test_should_pass/OverlayRocc.vcd"
+[dumpfile_mtime] "Fri Feb 16 13:54:52 2024"
+[dumpfile_size] 2835440
+[savefile] "/home/yasna/Work_Space/CGRAs/Benchmarks/MAC2.gtkw"
+[timestart] 193
+[size] 1920 950
+[pos] -138 -138
+*-4.530962 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.OverlayRocc.
+[sst_width] 577
+[signals_width] 174
+[sst_expanded] 1
+[sst_vpaned_height] 437
+@800205
+-a
+@25
+TOP.OverlayRocc.MIDDLENORTH_OV.io_north_din[31:0]
+TOP.OverlayRocc.MIDDLENORTH_OV.io_north_din_v
+@1000205
+-a
+@800205
+-b
+@25
+TOP.OverlayRocc.NORTHWEST_OV.io_north_din[31:0]
+TOP.OverlayRocc.NORTHWEST_OV.io_north_din_v
+@1000205
+-b
+@800205
+-c
+@25
+TOP.OverlayRocc.MIDDLENORTH_OV_1.io_north_din[31:0]
+TOP.OverlayRocc.MIDDLENORTH_OV_1.io_north_din_v
+@1000205
+-c
+@800205
+-d
+@25
+TOP.OverlayRocc.MIDDLENORTH_OV_2.io_north_din[31:0]
+TOP.OverlayRocc.MIDDLENORTH_OV_2.io_north_din_v
+@1000205
+-d
+@800205
+-x
+@25
+TOP.OverlayRocc.MIDDLENORTH_OV_3.io_north_din[31:0]
+TOP.OverlayRocc.MIDDLENORTH_OV_3.io_north_din_v
+@1000205
+-x
+@800205
+-y
+@25
+TOP.OverlayRocc.NORTHEAST_OV.io_north_din[31:0]
+TOP.OverlayRocc.NORTHEAST_OV.io_north_din_v
+@1000205
+-y
+@800205
+-X output
+@25
+TOP.OverlayRocc.MIDDLEEAST_OV.io_east_dout[31:0]
+TOP.OverlayRocc.MIDDLEEAST_OV.io_east_dout_v
+@1000205
+-X output
+@800205
+-Y output 
+@25
+TOP.OverlayRocc.NORTHEAST_OV.io_east_dout[31:0]
+TOP.OverlayRocc.NORTHEAST_OV.io_east_dout_v
+@1000205
+-Y output 
+[pattern_trace] 1
+[pattern_trace] 0
