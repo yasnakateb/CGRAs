@@ -76,7 +76,9 @@ class FU
     val dout_reg = RegInit(0.S(DATA_WIDTH.W))
     val count = RegInit(0.U(16.W))
     val loaded = RegInit(0.U(1.W))
-    val valid = RegInit(0.U(1.W))
+
+    //val valid = RegInit(0.U(1.W))
+    val valid = Wire(Bool()) 
 
     val ALU = Module (new ALU(DATA_WIDTH, OP_WIDTH))
     ALU.io.din_1 := alu_din_1
@@ -116,7 +118,9 @@ class FU
     
     when (io.dout_r === 1.U) {
         valid := 0.U           
-    }  
+    }.otherwise{
+        valid := 1.U 
+    }
     // Conditions 
     when (io.din_v === 1.U && io.dout_r === 1.U && 
             (io.loop_source === STATE_1 || io.loop_source === STATE_2)) 
@@ -125,7 +129,7 @@ class FU
         count := count + 1.U                    
     }
     // Fix io.iterations_reset (verilog vs vhdl)
-    when (count === io.iterations_reset - 1.U && 
+    when (count === io.iterations_reset && 
             (io.loop_source === STATE_1 || io.loop_source === STATE_2) && 
             io.dout_r === 1.U)
         {
