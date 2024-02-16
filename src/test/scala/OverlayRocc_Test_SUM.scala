@@ -39,7 +39,7 @@ import scala.io.Source
 
 class OverlayRocc_Test_SUM extends AnyFlatSpec with ChiselScalatestTester {
     "OverlayRocc_Test_SUM test" should "pass" in {
-        test(new OverlayRocc(32, 6, 6, 32)) { dut =>
+        test(new OverlayRocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation))  { dut =>
             
 
             ///////////////////////////////////////////
@@ -54,7 +54,7 @@ class OverlayRocc_Test_SUM extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
 
             var cell_config: UInt = 0.U 
-            /*
+            
             val source = Source.fromFile("src/test/scala/Bitstreams/sum.txt")
             for (line <- source.getLines()){
                 
@@ -65,9 +65,8 @@ class OverlayRocc_Test_SUM extends AnyFlatSpec with ChiselScalatestTester {
                 dut.clock.step(1)
             }
             source.close()
-            */
             
-            
+            /*
             cell_config = "b10001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000_0100_0000_0000_0000_0001_0000_0000".U 
             dut.io.cell_config.poke(cell_config)
 
@@ -78,15 +77,16 @@ class OverlayRocc_Test_SUM extends AnyFlatSpec with ChiselScalatestTester {
             cell_config = "b100010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000010000000000000001000000000000000000000000011".U 
             dut.io.cell_config.poke(cell_config)
             dut.clock.step(1)
+            */
             
-
             for (i <- 1 to 16) {
-                val c4 = i.toString()
-                val c5 = i.toString()
                 // ------------------------------------------------------------------------------------------------
                 // |                 |    C5     |    C4      |      C3   |     C2     |     C1     |      C0     |
                 // ------------------------------------------------------------------------------------------------
-                val din = BigInt( f"$i%08X" + (2*i).formatted("%08X") + "00000000000000000000000000000000",16).S
+                // ------------------------------------------------------------------------------------------------
+                // |                 |    a      |    b       |      -    |     -      |     -      |      -      |
+                // ------------------------------------------------------------------------------------------------
+                val din = BigInt((i+2).formatted("%08X")+ f"$i%08X" + "00000000000000000000000000000000",16).S
                 dut.io.data_in.poke(din)
                 dut.io.data_in_valid.poke("b110000".U)
                 dut.clock.step(i)
@@ -94,10 +94,11 @@ class OverlayRocc_Test_SUM extends AnyFlatSpec with ChiselScalatestTester {
                 dut.clock.step(5)
             }
             
-            for( i <- 0 to 100){
+            // Finish 
+            for( i <- 0 to 10){
                 dut.clock.step(1)
-            }
-           
+            } 
+            println("End of the simulation")         
         }
     } 
 }

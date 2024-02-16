@@ -34,43 +34,45 @@ module D_FIFO_V
             num_data = 0;
             dout <= 32'b0;
             dout_v <= 1'b0;	
-        end 
+        end else begin
 
-        if  (dout_r)
-            dout_v <= 1'b0;
+            if  (dout_r)
+                dout_v <= 1'b0;
 
-        if (~full & wr_en) begin 
-            memory[write_pointer] <= din;
-            num_data = num_data + 1;
-                    
-            if (write_pointer == FIFO_DEPTH) 
-                write_pointer <= 5'b0;
+            if (~full & wr_en) begin 
+                memory[write_pointer] <= din;
+                num_data = num_data + 1;
+                        
+                if (write_pointer == FIFO_DEPTH) 
+                    write_pointer <= 5'b0;
+                else
+                    write_pointer <= write_pointer + 1;     
+            end
+            
+            if (~empty & rd_en) begin
+                
+                dout <= memory[read_pointer];
+                dout_v <= 1'b1;
+                num_data = num_data - 1;
+                
+                if (read_pointer == FIFO_DEPTH) 
+                    read_pointer <= 0;
+                else
+                    read_pointer <= read_pointer + 1; 
+                
+            end
+
+            if (num_data == FIFO_DEPTH-1)
+                full <= 1'b1;
             else
-                write_pointer <= write_pointer + 1;     
-        end
-        
-        if (~empty & rd_en) begin
-            
-            dout <= memory[read_pointer];
-            dout_v <= 1'b1;
-            num_data = num_data - 1;
-            
-            if (read_pointer == FIFO_DEPTH) 
-                read_pointer <= 0;
+                full <= 1'b0;
+                        
+            if (num_data == 0) 
+                empty <= 1'b1;
             else
-                read_pointer <= read_pointer + 1; 
-            
-        end
+                empty <= 1'b0;
 
-        if (num_data == FIFO_DEPTH-1)
-            full <= 1'b1;
-        else
-            full <= 1'b0;
-                    
-        if (num_data == 0) 
-            empty <= 1'b1;
-        else
-            empty <= 1'b0;
+        end
     end 
 
 assign wr_en = din_v & (~full);
