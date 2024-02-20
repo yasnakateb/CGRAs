@@ -21,7 +21,7 @@ int main (){
   int sum = 1;
 
   for (int i = 0; i < 100; i++) {
-        b[i] = i;
+        b[i] = i+1;
         c[i] = 2;        
   }
 

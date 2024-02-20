@@ -305,7 +305,7 @@ class OverlayRocc_Test_ACC extends AnyFlatSpec with ChiselScalatestTester {
             }
 
             // Finish 
-            for( i <- 0 to 50){
+            for( i <- 0 to 150){
                 dut.clock.step(1)
             } 
             println("End of the simulation")       
