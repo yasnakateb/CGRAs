@@ -18,7 +18,11 @@ void cap(int *a, int *b, int *m) {
 int main (){
 
 
-  int a [SIZE]= {2, 4, 8, 16,32};
+  //int a [SIZE]= {2, 4, 8, 16,32};
+  //int m [SIZE]= {1, 2, 3, 4, 5};
+
+
+  int a [SIZE]= {1, 2, 3, 4, 5};
   int m [SIZE]= {1, 2, 3, 4, 5};
 
   int b [SIZE]= {0, 0, 0, 0, 0};

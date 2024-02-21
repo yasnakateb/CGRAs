@@ -181,6 +181,11 @@ class OverlayRocc_Test_CAP extends AnyFlatSpec with ChiselScalatestTester {
             dut.clock.step(1)
             dut.clock.step(1)
 
+            ///////////////////////////////////////////
+            // Test 1: int a [SIZE]= {2, 4, 8, 16,32};
+            //         int m [SIZE]= {1, 2, 3, 4, 5};
+            ///////////////////////////////////////////
+
 
             var din = BigInt("00000001"  + "00000000000000000000000000000000" + "00000002"  ,16).S    
             dut.io.data_in.poke(din)
@@ -219,20 +224,50 @@ class OverlayRocc_Test_CAP extends AnyFlatSpec with ChiselScalatestTester {
             dut.io.data_in_valid.poke("b000000".U)
             dut.clock.step(10)
 
-            for (i <- 1 to 16) {
-                // ------------------------------------------------------------------------------------------------
-                // |                 |    C5     |    C4      |      C3    |     C2     |     C1     |      C0     |
-                // ------------------------------------------------------------------------------------------------
-                // ------------------------------------------------------------------------------------------------
-                // |                 |    b      |      -      |      -    |     -      |     -      |      a      |
-                // ------------------------------------------------------------------------------------------------
-                din = BigInt(f"$i%08X"  + "00000000000000000000000000000000" + "00000020"  ,16).S   
-                dut.io.data_in.poke(din)
-                dut.io.data_in_valid.poke("b100001".U)
-                dut.clock.step(i)
-                dut.io.data_in_valid.poke("b000000".U)
-                dut.clock.step(5)
-            }
+            
+            ///////////////////////////////////////////
+            // Test 2: int a [SIZE]= {1, 2, 3, 4, 5};
+            //         int m [SIZE]= {1, 2, 3, 4, 5};
+            ///////////////////////////////////////////
+
+
+            din = BigInt("00000001"  + "00000000000000000000000000000000" + "00000001"  ,16).S    
+            dut.io.data_in.poke(din)
+            dut.io.data_in_valid.poke("b100001".U)
+            dut.clock.step(1)
+            dut.io.data_in_valid.poke("b000000".U)
+            dut.clock.step(10)
+
+
+            din = BigInt("00000002"  + "00000000000000000000000000000000" + "00000002"  ,16).S    
+            dut.io.data_in.poke(din)
+            dut.io.data_in_valid.poke("b100001".U)
+            dut.clock.step(1)
+            dut.io.data_in_valid.poke("b000000".U)
+            dut.clock.step(10)
+
+
+            din = BigInt("00000003"  + "00000000000000000000000000000000" + "00000003"  ,16).S    
+            dut.io.data_in.poke(din)
+            dut.io.data_in_valid.poke("b100001".U)
+            dut.clock.step(1)
+            dut.io.data_in_valid.poke("b000000".U)
+            dut.clock.step(10)
+
+
+            din = BigInt("00000004"  + "00000000000000000000000000000000" + "00000004"  ,16).S    
+            dut.io.data_in.poke(din)
+            dut.io.data_in_valid.poke("b100001".U)
+            dut.clock.step(1)
+            dut.io.data_in_valid.poke("b000000".U)
+            dut.clock.step(10)
+
+            din = BigInt("00000005"  + "00000000000000000000000000000000" + "00000005"  ,16).S    
+            dut.io.data_in.poke(din)
+            dut.io.data_in_valid.poke("b100001".U)
+            dut.clock.step(1)
+            dut.io.data_in_valid.poke("b000000".U)
+            dut.clock.step(10)
 
             // Finish 
             for( i <- 0 to 10){
