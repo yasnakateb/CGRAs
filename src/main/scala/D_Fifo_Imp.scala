@@ -30,33 +30,27 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
-
 import chisel3._
-import chiseltest._
-import org.scalatest.flatspec.AnyFlatSpec
-import chisel3.stage.PrintFullStackTraceAnnotation
+import chisel3.util._
+import chisel3.util.HasBlackBoxResource
+import chisel3.experimental.{IntParam, BaseModule}
 
-class D_FIFO_Test extends AnyFlatSpec with ChiselScalatestTester {
-    "D_FIFO_Test test" should "pass" in {
-        test(new D_FIFO(32, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
-            
-            //dut.io.din.poke(0.U)
-            dut.io.dout_r.poke(true.B)
-            dut.io.din_v.poke(false.B)
+class D_Fifo_Imp
+  (
+    dataWidth: Int, 
+    fifoDepth: Int
+  ) 
+  extends BlackBox(Map("dataWidth" -> dataWidth, "fifoDepth" -> fifoDepth)) with HasBlackBoxResource{ 
+  val io = IO(new Bundle {
+    val clock = Input(Clock())
+    val reset = Input(Bool())
+    val din = Input(SInt(dataWidth.W))  
+    val dinValid = Input(Bool())
+    val doutReady = Input(Bool())
+    val dinReady = Output(Bool())
+    val dout = Output(SInt(dataWidth.W))  
+    val doutValid = Output(Bool()) 
+  })
 
-            dut.clock.step(1)
-
-            for (i <- 0 to 15) {
-                dut.io.din.poke(i.S) 
-                dut.io.din_v.poke(true.B)
-                dut.clock.step(1)
-                dut.io.din_v.poke(false.B)
-                dut.clock.step(10)
-            }
-            
-            dut.clock.step(10)
-
-
-        }
-    } 
+  addResource("vsrc/D_Fifo_Imp.v")
 }

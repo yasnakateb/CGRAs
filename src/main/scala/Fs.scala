@@ -30,57 +30,37 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
-
 import chisel3._
 import chisel3.util._
 
-class D_EB 
-    (
-        DATA_WIDTH: Int
-    )
-    extends Module {
-    val io = IO(new Bundle {
-        // Data in
-        val din = Input(SInt(DATA_WIDTH.W))
-        val din_v = Input(Bool())
-        val din_r = Output(Bool())
-        // Data out
-        val dout = Output(SInt(DATA_WIDTH.W))
-        val dout_v = Output(Bool())
-        val dout_r = Input(Bool())  
-    })
+class Fs 
+  (
+    numberOfReadys: Int
+  )
+  extends Module {
+  val io = IO(new Bundle {
+    val readyOut = Input(UInt(numberOfReadys.W))
+    val forkMask = Input(UInt(numberOfReadys.W))
+    val readyIn = Output(Bool())  
+  })
+  
+  val aux = Wire(Vec(numberOfReadys, Bool()))
+  val temp = Wire(Vec(numberOfReadys, Bool()))
 
-    // Registers
-    val reg_din_1 = RegInit(0.S(DATA_WIDTH.W))
-    val reg_din_2 = RegInit(0.S(DATA_WIDTH.W))
-    val reg_din_v_1 = RegInit(0.B)
-    val reg_din_v_2 = RegInit(0.B)
-    val reg_areg = RegInit(0.B)
+  for (i <- 0 until numberOfReadys) {
+    aux(i) := ((~io.forkMask(i)) | io.readyOut(i)).asBool
+  }
 
-    when(reg_areg) {
-        reg_din_1 := io.din
-        reg_din_2 := reg_din_1
-        
-        reg_din_v_1 := io.din_v
-        reg_din_v_2 := reg_din_v_1
-    }
+  temp(0) := aux(0) 
 
-    reg_areg := ~io.dout_v | io.dout_r
-
-    // Combinational assignments
-    io.din_r := reg_areg
-
-    when(reg_areg) {
-        io.dout := reg_din_1
-        io.dout_v := reg_din_v_1
-    }.otherwise {
-        io.dout := reg_din_2
-        io.dout_v := reg_din_v_2
-    }
+  for (i <- 1 until numberOfReadys) {
+    temp(i) := temp(i-1) & aux(i)
+  }
+  io.readyIn := temp(numberOfReadys - 1).asBool   
 }
-    
+
 // Generate the Verilog code
-object D_EBMain extends App {
+object Fs_Main extends App {
     println("Generating the hardware")
-    (new chisel3.stage.ChiselStage).emitVerilog(new D_EB(32), Array("--target-dir", "generated"))
-}
+    (new chisel3.stage.ChiselStage).emitVerilog(new Fs(5), Array("--target-dir", "generated"))
+} 

@@ -30,34 +30,31 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
-
 import chisel3._
-import chiseltest._
-import org.scalatest.flatspec.AnyFlatSpec
+import chisel3.util._
 
-class FS_Test extends AnyFlatSpec with ChiselScalatestTester {
-    "FS_Test test" should "pass" in {
-        test(new FS(5)) { dut =>
-            
-            dut.io.ready_out.poke("b00000".U)
-            dut.io.fork_mask.poke("b00000".U)
+class Conf_Mux 
+  (
+    numInputs: Int = 2, 
+    dataWidth: Int = 1
+  )
+  extends Module {
+  val io = IO(new Bundle { 
+    val selector = Input(UInt(log2Ceil(numInputs).W))
+    val muxInput = Input(SInt((numInputs*dataWidth).W))
+    val muxOutput = Output(SInt(dataWidth.W))
+  })
+  
+  val inputs = Wire(Vec(numInputs, SInt(dataWidth.W))) 
 
-            dut.clock.step(5)
-        
-            dut.io.ready_out.poke("b11111".U)
-            dut.io.fork_mask.poke("b11000".U)
+  for (i <- 0 until numInputs) {
+    inputs(i) := (io.muxInput((i+1)*dataWidth-1,i*dataWidth)).asSInt
+  }
+  io.muxOutput := inputs(io.selector)
+}
 
-
-            dut.clock.step(1)
-            println("*************************************")
-            println("*************************************")
-            println("Ready Out: " + dut.io.ready_out.peek().toString)
-            println("Fork Mask: " + dut.io.fork_mask.peek().toString)
-            dut.clock.step(1)
-            println("--------------------------------------")
-            println("Ready In: " + dut.io.ready_in.peek().toString)
-            println("*************************************")
-            println("*************************************")
-        }
-    } 
+// Generate the Verilog code
+object Conf_Mux_Main extends App {
+  println("Generating the hardware")
+  (new chisel3.stage.ChiselStage).emitVerilog(new Conf_Mux(2, 1), Array("--target-dir", "generated"))
 }

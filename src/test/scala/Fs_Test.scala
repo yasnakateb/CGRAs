@@ -30,44 +30,30 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
-
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class FR_Test extends AnyFlatSpec with ChiselScalatestTester {
-    "FR_Test test" should "pass" in {
-        test(new FR(5,5)) { dut =>
+class Fs_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "Fs_Test test" should "pass" in {
+        test(new Fs(5)) { dut =>
             
-            var valid_in = "b11011".U 
-            var ready_out = "b11011".U 
-            var valid_mux_sel = "b10".U 
-            var fork_mask = "b11011".U 
+            dut.io.readyOut.poke("b00000".U)
+            dut.io.forkMask.poke("b00000".U)
+
+            dut.clock.step(5)
         
-            dut.io.valid_in.poke(valid_in)
-            dut.io.ready_out.poke(ready_out)
-            dut.io.valid_mux_sel.poke(valid_mux_sel)
-            dut.io.fork_mask.poke(fork_mask)
+            dut.io.readyOut.poke("b11111".U)
+            dut.io.forkMask.poke("b11000".U)
+
+            dut.clock.step(1)
             println("*************************************")
             println("*************************************")
-            println("Valid In: " + dut.io.valid_in.peek().toString)
-            println("Ready Out: " + dut.io.ready_out.peek().toString)
-            println("Valid Mux Sel: " + dut.io.valid_mux_sel.peek().toString)
-            println("Fork Mask: " + dut.io.fork_mask.peek().toString)
+            println("Ready Out: " + dut.io.readyOut.peek().toString)
+            println("Fork Mask: " + dut.io.forkMask.peek().toString)
             dut.clock.step(1)
             println("--------------------------------------")
-            println("Valid Out: " + dut.io.valid_out.peek().toString)
-            valid_mux_sel = "b1".U 
-            dut.io.valid_mux_sel.poke(valid_mux_sel)
-            println("*************************************")
-            println("*************************************")
-            println("Valid In: " + dut.io.valid_in.peek().toString)
-            println("Ready Out: " + dut.io.ready_out.peek().toString)
-            println("Valid Mux Sel: " + dut.io.valid_mux_sel.peek().toString)
-            println("Fork Mask: " + dut.io.fork_mask.peek().toString)
-            dut.clock.step(1)
-            println("--------------------------------------")
-            println("Valid Out: " + dut.io.valid_out.peek().toString)
+            println("Ready In: " + dut.io.readyIn.peek().toString)
             println("*************************************")
             println("*************************************")
         }

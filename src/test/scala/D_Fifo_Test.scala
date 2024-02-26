@@ -30,44 +30,30 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
-
 import chisel3._
-import chisel3.util._
+import chiseltest._
+import org.scalatest.flatspec.AnyFlatSpec
+import chisel3.stage.PrintFullStackTraceAnnotation
 
-class D_REG 
-    (
-        DATA_WIDTH: Int
-    )
-    extends Module {
-    val io = IO(new Bundle {
-        val din = Input(SInt(DATA_WIDTH.W))
-        val din_v = Input(Bool())
-        val dout_r = Input(Bool())
-        val dout = Output(SInt(DATA_WIDTH.W))
-        val dout_v = Output(Bool())
-        val din_r = Output(Bool())  
-    })
+class D_Fifo_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "D_Fifo_Test test" should "pass" in {
+        test(new D_Fifo(32, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
+            
+            //dut.io.din.poke(0.U)
+            dut.io.doutReady.poke(true.B)
+            dut.io.dinValid.poke(false.B)
 
-    
-    val data = RegInit(0.S(DATA_WIDTH.W))
-    val valid = RegInit(0.B)
+            dut.clock.step(1)
 
-    // Default value 
-    data := 0.S  
-    valid := false.B 
-    
-    when (io.dout_r === true.B) {
-        data := io.din
-        valid := io.din_v
+            for (i <- 0 to 15) {
+                dut.io.din.poke(i.S) 
+                dut.io.dinValid.poke(true.B)
+                dut.clock.step(1)
+                dut.io.dinValid.poke(false.B)
+                dut.clock.step(10)
+            }
+            
+            dut.clock.step(10)
+        }
     } 
-
-    io.dout := data
-    io.dout_v := valid
-    io.din_r := io.dout_r
-}
-
-// Generate the Verilog code
-object D_REGMain extends App {
-    println("Generating the hardware")
-    (new chisel3.stage.ChiselStage).emitVerilog(new D_REG(8), Array("--target-dir", "generated"))
 }

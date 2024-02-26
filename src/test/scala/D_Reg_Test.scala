@@ -30,20 +30,19 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
-
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class D_REG_Test extends AnyFlatSpec with ChiselScalatestTester {
-    "D_REG_Test test" should "pass" in {
-        test(new D_REG(8)) { dut =>
+class D_Reg_Test extends AnyFlatSpec with ChiselScalatestTester {
+    "D_Reg_Test test" should "pass" in {
+        test(new D_Reg(8)) { dut =>
             var din = 10.S 
-            var dout_r = false.B
-            var din_v = false.B 
+            var doutReady = false.B
+            var dinValid = false.B 
             dut.io.din.poke(din)
-            dut.io.dout_r.poke(dout_r)
-            dut.io.din_v.poke(din_v)
+            dut.io.doutReady.poke(doutReady)
+            dut.io.dinValid.poke(dinValid)
             ////////////////////////////////////////////////////////////////
             // Test 1 
             ////////////////////////////////////////////////////////////////
@@ -53,32 +52,32 @@ class D_REG_Test extends AnyFlatSpec with ChiselScalatestTester {
             println("Dp: " + dut.io.din.peek().toString)
             println("*************************************")
             println("*************************************")
-            println("Vp: " + dut.io.din_v.peek().toString)
-            println("An: " + dut.io.dout_r.peek().toString)
+            println("Vp: " + dut.io.dinValid.peek().toString)
+            println("An: " + dut.io.doutReady.peek().toString)
             dut.clock.step(1)
             println("--------------------------------------")
             println("Dn: " + dut.io.dout.peek().toString)
-            println("Vn: " + dut.io.dout_v.peek().toString)
-            println("Ap: " + dut.io.din_r.peek().toString)
+            println("Vn: " + dut.io.doutValid.peek().toString)
+            println("Ap: " + dut.io.dinReady.peek().toString)
             ////////////////////////////////////////////////////////////////
             // Test 2
             ////////////////////////////////////////////////////////////////
             println("*************************************")
             println("Test 2: Vp: true, An: true")
             println("*************************************")
-            dout_r = true.B 
-            din_v = true.B  
-            dut.io.dout_r.poke(dout_r)
-            dut.io.din_v.poke(din_v)
-            println("Vp: " + dut.io.din_v.peek().toString)
-            println("An: " + dut.io.dout_r.peek().toString)
+            doutReady = true.B 
+            dinValid = true.B  
+            dut.io.doutReady.poke(doutReady)
+            dut.io.dinValid.poke(dinValid)
+            println("Vp: " + dut.io.dinValid.peek().toString)
+            println("An: " + dut.io.doutReady.peek().toString)
             dut.clock.step(1)
             dut.clock.step(1)
             dut.clock.step(1)
             println("--------------------------------------")
             println("Dn: " + dut.io.dout.peek().toString)
-            println("Vn: " + dut.io.dout_v.peek().toString)
-            println("Ap: " + dut.io.din_r.peek().toString)
+            println("Vn: " + dut.io.doutValid.peek().toString)
+            println("Ap: " + dut.io.dinReady.peek().toString)
             println("*************************************")
             println("*************************************")
         }
