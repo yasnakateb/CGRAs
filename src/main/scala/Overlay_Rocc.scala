@@ -66,21 +66,21 @@ class Overlay_Rocc
   val intercDataWE = VecInit.fill(inputNodes -1, outputNodes)(0.asSInt(dataWidth.W)) 
   val intercDataEW = VecInit.fill(inputNodes -1, outputNodes)(0.asSInt(dataWidth.W)) 
 
-  val intercValidalidWE = VecInit.fill(inputNodes -1, outputNodes)(0.asUInt(1.W)) 
-  val intercValidalidEW = VecInit.fill(inputNodes -1, outputNodes)(0.asUInt(1.W)) 
+  val intercValidWE = VecInit.fill(inputNodes -1, outputNodes)(0.asUInt(1.W)) 
+  val intercValidEW = VecInit.fill(inputNodes -1, outputNodes)(0.asUInt(1.W)) 
 
-  val intercReadyeadyWE = VecInit.fill(inputNodes -1, outputNodes)(0.asUInt(1.W)) 
-  val intercReadyeadyEW = VecInit.fill(inputNodes -1, outputNodes)(0.asUInt(1.W)) 
+  val intercReadyWE = VecInit.fill(inputNodes -1, outputNodes)(0.asUInt(1.W)) 
+  val intercReadyEW = VecInit.fill(inputNodes -1, outputNodes)(0.asUInt(1.W)) 
 
 
   val intercDataNS = VecInit.fill(inputNodes, outputNodes - 1)(0.asSInt(dataWidth.W)) 
   val intercDataSN = VecInit.fill(inputNodes, outputNodes - 1)(0.asSInt(dataWidth.W)) 
 
-  val intercValidalidNS = VecInit.fill(inputNodes, outputNodes -1)(0.asUInt(1.W))
-  val intercValidalidSN = VecInit.fill(inputNodes, outputNodes -1)(0.asUInt(1.W))
+  val intercValidNS = VecInit.fill(inputNodes, outputNodes -1)(0.asUInt(1.W))
+  val intercValidSN = VecInit.fill(inputNodes, outputNodes -1)(0.asUInt(1.W))
 
-  val intercReadyeadyNS = VecInit.fill(inputNodes, outputNodes -1)(0.asUInt(1.W))
-  val intercReadyeadySN = VecInit.fill(inputNodes, outputNodes -1)(0.asUInt(1.W))
+  val intercReadyNS = VecInit.fill(inputNodes, outputNodes -1)(0.asUInt(1.W))
+  val intercReadySN = VecInit.fill(inputNodes, outputNodes -1)(0.asUInt(1.W))
 
   val configBits = Wire(UInt(182.W))
   val catchConfig = Wire(Vec(inputNodes*outputNodes, Bool()))
@@ -129,13 +129,13 @@ class Overlay_Rocc
 
           // ********* East
           northWestOv.io.eastDin := intercDataWE(I)(J)
-          northWestOv.io.eastDinValid := intercValidalidWE(I)(J)
-          intercReadyeadyWE(I)(J) := northWestOv.io.eastDinReady 
+          northWestOv.io.eastDinValid := intercValidWE(I)(J)
+          intercReadyWE(I)(J) := northWestOv.io.eastDinReady 
 
           // ********* South 
           northWestOv.io.southDin := intercDataNS(I)(J)
-          northWestOv.io.southDinValid := intercValidalidNS(I)(J)
-          intercReadyeadyNS(I)(J) := northWestOv.io.southDinReady 
+          northWestOv.io.southDinValid := intercValidNS(I)(J)
+          intercReadyNS(I)(J) := northWestOv.io.southDinReady 
 
           // ********* West
           northWestOv.io.westDin := 0.S     
@@ -149,13 +149,13 @@ class Overlay_Rocc
 
           // ********* East
           intercDataEW(I)(J) := northWestOv.io.eastDout 
-          intercValidalidEW(I)(J) := northWestOv.io.eastDoutValid 
-          northWestOv.io.eastDoutReady := intercReadyeadyEW(I)(J)
+          intercValidEW(I)(J) := northWestOv.io.eastDoutValid 
+          northWestOv.io.eastDoutReady := intercReadyEW(I)(J)
 
           // ********* South
           intercDataSN(I)(J) := northWestOv.io.southDout 
-          intercValidalidSN(I)(J) := northWestOv.io.southDoutValid 
-          northWestOv.io.southDoutReady := intercReadyeadySN(I)(J)
+          intercValidSN(I)(J) := northWestOv.io.southDoutValid 
+          northWestOv.io.southDoutReady := intercReadySN(I)(J)
 
           // ********* West
           // westDout = open
@@ -173,18 +173,18 @@ class Overlay_Rocc
 
           // ********* North
           midWestOv.io.northDin := intercDataSN(I)(J-1) 
-          midWestOv.io.northDinValid := intercValidalidSN(I)(J-1) 
-          intercReadyeadySN(I)(J-1) := midWestOv.io.northDinReady 
+          midWestOv.io.northDinValid := intercValidSN(I)(J-1) 
+          intercReadySN(I)(J-1) := midWestOv.io.northDinReady 
 
           // ********* East
           midWestOv.io.eastDin := intercDataWE(I)(J) 
-          midWestOv.io.eastDinValid := intercValidalidWE(I)(J)  
-          intercReadyeadyWE(I)(J) := midWestOv.io.eastDinReady 
+          midWestOv.io.eastDinValid := intercValidWE(I)(J)  
+          intercReadyWE(I)(J) := midWestOv.io.eastDinReady 
 
           // ********* South
           midWestOv.io.southDin := intercDataNS(I)(J) 
-          midWestOv.io.southDinValid := intercValidalidNS(I)(J) 
-          intercReadyeadyNS(I)(J) := midWestOv.io.southDinReady 
+          midWestOv.io.southDinValid := intercValidNS(I)(J) 
+          intercReadyNS(I)(J) := midWestOv.io.southDinReady 
 
           // ********* West
           midWestOv.io.westDin := 0.S  
@@ -193,18 +193,18 @@ class Overlay_Rocc
 
           // ********* North
           intercDataNS(I)(J-1) := midWestOv.io.northDout  
-          intercValidalidNS(I)(J-1) := midWestOv.io.northDoutValid 
-          midWestOv.io.northDoutReady := intercReadyeadyNS(I)(J-1)   
+          intercValidNS(I)(J-1) := midWestOv.io.northDoutValid 
+          midWestOv.io.northDoutReady := intercReadyNS(I)(J-1)   
 
           // ********* East
           intercDataEW(I)(J) := midWestOv.io.eastDout 
-          intercValidalidEW(I)(J) := midWestOv.io.eastDoutValid 
-          midWestOv.io.eastDoutReady := intercReadyeadyEW(I)(J) 
+          intercValidEW(I)(J) := midWestOv.io.eastDoutValid 
+          midWestOv.io.eastDoutReady := intercReadyEW(I)(J) 
 
           // ********* South
           intercDataSN(I)(J) := midWestOv.io.southDout 
-          intercValidalidSN(I)(J) := midWestOv.io.southDoutValid 
-          midWestOv.io.southDoutReady := intercReadyeadySN(I)(J) 
+          intercValidSN(I)(J) := midWestOv.io.southDoutValid 
+          midWestOv.io.southDoutReady := intercReadySN(I)(J) 
 
           // ********* West
           //westDout = open 
@@ -222,13 +222,13 @@ class Overlay_Rocc
 
           // ********* North
           southWestOv.io.northDin := intercDataSN(I)(J-1) 
-          southWestOv.io.northDinValid := intercValidalidSN(I)(J-1) 
-          intercReadyeadySN(I)(J-1) := southWestOv.io.northDinReady 
+          southWestOv.io.northDinValid := intercValidSN(I)(J-1) 
+          intercReadySN(I)(J-1) := southWestOv.io.northDinReady 
 
           // ********* East
           southWestOv.io.eastDin := intercDataWE(I)(J)  
-          southWestOv.io.eastDinValid := intercValidalidWE(I)(J) 
-          intercReadyeadyWE(I)(J) := southWestOv.io.eastDinReady  
+          southWestOv.io.eastDinValid := intercValidWE(I)(J) 
+          intercReadyWE(I)(J) := southWestOv.io.eastDinReady  
 
           // ********* South
           southWestOv.io.southDin := 0.S    
@@ -242,13 +242,13 @@ class Overlay_Rocc
 
           // ********* North
           intercDataNS(I)(J-1) := southWestOv.io.northDout 
-          intercValidalidNS(I)(J-1) := southWestOv.io.northDoutValid 
-          southWestOv.io.northDoutReady := intercReadyeadyNS(I)(J-1) 
+          intercValidNS(I)(J-1) := southWestOv.io.northDoutValid 
+          southWestOv.io.northDoutReady := intercReadyNS(I)(J-1) 
 
           // ********* East
           intercDataEW(I)(J) := southWestOv.io.eastDout
-          intercValidalidEW(I)(J) := southWestOv.io.eastDoutValid
-          southWestOv.io.eastDoutReady := intercReadyeadyEW(I)(J) 
+          intercValidEW(I)(J) := southWestOv.io.eastDoutValid
+          southWestOv.io.eastDoutReady := intercReadyEW(I)(J) 
 
           // ********* South
           // southDout = open 
@@ -280,18 +280,18 @@ class Overlay_Rocc
 
           // ********* East
           middleNorthOv.io.eastDin:= intercDataWE(I)(J)  
-          middleNorthOv.io.eastDinValid := intercValidalidWE(I)(J) 
-          intercReadyeadyWE(I)(J) := middleNorthOv.io.eastDinReady  
+          middleNorthOv.io.eastDinValid := intercValidWE(I)(J) 
+          intercReadyWE(I)(J) := middleNorthOv.io.eastDinReady  
 
           // ********* South
           middleNorthOv.io.southDin := intercDataNS(I)(J) 
-          middleNorthOv.io.southDinValid := intercValidalidNS(I)(J) 
-          intercReadyeadyNS(I)(J) := middleNorthOv.io.southDinReady 
+          middleNorthOv.io.southDinValid := intercValidNS(I)(J) 
+          intercReadyNS(I)(J) := middleNorthOv.io.southDinReady 
 
           // ********* West
           middleNorthOv.io.westDin:= intercDataEW(I-1)(J) 
-          middleNorthOv.io.westDinValid := intercValidalidEW(I-1)(J)  
-          intercReadyeadyEW(I-1)(J) := middleNorthOv.io.westDinReady 
+          middleNorthOv.io.westDinValid := intercValidEW(I-1)(J)  
+          intercReadyEW(I-1)(J) := middleNorthOv.io.westDinReady 
           
           // ********* North
           // northDout = open 
@@ -300,18 +300,18 @@ class Overlay_Rocc
 
           // ********* East 
           intercDataEW(I)(J) := middleNorthOv.io.eastDout  
-          intercValidalidEW(I)(J) := middleNorthOv.io.eastDoutValid 
-          middleNorthOv.io.eastDoutReady := intercReadyeadyEW(I)(J)
+          intercValidEW(I)(J) := middleNorthOv.io.eastDoutValid 
+          middleNorthOv.io.eastDoutReady := intercReadyEW(I)(J)
 
           // ********* South
           intercDataSN(I)(J) := middleNorthOv.io.southDout 
-          intercValidalidSN(I)(J) := middleNorthOv.io.southDoutValid
-          middleNorthOv.io.southDoutReady := intercReadyeadySN(I)(J)
+          intercValidSN(I)(J) := middleNorthOv.io.southDoutValid
+          middleNorthOv.io.southDoutReady := intercReadySN(I)(J)
 
           // ********* West
           intercDataWE(I-1)(J) := middleNorthOv.io.westDout 
-          intercValidalidWE(I-1)(J) := middleNorthOv.io.westDoutValid 
-          middleNorthOv.io.westDoutReady := intercReadyeadyWE(I-1)(J)
+          intercValidWE(I-1)(J) := middleNorthOv.io.westDoutValid 
+          middleNorthOv.io.westDoutReady := intercReadyWE(I-1)(J)
 
           // ********* Config
           middleNorthOv.io.configBits := configBits 
@@ -324,43 +324,43 @@ class Overlay_Rocc
 
           // ********* North
           middleMiddleOv.io.northDin := intercDataSN(I)(J-1) 
-          middleMiddleOv.io.northDinValid := intercValidalidSN(I)(J-1) 
-          intercReadyeadySN(I)(J-1) := middleMiddleOv.io.northDinReady  
+          middleMiddleOv.io.northDinValid := intercValidSN(I)(J-1) 
+          intercReadySN(I)(J-1) := middleMiddleOv.io.northDinReady  
 
           // ********* East
           middleMiddleOv.io.eastDin := intercDataWE(I)(J)  
-          middleMiddleOv.io.eastDinValid := intercValidalidWE(I)(J)    
-          intercReadyeadyWE(I)(J) := middleMiddleOv.io.eastDinReady  
+          middleMiddleOv.io.eastDinValid := intercValidWE(I)(J)    
+          intercReadyWE(I)(J) := middleMiddleOv.io.eastDinReady  
 
           // ********* South
           middleMiddleOv.io.southDin := intercDataNS(I)(J) 
-          middleMiddleOv.io.southDinValid := intercValidalidNS(I)(J) 
-          intercReadyeadyNS(I)(J) := middleMiddleOv.io.southDinReady  
+          middleMiddleOv.io.southDinValid := intercValidNS(I)(J) 
+          intercReadyNS(I)(J) := middleMiddleOv.io.southDinReady  
 
           // ********* West
           middleMiddleOv.io.westDin := intercDataEW(I-1)(J) 
-          middleMiddleOv.io.westDinValid := intercValidalidEW(I-1)(J)
-          intercReadyeadyEW(I-1)(J) := middleMiddleOv.io.westDinReady  
+          middleMiddleOv.io.westDinValid := intercValidEW(I-1)(J)
+          intercReadyEW(I-1)(J) := middleMiddleOv.io.westDinReady  
 
           // ********* North
           intercDataNS(I)(J-1) := middleMiddleOv.io.northDout 
-          intercValidalidNS(I)(J-1) := middleMiddleOv.io.northDoutValid
-          middleMiddleOv.io.northDoutReady := intercReadyeadyNS(I)(J-1)
+          intercValidNS(I)(J-1) := middleMiddleOv.io.northDoutValid
+          middleMiddleOv.io.northDoutReady := intercReadyNS(I)(J-1)
 
           // ********* East
           intercDataEW(I)(J) := middleMiddleOv.io.eastDout
-          intercValidalidEW(I)(J) := middleMiddleOv.io.eastDoutValid 
-          middleMiddleOv.io.eastDoutReady := intercReadyeadyEW(I)(J)
+          intercValidEW(I)(J) := middleMiddleOv.io.eastDoutValid 
+          middleMiddleOv.io.eastDoutReady := intercReadyEW(I)(J)
 
           // ********* South
           intercDataSN(I)(J) := middleMiddleOv.io.southDout  
-          intercValidalidSN(I)(J) := middleMiddleOv.io.southDoutValid
-          middleMiddleOv.io.southDoutReady := intercReadyeadySN(I)(J) 
+          intercValidSN(I)(J) := middleMiddleOv.io.southDoutValid
+          middleMiddleOv.io.southDoutReady := intercReadySN(I)(J) 
 
           // ********* West
           intercDataWE(I-1)(J) := middleMiddleOv.io.westDout 
-          intercValidalidWE(I-1)(J) := middleMiddleOv.io.westDoutValid 
-          middleMiddleOv.io.westDoutReady := intercReadyeadyWE(I-1)(J) 
+          intercValidWE(I-1)(J) := middleMiddleOv.io.westDoutValid 
+          middleMiddleOv.io.westDoutReady := intercReadyWE(I-1)(J) 
 
           // ********* Config
           middleMiddleOv.io.configBits := configBits
@@ -373,13 +373,13 @@ class Overlay_Rocc
 
           // ********* North
           middleSouthOv.io.northDin := intercDataSN(I)(J-1) 
-          middleSouthOv.io.northDinValid := intercValidalidSN(I)(J-1)
-          intercReadyeadySN(I)(J-1) := middleSouthOv.io.northDinReady  
+          middleSouthOv.io.northDinValid := intercValidSN(I)(J-1)
+          intercReadySN(I)(J-1) := middleSouthOv.io.northDinReady  
 
           // ********* East
           middleSouthOv.io.eastDin := intercDataWE(I)(J) 
-          middleSouthOv.io.eastDinValid := intercValidalidWE(I)(J) 
-          intercReadyeadyWE(I)(J) := middleSouthOv.io.eastDinReady 
+          middleSouthOv.io.eastDinValid := intercValidWE(I)(J) 
+          intercReadyWE(I)(J) := middleSouthOv.io.eastDinReady 
 
           // ********* South
           middleSouthOv.io.southDin := 0.S  
@@ -388,18 +388,18 @@ class Overlay_Rocc
 
           // ********* West
           middleSouthOv.io.westDin := intercDataEW(I-1)(J) 
-          middleSouthOv.io.westDinValid := intercValidalidEW(I-1)(J) 
-          intercReadyeadyEW(I-1)(J) := middleSouthOv.io.westDinReady 
+          middleSouthOv.io.westDinValid := intercValidEW(I-1)(J) 
+          intercReadyEW(I-1)(J) := middleSouthOv.io.westDinReady 
           
           // ********* North
           intercDataNS(I)(J-1) := middleSouthOv.io.northDout 
-          intercValidalidNS(I)(J-1) := middleSouthOv.io.northDoutValid 
-          middleSouthOv.io.northDoutReady := intercReadyeadyNS(I)(J-1) 
+          intercValidNS(I)(J-1) := middleSouthOv.io.northDoutValid 
+          middleSouthOv.io.northDoutReady := intercReadyNS(I)(J-1) 
 
           // ********* East
           intercDataEW(I)(J) := middleSouthOv.io.eastDout 
-          intercValidalidEW(I)(J) := middleSouthOv.io.eastDoutValid 
-          middleSouthOv.io.eastDoutReady := intercReadyeadyEW(I)(J)
+          intercValidEW(I)(J) := middleSouthOv.io.eastDoutValid 
+          middleSouthOv.io.eastDoutReady := intercReadyEW(I)(J)
 
           // ********* South
           // southDout = open 
@@ -408,8 +408,8 @@ class Overlay_Rocc
 
           // ********* West
           intercDataWE(I-1)(J) := middleSouthOv.io.westDout 
-          intercValidalidWE(I-1)(J) := middleSouthOv.io.westDoutValid 
-          middleSouthOv.io.westDoutReady := intercReadyeadyWE(I-1)(J) 
+          intercValidWE(I-1)(J) := middleSouthOv.io.westDoutValid 
+          middleSouthOv.io.westDoutReady := intercReadyWE(I-1)(J) 
 
           // ********* Config
           middleSouthOv.io.configBits := configBits
@@ -436,13 +436,13 @@ class Overlay_Rocc
 
           // ********* South
           northEastOv.io.southDin := intercDataNS(I)(J) 
-          northEastOv.io.southDinValid := intercValidalidNS(I)(J) 
-          intercReadyeadyNS(I)(J) := northEastOv.io.southDinReady  
+          northEastOv.io.southDinValid := intercValidNS(I)(J) 
+          intercReadyNS(I)(J) := northEastOv.io.southDinReady  
 
           // ********* West
           northEastOv.io.westDin := intercDataEW(I-1)(J) 
-          northEastOv.io.westDinValid := intercValidalidEW(I-1)(J) 
-          intercReadyeadyEW(I-1)(J) := northEastOv.io.westDinReady  
+          northEastOv.io.westDinValid := intercValidEW(I-1)(J) 
+          intercReadyEW(I-1)(J) := northEastOv.io.westDinReady  
 
           // ********* North
           // northDout = open 
@@ -456,13 +456,13 @@ class Overlay_Rocc
 
           // ********* South
           intercDataSN(I)(J) := northEastOv.io.southDout 
-          intercValidalidSN(I)(J) := northEastOv.io.southDoutValid 
-          northEastOv.io.southDoutReady := intercReadyeadySN(I)(J) 
+          intercValidSN(I)(J) := northEastOv.io.southDoutValid 
+          northEastOv.io.southDoutReady := intercReadySN(I)(J) 
 
           // ********* West
           intercDataWE(I-1)(J) := northEastOv.io.westDout 
-          intercValidalidWE(I-1)(J) := northEastOv.io.westDoutValid 
-          northEastOv.io.westDoutReady := intercReadyeadyWE(I-1)(J)
+          intercValidWE(I-1)(J) := northEastOv.io.westDoutValid 
+          northEastOv.io.westDoutReady := intercReadyWE(I-1)(J)
 
           // ********* Config
           northEastOv.io.configBits := configBits
@@ -475,8 +475,8 @@ class Overlay_Rocc
 
           // ********* North
           middleEastOv.io.northDin := intercDataSN(I)(J-1) 
-          middleEastOv.io.northDinValid := intercValidalidSN(I)(J-1)
-          intercReadyeadySN(I)(J-1) := middleEastOv.io.northDinReady  
+          middleEastOv.io.northDinValid := intercValidSN(I)(J-1)
+          intercReadySN(I)(J-1) := middleEastOv.io.northDinReady  
           
           // ********* East
           middleEastOv.io.eastDin := 0.S      
@@ -485,18 +485,18 @@ class Overlay_Rocc
 
           // ********* South
           middleEastOv.io.southDin := intercDataNS(I)(J)
-          middleEastOv.io.southDinValid:= intercValidalidNS(I)(J)
-          intercReadyeadyNS(I)(J) := middleEastOv.io.southDinReady 
+          middleEastOv.io.southDinValid:= intercValidNS(I)(J)
+          intercReadyNS(I)(J) := middleEastOv.io.southDinReady 
 
           // ********* West
           middleEastOv.io.westDin := intercDataEW(I-1)(J)
-          middleEastOv.io.westDinValid := intercValidalidEW(I-1)(J) 
-          intercReadyeadyEW(I-1)(J) := middleEastOv.io.westDinReady  
+          middleEastOv.io.westDinValid := intercValidEW(I-1)(J) 
+          intercReadyEW(I-1)(J) := middleEastOv.io.westDinReady  
 
           // ********* North
           intercDataNS(I)(J-1) := middleEastOv.io.northDout 
-          intercValidalidNS(I)(J-1) := middleEastOv.io.northDoutValid  
-          middleEastOv.io.northDoutReady := intercReadyeadyNS(I)(J-1)
+          intercValidNS(I)(J-1) := middleEastOv.io.northDoutValid  
+          middleEastOv.io.northDoutReady := intercReadyNS(I)(J-1)
 
           // ********* East
           eastDout(J) := middleEastOv.io.eastDout  
@@ -505,13 +505,13 @@ class Overlay_Rocc
 
           // ********* South
           intercDataSN(I)(J) := middleEastOv.io.southDout 
-          intercValidalidSN(I)(J) := middleEastOv.io.southDoutValid 
-          middleEastOv.io.southDoutReady := intercReadyeadySN(I)(J)
+          intercValidSN(I)(J) := middleEastOv.io.southDoutValid 
+          middleEastOv.io.southDoutReady := intercReadySN(I)(J)
 
           // ********* West
           intercDataWE(I-1)(J) := middleEastOv.io.westDout 
-          intercValidalidWE(I-1)(J) := middleEastOv.io.westDoutValid 
-          middleEastOv.io.westDoutReady := intercReadyeadyWE(I-1)(J)
+          intercValidWE(I-1)(J) := middleEastOv.io.westDoutValid 
+          middleEastOv.io.westDoutReady := intercReadyWE(I-1)(J)
 
           // ********* Config
           middleEastOv.io.configBits := configBits
@@ -524,8 +524,8 @@ class Overlay_Rocc
 
           // ********* North
           middleSouthOv.io.northDin := intercDataSN(I)(J-1)
-          middleSouthOv.io.northDinValid := intercValidalidSN(I)(J-1)
-          intercReadyeadySN(I)(J-1) := middleSouthOv.io.northDinReady   
+          middleSouthOv.io.northDinValid := intercValidSN(I)(J-1)
+          intercReadySN(I)(J-1) := middleSouthOv.io.northDinReady   
 
           // ********* East
           middleSouthOv.io.eastDin := 0.S   
@@ -539,13 +539,13 @@ class Overlay_Rocc
 
           // ********* West
           middleSouthOv.io.westDin := intercDataEW(I-1)(J)
-          middleSouthOv.io.westDinValid := intercValidalidEW(I-1)(J)
-          intercReadyeadyEW(I-1)(J) := middleSouthOv.io.westDinReady 
+          middleSouthOv.io.westDinValid := intercValidEW(I-1)(J)
+          intercReadyEW(I-1)(J) := middleSouthOv.io.westDinReady 
 
           // ********* North
           intercDataNS(I)(J-1) := middleSouthOv.io.northDout 
-          intercValidalidNS(I)(J-1) := middleSouthOv.io.northDoutValid 
-          middleSouthOv.io.northDoutReady := intercReadyeadyNS(I)(J-1)
+          intercValidNS(I)(J-1) := middleSouthOv.io.northDoutValid 
+          middleSouthOv.io.northDoutReady := intercReadyNS(I)(J-1)
 
           // ********* East
           eastDout(J) := middleSouthOv.io.eastDout 
@@ -559,8 +559,8 @@ class Overlay_Rocc
 
           // ********* West
           intercDataWE(I-1)(J) := middleSouthOv.io.westDout 
-          intercValidalidWE(I-1)(J) := middleSouthOv.io.westDoutValid 
-          middleSouthOv.io.westDoutReady := intercReadyeadyWE(I-1)(J)
+          intercValidWE(I-1)(J) := middleSouthOv.io.westDoutValid 
+          middleSouthOv.io.westDoutReady := intercReadyWE(I-1)(J)
 
           // ********* Config
           middleSouthOv.io.configBits := configBits
