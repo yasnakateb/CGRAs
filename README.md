@@ -12,7 +12,7 @@ CGRAs, or Coarse-Grained Reconfigurable Architectures, are arrays of interconnec
 |        Accumulate       | 2 Arrays                | 1 Array, 1 Scalar     | c[i] = c[i] (a[i] + b[i]) , x = x + ∑ c[i]
 |           Cap           | 2 Arrays                | 1 Array               | (((a[i] * 6) >> 2) 2 ) * (((b[i] * 3 * a[i])>>2) * a[i]);
 |          Mac            | 2 Arrays, 1 Scalar      | 1 Scalar              | x = x + ∑ a[i] b[i]
-|           Mac2          | 4 Arrays, 2 Scalars     | 2 Scalars             |                 x = x + ∑ a[i] b[i]           , y = y + ∑a[i] (b[i] + 1)c[i] d[i] 
+|           Mac2          | 4 Arrays, 2 Scalars     | 2 Scalars             |                 x = x + ∑ a[i] b[i]           , y = y + ∑ a[i] (b[i] + 1)c[i] d[i] 
 
 
 ## Building on Ubuntu
