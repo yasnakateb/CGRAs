@@ -4,7 +4,7 @@ CGRAs (Coarse-Grained Reconfigurable Architectures) are arrays of interconnected
 ![](assets/arch.png)
 
 
-### Instructions
+### Benchmarks
 
 | Name                    | Inputs                  | Outputs               | Expression                                   |
 |-------------------------|-------------------------|-----------------------|----------------------------------------------|
