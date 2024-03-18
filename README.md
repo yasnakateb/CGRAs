@@ -50,3 +50,5 @@ CGRAs (Coarse-Grained Reconfigurable Architectures) are arrays of interconnected
 | CAP       | North West        | North East        |                   |                   |                   |            |                | Middle East OV 2 (x) |
 | MAC       | Middle North OV 2 | Middle North OV 3 |                   |                   | North East        |            | North East (x) |                      |
 | MAC 2     | Middle North OV   | North West        | Middle North OV 1 | Middle North OV 2 | Middle North OV 3 | North East | North East (y) | Middle East OV (x)   |
+
+
