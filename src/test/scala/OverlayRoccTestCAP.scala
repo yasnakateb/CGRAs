@@ -35,9 +35,9 @@ import chiseltest._
 import chisel3.util._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class Overlay_Rocc_Test_CAP extends AnyFlatSpec with ChiselScalatestTester {
-  "Overlay_Rocc_CAP test" should "pass" in {
-    test(new Overlay_Rocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
+class OverlayRoccTestCAP extends AnyFlatSpec with ChiselScalatestTester {
+  "OverlayRoccCAP test" should "pass" in {
+    test(new OverlayRocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
       ///////////////////////////////////////////
       // CAP
       ///////////////////////////////////////////

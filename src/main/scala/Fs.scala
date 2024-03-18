@@ -60,7 +60,7 @@ class Fs
 }
 
 // Generate the Verilog code
-object Fs_Main extends App {
+object FsMain extends App {
     println("Generating the hardware")
     (new chisel3.stage.ChiselStage).emitVerilog(new Fs(5), Array("--target-dir", "generated"))
 } 

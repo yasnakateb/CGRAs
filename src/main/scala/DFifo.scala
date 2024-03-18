@@ -32,38 +32,36 @@
  ******************************************/
 import chisel3._
 import chisel3.util._
+import chisel3.stage.PrintFullStackTraceAnnotation
 
-class D_Reg
+class DFifo
   (
-    dataWidth: Int
-  )
+    dataWidth: Int, 
+    fifoDepth: Int
+  ) 
   extends Module {
   val io = IO(new Bundle {
-    val din = Input(SInt(dataWidth.W))
+    val din = Input(SInt(dataWidth.W))  
     val dinValid = Input(Bool())
     val doutReady = Input(Bool())
-    val dout = Output(SInt(dataWidth.W))
-    val doutValid = Output(Bool())
-    val dinReady = Output(Bool())  
+    val dinReady = Output(Bool())
+    val dout = Output(SInt(dataWidth.W))  
+    val doutValid = Output(Bool()) 
   })
 
-  val data = RegInit(0.S(dataWidth.W))
-  val valid = RegInit(0.B)
-
-  data := 0.S  
-  valid := false.B 
-  
-  when (io.doutReady === true.B) {
-    data := io.din
-    valid := io.dinValid
-  } 
-  io.dout := data
-  io.doutValid := valid
-  io.dinReady := io.doutReady
+  val fifo = Module(new DFifoImp(dataWidth, fifoDepth))
+  fifo.io.clock := clock
+  fifo.io.reset := reset.asBool 
+  fifo.io.din := io.din 
+  fifo.io.dinValid := io.dinValid
+  fifo.io.doutReady := io.doutReady
+  io.dinReady := fifo.io.dinReady
+  io.dout := fifo.io.dout 
+  io.doutValid := fifo.io.doutValid 
 }
 
 // Generate the Verilog code
-object D_Reg_Main extends App {
+object DFifoMain extends App {
   println("Generating the hardware")
-  (new chisel3.stage.ChiselStage).emitVerilog(new D_Reg(8), Array("--target-dir", "generated"))
+  (new chisel3.stage.ChiselStage).emitVerilog(new DFifo(32, 32), Array("--target-dir", "generated"))
 }

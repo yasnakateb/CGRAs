@@ -59,7 +59,7 @@ class Join
 }
 
 // Generate the Verilog code
-object Join_Main extends App {
+object JoinMain extends App {
   println("Generating the hardware")
   (new chisel3.stage.ChiselStage).emitVerilog(new Join(32), Array("--target-dir", "generated"))
 }

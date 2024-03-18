@@ -33,7 +33,7 @@
 import chisel3._
 import chisel3.util._
 
-class Processing_Element 
+class ProcessingElement 
   (
     dataWidth: Int, 
     fifoDepth: Int
@@ -153,7 +153,7 @@ class Processing_Element
   
   // ------------------------------- NORTH NODE -------------------------------
 
-  val fifoNin = Module (new D_Fifo(dataWidth, fifoDepth))
+  val fifoNin = Module (new DFifo(dataWidth, fifoDepth))
   fifoNin.io.din := io.northDin  
   fifoNin.io.dinValid := io.northDinValid
   fifoNin.io.doutReady := northBufferReady
@@ -167,7 +167,7 @@ class Processing_Element
   northBufferReady := fsNin.io.readyIn
   fsNin.io.forkMask := acceptMaskFsiN
   
-  val muxNout  = Module (new Conf_Mux(4, dataWidth))
+  val muxNout  = Module (new ConfMux(4, dataWidth))
   muxNout.io.selector := muxNsel
   muxNout.io.muxInput := (Cat(westBuffer, southBuffer, eastBuffer, fuDout)).asSInt 
   northRegDin := muxNout.io.muxOutput
@@ -181,7 +181,7 @@ class Processing_Element
   frNout.io.forkMask := acceptMaskFrN
   northRegDinValid := frNout.io.validOut 
 
-  val regNout = Module (new D_Reg(dataWidth))
+  val regNout = Module (new DReg(dataWidth))
   
   regNout.io.din := northRegDin 
   regNout.io.dinValid := northRegDinValid 
@@ -195,7 +195,7 @@ class Processing_Element
 
   // ------------------------------- EAST  NODE -------------------------------
   
-  val fifoEin = Module (new D_Fifo(dataWidth, fifoDepth))
+  val fifoEin = Module (new DFifo(dataWidth, fifoDepth))
   fifoEin.io.din := io.eastDin  
   fifoEin.io.dinValid := io.eastDinValid
   fifoEin.io.doutReady := eastBufferReady
@@ -209,7 +209,7 @@ class Processing_Element
   eastBufferReady := fsEin.io.readyIn
   fsEin.io.forkMask := acceptMaskFsiE
 
-  val muxEout  = Module (new Conf_Mux(4, dataWidth))
+  val muxEout  = Module (new ConfMux(4, dataWidth))
   muxEout.io.selector := muxEsel
   muxEout.io.muxInput := (Cat(westBuffer, southBuffer, northBuffer, fuDout)).asSInt
   eastRegDin := muxEout.io.muxOutput
@@ -223,7 +223,7 @@ class Processing_Element
   frEout.io.forkMask := acceptMaskFrE
   eastRegDinValid := frEout.io.validOut 
 
-  val regEout = Module (new D_Reg(dataWidth))
+  val regEout = Module (new DReg(dataWidth))
   
   regEout.io.din := eastRegDin 
   regEout.io.dinValid := eastRegDinValid 
@@ -237,7 +237,7 @@ class Processing_Element
 
   // ------------------------------- SOUTH NODE -------------------------------
   
-  val fifoSin = Module (new D_Fifo(dataWidth, fifoDepth))
+  val fifoSin = Module (new DFifo(dataWidth, fifoDepth))
   fifoSin.io.din := io.southDin  
   fifoSin.io.dinValid := io.southDinValid
   fifoSin.io.doutReady := southBufferReady
@@ -251,7 +251,7 @@ class Processing_Element
   southBufferReady := fsSin.io.readyIn
   fsSin.io.forkMask := acceptMaskFsiS
   
-  val muxSout  = Module (new Conf_Mux(4, dataWidth))
+  val muxSout  = Module (new ConfMux(4, dataWidth))
   muxSout.io.selector := muxSsel
   muxSout.io.muxInput := (Cat(westBuffer, eastBuffer, northBuffer, fuDout)).asSInt
   southRegDin := muxSout.io.muxOutput
@@ -265,7 +265,7 @@ class Processing_Element
   frSout.io.forkMask := acceptMaskFrS
   southRegDinValid := frSout.io.validOut 
 
-  val regSout = Module (new D_Reg(dataWidth))
+  val regSout = Module (new DReg(dataWidth))
   
   regSout.io.din := southRegDin 
   regSout.io.dinValid := southRegDinValid 
@@ -278,7 +278,7 @@ class Processing_Element
 
   // ------------------------------- WEST  NODE -------------------------------
 
-  val fifoWin = Module (new D_Fifo(dataWidth, fifoDepth))
+  val fifoWin = Module (new DFifo(dataWidth, fifoDepth))
   fifoWin.io.din := io.westDin  
   fifoWin.io.dinValid := io.westDinValid
   fifoWin.io.doutReady := westBufferReady
@@ -292,7 +292,7 @@ class Processing_Element
   fsWin.io.forkMask :=  acceptMaskFsiW
   westBufferReady := fsWin.io.readyIn
 
-  val muxWout  = Module (new Conf_Mux(4, dataWidth))
+  val muxWout  = Module (new ConfMux(4, dataWidth))
   muxWout.io.selector := muxWsel
   muxWout.io.muxInput := (Cat(southBuffer, eastBuffer, northBuffer, fuDout)).asSInt 
   westRegDin := muxWout.io.muxOutput
@@ -306,7 +306,7 @@ class Processing_Element
   frWout.io.forkMask := acceptMaskFrW
   westRegDinValid := frWout.io.validOut 
 
-  val regWout = Module (new D_Reg(dataWidth))
+  val regWout = Module (new DReg(dataWidth))
   
   regWout.io.din := westRegDin 
   regWout.io.dinValid := westRegDinValid 
@@ -318,7 +318,7 @@ class Processing_Element
   // ------------------------------- WEST  NODE -------------------------------
 
   // cell processing
-  val cell = Module (new Cell_Processing(dataWidth))
+  val cell = Module (new CellProcessing(dataWidth))
   cell.io.northDin := northBuffer
   cell.io.northDinValid := northBufferValid
   cell.io.eastDin := eastBuffer
@@ -339,7 +339,7 @@ class Processing_Element
 }
 
 // Generate the Verilog code
-object Processing_Element_Main extends App {
+object ProcessingElementMain extends App {
     println("Generating the hardware")
-    (new chisel3.stage.ChiselStage).emitVerilog(new Processing_Element(32, 32), Array("--target-dir", "generated"))
+    (new chisel3.stage.ChiselStage).emitVerilog(new ProcessingElement(32, 32), Array("--target-dir", "generated"))
 }

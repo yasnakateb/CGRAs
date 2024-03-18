@@ -34,9 +34,9 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class D_Eb_Test extends AnyFlatSpec with ChiselScalatestTester {
-  "D_Eb_Test test" should "pass" in {
-      test(new D_Eb(32)) { dut =>
+class DEbTest extends AnyFlatSpec with ChiselScalatestTester {
+  "DEbTest test" should "pass" in {
+      test(new DEb(32)) { dut =>
           var din = 0.S  
           var doutReady = false.B 
           var dinValid = false.B 

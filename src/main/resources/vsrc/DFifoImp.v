@@ -1,4 +1,4 @@
-module D_Fifo_Imp #(parameter dataWidth = 32, fifoDepth = 32)
+module DFifoImp #(parameter dataWidth = 32, fifoDepth = 32)
   (
   input                       clock,
   input                       reset,

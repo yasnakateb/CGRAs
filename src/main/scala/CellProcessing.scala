@@ -33,7 +33,7 @@
 import chisel3._
 import chisel3.util._
 
-class Cell_Processing 
+class CellProcessing 
   (
     dataWidth: Int
   ) 
@@ -114,12 +114,12 @@ class Cell_Processing
   fr1.io.forkMask := forkReceiverMask1 
   ebDin1Valid := fr1.io.validOut 
 
-  val mux1 = Module (new Conf_Mux(6, dataWidth))
+  val mux1 = Module (new ConfMux(6, dataWidth))
   mux1.io.selector := selectorMux1
   mux1.io.muxInput := (Cat(fuDout, I1CONST, io.westDin, io.southDin, io.eastDin, io.northDin)).asSInt
   ebDin1 := mux1.io.muxOutput
 
-  val eb1 = Module (new D_Eb(dataWidth))
+  val eb1 = Module (new DEb(dataWidth))
   eb1.io.din := ebDin1
   eb1.io.dinValid := ebDin1Valid
   io.fuDin1Ready := eb1.io.dinReady 
@@ -136,12 +136,12 @@ class Cell_Processing
   fr2.io.forkMask := forkReceiverMask2 
   ebDin2Valid := fr2.io.validOut 
 
-  val mux2 = Module (new Conf_Mux(6, dataWidth))
+  val mux2 = Module (new ConfMux(6, dataWidth))
   mux2.io.selector := selectorMux2
   mux2.io.muxInput := (Cat(fuDout, I1CONST, io.westDin, io.southDin, io.eastDin, io.northDin)).asSInt 
   ebDin2 := mux2.io.muxOutput
 
-  val eb2 = Module (new D_Eb(dataWidth))
+  val eb2 = Module (new DEb(dataWidth))
   eb2.io.din := ebDin2
   eb2.io.dinValid := ebDin2Valid
   io.fuDin2Ready := eb2.io.dinReady 
@@ -175,7 +175,7 @@ class Cell_Processing
   
   fuInst.io.doutReady := fuDoutReady
 
-  val ebOut = Module (new D_Eb(dataWidth))
+  val ebOut = Module (new DEb(dataWidth))
   ebOut.io.din := fuDout
   ebOut.io.dinValid := fuDoutValid
   ebOut.io.din := fuInst.io.dout    
@@ -194,7 +194,7 @@ class Cell_Processing
 }
 
 // Generate the Verilog code
-object Cell_Processing_Main extends App {
+object CellProcessingMain extends App {
   println("Generating the hardware")
-  (new chisel3.stage.ChiselStage).emitVerilog(new Cell_Processing(32), Array("--target-dir", "generated"))
+  (new chisel3.stage.ChiselStage).emitVerilog(new CellProcessing(32), Array("--target-dir", "generated"))
 }

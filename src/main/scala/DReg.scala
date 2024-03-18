@@ -33,7 +33,7 @@
 import chisel3._
 import chisel3.util._
 
-class D_Eb 
+class DReg
   (
     dataWidth: Int
   )
@@ -41,42 +41,29 @@ class D_Eb
   val io = IO(new Bundle {
     val din = Input(SInt(dataWidth.W))
     val dinValid = Input(Bool())
-    val dinReady = Output(Bool())
+    val doutReady = Input(Bool())
     val dout = Output(SInt(dataWidth.W))
     val doutValid = Output(Bool())
-    val doutReady = Input(Bool())  
+    val dinReady = Output(Bool())  
   })
 
-  val regDin1 = RegInit(0.S(dataWidth.W))
-  val regDin2 = RegInit(0.S(dataWidth.W))
-  val regDinValid1 = RegInit(0.B)
-  val regDinValid2 = RegInit(0.B)
-  val regAreg = RegInit(0.B)
+  val data = RegInit(0.S(dataWidth.W))
+  val valid = RegInit(0.B)
 
-  when(regAreg) {
-    regDin1 := io.din
-    regDin2 := regDin1
-    
-    regDinValid1 := io.dinValid
-    regDinValid2 := regDinValid1
-  }
-
-  regAreg := ~io.doutValid | io.doutReady
-
-  // Combinational assignments
-  io.dinReady := regAreg
-
-  when(regAreg) {
-    io.dout := regDin1
-    io.doutValid := regDinValid1
-  }.otherwise {
-    io.dout := regDin2
-    io.doutValid := regDinValid2
-  }
+  data := 0.S  
+  valid := false.B 
+  
+  when (io.doutReady === true.B) {
+    data := io.din
+    valid := io.dinValid
+  } 
+  io.dout := data
+  io.doutValid := valid
+  io.dinReady := io.doutReady
 }
-    
+
 // Generate the Verilog code
-object D_Eb_Main extends App {
+object DRegMain extends App {
   println("Generating the hardware")
-  (new chisel3.stage.ChiselStage).emitVerilog(new D_Eb(32), Array("--target-dir", "generated"))
+  (new chisel3.stage.ChiselStage).emitVerilog(new DReg(8), Array("--target-dir", "generated"))
 }

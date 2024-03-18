@@ -32,36 +32,51 @@
  ******************************************/
 import chisel3._
 import chisel3.util._
-import chisel3.stage.PrintFullStackTraceAnnotation
 
-class D_Fifo
+class DEb 
   (
-    dataWidth: Int, 
-    fifoDepth: Int
-  ) 
+    dataWidth: Int
+  )
   extends Module {
   val io = IO(new Bundle {
-    val din = Input(SInt(dataWidth.W))  
+    val din = Input(SInt(dataWidth.W))
     val dinValid = Input(Bool())
-    val doutReady = Input(Bool())
     val dinReady = Output(Bool())
-    val dout = Output(SInt(dataWidth.W))  
-    val doutValid = Output(Bool()) 
+    val dout = Output(SInt(dataWidth.W))
+    val doutValid = Output(Bool())
+    val doutReady = Input(Bool())  
   })
 
-  val fifo = Module(new D_Fifo_Imp(dataWidth, fifoDepth))
-  fifo.io.clock := clock
-  fifo.io.reset := reset.asBool 
-  fifo.io.din := io.din 
-  fifo.io.dinValid := io.dinValid
-  fifo.io.doutReady := io.doutReady
-  io.dinReady := fifo.io.dinReady
-  io.dout := fifo.io.dout 
-  io.doutValid := fifo.io.doutValid 
-}
+  val regDin1 = RegInit(0.S(dataWidth.W))
+  val regDin2 = RegInit(0.S(dataWidth.W))
+  val regDinValid1 = RegInit(0.B)
+  val regDinValid2 = RegInit(0.B)
+  val regAreg = RegInit(0.B)
 
+  when(regAreg) {
+    regDin1 := io.din
+    regDin2 := regDin1
+    
+    regDinValid1 := io.dinValid
+    regDinValid2 := regDinValid1
+  }
+
+  regAreg := ~io.doutValid | io.doutReady
+
+  // Combinational assignments
+  io.dinReady := regAreg
+
+  when(regAreg) {
+    io.dout := regDin1
+    io.doutValid := regDinValid1
+  }.otherwise {
+    io.dout := regDin2
+    io.doutValid := regDinValid2
+  }
+}
+    
 // Generate the Verilog code
-object D_Fifo_Main extends App {
+object DEbMain extends App {
   println("Generating the hardware")
-  (new chisel3.stage.ChiselStage).emitVerilog(new D_Fifo(32, 32), Array("--target-dir", "generated"))
+  (new chisel3.stage.ChiselStage).emitVerilog(new DEb(32), Array("--target-dir", "generated"))
 }

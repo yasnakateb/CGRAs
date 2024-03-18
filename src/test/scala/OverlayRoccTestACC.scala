@@ -35,9 +35,9 @@ import chiseltest._
 import chisel3.util._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class Overlay_Rocc_Test_ACC extends AnyFlatSpec with ChiselScalatestTester {
-  "Overlay_Rocc_Test_ACC test" should "pass" in {
-    test(new Overlay_Rocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
+class OverlayRoccTestACC extends AnyFlatSpec with ChiselScalatestTester {
+  "OverlayRoccTestACC test" should "pass" in {
+    test(new OverlayRocc(32, 6, 6, 32)).withAnnotations(Seq(VerilatorBackendAnnotation, WriteVcdAnnotation)) { dut =>
       ///////////////////////////////////////////
       // Accumulate
       ///////////////////////////////////////////

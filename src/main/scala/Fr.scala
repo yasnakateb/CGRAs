@@ -54,7 +54,7 @@ class Fr
   for (i <- 0 until numberOfReadys) {
     aux(i) := ((~io.forkMask(i)) | io.readyOut(i)).asBool
   }
-  val confMux  = Module (new Conf_Mux(numberOfValids, 1))
+  val confMux  = Module (new ConfMux(numberOfValids, 1))
   confMux.io.selector := io.validMuxSel
   confMux.io.muxInput := (io.validIn).asSInt 
   vaux := confMux.io.muxOutput
@@ -69,7 +69,7 @@ class Fr
 }
 
 // Generate the Verilog code
-object Fr_Main extends App {
+object FrMain extends App {
   println("Generating the hardware")
   (new chisel3.stage.ChiselStage).emitVerilog(new Fr(5, 5), Array("--target-dir", "generated"))
 }

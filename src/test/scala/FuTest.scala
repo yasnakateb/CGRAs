@@ -34,8 +34,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class Fu_Test extends AnyFlatSpec with ChiselScalatestTester {
-    "Fu_Test test" should "pass" in {
+class FuTest extends AnyFlatSpec with ChiselScalatestTester {
+    "FuTest test" should "pass" in {
         test(new Fu(32, 5)) { dut =>
             var din1 = 8.S
             var din2 = 3.S

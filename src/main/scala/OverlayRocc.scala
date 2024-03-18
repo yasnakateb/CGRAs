@@ -33,7 +33,7 @@
 import chisel3._
 import chisel3.util._
 
-class Overlay_Rocc 
+class OverlayRocc 
   (
     dataWidth: Int = 32, 
     inputNodes: Int = 6, 
@@ -120,7 +120,7 @@ class Overlay_Rocc
       {
         if (J == 0) 
         {
-          val northWestOv = Module(new Processing_Element(dataWidth, fifoDepth))
+          val northWestOv = Module(new ProcessingElement(dataWidth, fifoDepth))
 
           // ********* North
           northWestOv.io.northDin := northDin(I)
@@ -169,7 +169,7 @@ class Overlay_Rocc
 
         if (J != 0 & J != outputNodes - 1) 
         {
-          val midWestOv = Module(new Processing_Element(dataWidth, fifoDepth))
+          val midWestOv = Module(new ProcessingElement(dataWidth, fifoDepth))
 
           // ********* North
           midWestOv.io.northDin := intercDataSN(I)(J-1) 
@@ -218,7 +218,7 @@ class Overlay_Rocc
 
         if (J == outputNodes - 1) 
         {
-          val southWestOv = Module(new Processing_Element(dataWidth, fifoDepth))
+          val southWestOv = Module(new ProcessingElement(dataWidth, fifoDepth))
 
           // ********* North
           southWestOv.io.northDin := intercDataSN(I)(J-1) 
@@ -271,7 +271,7 @@ class Overlay_Rocc
       {
         if (J == 0)
         {
-          val middleNorthOv = Module(new Processing_Element(dataWidth, fifoDepth))
+          val middleNorthOv = Module(new ProcessingElement(dataWidth, fifoDepth))
 
           // ********* North
           middleNorthOv.io.northDin := northDin(I) 
@@ -320,7 +320,7 @@ class Overlay_Rocc
 
         if(J != 0 & J != outputNodes - 1)
         {
-          val middleMiddleOv = Module(new Processing_Element(dataWidth, fifoDepth))
+          val middleMiddleOv = Module(new ProcessingElement(dataWidth, fifoDepth))
 
           // ********* North
           middleMiddleOv.io.northDin := intercDataSN(I)(J-1) 
@@ -369,7 +369,7 @@ class Overlay_Rocc
 
         if (J == outputNodes - 1)
         {
-          val middleSouthOv = Module(new Processing_Element(dataWidth, fifoDepth))
+          val middleSouthOv = Module(new ProcessingElement(dataWidth, fifoDepth))
 
           // ********* North
           middleSouthOv.io.northDin := intercDataSN(I)(J-1) 
@@ -422,7 +422,7 @@ class Overlay_Rocc
       {
         if (J == 0)
         {
-          val northEastOv = Module(new Processing_Element(dataWidth, fifoDepth))
+          val northEastOv = Module(new ProcessingElement(dataWidth, fifoDepth))
 
           // ********* North
           northEastOv.io.northDin := northDin(I) 
@@ -471,7 +471,7 @@ class Overlay_Rocc
 
         if (J != 0 &  J != outputNodes - 1)
         {
-          val middleEastOv = Module(new Processing_Element(dataWidth,fifoDepth))
+          val middleEastOv = Module(new ProcessingElement(dataWidth,fifoDepth))
 
           // ********* North
           middleEastOv.io.northDin := intercDataSN(I)(J-1) 
@@ -520,7 +520,7 @@ class Overlay_Rocc
 
         if (J == outputNodes - 1)
         {
-          val middleSouthOv = Module(new Processing_Element(dataWidth, fifoDepth))
+          val middleSouthOv = Module(new ProcessingElement(dataWidth, fifoDepth))
 
           // ********* North
           middleSouthOv.io.northDin := intercDataSN(I)(J-1)
@@ -579,7 +579,7 @@ class Overlay_Rocc
 }
 
 // Generate the Verilog code
-object Overlay_Rocc_Main extends App {
+object OverlayRoccMain extends App {
   println("Generating the hardware")
-  (new chisel3.stage.ChiselStage).emitVerilog(new Overlay_Rocc(32, 6, 6, 32), Array("--target-dir", "generated"))
+  (new chisel3.stage.ChiselStage).emitVerilog(new OverlayRocc(32, 6, 6, 32), Array("--target-dir", "generated"))
 }

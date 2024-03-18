@@ -32,25 +32,29 @@
  ******************************************/
 import chisel3._
 import chisel3.util._
-import chisel3.util.HasBlackBoxResource
-import chisel3.experimental.{IntParam, BaseModule}
 
-class D_Fifo_Imp
+class ConfMux 
   (
-    dataWidth: Int, 
-    fifoDepth: Int
-  ) 
-  extends BlackBox(Map("dataWidth" -> dataWidth, "fifoDepth" -> fifoDepth)) with HasBlackBoxResource{ 
-  val io = IO(new Bundle {
-    val clock = Input(Clock())
-    val reset = Input(Bool())
-    val din = Input(SInt(dataWidth.W))  
-    val dinValid = Input(Bool())
-    val doutReady = Input(Bool())
-    val dinReady = Output(Bool())
-    val dout = Output(SInt(dataWidth.W))  
-    val doutValid = Output(Bool()) 
+    numInputs: Int = 2, 
+    dataWidth: Int = 1
+  )
+  extends Module {
+  val io = IO(new Bundle { 
+    val selector = Input(UInt(log2Ceil(numInputs).W))
+    val muxInput = Input(SInt((numInputs*dataWidth).W))
+    val muxOutput = Output(SInt(dataWidth.W))
   })
+  
+  val inputs = Wire(Vec(numInputs, SInt(dataWidth.W))) 
 
-  addResource("vsrc/D_Fifo_Imp.v")
+  for (i <- 0 until numInputs) {
+    inputs(i) := (io.muxInput((i+1)*dataWidth-1,i*dataWidth)).asSInt
+  }
+  io.muxOutput := inputs(io.selector)
+}
+
+// Generate the Verilog code
+object ConfMuxMain extends App {
+  println("Generating the hardware")
+  (new chisel3.stage.ChiselStage).emitVerilog(new ConfMux(2, 1), Array("--target-dir", "generated"))
 }

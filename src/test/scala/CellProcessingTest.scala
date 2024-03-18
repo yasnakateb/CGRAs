@@ -34,9 +34,9 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class Cell_Processing_Test extends AnyFlatSpec with ChiselScalatestTester {
-  "Cell_Processing_Test test" should "pass" in {
-    test(new Cell_Processing(32)) { dut =>
+class CellProcessingTest extends AnyFlatSpec with ChiselScalatestTester {
+  "CellProcessingTest test" should "pass" in {
+    test(new CellProcessing(32)) { dut =>
       var northDin = 1.S 
       var northDinValid = true.B 
       var eastDin = 0.S  

@@ -34,8 +34,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class Fr_Test extends AnyFlatSpec with ChiselScalatestTester {
-    "Fr_Test test" should "pass" in {
+class FrTest extends AnyFlatSpec with ChiselScalatestTester {
+    "FrTest test" should "pass" in {
         test(new Fr(5,5)) { dut =>
             
             var validIn = "b11011".U 

@@ -147,7 +147,7 @@ class Fu
 }
 
 // Generate the Verilog code
-object Fu_Main extends App {
+object FuMain extends App {
   println("Generating the hardware")
   (new chisel3.stage.ChiselStage).emitVerilog(new Fu(32, 5), Array("--target-dir", "generated"))
 }

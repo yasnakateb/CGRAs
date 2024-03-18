@@ -100,7 +100,7 @@ class Alu
 }
 
 // Generate the Verilog code
-object Alu_Main extends App {
+object AluMain extends App {
   println("Generating the hardware")
   (new chisel3.stage.ChiselStage).emitVerilog(new Alu(32, 5), Array("--target-dir", "generated"))
 }
