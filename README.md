@@ -43,4 +43,10 @@ CGRAs (Coarse-Grained Reconfigurable Architectures) are arrays of interconnected
 
 5. You can check the inputs and results of the benchmarks in the following table:
 
-![](assets/nodes.png)
+﻿| Benchmark | a                 | b                 | c                 | d                 | x                 | y          | Result         | Result               |
+|-----------|-------------------|-------------------|-------------------|-------------------|-------------------|------------|----------------|----------------------|
+| SUM       | North East        | Middle North OV 3 |                   |                   |                   |            | North East (x) |                      |
+| ACC       | North East        | North West        | Middle North OV 2 |                   | Middle North OV 3 |            | North East (c) | Middle East OV 1 (x) |
+| CAP       | North West        | North East        |                   |                   |                   |            |                | Middle East OV 2 (x) |
+| MAC       | Middle North OV 2 | Middle North OV 3 |                   |                   | North East        |            | North East (x) |                      |
+| MAC 2     | Middle North OV   | North West        | Middle North OV 1 | Middle North OV 2 | Middle North OV 3 | North East | North East (y) | Middle East OV (x)   |
