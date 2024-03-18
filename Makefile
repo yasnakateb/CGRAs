@@ -65,12 +65,6 @@ processing-element:
 
 processing-element-test:
 	$(SBT) "testOnly Processing_Element_Test -- -DwriteVcd=1"	
-
-overlay-rocc:
-	$(SBT) "runMain Overlay_Rocc_Main"
-
-overlay-rocc-test:
-	$(SBT) "testOnly Overlay_Rocc_Test -- -DwriteVcd=1"
 	
 overlay-sum:
 	$(SBT) "testOnly Overlay_Rocc_Test_SUM -- -DwriteVcd=1"
