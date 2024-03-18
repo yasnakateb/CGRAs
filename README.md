@@ -41,3 +41,6 @@ CGRAs (Coarse-Grained Reconfigurable Architectures) are arrays of interconnected
 
 4. The VCD files are generated in the `test_run_dir` folder.
 
+5. You can check the inputs and results of the benchmarks in the following table:
+
+![](assets/nodes.png)
