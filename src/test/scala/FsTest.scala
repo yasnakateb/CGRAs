@@ -34,8 +34,8 @@ import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-class Fs_Test extends AnyFlatSpec with ChiselScalatestTester {
-    "Fs_Test test" should "pass" in {
+class FsTest extends AnyFlatSpec with ChiselScalatestTester {
+    "FsTest test" should "pass" in {
         test(new Fs(5)) { dut =>
             
             dut.io.readyOut.poke("b00000".U)
