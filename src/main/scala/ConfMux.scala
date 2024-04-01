@@ -30,6 +30,18 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
+
+/**
+ * Multiplexer module that separates a series of input data based on the provided parameters.
+ * numInput: The number of inputs to the multiplexer.
+ * muxInput: The input data to be separated. Each input is assumed to be of equal size.
+ * selector: The index to select the output from the separated input data.
+ * muxOutput: The selected output based on the provided selector.
+ * Example:
+ * If `numInput` is 2 and each input data is 8 bits the multiplexer separates it 
+ * into 2 separate data, each containing 4 bits. If `selector` is 0, it returns the first 4 bits.
+ **/
+
 import chisel3._
 import chisel3.util._
 
