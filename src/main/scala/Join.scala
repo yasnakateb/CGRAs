@@ -30,6 +30,15 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
+
+/**
+ * This block stops both din1 and din2 until they have data. 
+ * So din1 and din2 shouldn't signal a stop when they're empty. 
+ * If they do, it will hold up the movement of data in the earlier 
+ * pipeline stages and stop din1 and din2 from getting valid data 
+ * during the stalled state.
+ **/
+
 import chisel3._
 import chisel3.util._
 
