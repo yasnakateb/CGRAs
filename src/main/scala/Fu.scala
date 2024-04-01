@@ -30,6 +30,12 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
+
+/**
+ * An FU is a circuit that executes the operation of a data flow graph node. 
+ * The FU executes an operation only when its inputs are ready and when its output is free.
+ **/
+
 import chisel3._
 import chisel3.util._
 
