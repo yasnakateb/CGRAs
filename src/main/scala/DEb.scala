@@ -30,6 +30,15 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
+
+/**
+ * The Elastic Buffer operates as a 2-slot FIFO, utilizing latches or flip-flops for implementation. 
+ * When EBs are adjacent, they synchronize data transfer (D) through a set of control signals: 
+ * a forward data-presence valid signal (V) indicating the presence of data or emptiness within the EB, 
+ * and a back-propagating stall/accept (A) signal, indicating if the EB is stalled or ready to receive new data. 
+ * A generalized EB extends this concept to an N-slot FIFO, typically realized through RAM implementation.
+ **/
+
 import chisel3._
 import chisel3.util._
 
