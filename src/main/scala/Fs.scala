@@ -30,6 +30,13 @@
  * Yasna Katebzadeh                       *
  * yasna.katebzadeh@gmail.com             *
  ******************************************/
+
+/**
+ * The Fork Sender's responsibility is to verify the readiness of all potential destinations 
+ * for the input data. The AND gate in this block ensures that the valid signal is asserted only 
+ * when the Fork Sender confirms that all receivers are available.
+ **/
+
 import chisel3._
 import chisel3.util._
 
