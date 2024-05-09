@@ -1,7 +1,13 @@
 # CGRAs
 CGRAs (Coarse-Grained Reconfigurable Architectures) are arrays of interconnected Processing Elements (PEs) arranged in a mesh style, offering a blend of hardware performance and software flexibility. In this architecture, each PE consists of a Cell Processing unit containing a Functional Unit (FU) surrounded by configurable routing logic. By mapping graph nodes to the FUs and configuring routing logic to establish connections between them based on the graph edges, the overlay executes a given Data Flow Graph (DFG). This overlay architecture operates on a data-driven execution model, where an FU performs an operation only when its inputs are ready and its output is available. Inputs are located in the north and outputs can be obtained from the east.
 ## Architecture
+
+## Overlay
 ![](assets/cgra.png)
+## Processing Element
+![](assets/pe.png)
+## Elastic Buffer
+![](assets/eb.png)
 
 
 ### Benchmarks
